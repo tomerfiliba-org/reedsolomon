@@ -193,7 +193,7 @@ def rs_correct_msg(msg_in, nsym):
             msg_out[i] = 0
             erase_pos.append(i)
     if len(erase_pos) > nsym:
-        raise ReedSolomonError("Too many earasures to corect")
+        raise ReedSolomonError("Too many erasures to correct")
     synd = rs_calc_syndromes(msg_out, nsym)
     if max(synd) == 0:
         return msg_out  # no errors

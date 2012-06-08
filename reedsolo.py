@@ -232,6 +232,8 @@ class RSCodec(object):
                 data = list(data.encode("utf8"))
             else:
                 data = [ord(ch) for ch in data]
+        if not isinstance(data, list):
+            data = list(data)
         chunk_size = 255 - self.nsym
         enc = []
         for i in range(0, len(data), chunk_size):

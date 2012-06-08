@@ -9,7 +9,7 @@ written by "Bobmath".
 
 I only consolidated the code a little and added exceptions and a simple API. 
 To my understanding, the algorithm can correct up to ``nsym/2`` of the errors in 
-the message, where ``nsym`` is the number of bytes in the error correction code.
+the message, where ``nsym`` is the number of bytes in the error correction code (ECC).
 The code should work on pretty much any reasonable version of python (2.4-3.2), 
 but I'm only testing on 2.6-3.2.
 
@@ -19,34 +19,34 @@ but I'm only testing on 2.6-3.2.
    
    I've released this package as I needed an ECC codec for another project I'm working on, 
    and I couldn't find anything on the web (that still works).
+   
+   The algorithm itself can handle messages up to 255 bytes, including the ECC bytes. The
+   ``RSCodec`` class will split longer messages into chunks and encode/decode them separately;
+   it shouldn't make a difference from an API perspective.
 
 ::
 
     >>> rs = RSCodec(10)
     >>> rs.encode([1,2,3,4])
-    '\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
-    >>> rs.encode("hello world")
-    'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
+    b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
+    >>> rs.encode(b'hello world')
+    b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
     >>> rs.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')
-    'hello world'
-    >>> rs.decode(b'hello worXd\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')  # 1 error
-    'hello world'
+    b'hello world'
     >>> rs.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 3 errors
-    'hello world'
-    >>> rs.decode(b'hXXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 4 errors
-    'hello world'
+    b'hello world'
     >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 5 errors
-    'hello world'
+    b'hello world'
     >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')        # 6 errors - fail
     Traceback (most recent call last):
       ...
     ReedSolomonError: Could not locate error
 
     >>> rs = RSCodec(12)
-    >>> rs.encode("hello world")
-    'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
+    >>> rs.encode(b'hello world')
+    b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
     >>> rs.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')         # 6 errors - ok
-    'hello world'
+    b'hello world'
 """
 import sys
 PY3 = sys.version_info[0] >= 3
@@ -111,6 +111,8 @@ def rs_generator_poly(nsym):
     return g
 
 def rs_encode_msg(msg_in, nsym):
+    if len(msg_in) + nsym > 255:
+        raise ValueError("message too long")
     gen = rs_generator_poly(nsym)
     msg_out = msg_in + [0] * nsym
     for i in range(0, len(msg_in)):
@@ -185,6 +187,8 @@ def rs_forney_syndromes(synd, pos, nmess):
     return fsynd
 
 def rs_correct_msg(msg_in, nsym):
+    if len(msg_in) > 255:
+        raise ValueError("message too long")
     msg_out = list(msg_in)     # copy of message
     # find erasures
     erase_pos = []
@@ -215,9 +219,9 @@ class RSCodec(object):
     """
     A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a 
     (byte)string to include the RS correction code, and pass such an encoded (byte)string to
-    ``decode`` to extract the original message (if the number of errors allows). The parameter
-    ``nsym`` is the length of the correction code, and it determines the number of error bytes
-    (if I understand this correctly, half of ``nsym`` is correctible)
+    ``decode`` to extract the original message (if the number of errors allows for correct decoding).
+    The ``nsym`` argument is the length of the correction code, and it determines the number of 
+    error bytes (if I understand this correctly, half of ``nsym`` is correctable)
     """
     def __init__(self, nsym=10):
         self.nsym = nsym
@@ -228,7 +232,11 @@ class RSCodec(object):
                 data = list(data.encode("utf8"))
             else:
                 data = [ord(ch) for ch in data]
-        enc = rs_encode_msg(data, self.nsym)
+        chunk_size = 255 - self.nsym
+        enc = []
+        for i in range(0, len(data), chunk_size):
+            chunk = data[i:i+chunk_size]
+            enc.extend(rs_encode_msg(chunk, self.nsym))
         if PY3:
             return bytes(enc)
         else:
@@ -240,22 +248,18 @@ class RSCodec(object):
                 data = list(data.encode("utf8"))
             else:
                 data = [ord(ch) for ch in data]
-        dec = rs_correct_msg(data, self.nsym)
+        dec = []
+        for i in range(0, len(data), 255):
+            chunk = data[i:i+255]
+            dec2 = rs_correct_msg(chunk, self.nsym)
+            if len(dec2) == len(chunk):
+                # no errors, discard ECC
+                dec2 = dec2[:-self.nsym]
+            dec.extend(dec2)
         if PY3:
             output = bytes(dec)
         else:
             output = "".join(chr(x) for x in dec)
-        if len(output) == len(data):
-            # no errors, discard ECC
-            output = output[:-self.nsym]
         return output
-
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
-
-
 
 

@@ -14,12 +14,6 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = b"hello world " * 10
         enc = rs.encode(msg)
-        try:
-            bytearray
-        except NameError:
-            enc = [ord(x) for x in enc]
-        else:
-            enc = bytearray(enc)
         self.assertEquals(rs.decode(enc), msg)
         for i in [27, -3, -9, 7, 0]:
             enc[i] = 99
@@ -33,8 +27,9 @@ class TestReedSolomon(unittest.TestCase):
         enc = rs.encode(msg)
         dec = rs.decode(enc)
         self.assertEquals(dec, msg)
-        enc2 = enc[:177] + b"X" + enc[178:2212] + b"Y" + enc[2213:]
-        dec2 = rs.decode(enc2)
+        enc[177] = 99
+        enc[2212] = 88
+        dec2 = rs.decode(enc)
         self.assertEquals(dec2, msg)
 
 

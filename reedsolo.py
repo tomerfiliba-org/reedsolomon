@@ -48,9 +48,6 @@ but I'm only testing on 2.6-3.2.
     >>> rs.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')         # 6 errors - ok
     b'hello world'
 """
-import sys
-PY3 = sys.version_info[0] >= 3
-
 
 class ReedSolomonError(Exception):
     pass
@@ -114,7 +111,8 @@ def rs_encode_msg(msg_in, nsym):
     if len(msg_in) + nsym > 255:
         raise ValueError("message too long")
     gen = rs_generator_poly(nsym)
-    msg_out = msg_in + [0] * nsym
+    msg_out = bytearray(len(msg_in) + nsym)
+    msg_out[:len(msg_in)] = msg_in
     for i in range(0, len(msg_in)):
         coef = msg_out[i]
         if coef != 0:
@@ -124,10 +122,7 @@ def rs_encode_msg(msg_in, nsym):
     return msg_out
 
 def rs_calc_syndromes(msg, nsym):
-    synd = [0] * nsym
-    for i in range(0, nsym):
-        synd[i] = gf_poly_eval(msg, gf_exp[i])
-    return synd
+    return [gf_poly_eval(msg, gf_exp[i]) for i in range(nsym)]
 
 def rs_correct_errata(msg, synd, pos):
     # calculate error locator polynomial
@@ -148,7 +143,6 @@ def rs_correct_errata(msg, synd, pos):
         y = gf_poly_eval(p, x)
         z = gf_poly_eval(q, gf_mul(x, x))
         msg[pos[i]] ^= gf_div(y, gf_mul(x, z))
-
 
 def rs_find_errors(synd, nmess):
     # find error locator polynomial with Berlekamp-Massey algorithm
@@ -200,7 +194,7 @@ def rs_correct_msg(msg_in, nsym):
         raise ReedSolomonError("Too many erasures to correct")
     synd = rs_calc_syndromes(msg_out, nsym)
     if max(synd) == 0:
-        return msg_out  # no errors
+        return msg_out[:-nsym]  # no errors
     fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out))
     err_pos = rs_find_errors(fsynd, len(msg_out))
     if err_pos is None:
@@ -228,40 +222,21 @@ class RSCodec(object):
 
     def encode(self, data):
         if isinstance(data, str):
-            if PY3:
-                data = list(data.encode("utf8"))
-            else:
-                data = [ord(ch) for ch in data]
-        if not isinstance(data, list):
-            data = list(data)
+            data = bytearray(data, "utf-8")
         chunk_size = 255 - self.nsym
-        enc = []
+        enc = bytearray()
         for i in range(0, len(data), chunk_size):
             chunk = data[i:i+chunk_size]
             enc.extend(rs_encode_msg(chunk, self.nsym))
-        if PY3:
-            return bytes(enc)
-        else:
-            return "".join(chr(x) for x in enc)
+        return enc
     
     def decode(self, data):
         if isinstance(data, str):
-            if PY3:
-                data = list(data.encode("utf8"))
-            else:
-                data = [ord(ch) for ch in data]
-        dec = []
+            data = bytearray(data, "utf-8")
+        dec = bytearray()
         for i in range(0, len(data), 255):
             chunk = data[i:i+255]
-            dec2 = rs_correct_msg(chunk, self.nsym)
-            if len(dec2) == len(chunk):
-                # no errors, discard ECC
-                dec2 = dec2[:-self.nsym]
-            dec.extend(dec2)
-        if PY3:
-            output = bytes(dec)
-        else:
-            output = "".join(chr(x) for x in dec)
-        return output
+            dec.extend(rs_correct_msg(chunk, self.nsym))
+        return dec
 
 

@@ -14,7 +14,7 @@ The code should work on pretty much any reasonable version of python (2.4-3.2),
 but I'm only testing on 2.6-3.2.
 
 .. note::
-   I claim no authorship of the code, and take no responsibility on the correctness 
+   I claim no authorship of the code, and take no responsibility for the correctness 
    of the algorithm. It's way too much finite-field algebra for me :)
    
    I've released this package as I needed an ECC codec for another project I'm working on, 

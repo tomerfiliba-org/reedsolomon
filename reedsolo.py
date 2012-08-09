@@ -11,7 +11,7 @@ I only consolidated the code a little and added exceptions and a simple API.
 To my understanding, the algorithm can correct up to ``nsym/2`` of the errors in 
 the message, where ``nsym`` is the number of bytes in the error correction code (ECC).
 The code should work on pretty much any reasonable version of python (2.4-3.2), 
-but I'm only testing on 2.6-3.2.
+but I'm only testing on 2.5-3.2.
 
 .. note::
    I claim no authorship of the code, and take no responsibility for the correctness 
@@ -48,6 +48,18 @@ but I'm only testing on 2.6-3.2.
     >>> rs.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')         # 6 errors - ok
     b'hello world'
 """
+
+try:
+    bytearray
+except NameError:
+    from array import array
+    def bytearray(obj = 0, encoding = "utf8"):
+        if isinstance(obj, str):
+            obj = [ord(ch) for ch in obj.encode("utf8")]
+        elif isinstance(obj, int):
+            obj = [0] * obj
+        return array("B", obj)
+
 
 class ReedSolomonError(Exception):
     pass

@@ -5,7 +5,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name = "reedsolo",
-    version = "0.2",
+    version = "0.3",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

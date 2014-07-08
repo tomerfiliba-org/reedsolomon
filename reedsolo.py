@@ -234,7 +234,7 @@ class RSCodec(object):
 
     def encode(self, data):
         if isinstance(data, str):
-            data = bytearray(data, "utf-8")
+            data = bytearray(data, "latin-1")
         chunk_size = 255 - self.nsym
         enc = bytearray()
         for i in range(0, len(data), chunk_size):
@@ -244,7 +244,7 @@ class RSCodec(object):
     
     def decode(self, data):
         if isinstance(data, str):
-            data = bytearray(data, "utf-8")
+            data = bytearray(data, "latin-1")
         dec = bytearray()
         for i in range(0, len(data), 255):
             chunk = data[i:i+255]

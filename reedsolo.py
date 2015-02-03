@@ -1,24 +1,23 @@
 """
-Modification notes by RD 2/1/2015:
+Modification notes by rotorgit 2/3/2015:
 - made the following changes to reedsolo by Tomer Filiba (TF) in order
     to support ADSB UAT FEC standard as specified in:
     http://adsb.tc.faa.gov/WG5_Meetings/Meeting27/UAT-DO-282B-FRAC.pdf
 - TF code is based on wikiversity RS code, so the mods are applicable there
     as well
-- there were two changes needed to support ADSB UAT ECC:
-    1. "generator polynomial": changed first consecutive root from 0 to 120
-        per standard
-    2. "primitive polynomial": changed from 0x11d to 0x187 per standard
+- there were two changes needed to support ADSB UAT FEC decoding:
+    1. non-zero "first consecutive root" (fcr): implicitly hard-coded as
+    fcr=0 in previous version, needed fcr=120 for ADSB UAT
+    2. "primitive polynomial": hard-coded as 0x11d in previous version,
+    needed 0x187 for ADSB UAT
 - both above params were hard-coded and are now user-definable (during
-    initial class instantiation), with defaults equal to old values to
+    class instantiation), with defaults equal to old values to
     prevent breakage of existing code
 - there are many online resources for rs, but the best (most practical)
     for me was:
     http://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP031.pdf
 - as noted above, the wikiversity discussion and examples ignore/skip
     the critical features that must be modified for ADSB UAT support
-"""
-
 """
 Reed Solomon
 ============

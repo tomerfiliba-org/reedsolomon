@@ -1,25 +1,45 @@
-r"""
+"""
+Modification notes by rotorgit 2/3/2015:
+- made the following changes to reedsolo by Tomer Filiba (TF) in order
+    to support ADSB UAT FEC standard as specified in:
+    http://adsb.tc.faa.gov/WG5_Meetings/Meeting27/UAT-DO-282B-FRAC.pdf
+- TF code is based on wikiversity RS code, so the mods are applicable there
+    as well
+- there were two changes needed to support ADSB UAT FEC decoding:
+    1. non-zero "first consecutive root" (fcr): implicitly hard-coded as
+    fcr=0 in previous version, needed fcr=120 for ADSB UAT
+    2. "primitive polynomial": hard-coded as 0x11d in previous version,
+    needed 0x187 for ADSB UAT
+- both above params were hard-coded and are now user-definable (during
+    class instantiation), with defaults equal to old values to
+    prevent breakage of existing code
+- there are many online resources for rs, but the best (most practical)
+    for me was:
+    http://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP031.pdf
+- as noted above, the wikiversity discussion and examples ignore/skip
+    the critical features that must be modified for ADSB UAT support
+
 Reed Solomon
 ============
 
 A pure-python `Reed Solomon <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
-encoder/decoder, based on the wonderful tutorial at 
+encoder/decoder, based on the wonderful tutorial at
 `wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,
 written by "Bobmath".
 
-I only consolidated the code a little and added exceptions and a simple API. 
-To my understanding, the algorithm can correct up to ``nsym/2`` of the errors in 
+I only consolidated the code a little and added exceptions and a simple API.
+To my understanding, the algorithm can correct up to ``nsym/2`` of the errors in
 the message, where ``nsym`` is the number of bytes in the error correction code (ECC).
-The code should work on pretty much any reasonable version of python (2.4-3.2), 
+The code should work on pretty much any reasonable version of python (2.4-3.2),
 but I'm only testing on 2.5-3.2.
 
 .. note::
-   I claim no authorship of the code, and take no responsibility for the correctness 
+   I claim no authorship of the code, and take no responsibility for the correctness
    of the algorithm. It's way too much finite-field algebra for me :)
-   
-   I've released this package as I needed an ECC codec for another project I'm working on, 
+
+   I've released this package as I needed an ECC codec for another project I'm working on,
    and I couldn't find anything on the web (that still works).
-   
+
    The algorithm itself can handle messages up to 255 bytes, including the ECC bytes. The
    ``RSCodec`` class will split longer messages into chunks and encode/decode them separately;
    it shouldn't make a difference from an API perspective.
@@ -53,9 +73,9 @@ try:
     bytearray
 except NameError:
     from array import array
-    def bytearray(obj = 0, encoding = "utf8"):
+    def bytearray(obj = 0, encoding = "latin-1"):
         if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.encode("utf8")]
+            obj = [ord(ch) for ch in obj.encode("latin-1")]
         elif isinstance(obj, int):
             obj = [0] * obj
         return array("B", obj)
@@ -64,18 +84,19 @@ except NameError:
 class ReedSolomonError(Exception):
     pass
 
-
 gf_exp = [1] * 512
 gf_log = [0] * 256
-x = 1
-for i in range(1, 255):
-    x <<= 1
-    if x & 0x100:
-        x ^= 0x11d
-    gf_exp[i] = x
-    gf_log[x] = i
-for i in range(255, 512):
-    gf_exp[i] = gf_exp[i - 255]
+
+def init_tables(prim):
+    x = 1
+    for i in range(1, 255):
+        x <<= 1
+        if x & 0x100:
+            x ^= prim
+        gf_exp[i] = x
+        gf_log[x] = i
+    for i in range(255, 512):
+        gf_exp[i] = gf_exp[i - 255]
 
 def gf_mul(x, y):
     if x == 0 or y == 0:
@@ -113,16 +134,16 @@ def gf_poly_eval(p, x):
         y = gf_mul(y, x) ^ p[i]
     return y
 
-def rs_generator_poly(nsym):
+def rs_generator_poly(nsym, fcr=0):
     g = [1]
-    for i in range(0, nsym):
+    for i in range(fcr, fcr+nsym):
         g = gf_poly_mul(g, [1, gf_exp[i]])
     return g
 
-def rs_encode_msg(msg_in, nsym):
+def rs_encode_msg(msg_in, nsym, fcr=0):
     if len(msg_in) + nsym > 255:
         raise ValueError("message too long")
-    gen = rs_generator_poly(nsym)
+    gen = rs_generator_poly(nsym, fcr)
     msg_out = bytearray(len(msg_in) + nsym)
     msg_out[:len(msg_in)] = msg_in
     for i in range(0, len(msg_in)):
@@ -133,10 +154,10 @@ def rs_encode_msg(msg_in, nsym):
     msg_out[:len(msg_in)] = msg_in
     return msg_out
 
-def rs_calc_syndromes(msg, nsym):
-    return [gf_poly_eval(msg, gf_exp[i]) for i in range(nsym)]
+def rs_calc_syndromes(msg, nsym, fcr=0):
+    return [gf_poly_eval(msg, gf_exp[i]) for i in range(fcr, fcr+nsym)]
 
-def rs_correct_errata(msg, synd, pos):
+def rs_correct_errata(msg, synd, pos, fcr=0):
     # calculate error locator polynomial
     q = [1]
     for i in range(0, len(pos)):
@@ -152,9 +173,11 @@ def rs_correct_errata(msg, synd, pos):
     # compute corrections
     for i in range(0, len(pos)):
         x = gf_exp[pos[i] + 256 - len(msg)]
-        y = gf_poly_eval(p, x)
+        exp = ((len(msg) - 1 - pos[i])*(1 - fcr)) % 255
+        xp = gf_exp[exp]
+        y = gf_mul(gf_poly_eval(p, x), xp)
         z = gf_poly_eval(q, gf_mul(x, x))
-        msg[pos[i]] ^= gf_div(y, gf_mul(x, z))
+        msg[pos[i]] ^= gf_div(y, z)
 
 def rs_find_errors(synd, nmess):
     # find error locator polynomial with Berlekamp-Massey algorithm
@@ -192,7 +215,7 @@ def rs_forney_syndromes(synd, pos, nmess):
         fsynd.pop()
     return fsynd
 
-def rs_correct_msg(msg_in, nsym):
+def rs_correct_msg(msg_in, nsym, fcr=0):
     if len(msg_in) > 255:
         raise ValueError("message too long")
     msg_out = list(msg_in)     # copy of message
@@ -204,15 +227,15 @@ def rs_correct_msg(msg_in, nsym):
             erase_pos.append(i)
     if len(erase_pos) > nsym:
         raise ReedSolomonError("Too many erasures to correct")
-    synd = rs_calc_syndromes(msg_out, nsym)
+    synd = rs_calc_syndromes(msg_out, nsym, fcr)
     if max(synd) == 0:
         return msg_out[:-nsym]  # no errors
     fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out))
     err_pos = rs_find_errors(fsynd, len(msg_out))
     if err_pos is None:
         raise ReedSolomonError("Could not locate error")
-    rs_correct_errata(msg_out, synd, erase_pos + err_pos)
-    synd = rs_calc_syndromes(msg_out, nsym)
+    rs_correct_errata(msg_out, synd, erase_pos + err_pos, fcr)
+    synd = rs_calc_syndromes(msg_out, nsym, fcr)
     if max(synd) > 0:
         raise ReedSolomonError("Could not correct message")
     return msg_out[:-nsym]
@@ -223,14 +246,25 @@ def rs_correct_msg(msg_in, nsym):
 #===================================================================================================
 class RSCodec(object):
     """
-    A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a 
+    A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a
     (byte)string to include the RS correction code, and pass such an encoded (byte)string to
     ``decode`` to extract the original message (if the number of errors allows for correct decoding).
-    The ``nsym`` argument is the length of the correction code, and it determines the number of 
+    The ``nsym`` argument is the length of the correction code, and it determines the number of
     error bytes (if I understand this correctly, half of ``nsym`` is correctable)
     """
-    def __init__(self, nsym=10):
+    """
+    Modifications by rotorgit 2/3/2015:
+    Added support for US FAA ADSB UAT RS FEC, by allowing user to specify
+    different primitive polynomial and non-zero first consecutive root (fcr).
+    For UAT/ADSB use, set fcr=120 and prim=0x187 when instantiating
+    the class; leaving them out will default for previous values (0 and
+    0x11d)
+    """
+    def __init__(self, nsym=10, fcr=0, prim=0x11d):
         self.nsym = nsym
+        self.fcr = fcr
+        self.prim = prim
+        init_tables(prim)
 
     def encode(self, data):
         if isinstance(data, str):
@@ -239,16 +273,15 @@ class RSCodec(object):
         enc = bytearray()
         for i in range(0, len(data), chunk_size):
             chunk = data[i:i+chunk_size]
-            enc.extend(rs_encode_msg(chunk, self.nsym))
+            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr))
         return enc
-    
+
     def decode(self, data):
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
         dec = bytearray()
         for i in range(0, len(data), 255):
             chunk = data[i:i+255]
-            dec.extend(rs_correct_msg(chunk, self.nsym))
+            dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr))
         return dec
-
 

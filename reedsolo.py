@@ -253,10 +253,10 @@ class RSCodec(object):
     error bytes (if I understand this correctly, half of ``nsym`` is correctable)
     """
     """
-    Modifications by RD 2/1/2015:
-    Added support for US FAA ADSB UAT RS ECC, by allowing user to specify
-    different primitive polynomial and non-zero index in the generating
-    polynomial. For UAT use, set fcr=120 and prim=0x187 when instantiating
+    Modifications by rotorgit 2/3/2015:
+    Added support for US FAA ADSB UAT RS FEC, by allowing user to specify
+    different primitive polynomial and non-zero first consecutive root (fcr).
+    For UAT/ADSB use, set fcr=120 and prim=0x187 when instantiating
     the class; leaving them out will default for previous values (0 and
     0x11d)
     """

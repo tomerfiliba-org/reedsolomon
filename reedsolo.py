@@ -18,7 +18,7 @@ Modification notes by rotorgit 2/3/2015:
     http://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP031.pdf
 - as noted above, the wikiversity discussion and examples ignore/skip
     the critical features that must be modified for ADSB UAT support
-"""
+
 Reed Solomon
 ============
 

@@ -1,4 +1,5 @@
 import unittest
+import sys
 from reedsolo import RSCodec, ReedSolomonError
 from random import randint, sample
 

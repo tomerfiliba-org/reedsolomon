@@ -1,6 +1,7 @@
 import unittest
 from reedsolo import RSCodec, ReedSolomonError
 from random import randint, sample
+from binascii import unhexlify
 
 try:
     bytearray
@@ -45,7 +46,7 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(tt, fcr=120, prim=0x187)
         hexencmsg = '00faa123555555c000000354064432c02800fe97c434e1ff5365' \
             'cf8fafe4'
-        encmsg = bytearray(hexencmsg.decode("hex"))
+        encmsg = bytearray(unhexlify(hexencmsg))
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
@@ -73,7 +74,7 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(tt, fcr=120, prim=0x187)
         hexencmsg = '08faa123555555c000000354064432c0280e1b4d090cfc04887400' \
             '000003500000000e1985ff9c6b33066ca9f43d12e8'
-        encmsg = bytearray(hexencmsg.decode("hex"))
+        encmsg = bytearray(unhexlify(hexencmsg))
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")

@@ -1,7 +1,7 @@
 import unittest
 import sys
+from random import sample
 from reedsolo import RSCodec, ReedSolomonError
-from random import randint, sample
 
 try:
     bytearray

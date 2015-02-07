@@ -45,7 +45,7 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(tt, fcr=120, prim=0x187)
         hexencmsg = '00faa123555555c000000354064432c02800fe97c434e1ff5365' \
             'cf8fafe4'
-        encmsg = bytearray.fromhex(hexencmsg)
+        encmsg = bytearray.fromhex(unicode(hexencmsg))
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
@@ -54,14 +54,14 @@ class TestReedSolomon(unittest.TestCase):
         tem1 = bytearray(tem) # clone a copy
         # encoding and decoding intact message seem OK, so test errors
         numerrs = tt >> 1 # inject tt/2 errors (expected to recover fully)
-        for i in sample(xrange(nn), numerrs): # inject errors in random places
+        for i in sample(range(nn), numerrs): # inject errors in random places
             tem1[i] ^= 0xff # flip all 8 bits
         tdm = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
         tem1 = bytearray(tem) # clone another copy
         numerrs += 1 # inject tt/2 + 1 errors (expected to fail and detect it)
-        for i in sample(xrange(nn), numerrs): # inject errors in random places
+        for i in sample(range(nn), numerrs): # inject errors in random places
             tem1[i] ^= 0xff # flip all 8 bits
         # if this fails, it means excessive errors not detected
         self.assertRaises(ReedSolomonError, rs.decode, tem1)
@@ -73,7 +73,7 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(tt, fcr=120, prim=0x187)
         hexencmsg = '08faa123555555c000000354064432c0280e1b4d090cfc04887400' \
             '000003500000000e1985ff9c6b33066ca9f43d12e8'
-        encmsg = bytearray.fromhex(hexencmsg)
+        encmsg = bytearray.fromhex(unicode(hexencmsg))
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
@@ -82,14 +82,14 @@ class TestReedSolomon(unittest.TestCase):
             msg="decoded does not match original")
         tem1 = bytearray(tem)
         numerrs = tt >> 1
-        for i in sample(xrange(nn), numerrs):
+        for i in sample(range(nn), numerrs):
             tem1[i] ^= 0xff
         tdm = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
         tem1 = bytearray(tem)
         numerrs += 1
-        for i in sample(xrange(nn), numerrs):
+        for i in sample(range(nn), numerrs):
             tem1[i] ^= 0xff
         self.assertRaises(ReedSolomonError, rs.decode, tem1)
 

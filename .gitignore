@@ -1,6 +1,6 @@
 .project
 .pydevproject
-*.pyc
+*.py[c|d]
 __pycache__
 *.egg-info
 dist/

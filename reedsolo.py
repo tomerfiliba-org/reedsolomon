@@ -503,11 +503,15 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
 
         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-        err_loc_prime = []
+        err_loc_prime_tmp = []
         for j in xrange(Xlength):
             if j != i:
-                err_loc_prime.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
-        err_loc_prime = reduce(gf_mul, err_loc_prime, 1) # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
+                err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
+        # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
+        err_loc_prime = 1
+        for coef in err_loc_prime_tmp:
+            err_loc_prime = gf_mul(err_loc_prime, coef)
+        # equivalent to: err_loc_prime = functools.reduce(gf_mul, err_loc_prime_tmp, 1)
 
         # Compute y (evaluation of the errata evaluator polynomial)
         # This is a more faithful translation of the theoretical equation contrary to the old forney method. Here it is exactly copy/pasted from the included presentation decoding_rs.pdf: Yl = omega(Xl.inverse()) / prod(1 - Xj*Xl.inverse()) for j in len(X) (in the paper it's for j in s, but it's useless when len(X) < s because we compute neutral terms 1 for nothing, and wrong when correcting more than s erasures or erasures+errors since it prevents computing all required terms).

@@ -18,3 +18,8 @@ notifications:
     email:
         on_success: change
         on_failure: change
+
+matrix:
+  allow_failures:
+    - python: pypy
+    - python: pypy3

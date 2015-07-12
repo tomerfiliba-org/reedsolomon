@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
@@ -9,7 +8,7 @@
 Reed Solomon
 ============
 
-A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
+A cython implementation of an `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at
 `wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,
 written by "Bobmath" and "LRQ3000".
@@ -20,7 +19,7 @@ v the number of erasures and nsym = n-k = the number of ECC (error correction co
 This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
 (errors where you know the position), and a combination of both errors and erasures.
 The code should work on pretty much any reasonable version of python (2.4-3.2),
-but I'm only testing on 2.5 - 3.2.
+but I'm only testing on 2.5-3.2.
 
 .. note::
    The codec is universal, meaning that it can decode any message encoded by another RS encoder
@@ -82,9 +81,12 @@ but I'm only testing on 2.5 - 3.2.
 
 '''
 
-# TODO IMPORTANT: try to keep the same convention for the ordering of polynomials inside lists throughout the code and functions (because for now there are a lot of list reversing in order to make it work, you never know the order of a polynomial, ie, if the first coefficient is the major degree or the constant term...).
+import cython
+cimport cython
+from cython.parallel import parallel, prange
 
 import itertools
+from cpython cimport array
 
 
 ################### INIT and stuff ###################
@@ -92,7 +94,6 @@ import itertools
 try:
     bytearray
 except NameError:
-    from array import array
     def bytearray(obj = 0, encoding = "latin-1"):
         if isinstance(obj, str):
             obj = [ord(ch) for ch in obj.encode("latin-1")]
@@ -100,17 +101,16 @@ except NameError:
             obj = [0] * obj
         return array("B", obj)
 
-try: # compatibility with Python 3+
-    xrange
-except NameError:
-    xrange = range
-
 class ReedSolomonError(Exception):
     pass
 
-gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % 255. For more infos on how to generate this extended exponentiation table, see paper: "Fast software implementation of finite field operations", Cheng Huang and Lihao Xu, Washington University in St. Louis, Tech. Rep (2003).
-gf_log = bytearray(256)
-field_charac = int(2**8 - 1)
+ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
+cimport cpython.array as array
+
+cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
+cdef uint8_t[::1] gf_log = bytearray([0] * 256)
+cdef int field_charac = int(2**8 - 1)
+
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
 
@@ -130,7 +130,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
 
     # A prime polynomial (necessarily irreducible) is necessary to reduce the multiplications in the Galois Field, so as to avoid overflows.
     # Why do we need a "prime polynomial"? Can't we just reduce modulo 255 (for GF(2^8) for example)? Because we need the values to be unique.
-    # For example: if the generator (alpha) = 2 and c_exp = 8 (GF(2^8) == GF(256)), then the generated Galois Field (0, 1, α, α^1, α^2, ..., α^(p-1)) will be galois field it becomes 0, 1, 2, 4, 8, 16, etc. However, upon reaching 128, the next value will be doubled (ie, next power of 2), which will give 256. Then we must reduce, because we have overflowed above the maximum value of 255. But, if we modulo 255, this will generate 256 == 1. Then 2, 4, 8, 16, etc. giving us a repeating pattern of numbers. This is very bad, as it's then not anymore a bijection (ie, a non-zero value doesn't have a unique index). That's why we can't just modulo 255, but we need another number above 255, which is called the prime polynomial.
+    # For example: if the generator (alpha) = 2 and c_exp = 8 (GF(2^8) == GF(256)), then the generated Galois Field (0, 1, a, a^1, a^2, ..., a^(p-1)) will be galois field it becomes 0, 1, 2, 4, 8, 16, etc. However, upon reaching 128, the next value will be doubled (ie, next power of 2), which will give 256. Then we must reduce, because we have overflowed above the maximum value of field_charac. But, if we modulo field_charac, this will generate 256 == 1. Then 2, 4, 8, 16, etc. giving us a repeating pattern of numbers. This is very bad, as it's then not anymore a bijection (ie, a non-zero value doesn't have a unique index). That's why we can't just modulo 255, but we need another number above 255, which is called the prime polynomial.
     # Why so much hassle? Because we are using precomputed look-up tables for multiplication: instead of multiplying a*b, we precompute alpha^a, alpha^b and alpha^(a+b), so that we can just use our lookup table at alpha^(a+b) and get our result. But just like in our original field we had 0,1,2,...,p-1 distinct unique values, in our "LUT" field using alpha we must have unique distinct values (we don't care that they are different from the original field as long as they are unique and distinct). That's why we need to avoid duplicated values, and to avoid duplicated values we need to use a prime irreducible polynomial.
 
     # Here is implemented a bruteforce approach to find all these prime polynomials, by generating every possible prime polynomials (ie, every integers between field_charac+1 and field_charac*2), and then we build the whole Galois Field, and we reject the candidate prime polynomial if it duplicates even one value or if it generates a value above field_charac (ie, cause an overflow).
@@ -195,9 +195,9 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     gf_log = bytearray(field_charac+1) # log table, log[0] is impossible and thus unused
 
     # For each possible value in the galois field 2^8, we will pre-compute the logarithm and anti-logarithm (exponential) of this value
-    # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator α : 1, α, α^1, α^2, ..., α^(p-1).
+    # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator a : 1, a, a^1, a^2, ..., a^(p-1).
     x = 1
-    for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0 but either way, this does not change the later outputs (ie, the ecc symbols will be the same either way)
+    for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0
         gf_exp[i] = x # compute anti-log for this value and store it in a table
         gf_log[x] = i # compute log at the same time
         x = gf_mult_noLUT(x, generator, prim, field_charac+1)
@@ -213,32 +213,40 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
 
     return [gf_log, gf_exp]
 
-def gf_add(x, y):
+cpdef uint8_t gf_add(uint8_t x, uint8_t y):
     return x ^ y
 
-def gf_sub(x, y):
+cpdef uint8_t gf_sub(uint8_t x, uint8_t y):
     return x ^ y # in binary galois field, substraction is just the same as addition (since we mod 2)
 
-def gf_neg(x):
+cpdef uint8_t gf_neg(uint8_t x):
     return x
 
-def gf_inverse(x):
+cpdef uint8_t gf_inverse(uint8_t x):
     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
 
-def gf_mul(x, y):
+cpdef uint8_t gf_mul(uint8_t x, uint8_t y):
+    global gf_exp, gf_log
     if x == 0 or y == 0:
         return 0
-    return gf_exp[(gf_log[x] + gf_log[y]) % field_charac]
+    cdef uint8_t lx = gf_log[x]
+    cdef uint8_t ly = gf_log[y]
+    cdef uint8_t z = (lx + ly) % field_charac
+    cdef uint8_t ret = gf_exp[z]
+    return ret
 
-def gf_div(x, y):
+cpdef uint8_t gf_div(uint8_t x, uint8_t y):
     if y == 0:
         raise ZeroDivisionError()
     if x == 0:
         return 0
     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
 
-def gf_pow(x, power):
-    return gf_exp[(gf_log[x] * power) % field_charac]
+cpdef uint8_t gf_pow(uint8_t x, int power):
+    cdef uint8_t x1 = gf_log[x]
+    cdef uint8_t x2 = (x1 * power) % field_charac
+    cdef uint8_t ret = gf_exp[x2]
+    return ret
 
 def gf_mult_noLUT_slow(x, y, prim=0):
     '''Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
@@ -286,7 +294,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
  
     return result
 
-def gf_mult_noLUT(x, y, prim=0, field_charac_full=256):
+cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     r = 0
@@ -313,31 +321,28 @@ def gf_poly_add(p, q):
         r[i + len(r) - len(q)] ^= q[i]
     return r
 
-def gf_poly_mul(p, q):
+cpdef gf_poly_mul(p, q):
     '''Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.'''
-    # Pre-allocate the result array
-    r = bytearray(len(p) + len(q) - 1)
-    # Precompute the logarithm of p
-    lp = [gf_log[p[i]] for i in xrange(len(p))]
-    # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
-    for j in xrange(len(q)):
-        qj = q[j] # optimization: load the coefficient once
-        if qj != 0: # log(0) is undefined, we need to check that
-            lq = gf_log[qj] # Optimization: precache the logarithm of the current coefficient of q
-            for i in xrange(len(p)):
-                if p[i] != 0: # log(0) is undefined, need to check that...
-                    r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
-    return r
+    cdef int i, j, x, y
+    cdef uint8_t lq, qj
 
-def gf_poly_mul_simple(p, q): # simple equivalent way of multiplying two polynomials without precomputation, but thus it's slower
-    '''Multiply two polynomials, inside Galois Field'''
+    cdef uint8_t[::1] p_t = bytearray(p)
+    cdef uint8_t[::1] q_t = bytearray(q)
     # Pre-allocate the result array
-    r = bytearray(len(p) + len(q) - 1)
+    cdef uint8_t[::1] r = bytearray(p_t.shape[0] + q_t.shape[0] - 1)
+    # Precompute the logarithm of p
+    cdef uint8_t[::1] lp = bytearray(p_t.shape[0])
+    for i in xrange(p_t.shape[0]):
+        lp[i] = gf_log[p_t[i]]
     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
-    for j in xrange(len(q)):
-        for i in xrange(len(p)):
-            r[i + j] ^= gf_mul(p[i], q[j]) # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j])) -- you can see it's your usual polynomial multiplication
-    return r
+    for j in xrange(q_t.shape[0]):
+        qj = q_t[j] # optimization: load the coefficient once
+        if qj != 0: # log(0) is undefined, we need to check that
+            lq = gf_log[q_t[j]] # Precache the logarithm of the current coefficient of q
+            for i in xrange(p_t.shape[0]):
+                if p_t[i] != 0: # log(0) is undefined, need to check that...
+                    r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
+    return bytearray(r)
 
 def gf_poly_neg(poly):
     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
@@ -347,15 +352,23 @@ def gf_poly_div(dividend, divisor):
     '''Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).'''
     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
 
-    msg_out = bytearray(dividend) # Copy the dividend list and pad with 0 where the ecc bytes will be computed
-    #normalizer = divisor[0] # precomputing for performance
-    for i in xrange(len(dividend) - (len(divisor)-1)):
-        #msg_out[i] /= normalizer # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]. For more infos, see http://en.wikipedia.org/wiki/Synthetic_division
+    cdef int i, j
+    cdef uint8_t coef, lcoef
+    cdef uint8_t[:] dividend_t = bytearray(dividend)
+    cdef uint8_t[:] msg_out = bytearray(dividend)
+    cdef uint8_t[:] divisor_t = bytearray(divisor)
+
+    cdef uint8_t[::1] ldivisor_t = bytearray(len(divisor_t))
+    for j in xrange(divisor_t.shape[0]):
+        ldivisor_t[j] = gf_log[divisor_t[j]]
+
+    for i in xrange(dividend_t.shape[0] - (divisor_t.shape[0]-1)):
         coef = msg_out[i] # precaching
-        if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization). In fact if you remove it, it should still work because gf_mul() will take care of the condition. But it's still a good practice to put the condition here.
+        if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization)
+            lcoef = gf_log[coef]
             for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
                 if divisor[j] != 0: # log(0) is undefined
-                    msg_out[i + j] ^= gf_mul(divisor[j], coef) # equivalent to the more mathematically correct (but xoring directly is faster): msg_out[i + j] += -divisor[j] * coef
+                    msg_out[i + j] ^= gf_exp[ldivisor_t[j] + lcoef] # equivalent to the more mathematically correct (but xoring directly is faster): msg_out[i + j] += -divisor[j] * coef
 
     # The resulting msg_out contains both the quotient and the remainder, the remainder being the size of the divisor (the remainder has necessarily the same degree as the divisor -- not length but degree == length-1 -- since it's what we couldn't divide from the dividend), so we compute the index where this separation is, and return the quotient and remainder.
     separator = -(len(divisor)-1)
@@ -377,9 +390,10 @@ def gf_poly_square(poly):
     if out[0] == 0: out[0] = 2*poly[1] - 1
     return out
 
-def gf_poly_eval(poly, x):
+def gf_poly_eval(poly, uint8_t x):
     '''Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.'''
-    y = poly[0]
+    cdef int i
+    cdef uint8_t y = poly[0]
     for i in xrange(1, len(poly)):
         y = gf_mul(y, x) ^ poly[i]
     return y
@@ -389,10 +403,11 @@ def gf_poly_eval(poly, x):
 
 def rs_generator_poly(nsym, fcr=0, generator=2):
     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
-    g = bytearray([1])
+    cdef int i
+    cdef uint8_t[:] g = bytearray([1])
     for i in xrange(0, nsym):
         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
-    return g
+    return bytearray(g)
 
 def rs_generator_poly_all(max_nsym, fcr=0, generator=2):
     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
@@ -402,43 +417,93 @@ def rs_generator_poly_all(max_nsym, fcr=0, generator=2):
         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)
     return g_all
 
-def rs_simple_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
-    '''Simple Reed-Solomon encoding (mainly an example for you to understand how it works, because it's slower than the inlined function below)'''
-    global field_charac
-    if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
-    if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
+@cython.boundscheck(False)
+@cython.wraparound(False)
+@cython.initializedcheck(False)
+def rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):
+    '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/'''
+    # IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
+    # >> cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
+    # >> ValueError : negative count
 
-    _, remainder = gf_poly_div(msg_in + bytearray(len(gen)-1), gen)
-    msg_out = msg_in + remainder
-    return msg_out
+    cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object
+    #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
+    cdef uint8_t[::1] gen_t = gen
 
-def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
-    '''Reed-Solomon main encoding function, using polynomial division (Extended Synthetic Division, the fastest algorithm available to my knowledge), better explained at http://research.swtch.com/field'''
-    global field_charac
+    cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
+
+    cdef int i, j
+    cdef uint8_t[::1] lgen = bytearray(gen_t.shape[0])
+
+    cdef uint8_t coef, lcoef
+
+    with nogil:
+        # Precompute the logarithm of every items in the generator
+        for j in prange(gen_t.shape[0]):
+            lgen[j] = gf_log[gen_t[j]]
+
+        # Extended synthetic division main loop
+        for i in xrange(msg_in_t.shape[0]):
+            coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).
+            # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
+            if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
+                lcoef = gf_log[coef] # precaching
+
+                for j in prange(1, gen_t.shape[0]): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
+                    msg_out[i + j] ^= gf_exp[lcoef + lgen[j]] # optimization, equivalent to gf_mul(gen[j], msg_out[i]) and we just substract it to msg_out[i+j] (but since we are in GF256, it's equivalent to an addition and to an XOR). In other words, this is simply a "multiply-accumulate operation"
+
+    # Recopy the original message bytes (overwrites the part where the quotient was computed)
+    msg_out[:msg_in_t.shape[0]] = msg_in_t # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
+    return bytearray(msg_out)
+
+####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
+gf_mul_arr = [bytearray(256) for _ in xrange(256)]
+gf_add_arr = [bytearray(256) for _ in xrange(256)]
+#gf_mul_arr = bytearray(256*256)
+#gf_add_arr = bytearray(256*256)
+
+def gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
+    global gf_mul_arr, gf_add_arr
+
+    for i in xrange(256):
+        for j in xrange(256):
+            gf_mul_arr[i][j] = gf_mul(i, j)
+            gf_add_arr[i][j] = i ^ j
+            #gf_mul_arr[i*256+j] = gf_mul(i, j)
+            #gf_add_arr[i*256+j] = i ^ j
+    return gf_mul_arr, gf_add_arr
+
+def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):
+    '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
     if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
     msg_in = bytearray(msg_in)
-    msg_out = bytearray(msg_in) + bytearray(len(gen)-1) # init msg_out with the values inside msg_in and pad with len(gen)-1 bytes (which is the number of ecc symbols).
+    msg_out = bytearray(msg_in) + bytearray(len(gen)-1)
 
-    # Precompute the logarithm of every items in the generator
-    lgen = bytearray([gf_log[gen[j]] for j in xrange(len(gen))])
+    # Alternative Numpy
+    #msg_in = np.array(bytearray(msg_in))
+    #msg_out = np.pad(msg_in, (0, nsym), 'constant')
+    #lgen = gf_log[gen]
+    #for i in xrange(msg_in.size):
+        #msg_out[i+1:i+len(gen)] = gf_add_arr[msg_out[i+1:i+len(gen)], gf_mul_arr[gen[1:], msg_out[i]]]
 
-    # Extended synthetic division main loop
-    # Fastest implementation with PyPy (but the Cython version in creedsolo.pyx is about 2x faster)
-    for i in xrange(len(msg_in)):
-        coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).
-        # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
-        if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
-            lcoef = gf_log[coef] # precaching
+    # Fastest
+    #mula = [gf_mul_arr[gen[j]] for j in xrange(len(gen))]
+    for i in xrange(len(msg_in)): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]
+        coef = msg_out[i]
+        # coef = gf_mul(msg_out[i], gf_inverse(gen[0])) # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
+        if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)
+            mula = gf_mul_arr[coef]
+            for j in xrange(1, len(gen)): # optimization: can skip g0 because the first coefficient of the generator is always 1! (that's why we start at position 1)
+                #msg_out[i + j] = gf_add_arr[msg_out[i+j]][gf_mul_arr[coef][gen[j]]] # slow, which is weird since it's only accessing lists
+                #msg_out[i + j] ^= gf_mul_arr[coef][gen[j]] # faster
+                msg_out[i + j] ^= mula[gen[j]] # fastest
 
-            for j in xrange(1, len(gen)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
-                #if gen[j] != 0: # log(0) is undefined so we need to check that, but it slow things down in fact and it's useless in our case (reed-solomon encoding) since we know that all coefficients in the generator are not 0
-                msg_out[i + j] ^= gf_exp[lcoef + lgen[j]] # optimization, equivalent to gf_mul(gen[j], msg_out[i]) and we just substract it to msg_out[i+j] (but since we are in GF256, it's equivalent to an addition and to an XOR). In other words, this is simply a "multiply-accumulate operation"
-
-    # Recopy the original message bytes (overwrites the part where the quotient was computed)
+    # Recopy the original message bytes
     msg_out[:len(msg_in)] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
     return msg_out
+############### end of precomputing attempt ###########
 
 
 ################### REED-SOLOMON DECODING ###################
@@ -450,35 +515,6 @@ def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
     # Note the "[0] +" : we add a 0 coefficient for the lowest degree (the constant). This effectively shifts the syndrome, and will shift every computations depending on the syndromes (such as the errors locator polynomial, errors evaluator polynomial, etc. but not the errors positions).
     # This is not necessary as anyway syndromes are defined such as there are only non-zero coefficients (the only 0 is the shift of the constant here) and subsequent computations will/must account for the shift by skipping the first iteration (eg, the often seen range(1, n-k+1)), but you can also avoid prepending the 0 coeff and adapt every subsequent computations to start from 0 instead of 1.
     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
-
-# DEPRECATED: do not use because it won't work for any other generator than 2 (this is probably because locprime is computed only once BEFORE the loop probably as an optimization when generator == 2, but in standard Forney algorithm locprime must be recomputed at every iterations inside the loop!)
-def rs_correct_errata_old(msg_in, synd, pos, fcr=0, generator=2): # pos is the positions of the errors/erasures/errata
-    '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
-    msg = bytearray(msg_in)
-    # calculate errata locator polynomial to correct both errors and erasures (by combining the positions given by the error locator polynomial found by BM with the erasures positions)
-    coef_pos = [len(msg) - 1 - p for p in pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
-    loc = rs_find_errata_locator(coef_pos, generator)
-    # calculate errata evaluator polynomial (also called Omega in academic paper)
-    eval = rs_find_error_evaluator(synd[1:][::-1], loc, len(loc)-1)
-    # computing formal derivative of errata locator, which is simple: we just eliminates even terms (because derivative in GF(2) is
-    # just eliminating even coefficients)
-    # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-    locprime = loc[len(loc) & 1:len(loc):2]
-    # compute corrections using Forney algorithm
-    # Forney algorithm compute the errata magnitude, it means that we calculate the value than needs to be substracted/added
-    # to each errata character to repair it
-    for i in xrange(len(pos)):
-        x = gf_pow(generator, coef_pos[i])
-        x_inv = gf_inverse(x)
-        xp = gf_pow(x, 1-fcr)
-        y = gf_mul(gf_poly_eval(eval, x_inv), xp) # numerator of the Forney algorithm (errata evaluator evaluated)
-        z = gf_poly_eval(locprime, gf_mul(x_inv, x_inv)) # denominator of the Forney algorithm (errata locator derivative)
-        magnitude = gf_div(y, z) # Forney algorithm: dividing the errata evaluator with the errata locator derivative gives us the errata magnitude (ie, value to repair) the ith symbol
-
-        # Apply on the message, same as gf_poly_add(msg, all_magnitudes) (this isn't the Forney algorithm, we just apply the result here)
-        msg[pos[i]] ^= magnitude # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes. So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
-
-    return msg
 
 def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata
     msg = bytearray(msg_in)
@@ -576,7 +612,7 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
                 old_loc = gf_poly_scale(err_loc, gf_inverse(delta)) # effectively we are doing err_loc * 1/delta = err_loc // delta
                 err_loc = new_loc
                 # Update the update flag
-                #L = K - L # the update flag L is tricky: in Blahut's schema, it's mandatory to use `L = K - L - erase_count` (and indeed in a previous draft of this function, if you forgot to do `- erase_count` it would lead to correcting only 2*(errors+erasures) <= (n-k) instead of 2*errors+erasures <= (n-k)), but in this latest draft, this will lead to a wrong decoding in some cases where it should correctly decode! Thus you should try with and without `- erase_count` to update L on your own implementation and see which one works OK without producing wrong decoding failures.
+                #L = K - L # incorrect: L = K - L - erase_count, this will lead to an uncorrect decoding in cases where it should correctly decode!
 
             # Update with the discrepancy
             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))
@@ -778,6 +814,8 @@ class RSCodec(object):
 
         # Initialize the look-up tables for easy and quick multiplication/division
         init_tables(prim, generator, c_exp)
+        # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
+        self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
     def encode(self, data):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
@@ -787,7 +825,7 @@ class RSCodec(object):
         enc = bytearray()
         for i in xrange(0, len(data), chunk_size):
             chunk = data[i:i+chunk_size]
-            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator))
+            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
         return enc
 
     def decode(self, data, erase_pos=None, only_erasures=False):

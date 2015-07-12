@@ -12,12 +12,12 @@ try:
 except ImportError:  #python3.x
     izip = zip
 
-from reedsolo import *
+from creedsolo import *
 
 try:
     bytearray
 except NameError:
-    from reedsolo import bytearray
+    from creedsolo import bytearray
 
 try: # compatibility with Python 3+
     xrange
@@ -25,7 +25,7 @@ except NameError:
     xrange = range
 
 
-class TestReedSolomon(unittest.TestCase):
+class cTestReedSolomon(unittest.TestCase):
     def test_simple(self):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "utf8")
@@ -169,7 +169,7 @@ class TestReedSolomon(unittest.TestCase):
             self.assertEqual( list(log_t) , expected_log_t )
             self.assertEqual( list(exp_t) , expected_exp_t )
 
-class TestGFArithmetics(unittest.TestCase):
+class cTestGFArithmetics(unittest.TestCase):
     '''Test Galois Field arithmetics'''
     def test_multiply_nolut(self):
         '''Try to multiply without look-up tables (necessary to build the look-up tables!)'''
@@ -194,7 +194,7 @@ class TestGFArithmetics(unittest.TestCase):
         self.assertEqual( gf_mult_noLUT(3, 125, prim=0) , 375 )
         self.assertEqual( gf_mult_noLUT_slow(4, 125, prim=0) , 500 ) # the second method, just to check that everything's alright
 
-class TestRSCodecUniversalCrossValidation(unittest.TestCase):
+class cTestRSCodecUniversalCrossValidation(unittest.TestCase):
     '''Ultimate set of tests of a full set of different parameters for encoding and decoding. If this passes, the codec is universal and can correctly interface with any other RS codec!'''
 
     def test_main(self):
@@ -263,7 +263,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                         sl = slice(-istart-erratanb, None)
                     if debugg:
                         print("Removed slice:", list(rmesecc[sl]), rmesecc[sl])
-                    rmesecc[sl] = [0] * erratanb # replace with null bytes
+                    rmesecc[sl] = [0] * erratanb
                 # Generate the erasures positions (if any)
                 erase_pos = [x for x in xrange(len(rmesecc)) if rmesecc[x] == 0]
                 if errnb > 0: erase_pos = erase_pos[:-errnb] # remove the errors positions (must not be known by definition)

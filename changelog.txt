@@ -1,0 +1,39 @@
+Modification notes by lrq3000 07/2015:
+- more precomputing (generator polynomial(s), log of generator polynomial, etc.)
+- faster encoding (particularly with PyPy and Cython)
+- more, more and more comments
+- reordered the code a bit and separated it into 4 sections for cleaner overview.
+- renamed variables for more understable code (closer to the academic books nomenclatura).
+- added a few gf and poly functions like gf_poly_div to complete the set of possible actions (in case someone wants to extend the lib in the future).
+- everything is a bytearray now, for faster computation
+- xrange() for faster computation in Python 2, but reverts automatically to range() with Python 3
+- added public rs_check() function to check if a message with ecc is tampered.
+- added a fast cython implementation (about 2x faster than pure-python run with PyPy 2.5)
+- (hopefully) fixed the decoding so that decoding under the bound 2*e+v <= (n-k) is always guaranted
+- implemented more RS parameters so that it is now a universal Reed-Solomon codec.
+
+Modification notes by rotorgit 2015-07-03:
+- added test unit
+- compatibility with Python 3+
+
+Modification notes by rotorgit 2015-02-03:
+- made the following changes to reedsolo by Tomer Filiba (TF) in order
+    to support ADSB UAT FEC standard as specified in:
+    http://adsb.tc.faa.gov/WG5_Meetings/Meeting27/UAT-DO-282B-FRAC.pdf
+- TF code is based on wikiversity RS code, so the mods are applicable there
+    as well
+- there were two changes needed to support ADSB UAT FEC decoding:
+    1. non-zero "first consecutive root" (fcr): implicitly hard-coded as
+    fcr=0 in previous version, needed fcr=120 for ADSB UAT
+    2. "primitive polynomial": hard-coded as 0x11d in previous version,
+    needed 0x187 for ADSB UAT
+- both above params were hard-coded and are now user-definable (during
+    class instantiation), with defaults equal to old values to
+    prevent breakage of existing code
+- there are many online resources for rs, but the best (most practical)
+    for me was:
+    http://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP031.pdf
+- as noted above, the wikiversity discussion and examples ignore/skip
+    the critical features that must be modified for ADSB UAT support
+
+Modifications notes by tomerfiliba 07/06/2012: Initial release.

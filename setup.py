@@ -1,15 +1,18 @@
 #!/usr/bin/env python
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-    
+
 # See:
 # https://docs.python.org/2/distutils/setupscript.html
 # http://docs.cython.org/src/reference/compilation.html
 # https://docs.python.org/2/extending/building.html
 # http://docs.cython.org/src/userguide/source_files_and_compilation.html
-from distutils.extension import Extension
+
+try:
+    from setuptools import setup
+    from setuptools import Extension
+except ImportError:
+    from distutils.core import setup
+    from distutils.extension import Extension
+
 import os
 
 try:

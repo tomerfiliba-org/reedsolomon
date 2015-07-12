@@ -7,6 +7,10 @@ import unittest
 import sys
 from random import sample
 import itertools
+try:
+    from itertools import izip
+except ImportError:  #python3.x
+    izip = zip
 
 from reedsolo import *
 
@@ -190,11 +194,11 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
 
     def test_main(self):
         def cartesian_product_dict_items(dicts):
-            return (dict(itertools.izip(dicts, x)) for x in itertools.product(*dicts.itervalues()))
+            return (dict(izip(dicts, x)) for x in itertools.product(*dicts.values()))
 
         debugg = False # if one or more tests don't pass, you can enable this flag to True to get verbose output to debug
 
-        orig_mes = bytearray("hello world")
+        orig_mes = bytearray("hello world", "utf8")
         n = len(orig_mes)*2
         k = len(orig_mes)
         nsym = n-k
@@ -241,7 +245,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                 g = rs_generator_poly_all(n, fcr=fcr, generator=generator)
                 # Encode the message
                 rmesecc = rs_encode_msg(orig_mes, n-k, gen=g[n-k])
-                rmesecc_orig = bytearray(rmesecc) # make a copy of the original message to check later if fully corrected (because the syndrome may be wrong sometimes)
+                rmesecc_orig = rmesecc[:] # make a copy of the original message to check later if fully corrected (because the syndrome may be wrong sometimes)
                 # Tamper the message
                 if erratanb > 0:
                     if errmode == 1:
@@ -254,7 +258,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                         sl = slice(-istart-erratanb, None)
                     if debugg:
                         print("Removed slice:", list(rmesecc[sl]), rmesecc[sl])
-                    rmesecc[sl] = "\x00" * erratanb
+                    rmesecc[sl] = [0] * erratanb # replace with null bytes
                 # Generate the erasures positions (if any)
                 erase_pos = [x for x in xrange(len(rmesecc)) if rmesecc[x] == 0]
                 if errnb > 0: erase_pos = erase_pos[:-errnb] # remove the errors positions (must not be known by definition)

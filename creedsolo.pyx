@@ -687,7 +687,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
     msg_out = bytearray(msg_in)     # copy of message
-    # erasures: set them to null bytes for easier decoding
+    # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
         erase_pos = []
     else:
@@ -731,7 +731,7 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
     msg_out = bytearray(msg_in)     # copy of message
-    # erasures: set them to null bytes for easier decoding
+    # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
         erase_pos = []
     else:

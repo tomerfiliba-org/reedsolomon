@@ -1,12 +1,18 @@
 language: python
 python:
-    - "2.6"
-    - "2.7"
-    - "3.2"
-    - "3.3"
-    - "3.4"
+    - 2.6
+    - 2.7
+    - 3.2
+    - 3.3
+    - 3.4
+    - pypy
 
-script: nosetests -vv
+install:
+ - pip install --install-option='--no-cython-compile' cython
+
+script:
+ - python setup.py build_ext --inplace
+ - nosetests -vv
 
 notifications:
     email:

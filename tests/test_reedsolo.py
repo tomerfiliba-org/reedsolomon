@@ -19,6 +19,11 @@ try:
 except NameError:
     from reedsolo import bytearray
 
+try: # compatibility with Python 3+
+    xrange
+except NameError:
+    xrange = range
+
 
 class TestReedSolomon(unittest.TestCase):
     def test_simple(self):

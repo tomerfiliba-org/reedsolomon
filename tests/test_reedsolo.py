@@ -28,14 +28,14 @@ except NameError:
 class TestReedSolomon(unittest.TestCase):
     def test_simple(self):
         rs = RSCodec(10)
-        msg = bytearray("hello world " * 10, "utf8")
+        msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
         dec = rs.decode(enc)
         self.assertEqual(dec, msg)
     
     def test_correction(self):
         rs = RSCodec(10)
-        msg = bytearray("hello world " * 10, "utf8")
+        msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
         self.assertEqual(rs.decode(enc), msg)
         for i in [27, -3, -9, 7, 0]:
@@ -46,7 +46,7 @@ class TestReedSolomon(unittest.TestCase):
     
     def test_long(self):
         rs = RSCodec(10)
-        msg = bytearray("a" * 10000, "utf8")
+        msg = bytearray("a" * 10000, "latin1")
         enc = rs.encode(msg)
         dec = rs.decode(enc)
         self.assertEqual(dec, msg)
@@ -203,7 +203,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
 
         debugg = False # if one or more tests don't pass, you can enable this flag to True to get verbose output to debug
 
-        orig_mes = bytearray("hello world", "utf8")
+        orig_mes = bytearray("hello world", "latin1")
         n = len(orig_mes)*2
         k = len(orig_mes)
         nsym = n-k

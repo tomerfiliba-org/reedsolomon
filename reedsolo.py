@@ -93,7 +93,7 @@ try:
     bytearray
 except NameError:
     from array import array
-    def bytearray(obj = 0, encoding = "latin-1"):
+    def bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
         if isinstance(obj, str):
             obj = [ord(ch) for ch in obj.encode("latin-1")]
         elif isinstance(obj, int):

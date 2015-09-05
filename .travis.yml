@@ -9,11 +9,15 @@ python:
     - pypy3
 
 install:
- - pip install --install-option='--no-cython-compile' cython
+    - pip install --install-option='--no-cython-compile' cython
+    - pip install coveralls
 
 script:
- - python setup.py build_ext --inplace
- - nosetests -vv
+    - python setup.py build_ext --inplace
+    - nosetests -vv --with-coverage
+
+after_success:
+    coveralls
 
 notifications:
     email:
@@ -21,6 +25,6 @@ notifications:
         on_failure: change
 
 matrix:
-  allow_failures:
-    - python: pypy
-    - python: pypy3
+    allow_failures:
+        - python: pypy
+        - python: pypy3

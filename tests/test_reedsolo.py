@@ -191,7 +191,7 @@ class TestGFArithmetics(unittest.TestCase):
         # Multiplications in GF(2^7)
         self.assertEqual( gf_mult_noLUT(3, 125, prim=0xfd, field_charac_full=128) , 122 )
         # Multiplications outside of the finite field (we revert to standard integer multiplications just to see if it works)
-        self.assertEqual( gf_mult_noLUT(3, 125, prim=0) , 375 )
+        self.assertEqual( gf_mult_noLUT(3, 125, prim=0, carryless=False) , 375 )
         self.assertEqual( gf_mult_noLUT_slow(4, 125, prim=0) , 500 ) # the second method, just to check that everything's alright
 
 class TestRSCodecUniversalCrossValidation(unittest.TestCase):

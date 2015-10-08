@@ -1,2 +1,4 @@
 include LICENSE
 include README.rst
+include changelog.txt
+include *.pyx # for the cython implementation

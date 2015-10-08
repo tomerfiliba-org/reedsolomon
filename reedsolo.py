@@ -286,15 +286,15 @@ def gf_mult_noLUT_slow(x, y, prim=0):
  
     return result
 
-def gf_mult_noLUT(x, y, prim=0, field_charac_full=256):
+def gf_mult_noLUT(x, y, prim=0, field_charac_full=256, carryless=True):
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
-    If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+    If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     r = 0
     while y: # while y is above 0
-        if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+        if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
         y = y >> 1 # equivalent to y // 2
         x = x << 1 # equivalent to x*2
-        if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.
+        if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).
 
     return r
 
@@ -390,7 +390,7 @@ def gf_poly_eval(poly, x):
 def rs_generator_poly(nsym, fcr=0, generator=2):
     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
     g = bytearray([1])
-    for i in xrange(0, nsym):
+    for i in xrange(nsym):
         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
     return g
 
@@ -405,17 +405,20 @@ def rs_generator_poly_all(max_nsym, fcr=0, generator=2):
 def rs_simple_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     '''Simple Reed-Solomon encoding (mainly an example for you to understand how it works, because it's slower than the inlined function below)'''
     global field_charac
-    if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
+    if (len(msg_in) + nsym) > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
+    # Pad the message, then divide it by the irreducible generator polynomial
     _, remainder = gf_poly_div(msg_in + bytearray(len(gen)-1), gen)
+    # The remainder is our RS code! Just append it to our original message to get our full codeword (this represents a polynomial of max 256 terms)
     msg_out = msg_in + remainder
+    # Return the codeword
     return msg_out
 
 def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     '''Reed-Solomon main encoding function, using polynomial division (Extended Synthetic Division, the fastest algorithm available to my knowledge), better explained at http://research.swtch.com/field'''
     global field_charac
-    if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
+    if (len(msg_in) + nsym) > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
     msg_in = bytearray(msg_in)
@@ -427,7 +430,7 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     # Extended synthetic division main loop
     # Fastest implementation with PyPy (but the Cython version in creedsolo.pyx is about 2x faster)
     for i in xrange(len(msg_in)):
-        coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).
+        coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works: instead of storing in a temporary register the intermediate values, we directly commit them to the output).
         # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
         if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
             lcoef = gf_log[coef] # precaching
@@ -451,36 +454,9 @@ def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
     # This is not necessary as anyway syndromes are defined such as there are only non-zero coefficients (the only 0 is the shift of the constant here) and subsequent computations will/must account for the shift by skipping the first iteration (eg, the often seen range(1, n-k+1)), but you can also avoid prepending the 0 coeff and adapt every subsequent computations to start from 0 instead of 1.
     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
 
-# DEPRECATED: do not use because it won't work for any other generator than 2 (this is probably because locprime is computed only once BEFORE the loop probably as an optimization when generator == 2, but in standard Forney algorithm locprime must be recomputed at every iterations inside the loop!)
-def rs_correct_errata_old(msg_in, synd, pos, fcr=0, generator=2): # pos is the positions of the errors/erasures/errata
-    '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
-    msg = bytearray(msg_in)
-    # calculate errata locator polynomial to correct both errors and erasures (by combining the positions given by the error locator polynomial found by BM with the erasures positions)
-    coef_pos = [len(msg) - 1 - p for p in pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
-    loc = rs_find_errata_locator(coef_pos, generator)
-    # calculate errata evaluator polynomial (also called Omega in academic paper)
-    eval = rs_find_error_evaluator(synd[1:][::-1], loc, len(loc)-1)
-    # computing formal derivative of errata locator, which is simple: we just eliminates even terms (because derivative in GF(2) is
-    # just eliminating even coefficients)
-    # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-    locprime = loc[len(loc) & 1:len(loc):2]
-    # compute corrections using Forney algorithm
-    # Forney algorithm compute the errata magnitude, it means that we calculate the value than needs to be substracted/added
-    # to each errata character to repair it
-    for i in xrange(len(pos)):
-        x = gf_pow(generator, coef_pos[i])
-        x_inv = gf_inverse(x)
-        xp = gf_pow(x, 1-fcr)
-        y = gf_mul(gf_poly_eval(eval, x_inv), xp) # numerator of the Forney algorithm (errata evaluator evaluated)
-        z = gf_poly_eval(locprime, gf_mul(x_inv, x_inv)) # denominator of the Forney algorithm (errata locator derivative)
-        magnitude = gf_div(y, z) # Forney algorithm: dividing the errata evaluator with the errata locator derivative gives us the errata magnitude (ie, value to repair) the ith symbol
-
-        # Apply on the message, same as gf_poly_add(msg, all_magnitudes) (this isn't the Forney algorithm, we just apply the result here)
-        msg[pos[i]] ^= magnitude # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes. So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
-
-    return msg
-
 def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata
+    '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+    global field_charac
     msg = bytearray(msg_in)
     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
@@ -657,7 +633,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     else:
         for e_pos in erase_pos:
             msg_out[e_pos] = 0
-    # check if there are too many erasures
+    # check if there are too many erasures to correct (beyond the Singleton bound)
     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)

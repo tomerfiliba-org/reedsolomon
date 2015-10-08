@@ -294,15 +294,15 @@ def gf_mult_noLUT_slow(x, y, prim=0):
  
     return result
 
-cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):
+cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
-    If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+    If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     r = 0
     while y: # while y is above 0
-        if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+        if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
         y = y >> 1 # equivalent to y // 2
         x = x << 1 # equivalent to x*2
-        if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.
+        if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).
 
     return r
 
@@ -517,6 +517,8 @@ def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
 
 def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata
+    '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+    global field_charac
     msg = bytearray(msg_in)
     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])

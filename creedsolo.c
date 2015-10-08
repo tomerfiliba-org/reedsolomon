@@ -257,8 +257,8 @@ class __Pyx_FakeReference {
 #define _USE_MATH_DEFINES
 #endif
 #include <math.h>
-#define __PYX_HAVE__reedsolomon__creedsolo
-#define __PYX_HAVE_API__reedsolomon__creedsolo
+#define __PYX_HAVE__reedsolo__creedsolo
+#define __PYX_HAVE_API__reedsolo__creedsolo
 #include "string.h"
 #include "stdio.h"
 #include "pythread.h"
@@ -453,9 +453,9 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "reedsolomon\\creedsolo.pyx",
+  "reedsolo\\creedsolo.pyx",
   "array.pxd",
-  "reedsolomon\\stringsource",
+  "reedsolo\\stringsource",
   "type.pxd",
   "bool.pxd",
   "complex.pxd",
@@ -552,48 +552,49 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "reedsolomon\creedsolo.pyx":107
+/* "reedsolo\creedsolo.pyx":107
  *     pass
  * 
  * ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t             # <<<<<<<<<<<<<<
  * cimport cpython.array as array
  * 
  */
-typedef unsigned char __pyx_t_11reedsolomon_9creedsolo_uint8_t;
+typedef unsigned char __pyx_t_8reedsolo_9creedsolo_uint8_t;
 
 /*--- Type declarations ---*/
 #ifndef _ARRAYARRAY_H
 struct arrayobject;
 typedef struct arrayobject arrayobject;
 #endif
-struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow;
+struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow;
 struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
-struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT;
+struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT;
 
-/* "reedsolomon\creedsolo.pyx":297
+/* "reedsolo\creedsolo.pyx":297
  *     return result
  * 
- * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):             # <<<<<<<<<<<<<<
+ * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):             # <<<<<<<<<<<<<<
  *     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
- *     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+ *     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
  */
-struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT {
+struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT {
   int __pyx_n;
   int prim;
   int field_charac_full;
+  int carryless;
 };
 
-/* "reedsolomon\creedsolo.pyx":251
+/* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
  *     '''Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
  * 
  */
-struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow {
+struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow {
   PyObject_HEAD
   PyObject *__pyx_v_bit_length;
 };
@@ -1259,8 +1260,8 @@ static CYTHON_INLINE unsigned char __Pyx_PyInt_As_unsigned_char(PyObject *);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_char(unsigned char value);
 
-static PyObject *__pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(const char *itemp);
-static int __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(const char *itemp, PyObject *obj);
+static PyObject *__pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(const char *itemp);
+static int __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(const char *itemp, PyObject *obj);
 
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
@@ -1297,9 +1298,9 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 __Pyx_memviewslice *memviewslice,
                 PyObject *original_obj);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(PyObject *);
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(PyObject *);
 
 static int __Pyx_check_binary_version(void);
 
@@ -1420,29 +1421,29 @@ static CYTHON_INLINE int __pyx_f_7cpython_5array_extend_buffer(arrayobject *, ch
 
 /* Module declarations from 'cpython' */
 
-/* Module declarations from 'reedsolomon.creedsolo' */
-static PyTypeObject *__pyx_ptype_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = 0;
+/* Module declarations from 'reedsolo.creedsolo' */
+static PyTypeObject *__pyx_ptype_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = 0;
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
-static __Pyx_memviewslice __pyx_v_11reedsolomon_9creedsolo_gf_exp = { 0, 0, { 0 }, { 0 }, { 0 } };
-static __Pyx_memviewslice __pyx_v_11reedsolomon_9creedsolo_gf_log = { 0, 0, { 0 }, { 0 }, { 0 } };
-static int __pyx_v_11reedsolomon_9creedsolo_field_charac;
+static __Pyx_memviewslice __pyx_v_8reedsolo_9creedsolo_gf_exp = { 0, 0, { 0 }, { 0 }, { 0 } };
+static __Pyx_memviewslice __pyx_v_8reedsolo_9creedsolo_gf_log = { 0, 0, { 0 }, { 0 }, { 0 } };
+static int __pyx_v_8reedsolo_9creedsolo_field_charac;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
 static PyObject *indirect = 0;
 static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_add(__pyx_t_11reedsolomon_9creedsolo_uint8_t, __pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_sub(__pyx_t_11reedsolomon_9creedsolo_uint8_t, __pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_neg(__pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_inverse(__pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_t_11reedsolomon_9creedsolo_uint8_t, __pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_div(__pyx_t_11reedsolomon_9creedsolo_uint8_t, __pyx_t_11reedsolomon_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_11reedsolomon_9creedsolo_uint8_t, int, int __pyx_skip_dispatch); /*proto*/
-static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int, int, int __pyx_skip_dispatch, struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT *__pyx_optional_args); /*proto*/
-static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_add(__pyx_t_8reedsolo_9creedsolo_uint8_t, __pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_sub(__pyx_t_8reedsolo_9creedsolo_uint8_t, __pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_neg(__pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_inverse(__pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_t_8reedsolo_9creedsolo_uint8_t, __pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_div(__pyx_t_8reedsolo_9creedsolo_uint8_t, __pyx_t_8reedsolo_9creedsolo_uint8_t, int __pyx_skip_dispatch); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_8reedsolo_9creedsolo_uint8_t, int, int __pyx_skip_dispatch); /*proto*/
+static int __pyx_f_8reedsolo_9creedsolo_gf_mult_noLUT(int, int, int __pyx_skip_dispatch, struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT *__pyx_optional_args); /*proto*/
+static PyObject *__pyx_f_8reedsolo_9creedsolo_gf_poly_mul(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1475,11 +1476,11 @@ static void __pyx_memoryview_refcount_objects_in_slice_with_gil(char *, Py_ssize
 static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_ssize_t *, int, int); /*proto*/
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t = { "uint8_t", NULL, sizeof(__pyx_t_11reedsolomon_9creedsolo_uint8_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_11reedsolomon_9creedsolo_uint8_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_11reedsolomon_9creedsolo_uint8_t), 0 };
-#define __Pyx_MODULE_NAME "reedsolomon.creedsolo"
-int __pyx_module_is_main_reedsolomon__creedsolo = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_8reedsolo_9creedsolo_uint8_t = { "uint8_t", NULL, sizeof(__pyx_t_8reedsolo_9creedsolo_uint8_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_8reedsolo_9creedsolo_uint8_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_8reedsolo_9creedsolo_uint8_t), 0 };
+#define __Pyx_MODULE_NAME "reedsolo.creedsolo"
+int __pyx_module_is_main_reedsolo__creedsolo = 0;
 
-/* Implementation of 'reedsolomon.creedsolo' */
+/* Implementation of 'reedsolo.creedsolo' */
 static PyObject *__pyx_builtin_NameError;
 static PyObject *__pyx_builtin_Exception;
 static PyObject *__pyx_builtin_xrange;
@@ -1495,48 +1496,48 @@ static PyObject *__pyx_builtin_Ellipsis;
 static PyObject *__pyx_builtin_TypeError;
 static PyObject *__pyx_builtin_id;
 static PyObject *__pyx_builtin_IndexError;
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, CYTHON_UNUSED PyObject *__pyx_v_encoding); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp, PyObject *__pyx_v_fast_primes, PyObject *__pyx_v_single); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_prim); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x, int __pyx_v_y, int __pyx_v_prim, int __pyx_v_field_charac_full); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_x); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_max_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, CYTHON_UNUSED int __pyx_v_nsym, CYTHON_UNUSED int __pyx_v_fcr, CYTHON_UNUSED int __pyx_v_generator, PyObject *__pyx_v_gen); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_gf_exp, CYTHON_UNUSED PyObject *__pyx_v_gf_log); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_gen); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_pos, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_bytearray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, CYTHON_UNUSED PyObject *__pyx_v_encoding); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_2rwh_primes1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_4find_prime_polys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp, PyObject *__pyx_v_fast_primes, PyObject *__pyx_v_single); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_6init_tables(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_8gf_add(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_10gf_sub(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_12gf_neg(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_14gf_inverse(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_16gf_mul(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_div(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_20gf_pow(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div(PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_22gf_mult_noLUT_slow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_prim); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x, int __pyx_v_y, int __pyx_v_prim, int __pyx_v_field_charac_full, int __pyx_v_carryless); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_26gf_poly_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_28gf_poly_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_30gf_poly_mul(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_32gf_poly_neg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_34gf_poly_div(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_36gf_poly_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_38gf_poly_eval(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_40rs_generator_poly(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_42rs_generator_poly_all(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_max_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_44rs_encode_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, CYTHON_UNUSED int __pyx_v_nsym, CYTHON_UNUSED int __pyx_v_fcr, CYTHON_UNUSED int __pyx_v_generator, PyObject *__pyx_v_gen); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_46gf_precomp_tables(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_gf_exp, CYTHON_UNUSED PyObject *__pyx_v_gf_log); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_48rs_encode_msg_precomp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_gen); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_50rs_calc_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_52rs_correct_errata(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_pos, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_nsym, PyObject *__pyx_v_erase_loc, PyObject *__pyx_v_erase_count); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_e_pos, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nsym); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_pos, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_nsize, PyObject *__pyx_v_fcr, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_54rs_find_error_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_nsym, PyObject *__pyx_v_erase_loc, PyObject *__pyx_v_erase_count); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_56rs_find_errata_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_e_pos, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_58rs_find_error_evaluator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nsym); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_60rs_find_errors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_62rs_forney_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_pos, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_64rs_correct_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_66rs_correct_msg_nofsynd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_68rs_check(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_nsize, PyObject *__pyx_v_fcr, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec_2encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec_4decode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures); /* proto */
 static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info, CYTHON_UNUSED int __pyx_v_flags); /* proto */
 static void __pyx_pf_7cpython_5array_5array_2__releasebuffer__(CYTHON_UNUSED arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -1571,7 +1572,7 @@ static PyObject *__pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_20
 static PyObject *__pyx_memoryview___pyx_pf_15View_dot_MemoryView_10memoryview_22copy_fortran(struct __pyx_memoryview_obj *__pyx_v_self); /* proto */
 static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewslice___dealloc__(struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView_16_memoryviewslice_4base___get__(struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
-static PyObject *__pyx_tp_new_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1702,6 +1703,7 @@ static char __pyx_k_Exception[] = "Exception";
 static char __pyx_k_NameError[] = "NameError";
 static char __pyx_k_TypeError[] = "TypeError";
 static char __pyx_k_bytearray[] = "bytearray";
+static char __pyx_k_carryless[] = "carryless";
 static char __pyx_k_divisor_t[] = "divisor_t";
 static char __pyx_k_dropwhile[] = "dropwhile";
 static char __pyx_k_enumerate[] = "enumerate";
@@ -1761,11 +1763,11 @@ static char __pyx_k_rs_correct_errata[] = "rs_correct_errata";
 static char __pyx_k_rs_generator_poly[] = "rs_generator_poly";
 static char __pyx_k_erase_pos_reversed[] = "erase_pos_reversed";
 static char __pyx_k_gf_mult_noLUT_slow[] = "gf_mult_noLUT_slow";
+static char __pyx_k_reedsolo_creedsolo[] = "reedsolo.creedsolo";
 static char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static char __pyx_k_rs_forney_syndromes[] = "rs_forney_syndromes";
 static char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
-static char __pyx_k_reedsolomon_creedsolo[] = "reedsolomon.creedsolo";
 static char __pyx_k_rs_encode_msg_precomp[] = "rs_encode_msg_precomp";
 static char __pyx_k_rs_find_error_locator[] = "rs_find_error_locator";
 static char __pyx_k_rs_generator_poly_all[] = "rs_generator_poly_all";
@@ -1793,7 +1795,7 @@ static char __pyx_k_Reed_Solomon_A_cython_implement[] = "\nReed Solomon\n=======
 static char __pyx_k_Too_many_or_few_errors_found_by[] = "Too many (or few) errors found by Chien Search for the errata locator polynomial!";
 static char __pyx_k_All_dimensions_preceding_dimensi[] = "All dimensions preceding dimension %d must be indexed and not sliced";
 static char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
-static char __pyx_k_C_git_rfigc_reedsolomon_creedsol[] = "C:\\git\\rfigc\\reedsolomon\\creedsolo.pyx";
+static char __pyx_k_C_git_rfigc_reedsolo_creedsolo_p[] = "C:\\git\\rfigc\\reedsolo\\creedsolo.pyx";
 static char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static char __pyx_k_Cannot_transpose_memoryview_with[] = "Cannot transpose memoryview with indirect dimensions";
 static char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tuple for cython.array";
@@ -1811,7 +1813,7 @@ static char __pyx_k_unable_to_allocate_shape_and_str[] = "unable to allocate sha
 static PyObject *__pyx_kp_s_A_Reed_Solomon_encoder_decoder;
 static PyObject *__pyx_n_s_B;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
-static PyObject *__pyx_kp_s_C_git_rfigc_reedsolomon_creedsol;
+static PyObject *__pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p;
 static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
 static PyObject *__pyx_kp_s_Could_not_correct_message;
@@ -1858,6 +1860,7 @@ static PyObject *__pyx_n_s_bytearray;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_c_exp;
+static PyObject *__pyx_n_s_carryless;
 static PyObject *__pyx_n_s_ch;
 static PyObject *__pyx_n_s_chunk;
 static PyObject *__pyx_n_s_chunk_size;
@@ -1991,7 +1994,7 @@ static PyObject *__pyx_n_s_q;
 static PyObject *__pyx_n_s_qualname;
 static PyObject *__pyx_n_s_r;
 static PyObject *__pyx_n_s_range;
-static PyObject *__pyx_n_s_reedsolomon_creedsolo;
+static PyObject *__pyx_n_s_reedsolo_creedsolo;
 static PyObject *__pyx_n_s_remainder;
 static PyObject *__pyx_n_s_result;
 static PyObject *__pyx_n_s_root_charac;
@@ -2153,7 +2156,7 @@ static PyObject *__pyx_codeobj__96;
 static PyObject *__pyx_codeobj__99;
 static PyObject *__pyx_codeobj__101;
 
-/* "reedsolomon\creedsolo.pyx":97
+/* "reedsolo\creedsolo.pyx":97
  *     bytearray
  * except NameError:
  *     def bytearray(obj = 0, encoding = "latin-1"):             # <<<<<<<<<<<<<<
@@ -2162,9 +2165,9 @@ static PyObject *__pyx_codeobj__101;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_1bytearray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_1bytearray = {"bytearray", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_1bytearray, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_1bytearray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_1bytearray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_1bytearray = {"bytearray", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_1bytearray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_1bytearray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_obj = 0;
   CYTHON_UNUSED PyObject *__pyx_v_encoding = 0;
   int __pyx_lineno = 0;
@@ -2218,18 +2221,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_1bytearray(PyObject *__pyx_se
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("bytearray", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.bytearray", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.bytearray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_bytearray(__pyx_self, __pyx_v_obj, __pyx_v_encoding);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_bytearray(__pyx_self, __pyx_v_obj, __pyx_v_encoding);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, CYTHON_UNUSED PyObject *__pyx_v_encoding) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_bytearray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj, CYTHON_UNUSED PyObject *__pyx_v_encoding) {
   PyObject *__pyx_v_ch = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2247,7 +2250,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   __Pyx_RefNannySetupContext("bytearray", 0);
   __Pyx_INCREF(__pyx_v_obj);
 
-  /* "reedsolomon\creedsolo.pyx":98
+  /* "reedsolo\creedsolo.pyx":98
  * except NameError:
  *     def bytearray(obj = 0, encoding = "latin-1"):
  *         if isinstance(obj, str):             # <<<<<<<<<<<<<<
@@ -2258,7 +2261,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":99
+    /* "reedsolo\creedsolo.pyx":99
  *     def bytearray(obj = 0, encoding = "latin-1"):
  *         if isinstance(obj, str):
  *             obj = [ord(ch) for ch in obj.encode("latin-1")]             # <<<<<<<<<<<<<<
@@ -2331,7 +2334,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
     goto __pyx_L3;
   }
 
-  /* "reedsolomon\creedsolo.pyx":100
+  /* "reedsolo\creedsolo.pyx":100
  *         if isinstance(obj, str):
  *             obj = [ord(ch) for ch in obj.encode("latin-1")]
  *         elif isinstance(obj, int):             # <<<<<<<<<<<<<<
@@ -2342,7 +2345,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":101
+    /* "reedsolo\creedsolo.pyx":101
  *             obj = [ord(ch) for ch in obj.encode("latin-1")]
  *         elif isinstance(obj, int):
  *             obj = [0] * obj             # <<<<<<<<<<<<<<
@@ -2365,7 +2368,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":102
+  /* "reedsolo\creedsolo.pyx":102
  *         elif isinstance(obj, int):
  *             obj = [0] * obj
  *         return array("B", obj)             # <<<<<<<<<<<<<<
@@ -2406,7 +2409,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":97
+  /* "reedsolo\creedsolo.pyx":97
  *     bytearray
  * except NameError:
  *     def bytearray(obj = 0, encoding = "latin-1"):             # <<<<<<<<<<<<<<
@@ -2420,7 +2423,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.bytearray", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.bytearray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_ch);
@@ -2430,7 +2433,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":117
+/* "reedsolo\creedsolo.pyx":117
  * ################### GALOIS FIELD ELEMENTS MATHS ###################
  * 
  * def rwh_primes1(n):             # <<<<<<<<<<<<<<
@@ -2439,21 +2442,21 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_bytearray(CYTHON_UNUSED PyObj
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_3rwh_primes1(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_2rwh_primes1[] = " Returns  a list of primes < n ";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_3rwh_primes1 = {"rwh_primes1", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_3rwh_primes1, METH_O, __pyx_doc_11reedsolomon_9creedsolo_2rwh_primes1};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_3rwh_primes1(PyObject *__pyx_self, PyObject *__pyx_v_n) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_3rwh_primes1(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_2rwh_primes1[] = " Returns  a list of primes < n ";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_3rwh_primes1 = {"rwh_primes1", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_3rwh_primes1, METH_O, __pyx_doc_8reedsolo_9creedsolo_2rwh_primes1};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_3rwh_primes1(PyObject *__pyx_self, PyObject *__pyx_v_n) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("rwh_primes1 (wrapper)", 0);
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(__pyx_self, ((PyObject *)__pyx_v_n));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_2rwh_primes1(__pyx_self, ((PyObject *)__pyx_v_n));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_2rwh_primes1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
   PyObject *__pyx_v_sieve = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
@@ -2471,7 +2474,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rwh_primes1", 0);
 
-  /* "reedsolomon\creedsolo.pyx":120
+  /* "reedsolo\creedsolo.pyx":120
  *     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
  *     ''' Returns  a list of primes < n '''
  *     sieve = [True] * (n/2)             # <<<<<<<<<<<<<<
@@ -2494,7 +2497,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   __pyx_v_sieve = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":121
+  /* "reedsolo\creedsolo.pyx":121
  *     ''' Returns  a list of primes < n '''
  *     sieve = [True] * (n/2)
  *     for i in xrange(3,int(n**0.5)+1,2):             # <<<<<<<<<<<<<<
@@ -2566,7 +2569,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":122
+    /* "reedsolo\creedsolo.pyx":122
  *     sieve = [True] * (n/2)
  *     for i in xrange(3,int(n**0.5)+1,2):
  *         if sieve[i/2]:             # <<<<<<<<<<<<<<
@@ -2582,7 +2585,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_6) {
 
-      /* "reedsolomon\creedsolo.pyx":123
+      /* "reedsolo\creedsolo.pyx":123
  *     for i in xrange(3,int(n**0.5)+1,2):
  *         if sieve[i/2]:
  *             sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)             # <<<<<<<<<<<<<<
@@ -2632,7 +2635,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
     }
     __pyx_L5:;
 
-    /* "reedsolomon\creedsolo.pyx":121
+    /* "reedsolo\creedsolo.pyx":121
  *     ''' Returns  a list of primes < n '''
  *     sieve = [True] * (n/2)
  *     for i in xrange(3,int(n**0.5)+1,2):             # <<<<<<<<<<<<<<
@@ -2642,7 +2645,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":124
+  /* "reedsolo\creedsolo.pyx":124
  *         if sieve[i/2]:
  *             sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
  *     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]             # <<<<<<<<<<<<<<
@@ -2737,7 +2740,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":117
+  /* "reedsolo\creedsolo.pyx":117
  * ################### GALOIS FIELD ELEMENTS MATHS ###################
  * 
  * def rwh_primes1(n):             # <<<<<<<<<<<<<<
@@ -2752,7 +2755,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rwh_primes1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rwh_primes1", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sieve);
@@ -2762,7 +2765,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":126
+/* "reedsolo\creedsolo.pyx":126
  *     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
  * 
  * def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):             # <<<<<<<<<<<<<<
@@ -2771,10 +2774,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_2rwh_primes1(CYTHON_UNUSED Py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_5find_prime_polys(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_4find_prime_polys[] = "Compute the list of prime polynomials for the given generator and galois field characteristic exponent.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_5find_prime_polys = {"find_prime_polys", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_5find_prime_polys, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_4find_prime_polys};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_5find_prime_polys(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_5find_prime_polys(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_4find_prime_polys[] = "Compute the list of prime polynomials for the given generator and galois field characteristic exponent.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_5find_prime_polys = {"find_prime_polys", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_5find_prime_polys, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_4find_prime_polys};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_5find_prime_polys(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_generator = 0;
   PyObject *__pyx_v_c_exp = 0;
   PyObject *__pyx_v_fast_primes = 0;
@@ -2848,18 +2851,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_5find_prime_polys(PyObject *_
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("find_prime_polys", 0, 0, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.find_prime_polys", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.find_prime_polys", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(__pyx_self, __pyx_v_generator, __pyx_v_c_exp, __pyx_v_fast_primes, __pyx_v_single);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_4find_prime_polys(__pyx_self, __pyx_v_generator, __pyx_v_c_exp, __pyx_v_fast_primes, __pyx_v_single);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp, PyObject *__pyx_v_fast_primes, PyObject *__pyx_v_single) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_4find_prime_polys(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp, PyObject *__pyx_v_fast_primes, PyObject *__pyx_v_single) {
   PyObject *__pyx_v_root_charac = NULL;
   PyObject *__pyx_v_field_charac = NULL;
   PyObject *__pyx_v_field_charac_next = NULL;
@@ -2888,7 +2891,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   int __pyx_t_14;
   int __pyx_t_15;
   int __pyx_t_16;
-  struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT __pyx_t_17;
+  struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT __pyx_t_17;
   int __pyx_t_18;
   int __pyx_t_19;
   int __pyx_lineno = 0;
@@ -2896,7 +2899,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("find_prime_polys", 0);
 
-  /* "reedsolomon\creedsolo.pyx":141
+  /* "reedsolo\creedsolo.pyx":141
  * 
  *     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
  *     root_charac = 2 # we're in GF(2)             # <<<<<<<<<<<<<<
@@ -2906,7 +2909,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __Pyx_INCREF(__pyx_int_2);
   __pyx_v_root_charac = __pyx_int_2;
 
-  /* "reedsolomon\creedsolo.pyx":142
+  /* "reedsolo\creedsolo.pyx":142
  *     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
  *     root_charac = 2 # we're in GF(2)
  *     field_charac = int(root_charac**c_exp - 1)             # <<<<<<<<<<<<<<
@@ -2924,7 +2927,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_v_field_charac = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":143
+  /* "reedsolo\creedsolo.pyx":143
  *     root_charac = 2 # we're in GF(2)
  *     field_charac = int(root_charac**c_exp - 1)
  *     field_charac_next = int(root_charac**(c_exp+1) - 1)             # <<<<<<<<<<<<<<
@@ -2945,7 +2948,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_v_field_charac_next = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":145
+  /* "reedsolo\creedsolo.pyx":145
  *     field_charac_next = int(root_charac**(c_exp+1) - 1)
  * 
  *     prim_candidates = []             # <<<<<<<<<<<<<<
@@ -2957,7 +2960,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_v_prim_candidates = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":146
+  /* "reedsolo\creedsolo.pyx":146
  * 
  *     prim_candidates = []
  *     if fast_primes:             # <<<<<<<<<<<<<<
@@ -2967,7 +2970,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_fast_primes); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_3) {
 
-    /* "reedsolomon\creedsolo.pyx":147
+    /* "reedsolo\creedsolo.pyx":147
  *     prim_candidates = []
  *     if fast_primes:
  *         prim_candidates = rwh_primes1(field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible             # <<<<<<<<<<<<<<
@@ -3004,7 +3007,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __Pyx_DECREF_SET(__pyx_v_prim_candidates, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":148
+    /* "reedsolo\creedsolo.pyx":148
  *     if fast_primes:
  *         prim_candidates = rwh_primes1(field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible
  *         prim_candidates = [x for x in prim_candidates if x > field_charac] # filter out too small primes             # <<<<<<<<<<<<<<
@@ -3070,7 +3073,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":150
+    /* "reedsolo\creedsolo.pyx":150
  *         prim_candidates = [x for x in prim_candidates if x > field_charac] # filter out too small primes
  *     else:
  *         prim_candidates = xrange(field_charac+2, field_charac_next, root_charac) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)             # <<<<<<<<<<<<<<
@@ -3098,7 +3101,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":153
+  /* "reedsolo\creedsolo.pyx":153
  * 
  *     # Start of the main loop
  *     correct_primes = []             # <<<<<<<<<<<<<<
@@ -3110,7 +3113,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_v_correct_primes = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":154
+  /* "reedsolo\creedsolo.pyx":154
  *     # Start of the main loop
  *     correct_primes = []
  *     for prim in prim_candidates: # try potential candidates primitive irreducible polys             # <<<<<<<<<<<<<<
@@ -3159,7 +3162,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __Pyx_XDECREF_SET(__pyx_v_prim, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":155
+    /* "reedsolo\creedsolo.pyx":155
  *     correct_primes = []
  *     for prim in prim_candidates: # try potential candidates primitive irreducible polys
  *         seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)             # <<<<<<<<<<<<<<
@@ -3199,7 +3202,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __Pyx_XDECREF_SET(__pyx_v_seen, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":156
+    /* "reedsolo\creedsolo.pyx":156
  *     for prim in prim_candidates: # try potential candidates primitive irreducible polys
  *         seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
  *         conflict = False # flag to know if there was at least one conflict             # <<<<<<<<<<<<<<
@@ -3208,7 +3211,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
  */
     __pyx_v_conflict = 0;
 
-    /* "reedsolomon\creedsolo.pyx":159
+    /* "reedsolo\creedsolo.pyx":159
  * 
  *         # Second loop, build the whole Galois Field
  *         x = 1             # <<<<<<<<<<<<<<
@@ -3218,7 +3221,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_XDECREF_SET(__pyx_v_x, __pyx_int_1);
 
-    /* "reedsolomon\creedsolo.pyx":160
+    /* "reedsolo\creedsolo.pyx":160
  *         # Second loop, build the whole Galois Field
  *         x = 1
  *         for i in xrange(field_charac):             # <<<<<<<<<<<<<<
@@ -3276,7 +3279,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
       __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":162
+      /* "reedsolo\creedsolo.pyx":162
  *         for i in xrange(field_charac):
  *             # Compute the next value in the field (ie, the next power of alpha/generator)
  *             x = gf_mult_noLUT(x, generator, prim, field_charac+1)             # <<<<<<<<<<<<<<
@@ -3293,13 +3296,13 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
       __pyx_t_17.__pyx_n = 2;
       __pyx_t_17.prim = __pyx_t_14;
       __pyx_t_17.field_charac_full = __pyx_t_15;
-      __pyx_t_16 = __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(__pyx_t_12, __pyx_t_13, 0, &__pyx_t_17); 
+      __pyx_t_16 = __pyx_f_8reedsolo_9creedsolo_gf_mult_noLUT(__pyx_t_12, __pyx_t_13, 0, &__pyx_t_17); 
       __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_t_16); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF_SET(__pyx_v_x, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":165
+      /* "reedsolo\creedsolo.pyx":165
  * 
  *             # Rejection criterion: if the value overflowed (above field_charac) or is a duplicate of a previously generated power of alpha, then we reject this polynomial (not prime)
  *             if x > field_charac or seen[x] == 1:             # <<<<<<<<<<<<<<
@@ -3324,7 +3327,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
       __pyx_L12_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "reedsolomon\creedsolo.pyx":166
+        /* "reedsolo\creedsolo.pyx":166
  *             # Rejection criterion: if the value overflowed (above field_charac) or is a duplicate of a previously generated power of alpha, then we reject this polynomial (not prime)
  *             if x > field_charac or seen[x] == 1:
  *                 conflict = True             # <<<<<<<<<<<<<<
@@ -3333,7 +3336,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
  */
         __pyx_v_conflict = 1;
 
-        /* "reedsolomon\creedsolo.pyx":167
+        /* "reedsolo\creedsolo.pyx":167
  *             if x > field_charac or seen[x] == 1:
  *                 conflict = True
  *                 break             # <<<<<<<<<<<<<<
@@ -3344,7 +3347,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
       }
       /*else*/ {
 
-        /* "reedsolomon\creedsolo.pyx":170
+        /* "reedsolo\creedsolo.pyx":170
  *             # Else we flag this value as seen (to maybe detect future duplicates), and we continue onto the next power of alpha
  *             else:
  *                 seen[x] = 1             # <<<<<<<<<<<<<<
@@ -3354,7 +3357,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
         if (unlikely(PyObject_SetItem(__pyx_v_seen, __pyx_v_x, __pyx_int_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
 
-      /* "reedsolomon\creedsolo.pyx":160
+      /* "reedsolo\creedsolo.pyx":160
  *         # Second loop, build the whole Galois Field
  *         x = 1
  *         for i in xrange(field_charac):             # <<<<<<<<<<<<<<
@@ -3365,7 +3368,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __pyx_L10_break:;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":173
+    /* "reedsolo\creedsolo.pyx":173
  * 
  *         # End of the second loop: if there's no conflict (no overflow nor duplicated value), this is a prime polynomial!
  *         if not conflict:             # <<<<<<<<<<<<<<
@@ -3375,7 +3378,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     __pyx_t_3 = ((!(__pyx_v_conflict != 0)) != 0);
     if (__pyx_t_3) {
 
-      /* "reedsolomon\creedsolo.pyx":174
+      /* "reedsolo\creedsolo.pyx":174
  *         # End of the second loop: if there's no conflict (no overflow nor duplicated value), this is a prime polynomial!
  *         if not conflict:
  *             correct_primes.append(prim)             # <<<<<<<<<<<<<<
@@ -3384,7 +3387,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
  */
       __pyx_t_19 = __Pyx_PyList_Append(__pyx_v_correct_primes, __pyx_v_prim); if (unlikely(__pyx_t_19 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "reedsolomon\creedsolo.pyx":175
+      /* "reedsolo\creedsolo.pyx":175
  *         if not conflict:
  *             correct_primes.append(prim)
  *             if single: return prim             # <<<<<<<<<<<<<<
@@ -3403,7 +3406,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
     }
     __pyx_L14:;
 
-    /* "reedsolomon\creedsolo.pyx":154
+    /* "reedsolo\creedsolo.pyx":154
  *     # Start of the main loop
  *     correct_primes = []
  *     for prim in prim_candidates: # try potential candidates primitive irreducible polys             # <<<<<<<<<<<<<<
@@ -3413,7 +3416,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":178
+  /* "reedsolo\creedsolo.pyx":178
  * 
  *     # Return the list of all prime polynomials
  *     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]             # <<<<<<<<<<<<<<
@@ -3425,7 +3428,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __pyx_r = __pyx_v_correct_primes;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":126
+  /* "reedsolo\creedsolo.pyx":126
  *     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
  * 
  * def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):             # <<<<<<<<<<<<<<
@@ -3441,7 +3444,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.find_prime_polys", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.find_prime_polys", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_root_charac);
@@ -3458,7 +3461,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":180
+/* "reedsolo\creedsolo.pyx":180
  *     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
  * 
  * def init_tables(prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
@@ -3467,10 +3470,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_4find_prime_polys(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7init_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_6init_tables[] = "Precompute the logarithm and anti-log tables for faster computation later, using the provided primitive polynomial.\n    These tables are used for multiplication/division since addition/substraction are simple XOR operations inside GF of characteristic 2.\n    The basic idea is quite simple: since b**(log_b(x), log_b(y)) == x * y given any number b (the base or generator of the logarithm), then we can use any number b to precompute logarithm and anti-log (exponentiation) tables to use for multiplying two numbers x and y.\n    That's why when we use a different base/generator number, the log and anti-log tables are drastically different, but the resulting computations are the same given any such tables.\n    For more infos, see https://en.wikipedia.org/wiki/Finite_field_arithmetic#Implementation_tricks\n    ";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_7init_tables = {"init_tables", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_7init_tables, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_6init_tables};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7init_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7init_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_6init_tables[] = "Precompute the logarithm and anti-log tables for faster computation later, using the provided primitive polynomial.\n    These tables are used for multiplication/division since addition/substraction are simple XOR operations inside GF of characteristic 2.\n    The basic idea is quite simple: since b**(log_b(x), log_b(y)) == x * y given any number b (the base or generator of the logarithm), then we can use any number b to precompute logarithm and anti-log (exponentiation) tables to use for multiplying two numbers x and y.\n    That's why when we use a different base/generator number, the log and anti-log tables are drastically different, but the resulting computations are the same given any such tables.\n    For more infos, see https://en.wikipedia.org/wiki/Finite_field_arithmetic#Implementation_tricks\n    ";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_7init_tables = {"init_tables", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_7init_tables, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_6init_tables};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7init_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_prim = 0;
   PyObject *__pyx_v_generator = 0;
   PyObject *__pyx_v_c_exp = 0;
@@ -3534,18 +3537,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7init_tables(PyObject *__pyx_
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("init_tables", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.init_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.init_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_6init_tables(__pyx_self, __pyx_v_prim, __pyx_v_generator, __pyx_v_c_exp);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_6init_tables(__pyx_self, __pyx_v_prim, __pyx_v_generator, __pyx_v_c_exp);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_6init_tables(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp) {
   long __pyx_v_x;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
@@ -3561,11 +3564,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   PyObject *(*__pyx_t_9)(PyObject *);
   Py_ssize_t __pyx_t_10;
   Py_ssize_t __pyx_t_11;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_12;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_12;
   long __pyx_t_13;
   int __pyx_t_14;
   int __pyx_t_15;
-  struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT __pyx_t_16;
+  struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT __pyx_t_16;
   Py_ssize_t __pyx_t_17;
   Py_ssize_t __pyx_t_18;
   Py_ssize_t __pyx_t_19;
@@ -3574,7 +3577,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("init_tables", 0);
 
-  /* "reedsolomon\creedsolo.pyx":193
+  /* "reedsolo\creedsolo.pyx":193
  * 
  *     global gf_exp, gf_log, field_charac
  *     field_charac = int(2**c_exp - 1)             # <<<<<<<<<<<<<<
@@ -3591,9 +3594,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_11reedsolomon_9creedsolo_field_charac = __pyx_t_3;
+  __pyx_v_8reedsolo_9creedsolo_field_charac = __pyx_t_3;
 
-  /* "reedsolomon\creedsolo.pyx":194
+  /* "reedsolo\creedsolo.pyx":194
  *     global gf_exp, gf_log, field_charac
  *     field_charac = int(2**c_exp - 1)
  *     gf_exp = bytearray(field_charac * 2) # anti-log (exponential) table. The first two elements will always be [GF256int(1), generator]             # <<<<<<<<<<<<<<
@@ -3602,7 +3605,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_11reedsolomon_9creedsolo_field_charac * 2)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_long((__pyx_v_8reedsolo_9creedsolo_field_charac * 2)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3630,15 +3633,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_XDEC_MEMVIEW(&__pyx_v_11reedsolomon_9creedsolo_gf_exp, 1);
-  __pyx_v_11reedsolomon_9creedsolo_gf_exp = __pyx_t_7;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_8reedsolo_9creedsolo_gf_exp, 1);
+  __pyx_v_8reedsolo_9creedsolo_gf_exp = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":195
+  /* "reedsolo\creedsolo.pyx":195
  *     field_charac = int(2**c_exp - 1)
  *     gf_exp = bytearray(field_charac * 2) # anti-log (exponential) table. The first two elements will always be [GF256int(1), generator]
  *     gf_log = bytearray(field_charac+1) # log table, log[0] is impossible and thus unused             # <<<<<<<<<<<<<<
@@ -3647,7 +3650,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyInt_From_long((__pyx_v_11reedsolomon_9creedsolo_field_charac + 1)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyInt_From_long((__pyx_v_8reedsolo_9creedsolo_field_charac + 1)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3675,15 +3678,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_7.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_XDEC_MEMVIEW(&__pyx_v_11reedsolomon_9creedsolo_gf_log, 1);
-  __pyx_v_11reedsolomon_9creedsolo_gf_log = __pyx_t_7;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_8reedsolo_9creedsolo_gf_log, 1);
+  __pyx_v_8reedsolo_9creedsolo_gf_log = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":199
+  /* "reedsolo\creedsolo.pyx":199
  *     # For each possible value in the galois field 2^8, we will pre-compute the logarithm and anti-logarithm (exponential) of this value
  *     # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator a : 1, a, a^1, a^2, ..., a^(p-1).
  *     x = 1             # <<<<<<<<<<<<<<
@@ -3692,14 +3695,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  */
   __pyx_v_x = 1;
 
-  /* "reedsolomon\creedsolo.pyx":200
+  /* "reedsolo\creedsolo.pyx":200
  *     # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator a : 1, a, a^1, a^2, ..., a^(p-1).
  *     x = 1
  *     for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0             # <<<<<<<<<<<<<<
  *         gf_exp[i] = x # compute anti-log for this value and store it in a table
  *         gf_log[x] = i # compute log at the same time
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -3752,28 +3755,28 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":201
+    /* "reedsolo\creedsolo.pyx":201
  *     x = 1
  *     for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0
  *         gf_exp[i] = x # compute anti-log for this value and store it in a table             # <<<<<<<<<<<<<<
  *         gf_log[x] = i # compute log at the same time
  *         x = gf_mult_noLUT(x, generator, prim, field_charac+1)
  */
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
     __pyx_t_10 = __Pyx_PyIndex_AsSsize_t(__pyx_v_i); if (unlikely((__pyx_t_10 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_11 = __pyx_t_10;
     __pyx_t_3 = -1;
     if (__pyx_t_11 < 0) {
-      __pyx_t_11 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+      __pyx_t_11 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
       if (unlikely(__pyx_t_11 < 0)) __pyx_t_3 = 0;
-    } else if (unlikely(__pyx_t_11 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_3 = 0;
+    } else if (unlikely(__pyx_t_11 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_3 = 0;
     if (unlikely(__pyx_t_3 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_3);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_11)) )) = __pyx_v_x;
+    *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_11)) )) = __pyx_v_x;
 
-    /* "reedsolomon\creedsolo.pyx":202
+    /* "reedsolo\creedsolo.pyx":202
  *     for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0
  *         gf_exp[i] = x # compute anti-log for this value and store it in a table
  *         gf_log[x] = i # compute log at the same time             # <<<<<<<<<<<<<<
@@ -3781,20 +3784,20 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  * 
  */
     __pyx_t_12 = __Pyx_PyInt_As_unsigned_char(__pyx_v_i); if (unlikely((__pyx_t_12 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
     __pyx_t_13 = __pyx_v_x;
     __pyx_t_3 = -1;
     if (__pyx_t_13 < 0) {
-      __pyx_t_13 += __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0];
+      __pyx_t_13 += __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0];
       if (unlikely(__pyx_t_13 < 0)) __pyx_t_3 = 0;
-    } else if (unlikely(__pyx_t_13 >= __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_3 = 0;
+    } else if (unlikely(__pyx_t_13 >= __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_3 = 0;
     if (unlikely(__pyx_t_3 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_3);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_13)) )) = __pyx_t_12;
+    *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_13)) )) = __pyx_t_12;
 
-    /* "reedsolomon\creedsolo.pyx":203
+    /* "reedsolo\creedsolo.pyx":203
  *         gf_exp[i] = x # compute anti-log for this value and store it in a table
  *         gf_log[x] = i # compute log at the same time
  *         x = gf_mult_noLUT(x, generator, prim, field_charac+1)             # <<<<<<<<<<<<<<
@@ -3805,11 +3808,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_v_prim); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_16.__pyx_n = 2;
     __pyx_t_16.prim = __pyx_t_14;
-    __pyx_t_16.field_charac_full = (__pyx_v_11reedsolomon_9creedsolo_field_charac + 1);
-    __pyx_t_15 = __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(__pyx_v_x, __pyx_t_3, 0, &__pyx_t_16); 
+    __pyx_t_16.field_charac_full = (__pyx_v_8reedsolo_9creedsolo_field_charac + 1);
+    __pyx_t_15 = __pyx_f_8reedsolo_9creedsolo_gf_mult_noLUT(__pyx_v_x, __pyx_t_3, 0, &__pyx_t_16); 
     __pyx_v_x = __pyx_t_15;
 
-    /* "reedsolomon\creedsolo.pyx":200
+    /* "reedsolo\creedsolo.pyx":200
  *     # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator a : 1, a, a^1, a^2, ..., a^(p-1).
  *     x = 1
  *     for i in xrange(field_charac): # we could skip index 255 which is equal to index 0 because of modulo: g^255==g^0             # <<<<<<<<<<<<<<
@@ -3819,16 +3822,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":211
+  /* "reedsolo\creedsolo.pyx":211
  * 
  *     # Optimization: double the size of the anti-log table so that we don't need to mod 255 to stay inside the bounds (because we will mainly use this table for the multiplication of two GF numbers, no more).
  *     for i in xrange(field_charac, field_charac * 2):             # <<<<<<<<<<<<<<
  *         gf_exp[i] = gf_exp[i - field_charac]
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_11reedsolomon_9creedsolo_field_charac * 2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_long((__pyx_v_8reedsolo_9creedsolo_field_charac * 2)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
@@ -3884,15 +3887,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":212
+    /* "reedsolo\creedsolo.pyx":212
  *     # Optimization: double the size of the anti-log table so that we don't need to mod 255 to stay inside the bounds (because we will mainly use this table for the multiplication of two GF numbers, no more).
  *     for i in xrange(field_charac, field_charac * 2):
  *         gf_exp[i] = gf_exp[i - field_charac]             # <<<<<<<<<<<<<<
  * 
  *     return [gf_log, gf_exp]
  */
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_2 = PyNumber_Subtract(__pyx_v_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -3902,28 +3905,28 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
     __pyx_t_17 = __pyx_t_10;
     __pyx_t_15 = -1;
     if (__pyx_t_17 < 0) {
-      __pyx_t_17 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+      __pyx_t_17 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
       if (unlikely(__pyx_t_17 < 0)) __pyx_t_15 = 0;
-    } else if (unlikely(__pyx_t_17 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_15 = 0;
+    } else if (unlikely(__pyx_t_17 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_15 = 0;
     if (unlikely(__pyx_t_15 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_15);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
     __pyx_t_18 = __Pyx_PyIndex_AsSsize_t(__pyx_v_i); if (unlikely((__pyx_t_18 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_19 = __pyx_t_18;
     __pyx_t_15 = -1;
     if (__pyx_t_19 < 0) {
-      __pyx_t_19 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+      __pyx_t_19 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
       if (unlikely(__pyx_t_19 < 0)) __pyx_t_15 = 0;
-    } else if (unlikely(__pyx_t_19 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_15 = 0;
+    } else if (unlikely(__pyx_t_19 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_15 = 0;
     if (unlikely(__pyx_t_15 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_15);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_19)) )) = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_17)) )));
+    *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_19)) )) = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_17)) )));
 
-    /* "reedsolomon\creedsolo.pyx":211
+    /* "reedsolo\creedsolo.pyx":211
  * 
  *     # Optimization: double the size of the anti-log table so that we don't need to mod 255 to stay inside the bounds (because we will mainly use this table for the multiplication of two GF numbers, no more).
  *     for i in xrange(field_charac, field_charac * 2):             # <<<<<<<<<<<<<<
@@ -3933,7 +3936,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":214
+  /* "reedsolo\creedsolo.pyx":214
  *         gf_exp[i] = gf_exp[i - field_charac]
  * 
  *     return [gf_log, gf_exp]             # <<<<<<<<<<<<<<
@@ -3941,11 +3944,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  * cpdef uint8_t gf_add(uint8_t x, uint8_t y):
  */
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_11reedsolomon_9creedsolo_gf_log, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_8reedsolo_9creedsolo_gf_log, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_11reedsolomon_9creedsolo_gf_exp, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_v_8reedsolo_9creedsolo_gf_exp, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -3959,7 +3962,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":180
+  /* "reedsolo\creedsolo.pyx":180
  *     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
  * 
  * def init_tables(prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
@@ -3975,7 +3978,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.init_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.init_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_i);
@@ -3984,7 +3987,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":216
+/* "reedsolo\creedsolo.pyx":216
  *     return [gf_log, gf_exp]
  * 
  * cpdef uint8_t gf_add(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -3992,13 +3995,13 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_6init_tables(CYTHON_UNUSED Py
  * 
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_add(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_add(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_add", 0);
 
-  /* "reedsolomon\creedsolo.pyx":217
+  /* "reedsolo\creedsolo.pyx":217
  * 
  * cpdef uint8_t gf_add(uint8_t x, uint8_t y):
  *     return x ^ y             # <<<<<<<<<<<<<<
@@ -4008,7 +4011,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_r = (__pyx_v_x ^ __pyx_v_y);
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":216
+  /* "reedsolo\creedsolo.pyx":216
  *     return [gf_log, gf_exp]
  * 
  * cpdef uint8_t gf_add(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4023,10 +4026,10 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_9gf_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4072,18 +4075,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_9gf_add(PyObject *__pyx_self,
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_add", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_8gf_add(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_8gf_add(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_8gf_add(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4092,7 +4095,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_add", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_add(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_add(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4101,7 +4104,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObjec
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4109,7 +4112,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":219
+/* "reedsolo\creedsolo.pyx":219
  *     return x ^ y
  * 
  * cpdef uint8_t gf_sub(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4117,13 +4120,13 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_8gf_add(CYTHON_UNUSED PyObjec
  * 
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_sub(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_sub(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_sub", 0);
 
-  /* "reedsolomon\creedsolo.pyx":220
+  /* "reedsolo\creedsolo.pyx":220
  * 
  * cpdef uint8_t gf_sub(uint8_t x, uint8_t y):
  *     return x ^ y # in binary galois field, substraction is just the same as addition (since we mod 2)             # <<<<<<<<<<<<<<
@@ -4133,7 +4136,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_r = (__pyx_v_x ^ __pyx_v_y);
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":219
+  /* "reedsolo\creedsolo.pyx":219
  *     return x ^ y
  * 
  * cpdef uint8_t gf_sub(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4148,10 +4151,10 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_11gf_sub(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4197,18 +4200,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_11gf_sub(PyObject *__pyx_self
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_sub", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_sub", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_sub", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_10gf_sub(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_10gf_sub(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_10gf_sub(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4217,7 +4220,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_sub", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_sub(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_sub(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4226,7 +4229,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObje
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_sub", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_sub", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4234,7 +4237,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":222
+/* "reedsolo\creedsolo.pyx":222
  *     return x ^ y # in binary galois field, substraction is just the same as addition (since we mod 2)
  * 
  * cpdef uint8_t gf_neg(uint8_t x):             # <<<<<<<<<<<<<<
@@ -4242,13 +4245,13 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_10gf_sub(CYTHON_UNUSED PyObje
  * 
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_neg(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_neg(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_neg", 0);
 
-  /* "reedsolomon\creedsolo.pyx":223
+  /* "reedsolo\creedsolo.pyx":223
  * 
  * cpdef uint8_t gf_neg(uint8_t x):
  *     return x             # <<<<<<<<<<<<<<
@@ -4258,7 +4261,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_r = __pyx_v_x;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":222
+  /* "reedsolo\creedsolo.pyx":222
  *     return x ^ y # in binary galois field, substraction is just the same as addition (since we mod 2)
  * 
  * cpdef uint8_t gf_neg(uint8_t x):             # <<<<<<<<<<<<<<
@@ -4273,9 +4276,9 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_13gf_neg(PyObject *__pyx_self, PyObject *__pyx_arg_x) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4287,18 +4290,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_13gf_neg(PyObject *__pyx_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_neg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_neg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_12gf_neg(__pyx_self, ((__pyx_t_11reedsolomon_9creedsolo_uint8_t)__pyx_v_x));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_12gf_neg(__pyx_self, ((__pyx_t_8reedsolo_9creedsolo_uint8_t)__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_12gf_neg(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4307,7 +4310,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_neg", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_neg(__pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_neg(__pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 222; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4316,7 +4319,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObje
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_neg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_neg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4324,7 +4327,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":225
+/* "reedsolo\creedsolo.pyx":225
  *     return x
  * 
  * cpdef uint8_t gf_inverse(uint8_t x):             # <<<<<<<<<<<<<<
@@ -4332,11 +4335,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_12gf_neg(CYTHON_UNUSED PyObje
  * 
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_inverse(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_inverse(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_1;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
   int __pyx_lineno = 0;
@@ -4344,36 +4347,36 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_inverse", 0);
 
-  /* "reedsolomon\creedsolo.pyx":226
+  /* "reedsolo\creedsolo.pyx":226
  * 
  * cpdef uint8_t gf_inverse(uint8_t x):
  *     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)             # <<<<<<<<<<<<<<
  * 
  * cpdef uint8_t gf_mul(uint8_t x, uint8_t y):
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_1 = __pyx_v_x;
   __pyx_t_2 = -1;
-  if (unlikely(__pyx_t_1 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_2 = 0;
+  if (unlikely(__pyx_t_1 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_2 = 0;
   if (unlikely(__pyx_t_2 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_2);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = (__pyx_v_11reedsolomon_9creedsolo_field_charac - (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_1)) ))));
+  __pyx_t_2 = (__pyx_v_8reedsolo_9creedsolo_field_charac - (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_1)) ))));
   __pyx_t_3 = -1;
   if (__pyx_t_2 < 0) {
-    __pyx_t_2 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+    __pyx_t_2 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
     if (unlikely(__pyx_t_2 < 0)) __pyx_t_3 = 0;
-  } else if (unlikely(__pyx_t_2 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_3 = 0;
+  } else if (unlikely(__pyx_t_2 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_3 = 0;
   if (unlikely(__pyx_t_3 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_3);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_r = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_2)) )));
+  __pyx_r = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_2)) )));
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":225
+  /* "reedsolo\creedsolo.pyx":225
  *     return x
  * 
  * cpdef uint8_t gf_inverse(uint8_t x):             # <<<<<<<<<<<<<<
@@ -4383,7 +4386,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_WriteUnraisable("reedsolomon.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("reedsolo.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4391,9 +4394,9 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_15gf_inverse(PyObject *__pyx_self, PyObject *__pyx_arg_x) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4405,18 +4408,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_15gf_inverse(PyObject *__pyx_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(__pyx_self, ((__pyx_t_11reedsolomon_9creedsolo_uint8_t)__pyx_v_x));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_14gf_inverse(__pyx_self, ((__pyx_t_8reedsolo_9creedsolo_uint8_t)__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_14gf_inverse(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4425,7 +4428,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_inverse", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_inverse(__pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_inverse(__pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 225; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4434,7 +4437,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED Py
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_inverse", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4442,7 +4445,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":228
+/* "reedsolo\creedsolo.pyx":228
  *     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
  * 
  * cpdef uint8_t gf_mul(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4450,26 +4453,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_14gf_inverse(CYTHON_UNUSED Py
  *     if x == 0 or y == 0:
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_lx;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_ly;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_z;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_ret;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_lx;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_ly;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_z;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_ret;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_3;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_3;
   int __pyx_t_4;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_5;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_6;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_5;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_6;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_mul", 0);
 
-  /* "reedsolomon\creedsolo.pyx":230
+  /* "reedsolo\creedsolo.pyx":230
  * cpdef uint8_t gf_mul(uint8_t x, uint8_t y):
  *     global gf_exp, gf_log
  *     if x == 0 or y == 0:             # <<<<<<<<<<<<<<
@@ -4487,7 +4490,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":231
+    /* "reedsolo\creedsolo.pyx":231
  *     global gf_exp, gf_log
  *     if x == 0 or y == 0:
  *         return 0             # <<<<<<<<<<<<<<
@@ -4498,41 +4501,41 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     goto __pyx_L0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":232
+  /* "reedsolo\creedsolo.pyx":232
  *     if x == 0 or y == 0:
  *         return 0
  *     cdef uint8_t lx = gf_log[x]             # <<<<<<<<<<<<<<
  *     cdef uint8_t ly = gf_log[y]
  *     cdef uint8_t z = (lx + ly) % field_charac
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_3 = __pyx_v_x;
   __pyx_t_4 = -1;
-  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
+  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
   if (unlikely(__pyx_t_4 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_4);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_lx = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_3)) )));
+  __pyx_v_lx = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_3)) )));
 
-  /* "reedsolomon\creedsolo.pyx":233
+  /* "reedsolo\creedsolo.pyx":233
  *         return 0
  *     cdef uint8_t lx = gf_log[x]
  *     cdef uint8_t ly = gf_log[y]             # <<<<<<<<<<<<<<
  *     cdef uint8_t z = (lx + ly) % field_charac
  *     cdef uint8_t ret = gf_exp[z]
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_5 = __pyx_v_y;
   __pyx_t_4 = -1;
-  if (unlikely(__pyx_t_5 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
+  if (unlikely(__pyx_t_5 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
   if (unlikely(__pyx_t_4 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_4);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_ly = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_5)) )));
+  __pyx_v_ly = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_5)) )));
 
-  /* "reedsolomon\creedsolo.pyx":234
+  /* "reedsolo\creedsolo.pyx":234
  *     cdef uint8_t lx = gf_log[x]
  *     cdef uint8_t ly = gf_log[y]
  *     cdef uint8_t z = (lx + ly) % field_charac             # <<<<<<<<<<<<<<
@@ -4540,7 +4543,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
  *     return ret
  */
   __pyx_t_4 = (__pyx_v_lx + __pyx_v_ly);
-  if (unlikely(__pyx_v_11reedsolomon_9creedsolo_field_charac == 0)) {
+  if (unlikely(__pyx_v_8reedsolo_9creedsolo_field_charac == 0)) {
     #ifdef WITH_THREAD
     PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
     #endif
@@ -4550,26 +4553,26 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     #endif
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_z = __Pyx_mod_int(__pyx_t_4, __pyx_v_11reedsolomon_9creedsolo_field_charac);
+  __pyx_v_z = __Pyx_mod_int(__pyx_t_4, __pyx_v_8reedsolo_9creedsolo_field_charac);
 
-  /* "reedsolomon\creedsolo.pyx":235
+  /* "reedsolo\creedsolo.pyx":235
  *     cdef uint8_t ly = gf_log[y]
  *     cdef uint8_t z = (lx + ly) % field_charac
  *     cdef uint8_t ret = gf_exp[z]             # <<<<<<<<<<<<<<
  *     return ret
  * 
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_6 = __pyx_v_z;
   __pyx_t_4 = -1;
-  if (unlikely(__pyx_t_6 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_4 = 0;
+  if (unlikely(__pyx_t_6 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_4 = 0;
   if (unlikely(__pyx_t_4 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_4);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_ret = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_6)) )));
+  __pyx_v_ret = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_6)) )));
 
-  /* "reedsolomon\creedsolo.pyx":236
+  /* "reedsolo\creedsolo.pyx":236
  *     cdef uint8_t z = (lx + ly) % field_charac
  *     cdef uint8_t ret = gf_exp[z]
  *     return ret             # <<<<<<<<<<<<<<
@@ -4579,7 +4582,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":228
+  /* "reedsolo\creedsolo.pyx":228
  *     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
  * 
  * cpdef uint8_t gf_mul(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4589,7 +4592,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_WriteUnraisable("reedsolomon.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("reedsolo.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4597,10 +4600,10 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_17gf_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4646,18 +4649,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_17gf_mul(PyObject *__pyx_self
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_mul", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_16gf_mul(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_16gf_mul(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_16gf_mul(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4666,7 +4669,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_mul", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4675,7 +4678,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObje
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4683,7 +4686,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":238
+/* "reedsolo\creedsolo.pyx":238
  *     return ret
  * 
  * cpdef uint8_t gf_div(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4691,15 +4694,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_16gf_mul(CYTHON_UNUSED PyObje
  *         raise ZeroDivisionError()
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_div(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_div(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_3;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_3;
   int __pyx_t_4;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_5;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_5;
   int __pyx_t_6;
   int __pyx_t_7;
   int __pyx_lineno = 0;
@@ -4707,7 +4710,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_div", 0);
 
-  /* "reedsolomon\creedsolo.pyx":239
+  /* "reedsolo\creedsolo.pyx":239
  * 
  * cpdef uint8_t gf_div(uint8_t x, uint8_t y):
  *     if y == 0:             # <<<<<<<<<<<<<<
@@ -4717,7 +4720,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_t_1 = ((__pyx_v_y == 0) != 0);
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":240
+    /* "reedsolo\creedsolo.pyx":240
  * cpdef uint8_t gf_div(uint8_t x, uint8_t y):
  *     if y == 0:
  *         raise ZeroDivisionError()             # <<<<<<<<<<<<<<
@@ -4731,7 +4734,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":241
+  /* "reedsolo\creedsolo.pyx":241
  *     if y == 0:
  *         raise ZeroDivisionError()
  *     if x == 0:             # <<<<<<<<<<<<<<
@@ -4741,7 +4744,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_t_1 = ((__pyx_v_x == 0) != 0);
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":242
+    /* "reedsolo\creedsolo.pyx":242
  *         raise ZeroDivisionError()
  *     if x == 0:
  *         return 0             # <<<<<<<<<<<<<<
@@ -4752,32 +4755,32 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     goto __pyx_L0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":243
+  /* "reedsolo\creedsolo.pyx":243
  *     if x == 0:
  *         return 0
  *     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]             # <<<<<<<<<<<<<<
  * 
  * cpdef uint8_t gf_pow(uint8_t x, int power):
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_3 = __pyx_v_x;
   __pyx_t_4 = -1;
-  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
+  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
   if (unlikely(__pyx_t_4 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_4);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_5 = __pyx_v_y;
   __pyx_t_4 = -1;
-  if (unlikely(__pyx_t_5 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
+  if (unlikely(__pyx_t_5 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_4 = 0;
   if (unlikely(__pyx_t_4 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_4);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_4 = (((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_3)) ))) + __pyx_v_11reedsolomon_9creedsolo_field_charac) - (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_5)) ))));
-  if (unlikely(__pyx_v_11reedsolomon_9creedsolo_field_charac == 0)) {
+  __pyx_t_4 = (((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_3)) ))) + __pyx_v_8reedsolo_9creedsolo_field_charac) - (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_5)) ))));
+  if (unlikely(__pyx_v_8reedsolo_9creedsolo_field_charac == 0)) {
     #ifdef WITH_THREAD
     PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
     #endif
@@ -4787,20 +4790,20 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     #endif
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_6 = __Pyx_mod_int(__pyx_t_4, __pyx_v_11reedsolomon_9creedsolo_field_charac);
+  __pyx_t_6 = __Pyx_mod_int(__pyx_t_4, __pyx_v_8reedsolo_9creedsolo_field_charac);
   __pyx_t_7 = -1;
   if (__pyx_t_6 < 0) {
-    __pyx_t_6 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+    __pyx_t_6 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
     if (unlikely(__pyx_t_6 < 0)) __pyx_t_7 = 0;
-  } else if (unlikely(__pyx_t_6 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_7 = 0;
+  } else if (unlikely(__pyx_t_6 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_r = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_6)) )));
+  __pyx_r = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_6)) )));
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":238
+  /* "reedsolo\creedsolo.pyx":238
  *     return ret
  * 
  * cpdef uint8_t gf_div(uint8_t x, uint8_t y):             # <<<<<<<<<<<<<<
@@ -4811,7 +4814,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_WriteUnraisable("reedsolomon.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("reedsolo.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -4819,10 +4822,10 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_19gf_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4868,18 +4871,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_19gf_div(PyObject *__pyx_self
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_div", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_18gf_div(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_18gf_div(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_div(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4888,7 +4891,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_div", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_div(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_div(__pyx_v_x, __pyx_v_y, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4897,7 +4900,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObje
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4905,7 +4908,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":245
+/* "reedsolo\creedsolo.pyx":245
  *     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
  * 
  * cpdef uint8_t gf_pow(uint8_t x, int power):             # <<<<<<<<<<<<<<
@@ -4913,39 +4916,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_div(CYTHON_UNUSED PyObje
  *     cdef uint8_t x2 = (x1 * power) % field_charac
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power, CYTHON_UNUSED int __pyx_skip_dispatch) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x1;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x2;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_ret;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_r;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x1;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x2;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_ret;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_r;
   __Pyx_RefNannyDeclarations
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_1;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_1;
   int __pyx_t_2;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_3;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_3;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_pow", 0);
 
-  /* "reedsolomon\creedsolo.pyx":246
+  /* "reedsolo\creedsolo.pyx":246
  * 
  * cpdef uint8_t gf_pow(uint8_t x, int power):
  *     cdef uint8_t x1 = gf_log[x]             # <<<<<<<<<<<<<<
  *     cdef uint8_t x2 = (x1 * power) % field_charac
  *     cdef uint8_t ret = gf_exp[x2]
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_1 = __pyx_v_x;
   __pyx_t_2 = -1;
-  if (unlikely(__pyx_t_1 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_2 = 0;
+  if (unlikely(__pyx_t_1 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_2 = 0;
   if (unlikely(__pyx_t_2 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_2);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_x1 = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_1)) )));
+  __pyx_v_x1 = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_1)) )));
 
-  /* "reedsolomon\creedsolo.pyx":247
+  /* "reedsolo\creedsolo.pyx":247
  * cpdef uint8_t gf_pow(uint8_t x, int power):
  *     cdef uint8_t x1 = gf_log[x]
  *     cdef uint8_t x2 = (x1 * power) % field_charac             # <<<<<<<<<<<<<<
@@ -4953,7 +4956,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
  *     return ret
  */
   __pyx_t_2 = (__pyx_v_x1 * __pyx_v_power);
-  if (unlikely(__pyx_v_11reedsolomon_9creedsolo_field_charac == 0)) {
+  if (unlikely(__pyx_v_8reedsolo_9creedsolo_field_charac == 0)) {
     #ifdef WITH_THREAD
     PyGILState_STATE __pyx_gilstate_save = PyGILState_Ensure();
     #endif
@@ -4963,26 +4966,26 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
     #endif
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_x2 = __Pyx_mod_int(__pyx_t_2, __pyx_v_11reedsolomon_9creedsolo_field_charac);
+  __pyx_v_x2 = __Pyx_mod_int(__pyx_t_2, __pyx_v_8reedsolo_9creedsolo_field_charac);
 
-  /* "reedsolomon\creedsolo.pyx":248
+  /* "reedsolo\creedsolo.pyx":248
  *     cdef uint8_t x1 = gf_log[x]
  *     cdef uint8_t x2 = (x1 * power) % field_charac
  *     cdef uint8_t ret = gf_exp[x2]             # <<<<<<<<<<<<<<
  *     return ret
  * 
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_3 = __pyx_v_x2;
   __pyx_t_2 = -1;
-  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_2 = 0;
+  if (unlikely(__pyx_t_3 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_2 = 0;
   if (unlikely(__pyx_t_2 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_2);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_v_ret = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_3)) )));
+  __pyx_v_ret = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_3)) )));
 
-  /* "reedsolomon\creedsolo.pyx":249
+  /* "reedsolo\creedsolo.pyx":249
  *     cdef uint8_t x2 = (x1 * power) % field_charac
  *     cdef uint8_t ret = gf_exp[x2]
  *     return ret             # <<<<<<<<<<<<<<
@@ -4992,7 +4995,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":245
+  /* "reedsolo\creedsolo.pyx":245
  *     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
  * 
  * cpdef uint8_t gf_pow(uint8_t x, int power):             # <<<<<<<<<<<<<<
@@ -5002,7 +5005,7 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_WriteUnraisable("reedsolomon.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("reedsolo.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -5010,9 +5013,9 @@ static __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_f_11reedsolomon_9creedsolo
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_21gf_pow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
   int __pyx_v_power;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -5059,18 +5062,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21gf_pow(PyObject *__pyx_self
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_pow", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_20gf_pow(__pyx_self, __pyx_v_x, __pyx_v_power);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_20gf_pow(__pyx_self, __pyx_v_x, __pyx_v_power);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_20gf_pow(CYTHON_UNUSED PyObject *__pyx_self, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x, int __pyx_v_power) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5079,7 +5082,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_pow", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_v_x, __pyx_v_power, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_v_x, __pyx_v_power, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5088,7 +5091,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObje
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_pow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5096,7 +5099,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":251
+/* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
@@ -5105,10 +5108,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_20gf_pow(CYTHON_UNUSED PyObje
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow[] = "Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow = {"gf_mult_noLUT_slow", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_23gf_mult_noLUT_slow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_22gf_mult_noLUT_slow[] = "Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_23gf_mult_noLUT_slow = {"gf_mult_noLUT_slow", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_23gf_mult_noLUT_slow, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_22gf_mult_noLUT_slow};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_23gf_mult_noLUT_slow(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_x = 0;
   PyObject *__pyx_v_y = 0;
   PyObject *__pyx_v_prim = 0;
@@ -5168,18 +5171,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow(PyObject
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_mult_noLUT_slow", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_prim);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_22gf_mult_noLUT_slow(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_prim);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":255
+/* "reedsolo\creedsolo.pyx":255
  * 
  *     ### Define bitwise carry-less operations as inner functions ###
  *     def cl_mult(x,y):             # <<<<<<<<<<<<<<
@@ -5188,10 +5191,10 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow(PyObject
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult[] = "Bitwise carry-less multiplication on integers";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult = {"cl_mult", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_1cl_mult(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult[] = "Bitwise carry-less multiplication on integers";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_1cl_mult = {"cl_mult", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_1cl_mult, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_1cl_mult(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_x = 0;
   PyObject *__pyx_v_y = 0;
   int __pyx_lineno = 0;
@@ -5239,18 +5242,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("cl_mult", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow.cl_mult", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow.cl_mult", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y) {
   PyObject *__pyx_v_z = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
@@ -5263,7 +5266,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cl_mult", 0);
 
-  /* "reedsolomon\creedsolo.pyx":257
+  /* "reedsolo\creedsolo.pyx":257
  *     def cl_mult(x,y):
  *         '''Bitwise carry-less multiplication on integers'''
  *         z = 0             # <<<<<<<<<<<<<<
@@ -5273,7 +5276,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_z = __pyx_int_0;
 
-  /* "reedsolomon\creedsolo.pyx":258
+  /* "reedsolo\creedsolo.pyx":258
  *         '''Bitwise carry-less multiplication on integers'''
  *         z = 0
  *         i = 0             # <<<<<<<<<<<<<<
@@ -5283,7 +5286,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_i = __pyx_int_0;
 
-  /* "reedsolomon\creedsolo.pyx":259
+  /* "reedsolo\creedsolo.pyx":259
  *         z = 0
  *         i = 0
  *         while (y>>i) > 0:             # <<<<<<<<<<<<<<
@@ -5299,7 +5302,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (!__pyx_t_3) break;
 
-    /* "reedsolomon\creedsolo.pyx":260
+    /* "reedsolo\creedsolo.pyx":260
  *         i = 0
  *         while (y>>i) > 0:
  *             if y & (1<<i):             # <<<<<<<<<<<<<<
@@ -5315,7 +5318,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__pyx_t_3) {
 
-      /* "reedsolomon\creedsolo.pyx":261
+      /* "reedsolo\creedsolo.pyx":261
  *         while (y>>i) > 0:
  *             if y & (1<<i):
  *                 z ^= x<<i             # <<<<<<<<<<<<<<
@@ -5333,7 +5336,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
     }
     __pyx_L5:;
 
-    /* "reedsolomon\creedsolo.pyx":262
+    /* "reedsolo\creedsolo.pyx":262
  *             if y & (1<<i):
  *                 z ^= x<<i
  *             i += 1             # <<<<<<<<<<<<<<
@@ -5346,7 +5349,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
     __pyx_t_2 = 0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":263
+  /* "reedsolo\creedsolo.pyx":263
  *                 z ^= x<<i
  *             i += 1
  *         return z             # <<<<<<<<<<<<<<
@@ -5358,7 +5361,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   __pyx_r = __pyx_v_z;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":255
+  /* "reedsolo\creedsolo.pyx":255
  * 
  *     ### Define bitwise carry-less operations as inner functions ###
  *     def cl_mult(x,y):             # <<<<<<<<<<<<<<
@@ -5370,7 +5373,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow.cl_mult", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow.cl_mult", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_z);
@@ -5380,7 +5383,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":265
+/* "reedsolo\creedsolo.pyx":265
  *         return z
  * 
  *     def bit_length(n):             # <<<<<<<<<<<<<<
@@ -5389,21 +5392,21 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_3bit_length(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length[] = "Compute the position of the most significant bit (1) of an integer. Equivalent to int.bit_length()";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_3bit_length = {"bit_length", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_3bit_length, METH_O, __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_3bit_length(PyObject *__pyx_self, PyObject *__pyx_v_n) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_3bit_length(PyObject *__pyx_self, PyObject *__pyx_v_n); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length[] = "Compute the position of the most significant bit (1) of an integer. Equivalent to int.bit_length()";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_3bit_length = {"bit_length", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_3bit_length, METH_O, __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_3bit_length(PyObject *__pyx_self, PyObject *__pyx_v_n) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("bit_length (wrapper)", 0);
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_self, ((PyObject *)__pyx_v_n));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_self, ((PyObject *)__pyx_v_n));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_n) {
   PyObject *__pyx_v_bits = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -5414,7 +5417,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bit_length", 0);
 
-  /* "reedsolomon\creedsolo.pyx":267
+  /* "reedsolo\creedsolo.pyx":267
  *     def bit_length(n):
  *         '''Compute the position of the most significant bit (1) of an integer. Equivalent to int.bit_length()'''
  *         bits = 0             # <<<<<<<<<<<<<<
@@ -5424,7 +5427,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_bits = __pyx_int_0;
 
-  /* "reedsolomon\creedsolo.pyx":268
+  /* "reedsolo\creedsolo.pyx":268
  *         '''Compute the position of the most significant bit (1) of an integer. Equivalent to int.bit_length()'''
  *         bits = 0
  *         while n >> bits: bits += 1             # <<<<<<<<<<<<<<
@@ -5443,7 +5446,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
     __pyx_t_1 = 0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":269
+  /* "reedsolo\creedsolo.pyx":269
  *         bits = 0
  *         while n >> bits: bits += 1
  *         return bits             # <<<<<<<<<<<<<<
@@ -5455,7 +5458,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
   __pyx_r = __pyx_v_bits;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":265
+  /* "reedsolo\creedsolo.pyx":265
  *         return z
  * 
  *     def bit_length(n):             # <<<<<<<<<<<<<<
@@ -5466,7 +5469,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow.bit_length", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow.bit_length", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_bits);
@@ -5475,7 +5478,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":271
+/* "reedsolo\creedsolo.pyx":271
  *         return bits
  * 
  *     def cl_div(dividend, divisor=None):             # <<<<<<<<<<<<<<
@@ -5484,10 +5487,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_len
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div[] = "Bitwise carry-less long division on integers and returns the remainder";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div = {"cl_div", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_5cl_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div[] = "Bitwise carry-less long division on integers and returns the remainder";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_5cl_div = {"cl_div", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_5cl_div, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_5cl_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_dividend = 0;
   PyObject *__pyx_v_divisor = 0;
   int __pyx_lineno = 0;
@@ -5538,20 +5541,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div(
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("cl_div", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow.cl_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow.cl_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(__pyx_self, __pyx_v_dividend, __pyx_v_divisor);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div(__pyx_self, __pyx_v_dividend, __pyx_v_divisor);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor) {
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_cur_scope;
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_outer_scope;
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div(PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor) {
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_cur_scope;
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_outer_scope;
   PyObject *__pyx_v_dl1 = NULL;
   PyObject *__pyx_v_dl2 = NULL;
   PyObject *__pyx_v_i = NULL;
@@ -5567,11 +5570,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("cl_div", 0);
-  __pyx_outer_scope = (struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *) __Pyx_CyFunction_GetClosure(__pyx_self);
+  __pyx_outer_scope = (struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
   __Pyx_INCREF(__pyx_v_dividend);
 
-  /* "reedsolomon\creedsolo.pyx":274
+  /* "reedsolo\creedsolo.pyx":274
  *         '''Bitwise carry-less long division on integers and returns the remainder'''
  *         # Compute the position of the most significant bit for each integers
  *         dl1 = bit_length(dividend)             # <<<<<<<<<<<<<<
@@ -5579,12 +5582,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
  *         # If the dividend is smaller than the divisor, just exit
  */
   if (unlikely(!__pyx_cur_scope->__pyx_v_bit_length)) { __Pyx_RaiseClosureNameError("bit_length"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_cur_scope->__pyx_v_bit_length, __pyx_v_dividend); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_cur_scope->__pyx_v_bit_length, __pyx_v_dividend); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 274; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dl1 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":275
+  /* "reedsolo\creedsolo.pyx":275
  *         # Compute the position of the most significant bit for each integers
  *         dl1 = bit_length(dividend)
  *         dl2 = bit_length(divisor)             # <<<<<<<<<<<<<<
@@ -5592,12 +5595,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
  *         if dl1 < dl2:
  */
   if (unlikely(!__pyx_cur_scope->__pyx_v_bit_length)) { __Pyx_RaiseClosureNameError("bit_length"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_1 = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_cur_scope->__pyx_v_bit_length, __pyx_v_divisor); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_2bit_length(__pyx_cur_scope->__pyx_v_bit_length, __pyx_v_divisor); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_dl2 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":277
+  /* "reedsolo\creedsolo.pyx":277
  *         dl2 = bit_length(divisor)
  *         # If the dividend is smaller than the divisor, just exit
  *         if dl1 < dl2:             # <<<<<<<<<<<<<<
@@ -5609,7 +5612,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":278
+    /* "reedsolo\creedsolo.pyx":278
  *         # If the dividend is smaller than the divisor, just exit
  *         if dl1 < dl2:
  *             return dividend             # <<<<<<<<<<<<<<
@@ -5622,7 +5625,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
     goto __pyx_L0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":280
+  /* "reedsolo\creedsolo.pyx":280
  *             return dividend
  *         # Else, align the most significant 1 of the divisor to the most significant 1 of the dividend (by shifting the divisor)
  *         for i in xrange(dl1-dl2,-1,-1):             # <<<<<<<<<<<<<<
@@ -5688,7 +5691,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":282
+    /* "reedsolo\creedsolo.pyx":282
  *         for i in xrange(dl1-dl2,-1,-1):
  *             # Check that the dividend is divisible (useless for the first iteration but important for the next ones)
  *             if dividend & (1 << i+dl2-1):             # <<<<<<<<<<<<<<
@@ -5710,7 +5713,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__pyx_t_2) {
 
-      /* "reedsolomon\creedsolo.pyx":284
+      /* "reedsolo\creedsolo.pyx":284
  *             if dividend & (1 << i+dl2-1):
  *                 # If divisible, then shift the divisor to align the most significant bits and XOR (carry-less substraction)
  *                 dividend ^= divisor << i             # <<<<<<<<<<<<<<
@@ -5728,7 +5731,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
     }
     __pyx_L6:;
 
-    /* "reedsolomon\creedsolo.pyx":280
+    /* "reedsolo\creedsolo.pyx":280
  *             return dividend
  *         # Else, align the most significant 1 of the divisor to the most significant 1 of the dividend (by shifting the divisor)
  *         for i in xrange(dl1-dl2,-1,-1):             # <<<<<<<<<<<<<<
@@ -5738,7 +5741,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":285
+  /* "reedsolo\creedsolo.pyx":285
  *                 # If divisible, then shift the divisor to align the most significant bits and XOR (carry-less substraction)
  *                 dividend ^= divisor << i
  *         return dividend             # <<<<<<<<<<<<<<
@@ -5750,7 +5753,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   __pyx_r = __pyx_v_dividend;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":271
+  /* "reedsolo\creedsolo.pyx":271
  *         return bits
  * 
  *     def cl_div(dividend, divisor=None):             # <<<<<<<<<<<<<<
@@ -5763,7 +5766,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow.cl_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow.cl_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_dl1);
@@ -5775,7 +5778,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":251
+/* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
@@ -5783,8 +5786,8 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(
  * 
  */
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_prim) {
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_cur_scope;
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_22gf_mult_noLUT_slow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_prim) {
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_cur_scope;
   PyObject *__pyx_v_cl_mult = 0;
   PyObject *__pyx_v_cl_div = 0;
   PyObject *__pyx_v_result = NULL;
@@ -5796,64 +5799,64 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_U
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_mult_noLUT_slow", 0);
-  __pyx_cur_scope = (struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)__pyx_tp_new_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(__pyx_ptype_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, __pyx_empty_tuple, NULL);
+  __pyx_cur_scope = (struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)__pyx_tp_new_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(__pyx_ptype_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, __pyx_empty_tuple, NULL);
   if (unlikely(!__pyx_cur_scope)) {
     __Pyx_RefNannyFinishContext();
     return NULL;
   }
   __Pyx_GOTREF(__pyx_cur_scope);
 
-  /* "reedsolomon\creedsolo.pyx":255
+  /* "reedsolo\creedsolo.pyx":255
  * 
  *     ### Define bitwise carry-less operations as inner functions ###
  *     def cl_mult(x,y):             # <<<<<<<<<<<<<<
  *         '''Bitwise carry-less multiplication on integers'''
  *         z = 0
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_1cl_mult, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_cl_mul, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_1cl_mult, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_cl_mul, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_cl_mult = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":265
+  /* "reedsolo\creedsolo.pyx":265
  *         return z
  * 
  *     def bit_length(n):             # <<<<<<<<<<<<<<
  *         '''Compute the position of the most significant bit (1) of an integer. Equivalent to int.bit_length()'''
  *         bits = 0
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_3bit_length, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_bit_le, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_3bit_length, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_bit_le, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_bit_length = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":271
+  /* "reedsolo\creedsolo.pyx":271
  *         return bits
  * 
  *     def cl_div(dividend, divisor=None):             # <<<<<<<<<<<<<<
  *         '''Bitwise carry-less long division on integers and returns the remainder'''
  *         # Compute the position of the most significant bit for each integers
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_5cl_div, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_cl_div, ((PyObject*)__pyx_cur_scope), __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_5cl_div, 0, __pyx_n_s_gf_mult_noLUT_slow_locals_cl_div, ((PyObject*)__pyx_cur_scope), __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_tuple__8);
   __pyx_v_cl_div = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":290
+  /* "reedsolo\creedsolo.pyx":290
  * 
  *     # Multiply the gf numbers
  *     result = cl_mult(x,y)             # <<<<<<<<<<<<<<
  *     # Then do a modular reduction (ie, remainder from the division) with an irreducible primitive polynomial so that it stays inside GF bounds
  *     if prim > 0:
  */
-  __pyx_t_1 = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_cl_mult(__pyx_v_cl_mult, __pyx_v_x, __pyx_v_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_cl_mult(__pyx_v_cl_mult, __pyx_v_x, __pyx_v_y); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":292
+  /* "reedsolo\creedsolo.pyx":292
  *     result = cl_mult(x,y)
  *     # Then do a modular reduction (ie, remainder from the division) with an irreducible primitive polynomial so that it stays inside GF bounds
  *     if prim > 0:             # <<<<<<<<<<<<<<
@@ -5865,14 +5868,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_U
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":293
+    /* "reedsolo\creedsolo.pyx":293
  *     # Then do a modular reduction (ie, remainder from the division) with an irreducible primitive polynomial so that it stays inside GF bounds
  *     if prim > 0:
  *         result = cl_div(result, prim)             # <<<<<<<<<<<<<<
  * 
  *     return result
  */
-    __pyx_t_1 = __pyx_pf_11reedsolomon_9creedsolo_18gf_mult_noLUT_slow_4cl_div(__pyx_v_cl_div, __pyx_v_result, __pyx_v_prim); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_pf_8reedsolo_9creedsolo_18gf_mult_noLUT_slow_4cl_div(__pyx_v_cl_div, __pyx_v_result, __pyx_v_prim); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 293; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_1);
     __pyx_t_1 = 0;
@@ -5880,19 +5883,19 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_U
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":295
+  /* "reedsolo\creedsolo.pyx":295
  *         result = cl_div(result, prim)
  * 
  *     return result             # <<<<<<<<<<<<<<
  * 
- * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):
+ * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_result);
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":251
+  /* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
@@ -5903,7 +5906,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_U
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT_slow", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT_slow", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_cl_mult);
@@ -5915,18 +5918,19 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_22gf_mult_noLUT_slow(CYTHON_U
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":297
+/* "reedsolo\creedsolo.pyx":297
  *     return result
  * 
- * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):             # <<<<<<<<<<<<<<
+ * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):             # <<<<<<<<<<<<<<
  *     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
- *     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+ *     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT *__pyx_optional_args) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_f_8reedsolo_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT *__pyx_optional_args) {
   int __pyx_v_prim = ((int)0);
   int __pyx_v_field_charac_full = ((int)256);
+  int __pyx_v_carryless = ((int)1);
   PyObject *__pyx_v_r = NULL;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
@@ -5945,41 +5949,44 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
       __pyx_v_prim = __pyx_optional_args->prim;
       if (__pyx_optional_args->__pyx_n > 1) {
         __pyx_v_field_charac_full = __pyx_optional_args->field_charac_full;
+        if (__pyx_optional_args->__pyx_n > 2) {
+          __pyx_v_carryless = __pyx_optional_args->carryless;
+        }
       }
     }
   }
 
-  /* "reedsolomon\creedsolo.pyx":300
+  /* "reedsolo\creedsolo.pyx":300
  *     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
- *     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+ *     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
  *     r = 0             # <<<<<<<<<<<<<<
  *     while y: # while y is above 0
- *         if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+ *         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
  */
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_r = __pyx_int_0;
 
-  /* "reedsolomon\creedsolo.pyx":301
- *     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+  /* "reedsolo\creedsolo.pyx":301
+ *     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
  *     r = 0
  *     while y: # while y is above 0             # <<<<<<<<<<<<<<
- *         if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+ *         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
  *         y = y >> 1 # equivalent to y // 2
  */
   while (1) {
     __pyx_t_1 = (__pyx_v_y != 0);
     if (!__pyx_t_1) break;
 
-    /* "reedsolomon\creedsolo.pyx":302
+    /* "reedsolo\creedsolo.pyx":302
  *     r = 0
  *     while y: # while y is above 0
- *         if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).             # <<<<<<<<<<<<<<
+ *         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).             # <<<<<<<<<<<<<<
  *         y = y >> 1 # equivalent to y // 2
  *         x = x << 1 # equivalent to x*2
  */
     __pyx_t_1 = ((__pyx_v_y & 1) != 0);
     if (__pyx_t_1) {
-      if (((__pyx_v_prim > 0) != 0)) {
+      if ((__pyx_v_carryless != 0)) {
         __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __pyx_t_4 = PyNumber_Xor(__pyx_v_r, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 302; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -6002,28 +6009,28 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
     }
     __pyx_L5:;
 
-    /* "reedsolomon\creedsolo.pyx":303
+    /* "reedsolo\creedsolo.pyx":303
  *     while y: # while y is above 0
- *         if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+ *         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
  *         y = y >> 1 # equivalent to y // 2             # <<<<<<<<<<<<<<
  *         x = x << 1 # equivalent to x*2
- *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.
+ *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).
  */
     __pyx_v_y = (__pyx_v_y >> 1);
 
-    /* "reedsolomon\creedsolo.pyx":304
- *         if y & 1: r = r ^ x if prim > 0 else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
+    /* "reedsolo\creedsolo.pyx":304
+ *         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
  *         y = y >> 1 # equivalent to y // 2
  *         x = x << 1 # equivalent to x*2             # <<<<<<<<<<<<<<
- *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.
+ *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).
  * 
  */
     __pyx_v_x = (__pyx_v_x << 1);
 
-    /* "reedsolomon\creedsolo.pyx":305
+    /* "reedsolo\creedsolo.pyx":305
  *         y = y >> 1 # equivalent to y // 2
  *         x = x << 1 # equivalent to x*2
- *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.             # <<<<<<<<<<<<<<
+ *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).             # <<<<<<<<<<<<<<
  * 
  *     return r
  */
@@ -6043,8 +6050,8 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
     __pyx_L6:;
   }
 
-  /* "reedsolomon\creedsolo.pyx":307
- *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR). If you comment this line out, you get the same result as standard multiplication on integers.
+  /* "reedsolo\creedsolo.pyx":307
+ *         if prim > 0 and x & field_charac_full: x = x ^ prim # GF modulo: if x >= 256 then apply modular reduction using the primitive polynomial (we just substract, but since the primitive number can be above 256 then we directly XOR).
  * 
  *     return r             # <<<<<<<<<<<<<<
  * 
@@ -6054,12 +6061,12 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
   __pyx_r = __pyx_t_6;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":297
+  /* "reedsolo\creedsolo.pyx":297
  *     return result
  * 
- * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256):             # <<<<<<<<<<<<<<
+ * cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):             # <<<<<<<<<<<<<<
  *     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
- *     If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
+ *     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
  */
 
   /* function exit code */
@@ -6067,7 +6074,7 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_WriteUnraisable("reedsolomon.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  __Pyx_WriteUnraisable("reedsolo.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_r);
@@ -6076,13 +6083,14 @@ static int __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(int __pyx_v_x, int __p
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_24gf_mult_noLUT[] = "Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).\n    If prim is 0, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).";
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_24gf_mult_noLUT[] = "Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).\n    If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).";
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_25gf_mult_noLUT(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_v_x;
   int __pyx_v_y;
   int __pyx_v_prim;
   int __pyx_v_field_charac_full;
+  int __pyx_v_carryless;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6090,12 +6098,13 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_mult_noLUT (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_prim,&__pyx_n_s_field_charac_full,0};
-    PyObject* values[4] = {0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_prim,&__pyx_n_s_field_charac_full,&__pyx_n_s_carryless,0};
+    PyObject* values[5] = {0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -6111,7 +6120,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__p
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("gf_mult_noLUT", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("gf_mult_noLUT", 0, 2, 5, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -6123,12 +6132,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__p
           PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_field_charac_full);
           if (value) { values[3] = value; kw_args--; }
         }
+        case  4:
+        if (kw_args > 0) {
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_carryless);
+          if (value) { values[4] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "gf_mult_noLUT") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -6149,37 +6164,43 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT(PyObject *__p
     } else {
       __pyx_v_field_charac_full = ((int)256);
     }
+    if (values[4]) {
+      __pyx_v_carryless = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_carryless == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    } else {
+      __pyx_v_carryless = ((int)1);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gf_mult_noLUT", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("gf_mult_noLUT", 0, 2, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_prim, __pyx_v_field_charac_full);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_24gf_mult_noLUT(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_prim, __pyx_v_field_charac_full, __pyx_v_carryless);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x, int __pyx_v_y, int __pyx_v_prim, int __pyx_v_field_charac_full) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_x, int __pyx_v_y, int __pyx_v_prim, int __pyx_v_field_charac_full, int __pyx_v_carryless) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  struct __pyx_opt_args_11reedsolomon_9creedsolo_gf_mult_noLUT __pyx_t_2;
+  struct __pyx_opt_args_8reedsolo_9creedsolo_gf_mult_noLUT __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_mult_noLUT", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2.__pyx_n = 2;
+  __pyx_t_2.__pyx_n = 3;
   __pyx_t_2.prim = __pyx_v_prim;
   __pyx_t_2.field_charac_full = __pyx_v_field_charac_full;
-  __pyx_t_1 = __pyx_f_11reedsolomon_9creedsolo_gf_mult_noLUT(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); 
+  __pyx_t_2.carryless = __pyx_v_carryless;
+  __pyx_t_1 = __pyx_f_8reedsolo_9creedsolo_gf_mult_noLUT(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); 
   __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 297; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
@@ -6189,7 +6210,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_mult_noLUT", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6197,7 +6218,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":312
+/* "reedsolo\creedsolo.pyx":312
  * ################### GALOIS FIELD POLYNOMIALS MATHS ###################
  * 
  * def gf_poly_scale(p, x):             # <<<<<<<<<<<<<<
@@ -6206,9 +6227,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_24gf_mult_noLUT(CYTHON_UNUSED
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_27gf_poly_scale(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_27gf_poly_scale = {"gf_poly_scale", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_27gf_poly_scale, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_27gf_poly_scale(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_27gf_poly_scale(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_27gf_poly_scale = {"gf_poly_scale", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_27gf_poly_scale, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_27gf_poly_scale(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_p = 0;
   PyObject *__pyx_v_x = 0;
   int __pyx_lineno = 0;
@@ -6256,18 +6277,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_27gf_poly_scale(PyObject *__p
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_poly_scale", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_scale", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_scale", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(__pyx_self, __pyx_v_p, __pyx_v_x);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_26gf_poly_scale(__pyx_self, __pyx_v_p, __pyx_v_x);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_26gf_poly_scale(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_x) {
   Py_ssize_t __pyx_v_i;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -6277,15 +6298,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
   Py_ssize_t __pyx_t_4;
   Py_ssize_t __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_7;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_8;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_7;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_8;
   PyObject *__pyx_t_9 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_scale", 0);
 
-  /* "reedsolomon\creedsolo.pyx":313
+  /* "reedsolo\creedsolo.pyx":313
  * 
  * def gf_poly_scale(p, x):
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])             # <<<<<<<<<<<<<<
@@ -6305,7 +6326,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
     __pyx_t_7 = __Pyx_PyInt_As_unsigned_char(__pyx_t_6); if (unlikely((__pyx_t_7 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_8 = __Pyx_PyInt_As_unsigned_char(__pyx_v_x); if (unlikely((__pyx_t_8 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_t_7, __pyx_t_8, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_t_7, __pyx_t_8, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_6))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -6340,7 +6361,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":312
+  /* "reedsolo\creedsolo.pyx":312
  * ################### GALOIS FIELD POLYNOMIALS MATHS ###################
  * 
  * def gf_poly_scale(p, x):             # <<<<<<<<<<<<<<
@@ -6355,7 +6376,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_scale", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_scale", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6363,7 +6384,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":315
+/* "reedsolo\creedsolo.pyx":315
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
  * 
  * def gf_poly_add(p, q):             # <<<<<<<<<<<<<<
@@ -6372,9 +6393,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_26gf_poly_scale(CYTHON_UNUSED
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_29gf_poly_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_29gf_poly_add = {"gf_poly_add", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_29gf_poly_add, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_29gf_poly_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_29gf_poly_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_29gf_poly_add = {"gf_poly_add", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_29gf_poly_add, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_29gf_poly_add(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_p = 0;
   PyObject *__pyx_v_q = 0;
   int __pyx_lineno = 0;
@@ -6422,18 +6443,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_29gf_poly_add(PyObject *__pyx
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_poly_add", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(__pyx_self, __pyx_v_p, __pyx_v_q);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_28gf_poly_add(__pyx_self, __pyx_v_p, __pyx_v_q);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_28gf_poly_add(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q) {
   PyObject *__pyx_v_r = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
@@ -6452,7 +6473,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_add", 0);
 
-  /* "reedsolomon\creedsolo.pyx":316
+  /* "reedsolo\creedsolo.pyx":316
  * 
  * def gf_poly_add(p, q):
  *     r = bytearray( max(len(p), len(q)) )             # <<<<<<<<<<<<<<
@@ -6499,7 +6520,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   __pyx_v_r = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":317
+  /* "reedsolo\creedsolo.pyx":317
  * def gf_poly_add(p, q):
  *     r = bytearray( max(len(p), len(q)) )
  *     r[len(r)-len(p):len(r)] = p             # <<<<<<<<<<<<<<
@@ -6511,7 +6532,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   __pyx_t_4 = PyObject_Length(__pyx_v_r); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_PyObject_SetSlice(__pyx_v_r, __pyx_v_p, (__pyx_t_5 - __pyx_t_3), __pyx_t_4, NULL, NULL, NULL, 1, 1, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":320
+  /* "reedsolo\creedsolo.pyx":320
  *     #for i in xrange(len(p)):
  *         #r[i + len(r) - len(p)] = p[i]
  *     for i in xrange(len(q)):             # <<<<<<<<<<<<<<
@@ -6572,7 +6593,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":321
+    /* "reedsolo\creedsolo.pyx":321
  *         #r[i + len(r) - len(p)] = p[i]
  *     for i in xrange(len(q)):
  *         r[i + len(r) - len(q)] ^= q[i]             # <<<<<<<<<<<<<<
@@ -6604,7 +6625,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":320
+    /* "reedsolo\creedsolo.pyx":320
  *     #for i in xrange(len(p)):
  *         #r[i + len(r) - len(p)] = p[i]
  *     for i in xrange(len(q)):             # <<<<<<<<<<<<<<
@@ -6614,7 +6635,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":322
+  /* "reedsolo\creedsolo.pyx":322
  *     for i in xrange(len(q)):
  *         r[i + len(r) - len(q)] ^= q[i]
  *     return r             # <<<<<<<<<<<<<<
@@ -6626,7 +6647,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   __pyx_r = __pyx_v_r;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":315
+  /* "reedsolo\creedsolo.pyx":315
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
  * 
  * def gf_poly_add(p, q):             # <<<<<<<<<<<<<<
@@ -6641,7 +6662,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_add", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_r);
@@ -6651,7 +6672,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":324
+/* "reedsolo\creedsolo.pyx":324
  *     return r
  * 
  * cpdef gf_poly_mul(p, q):             # <<<<<<<<<<<<<<
@@ -6659,12 +6680,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_28gf_poly_add(CYTHON_UNUSED P
  *     cdef int i, j, x, y
  */
 
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_p, PyObject *__pyx_v_q, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_8reedsolo_9creedsolo_gf_poly_mul(PyObject *__pyx_v_p, PyObject *__pyx_v_q, CYTHON_UNUSED int __pyx_skip_dispatch) {
   int __pyx_v_i;
   int __pyx_v_j;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_lq;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_qj;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_lq;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_qj;
   __Pyx_memviewslice __pyx_v_p_t = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_q_t = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_r = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -6681,12 +6702,12 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   int __pyx_t_8;
   int __pyx_t_9;
   int __pyx_t_10;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_11;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_11;
   int __pyx_t_12;
   int __pyx_t_13;
   int __pyx_t_14;
   int __pyx_t_15;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_16;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
   int __pyx_t_18;
   int __pyx_t_19;
@@ -6698,7 +6719,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_mul", 0);
 
-  /* "reedsolomon\creedsolo.pyx":329
+  /* "reedsolo\creedsolo.pyx":329
  *     cdef uint8_t lq, qj
  * 
  *     cdef uint8_t[::1] p_t = bytearray(p)             # <<<<<<<<<<<<<<
@@ -6732,14 +6753,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 329; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_p_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":330
+  /* "reedsolo\creedsolo.pyx":330
  * 
  *     cdef uint8_t[::1] p_t = bytearray(p)
  *     cdef uint8_t[::1] q_t = bytearray(q)             # <<<<<<<<<<<<<<
@@ -6773,14 +6794,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 330; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_q_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":332
+  /* "reedsolo\creedsolo.pyx":332
  *     cdef uint8_t[::1] q_t = bytearray(q)
  *     # Pre-allocate the result array
  *     cdef uint8_t[::1] r = bytearray(p_t.shape[0] + q_t.shape[0] - 1)             # <<<<<<<<<<<<<<
@@ -6817,14 +6838,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 332; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_r = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":334
+  /* "reedsolo\creedsolo.pyx":334
  *     cdef uint8_t[::1] r = bytearray(p_t.shape[0] + q_t.shape[0] - 1)
  *     # Precompute the logarithm of p
  *     cdef uint8_t[::1] lp = bytearray(p_t.shape[0])             # <<<<<<<<<<<<<<
@@ -6861,14 +6882,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 334; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_lp = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":335
+  /* "reedsolo\creedsolo.pyx":335
  *     # Precompute the logarithm of p
  *     cdef uint8_t[::1] lp = bytearray(p_t.shape[0])
  *     for i in xrange(p_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -6879,14 +6900,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "reedsolomon\creedsolo.pyx":336
+    /* "reedsolo\creedsolo.pyx":336
  *     cdef uint8_t[::1] lp = bytearray(p_t.shape[0])
  *     for i in xrange(p_t.shape[0]):
  *         lp[i] = gf_log[p_t[i]]             # <<<<<<<<<<<<<<
  *     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
  *     for j in xrange(q_t.shape[0]):
  */
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
     __pyx_t_9 = __pyx_v_i;
     __pyx_t_10 = -1;
     if (__pyx_t_9 < 0) {
@@ -6897,9 +6918,9 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
       __Pyx_RaiseBufferIndexError(__pyx_t_10);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_11 = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_p_t.data) + __pyx_t_9)) )));
+    __pyx_t_11 = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_p_t.data) + __pyx_t_9)) )));
     __pyx_t_10 = -1;
-    if (unlikely(__pyx_t_11 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_10 = 0;
+    if (unlikely(__pyx_t_11 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_10 = 0;
     if (unlikely(__pyx_t_10 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_10);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -6914,10 +6935,10 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
       __Pyx_RaiseBufferIndexError(__pyx_t_12);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 336; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_lp.data) + __pyx_t_10)) )) = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_11)) )));
+    *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_lp.data) + __pyx_t_10)) )) = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_11)) )));
   }
 
-  /* "reedsolomon\creedsolo.pyx":338
+  /* "reedsolo\creedsolo.pyx":338
  *         lp[i] = gf_log[p_t[i]]
  *     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
  *     for j in xrange(q_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -6928,7 +6949,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_j = __pyx_t_8;
 
-    /* "reedsolomon\creedsolo.pyx":339
+    /* "reedsolo\creedsolo.pyx":339
  *     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
  *     for j in xrange(q_t.shape[0]):
  *         qj = q_t[j] # optimization: load the coefficient once             # <<<<<<<<<<<<<<
@@ -6945,9 +6966,9 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
       __Pyx_RaiseBufferIndexError(__pyx_t_13);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 339; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_v_qj = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_q_t.data) + __pyx_t_12)) )));
+    __pyx_v_qj = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_q_t.data) + __pyx_t_12)) )));
 
-    /* "reedsolomon\creedsolo.pyx":340
+    /* "reedsolo\creedsolo.pyx":340
  *     for j in xrange(q_t.shape[0]):
  *         qj = q_t[j] # optimization: load the coefficient once
  *         if qj != 0: # log(0) is undefined, we need to check that             # <<<<<<<<<<<<<<
@@ -6957,14 +6978,14 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __pyx_t_14 = ((__pyx_v_qj != 0) != 0);
     if (__pyx_t_14) {
 
-      /* "reedsolomon\creedsolo.pyx":341
+      /* "reedsolo\creedsolo.pyx":341
  *         qj = q_t[j] # optimization: load the coefficient once
  *         if qj != 0: # log(0) is undefined, we need to check that
  *             lq = gf_log[q_t[j]] # Precache the logarithm of the current coefficient of q             # <<<<<<<<<<<<<<
  *             for i in xrange(p_t.shape[0]):
  *                 if p_t[i] != 0: # log(0) is undefined, need to check that...
  */
-      if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+      if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
       __pyx_t_13 = __pyx_v_j;
       __pyx_t_15 = -1;
       if (__pyx_t_13 < 0) {
@@ -6975,16 +6996,16 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
         __Pyx_RaiseBufferIndexError(__pyx_t_15);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_16 = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_q_t.data) + __pyx_t_13)) )));
+      __pyx_t_16 = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_q_t.data) + __pyx_t_13)) )));
       __pyx_t_15 = -1;
-      if (unlikely(__pyx_t_16 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_15 = 0;
+      if (unlikely(__pyx_t_16 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_15 = 0;
       if (unlikely(__pyx_t_15 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_15);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 341; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_v_lq = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_16)) )));
+      __pyx_v_lq = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_16)) )));
 
-      /* "reedsolomon\creedsolo.pyx":342
+      /* "reedsolo\creedsolo.pyx":342
  *         if qj != 0: # log(0) is undefined, we need to check that
  *             lq = gf_log[q_t[j]] # Precache the logarithm of the current coefficient of q
  *             for i in xrange(p_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -6995,7 +7016,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
       for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_17; __pyx_t_15+=1) {
         __pyx_v_i = __pyx_t_15;
 
-        /* "reedsolomon\creedsolo.pyx":343
+        /* "reedsolo\creedsolo.pyx":343
  *             lq = gf_log[q_t[j]] # Precache the logarithm of the current coefficient of q
  *             for i in xrange(p_t.shape[0]):
  *                 if p_t[i] != 0: # log(0) is undefined, need to check that...             # <<<<<<<<<<<<<<
@@ -7012,17 +7033,17 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
           __Pyx_RaiseBufferIndexError(__pyx_t_19);
           {__pyx_filename = __pyx_f[0]; __pyx_lineno = 343; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __pyx_t_14 = (((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_p_t.data) + __pyx_t_18)) ))) != 0) != 0);
+        __pyx_t_14 = (((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_p_t.data) + __pyx_t_18)) ))) != 0) != 0);
         if (__pyx_t_14) {
 
-          /* "reedsolomon\creedsolo.pyx":344
+          /* "reedsolo\creedsolo.pyx":344
  *             for i in xrange(p_t.shape[0]):
  *                 if p_t[i] != 0: # log(0) is undefined, need to check that...
  *                     r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))             # <<<<<<<<<<<<<<
  *     return bytearray(r)
  * 
  */
-          if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+          if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
           __pyx_t_19 = __pyx_v_i;
           __pyx_t_20 = -1;
           if (__pyx_t_19 < 0) {
@@ -7033,12 +7054,12 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
             __Pyx_RaiseBufferIndexError(__pyx_t_20);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_20 = ((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_lp.data) + __pyx_t_19)) ))) + __pyx_v_lq);
+          __pyx_t_20 = ((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_lp.data) + __pyx_t_19)) ))) + __pyx_v_lq);
           __pyx_t_21 = -1;
           if (__pyx_t_20 < 0) {
-            __pyx_t_20 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+            __pyx_t_20 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
             if (unlikely(__pyx_t_20 < 0)) __pyx_t_21 = 0;
-          } else if (unlikely(__pyx_t_20 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_21 = 0;
+          } else if (unlikely(__pyx_t_20 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_21 = 0;
           if (unlikely(__pyx_t_21 != -1)) {
             __Pyx_RaiseBufferIndexError(__pyx_t_21);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7053,7 +7074,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
             __Pyx_RaiseBufferIndexError(__pyx_t_22);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 344; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_r.data) + __pyx_t_21)) )) ^= (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_20)) )));
+          *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_r.data) + __pyx_t_21)) )) ^= (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_20)) )));
           goto __pyx_L10;
         }
         __pyx_L10:;
@@ -7063,7 +7084,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
     __pyx_L7:;
   }
 
-  /* "reedsolomon\creedsolo.pyx":345
+  /* "reedsolo\creedsolo.pyx":345
  *                 if p_t[i] != 0: # log(0) is undefined, need to check that...
  *                     r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
  *     return bytearray(r)             # <<<<<<<<<<<<<<
@@ -7073,7 +7094,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_r, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_r, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 345; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -7105,7 +7126,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":324
+  /* "reedsolo\creedsolo.pyx":324
  *     return r
  * 
  * cpdef gf_poly_mul(p, q):             # <<<<<<<<<<<<<<
@@ -7121,7 +7142,7 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_p_t, 1);
@@ -7134,9 +7155,9 @@ static PyObject *__pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(PyObject *__pyx_v_
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_30gf_poly_mul[] = "Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.";
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_30gf_poly_mul[] = "Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.";
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_31gf_poly_mul(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_p = 0;
   PyObject *__pyx_v_q = 0;
   int __pyx_lineno = 0;
@@ -7184,18 +7205,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_31gf_poly_mul(PyObject *__pyx
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_poly_mul", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(__pyx_self, __pyx_v_p, __pyx_v_q);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_30gf_poly_mul(__pyx_self, __pyx_v_p, __pyx_v_q);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_30gf_poly_mul(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_p, PyObject *__pyx_v_q) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -7204,7 +7225,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_mul", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(__pyx_v_p, __pyx_v_q, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_8reedsolo_9creedsolo_gf_poly_mul(__pyx_v_p, __pyx_v_q, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7213,7 +7234,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED P
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_mul", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -7221,7 +7242,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":347
+/* "reedsolo\creedsolo.pyx":347
  *     return bytearray(r)
  * 
  * def gf_poly_neg(poly):             # <<<<<<<<<<<<<<
@@ -7230,26 +7251,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_30gf_poly_mul(CYTHON_UNUSED P
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_33gf_poly_neg(PyObject *__pyx_self, PyObject *__pyx_v_poly); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_32gf_poly_neg[] = "Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_33gf_poly_neg = {"gf_poly_neg", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_33gf_poly_neg, METH_O, __pyx_doc_11reedsolomon_9creedsolo_32gf_poly_neg};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_33gf_poly_neg(PyObject *__pyx_self, PyObject *__pyx_v_poly) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_33gf_poly_neg(PyObject *__pyx_self, PyObject *__pyx_v_poly); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_32gf_poly_neg[] = "Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_33gf_poly_neg = {"gf_poly_neg", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_33gf_poly_neg, METH_O, __pyx_doc_8reedsolo_9creedsolo_32gf_poly_neg};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_33gf_poly_neg(PyObject *__pyx_self, PyObject *__pyx_v_poly) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_poly_neg (wrapper)", 0);
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(__pyx_self, ((PyObject *)__pyx_v_poly));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_32gf_poly_neg(__pyx_self, ((PyObject *)__pyx_v_poly));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_32gf_poly_neg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_poly_neg", 0);
 
-  /* "reedsolomon\creedsolo.pyx":349
+  /* "reedsolo\creedsolo.pyx":349
  * def gf_poly_neg(poly):
  *     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
  *     return poly             # <<<<<<<<<<<<<<
@@ -7261,7 +7282,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(CYTHON_UNUSED P
   __pyx_r = __pyx_v_poly;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":347
+  /* "reedsolo\creedsolo.pyx":347
  *     return bytearray(r)
  * 
  * def gf_poly_neg(poly):             # <<<<<<<<<<<<<<
@@ -7276,7 +7297,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":351
+/* "reedsolo\creedsolo.pyx":351
  *     return poly
  * 
  * def gf_poly_div(dividend, divisor):             # <<<<<<<<<<<<<<
@@ -7285,10 +7306,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_32gf_poly_neg(CYTHON_UNUSED P
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_35gf_poly_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_34gf_poly_div[] = "Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_35gf_poly_div = {"gf_poly_div", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_35gf_poly_div, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_34gf_poly_div};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_35gf_poly_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_35gf_poly_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_34gf_poly_div[] = "Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_35gf_poly_div = {"gf_poly_div", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_35gf_poly_div, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_34gf_poly_div};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_35gf_poly_div(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_dividend = 0;
   PyObject *__pyx_v_divisor = 0;
   int __pyx_lineno = 0;
@@ -7336,22 +7357,22 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_35gf_poly_div(PyObject *__pyx
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_poly_div", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(__pyx_self, __pyx_v_dividend, __pyx_v_divisor);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_34gf_poly_div(__pyx_self, __pyx_v_dividend, __pyx_v_divisor);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_34gf_poly_div(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_dividend, PyObject *__pyx_v_divisor) {
   int __pyx_v_i;
   int __pyx_v_j;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_coef;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_lcoef;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_coef;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_lcoef;
   __Pyx_memviewslice __pyx_v_dividend_t = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_msg_out = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_divisor_t = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -7370,11 +7391,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
   int __pyx_t_9;
   int __pyx_t_10;
   int __pyx_t_11;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_12;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_12;
   int __pyx_t_13;
   int __pyx_t_14;
   int __pyx_t_15;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_16;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
   int __pyx_t_18;
   int __pyx_t_19;
@@ -7385,7 +7406,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_div", 0);
 
-  /* "reedsolomon\creedsolo.pyx":357
+  /* "reedsolo\creedsolo.pyx":357
  *     cdef int i, j
  *     cdef uint8_t coef, lcoef
  *     cdef uint8_t[:] dividend_t = bytearray(dividend)             # <<<<<<<<<<<<<<
@@ -7419,14 +7440,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_dividend_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":358
+  /* "reedsolo\creedsolo.pyx":358
  *     cdef uint8_t coef, lcoef
  *     cdef uint8_t[:] dividend_t = bytearray(dividend)
  *     cdef uint8_t[:] msg_out = bytearray(dividend)             # <<<<<<<<<<<<<<
@@ -7460,14 +7481,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_msg_out = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":359
+  /* "reedsolo\creedsolo.pyx":359
  *     cdef uint8_t[:] dividend_t = bytearray(dividend)
  *     cdef uint8_t[:] msg_out = bytearray(dividend)
  *     cdef uint8_t[:] divisor_t = bytearray(divisor)             # <<<<<<<<<<<<<<
@@ -7501,14 +7522,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 359; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_divisor_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":361
+  /* "reedsolo\creedsolo.pyx":361
  *     cdef uint8_t[:] divisor_t = bytearray(divisor)
  * 
  *     cdef uint8_t[::1] ldivisor_t = bytearray(len(divisor_t))             # <<<<<<<<<<<<<<
@@ -7517,7 +7538,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_divisor_t, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_divisor_t, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = PyObject_Length(__pyx_t_4); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -7549,14 +7570,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_8.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 361; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_ldivisor_t = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":362
+  /* "reedsolo\creedsolo.pyx":362
  * 
  *     cdef uint8_t[::1] ldivisor_t = bytearray(len(divisor_t))
  *     for j in xrange(divisor_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -7567,14 +7588,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_6; __pyx_t_9+=1) {
     __pyx_v_j = __pyx_t_9;
 
-    /* "reedsolomon\creedsolo.pyx":363
+    /* "reedsolo\creedsolo.pyx":363
  *     cdef uint8_t[::1] ldivisor_t = bytearray(len(divisor_t))
  *     for j in xrange(divisor_t.shape[0]):
  *         ldivisor_t[j] = gf_log[divisor_t[j]]             # <<<<<<<<<<<<<<
  * 
  *     for i in xrange(dividend_t.shape[0] - (divisor_t.shape[0]-1)):
  */
-    if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+    if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
     __pyx_t_10 = __pyx_v_j;
     __pyx_t_11 = -1;
     if (__pyx_t_10 < 0) {
@@ -7585,9 +7606,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
       __Pyx_RaiseBufferIndexError(__pyx_t_11);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_12 = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_divisor_t.data + __pyx_t_10 * __pyx_v_divisor_t.strides[0]) )));
+    __pyx_t_12 = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_divisor_t.data + __pyx_t_10 * __pyx_v_divisor_t.strides[0]) )));
     __pyx_t_11 = -1;
-    if (unlikely(__pyx_t_12 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
+    if (unlikely(__pyx_t_12 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
     if (unlikely(__pyx_t_11 != -1)) {
       __Pyx_RaiseBufferIndexError(__pyx_t_11);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7602,10 +7623,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
       __Pyx_RaiseBufferIndexError(__pyx_t_13);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 363; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_ldivisor_t.data) + __pyx_t_11)) )) = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_12)) )));
+    *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_ldivisor_t.data) + __pyx_t_11)) )) = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_12)) )));
   }
 
-  /* "reedsolomon\creedsolo.pyx":365
+  /* "reedsolo\creedsolo.pyx":365
  *         ldivisor_t[j] = gf_log[divisor_t[j]]
  * 
  *     for i in xrange(dividend_t.shape[0] - (divisor_t.shape[0]-1)):             # <<<<<<<<<<<<<<
@@ -7616,7 +7637,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_6; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "reedsolomon\creedsolo.pyx":366
+    /* "reedsolo\creedsolo.pyx":366
  * 
  *     for i in xrange(dividend_t.shape[0] - (divisor_t.shape[0]-1)):
  *         coef = msg_out[i] # precaching             # <<<<<<<<<<<<<<
@@ -7633,9 +7654,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
       __Pyx_RaiseBufferIndexError(__pyx_t_14);
       {__pyx_filename = __pyx_f[0]; __pyx_lineno = 366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_v_coef = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_msg_out.data + __pyx_t_13 * __pyx_v_msg_out.strides[0]) )));
+    __pyx_v_coef = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_msg_out.data + __pyx_t_13 * __pyx_v_msg_out.strides[0]) )));
 
-    /* "reedsolomon\creedsolo.pyx":367
+    /* "reedsolo\creedsolo.pyx":367
  *     for i in xrange(dividend_t.shape[0] - (divisor_t.shape[0]-1)):
  *         coef = msg_out[i] # precaching
  *         if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization)             # <<<<<<<<<<<<<<
@@ -7645,24 +7666,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __pyx_t_15 = ((__pyx_v_coef != 0) != 0);
     if (__pyx_t_15) {
 
-      /* "reedsolomon\creedsolo.pyx":368
+      /* "reedsolo\creedsolo.pyx":368
  *         coef = msg_out[i] # precaching
  *         if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization)
  *             lcoef = gf_log[coef]             # <<<<<<<<<<<<<<
  *             for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
  *                 if divisor[j] != 0: # log(0) is undefined
  */
-      if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+      if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
       __pyx_t_16 = __pyx_v_coef;
       __pyx_t_14 = -1;
-      if (unlikely(__pyx_t_16 >= (size_t)__pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_14 = 0;
+      if (unlikely(__pyx_t_16 >= (size_t)__pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_14 = 0;
       if (unlikely(__pyx_t_14 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_14);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_v_lcoef = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_16)) )));
+      __pyx_v_lcoef = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_16)) )));
 
-      /* "reedsolomon\creedsolo.pyx":369
+      /* "reedsolo\creedsolo.pyx":369
  *         if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization)
  *             lcoef = gf_log[coef]
  *             for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient             # <<<<<<<<<<<<<<
@@ -7673,7 +7694,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
       for (__pyx_t_14 = 1; __pyx_t_14 < __pyx_t_17; __pyx_t_14+=1) {
         __pyx_v_j = __pyx_t_14;
 
-        /* "reedsolomon\creedsolo.pyx":370
+        /* "reedsolo\creedsolo.pyx":370
  *             lcoef = gf_log[coef]
  *             for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
  *                 if divisor[j] != 0: # log(0) is undefined             # <<<<<<<<<<<<<<
@@ -7688,14 +7709,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         if (__pyx_t_15) {
 
-          /* "reedsolomon\creedsolo.pyx":371
+          /* "reedsolo\creedsolo.pyx":371
  *             for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
  *                 if divisor[j] != 0: # log(0) is undefined
  *                     msg_out[i + j] ^= gf_exp[ldivisor_t[j] + lcoef] # equivalent to the more mathematically correct (but xoring directly is faster): msg_out[i + j] += -divisor[j] * coef             # <<<<<<<<<<<<<<
  * 
  *     # The resulting msg_out contains both the quotient and the remainder, the remainder being the size of the divisor (the remainder has necessarily the same degree as the divisor -- not length but degree == length-1 -- since it's what we couldn't divide from the dividend), so we compute the index where this separation is, and return the quotient and remainder.
  */
-          if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+          if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
           __pyx_t_18 = __pyx_v_j;
           __pyx_t_19 = -1;
           if (__pyx_t_18 < 0) {
@@ -7706,12 +7727,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
             __Pyx_RaiseBufferIndexError(__pyx_t_19);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          __pyx_t_19 = ((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_ldivisor_t.data) + __pyx_t_18)) ))) + __pyx_v_lcoef);
+          __pyx_t_19 = ((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_ldivisor_t.data) + __pyx_t_18)) ))) + __pyx_v_lcoef);
           __pyx_t_20 = -1;
           if (__pyx_t_19 < 0) {
-            __pyx_t_19 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+            __pyx_t_19 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
             if (unlikely(__pyx_t_19 < 0)) __pyx_t_20 = 0;
-          } else if (unlikely(__pyx_t_19 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_20 = 0;
+          } else if (unlikely(__pyx_t_19 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_20 = 0;
           if (unlikely(__pyx_t_20 != -1)) {
             __Pyx_RaiseBufferIndexError(__pyx_t_20);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7726,7 +7747,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
             __Pyx_RaiseBufferIndexError(__pyx_t_21);
             {__pyx_filename = __pyx_f[0]; __pyx_lineno = 371; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
-          *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_msg_out.data + __pyx_t_20 * __pyx_v_msg_out.strides[0]) )) ^= (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_19)) )));
+          *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ (__pyx_v_msg_out.data + __pyx_t_20 * __pyx_v_msg_out.strides[0]) )) ^= (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_19)) )));
           goto __pyx_L10;
         }
         __pyx_L10:;
@@ -7736,7 +7757,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     __pyx_L7:;
   }
 
-  /* "reedsolomon\creedsolo.pyx":374
+  /* "reedsolo\creedsolo.pyx":374
  * 
  *     # The resulting msg_out contains both the quotient and the remainder, the remainder being the size of the divisor (the remainder has necessarily the same degree as the divisor -- not length but degree == length-1 -- since it's what we couldn't divide from the dividend), so we compute the index where this separation is, and return the quotient and remainder.
  *     separator = -(len(divisor)-1)             # <<<<<<<<<<<<<<
@@ -7746,7 +7767,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
   __pyx_t_6 = PyObject_Length(__pyx_v_divisor); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_separator = (-(__pyx_t_6 - 1));
 
-  /* "reedsolomon\creedsolo.pyx":375
+  /* "reedsolo\creedsolo.pyx":375
  *     # The resulting msg_out contains both the quotient and the remainder, the remainder being the size of the divisor (the remainder has necessarily the same degree as the divisor -- not length but degree == length-1 -- since it's what we couldn't divide from the dividend), so we compute the index where this separation is, and return the quotient and remainder.
  *     separator = -(len(divisor)-1)
  *     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.             # <<<<<<<<<<<<<<
@@ -7775,7 +7796,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_34gf_poly_div(CYTHON_UNUSED P
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 }
 
-__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __pyx_t_5.data = __pyx_v_msg_out.data;
@@ -7799,7 +7820,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __p
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 }
 
-__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7814,7 +7835,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __p
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":351
+  /* "reedsolo\creedsolo.pyx":351
  *     return poly
  * 
  * def gf_poly_div(dividend, divisor):             # <<<<<<<<<<<<<<
@@ -7831,7 +7852,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __p
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __Pyx_XDECREF(__pyx_t_7);
   __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_div", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_dividend_t, 1);
@@ -7843,7 +7864,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __p
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":377
+/* "reedsolo\creedsolo.pyx":377
  *     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
  * 
  * def gf_poly_square(poly):             # <<<<<<<<<<<<<<
@@ -7852,21 +7873,21 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_5, 1, (PyObject *(*)(char *)) __p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_37gf_poly_square(PyObject *__pyx_self, PyObject *__pyx_v_poly); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_36gf_poly_square[] = "Linear time implementation of polynomial squaring. For details, see paper: \"A fast software implementation for arithmetic operations in GF (2n)\". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_37gf_poly_square = {"gf_poly_square", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_37gf_poly_square, METH_O, __pyx_doc_11reedsolomon_9creedsolo_36gf_poly_square};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_37gf_poly_square(PyObject *__pyx_self, PyObject *__pyx_v_poly) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_37gf_poly_square(PyObject *__pyx_self, PyObject *__pyx_v_poly); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_36gf_poly_square[] = "Linear time implementation of polynomial squaring. For details, see paper: \"A fast software implementation for arithmetic operations in GF (2n)\". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_37gf_poly_square = {"gf_poly_square", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_37gf_poly_square, METH_O, __pyx_doc_8reedsolo_9creedsolo_36gf_poly_square};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_37gf_poly_square(PyObject *__pyx_self, PyObject *__pyx_v_poly) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gf_poly_square (wrapper)", 0);
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(__pyx_self, ((PyObject *)__pyx_v_poly));
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_36gf_poly_square(__pyx_self, ((PyObject *)__pyx_v_poly));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_36gf_poly_square(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly) {
   PyObject *__pyx_v_length = NULL;
   PyObject *__pyx_v_out = NULL;
   PyObject *__pyx_v_i = NULL;
@@ -7892,7 +7913,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_square", 0);
 
-  /* "reedsolomon\creedsolo.pyx":379
+  /* "reedsolo\creedsolo.pyx":379
  * def gf_poly_square(poly):
  *     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
  *     length = len(poly)             # <<<<<<<<<<<<<<
@@ -7905,7 +7926,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __pyx_v_length = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":380
+  /* "reedsolo\creedsolo.pyx":380
  *     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
  *     length = len(poly)
  *     out = bytearray(2*length - 1)             # <<<<<<<<<<<<<<
@@ -7948,7 +7969,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __pyx_v_out = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":381
+  /* "reedsolo\creedsolo.pyx":381
  *     length = len(poly)
  *     out = bytearray(2*length - 1)
  *     for i in xrange(length-1):             # <<<<<<<<<<<<<<
@@ -8008,7 +8029,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":382
+    /* "reedsolo\creedsolo.pyx":382
  *     out = bytearray(2*length - 1)
  *     for i in xrange(length-1):
  *         p = poly[i]             # <<<<<<<<<<<<<<
@@ -8020,7 +8041,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":383
+    /* "reedsolo\creedsolo.pyx":383
  *     for i in xrange(length-1):
  *         p = poly[i]
  *         k = 2*i             # <<<<<<<<<<<<<<
@@ -8032,7 +8053,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_k, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":384
+    /* "reedsolo\creedsolo.pyx":384
  *         p = poly[i]
  *         k = 2*i
  *         if p != 0:             # <<<<<<<<<<<<<<
@@ -8044,37 +8065,37 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_8) {
 
-      /* "reedsolomon\creedsolo.pyx":386
+      /* "reedsolo\creedsolo.pyx":386
  *         if p != 0:
  *             #out[k] = gf_exp[(2*gf_log[p]) % field_charac] # not necessary to modulo (2^r)-1 since gf_exp is duplicated up to 510.
  *             out[k] = gf_exp[2*gf_log[p]]             # <<<<<<<<<<<<<<
  *         #else: # not necessary since the output is already initialized to an array of 0
  *             #out[k] = 0
  */
-      if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-      if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+      if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+      if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
       __pyx_t_9 = __Pyx_PyIndex_AsSsize_t(__pyx_v_p); if (unlikely((__pyx_t_9 == (Py_ssize_t)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_10 = __pyx_t_9;
       __pyx_t_11 = -1;
       if (__pyx_t_10 < 0) {
-        __pyx_t_10 += __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0];
+        __pyx_t_10 += __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0];
         if (unlikely(__pyx_t_10 < 0)) __pyx_t_11 = 0;
-      } else if (unlikely(__pyx_t_10 >= __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_10 >= __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
       if (unlikely(__pyx_t_11 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_11);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_12 = (2 * (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_10)) ))));
+      __pyx_t_12 = (2 * (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_10)) ))));
       __pyx_t_11 = -1;
       if (__pyx_t_12 < 0) {
-        __pyx_t_12 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+        __pyx_t_12 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
         if (unlikely(__pyx_t_12 < 0)) __pyx_t_11 = 0;
-      } else if (unlikely(__pyx_t_12 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_11 = 0;
+      } else if (unlikely(__pyx_t_12 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_11 = 0;
       if (unlikely(__pyx_t_11 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_11);
         {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       }
-      __pyx_t_2 = __Pyx_PyInt_From_unsigned_char((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyInt_From_unsigned_char((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       if (unlikely(PyObject_SetItem(__pyx_v_out, __pyx_v_k, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 386; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -8082,7 +8103,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
     }
     __pyx_L5:;
 
-    /* "reedsolomon\creedsolo.pyx":381
+    /* "reedsolo\creedsolo.pyx":381
  *     length = len(poly)
  *     out = bytearray(2*length - 1)
  *     for i in xrange(length-1):             # <<<<<<<<<<<<<<
@@ -8092,15 +8113,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":389
+  /* "reedsolo\creedsolo.pyx":389
  *         #else: # not necessary since the output is already initialized to an array of 0
  *             #out[k] = 0
  *     out[2*length-2] = gf_exp[2*gf_log[poly[length-1]]]             # <<<<<<<<<<<<<<
  *     if out[0] == 0: out[0] = 2*poly[1] - 1
  *     return out
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
   __pyx_t_3 = PyNumber_Subtract(__pyx_v_length, __pyx_int_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = PyObject_GetItem(__pyx_v_poly, __pyx_t_3); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
@@ -8111,24 +8132,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __pyx_t_9 = __pyx_t_1;
   __pyx_t_11 = -1;
   if (__pyx_t_9 < 0) {
-    __pyx_t_9 += __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0];
+    __pyx_t_9 += __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0];
     if (unlikely(__pyx_t_9 < 0)) __pyx_t_11 = 0;
-  } else if (unlikely(__pyx_t_9 >= __pyx_v_11reedsolomon_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
+  } else if (unlikely(__pyx_t_9 >= __pyx_v_8reedsolo_9creedsolo_gf_log.shape[0])) __pyx_t_11 = 0;
   if (unlikely(__pyx_t_11 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_11);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_13 = (2 * (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_9)) ))));
+  __pyx_t_13 = (2 * (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_9)) ))));
   __pyx_t_11 = -1;
   if (__pyx_t_13 < 0) {
-    __pyx_t_13 += __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0];
+    __pyx_t_13 += __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0];
     if (unlikely(__pyx_t_13 < 0)) __pyx_t_11 = 0;
-  } else if (unlikely(__pyx_t_13 >= __pyx_v_11reedsolomon_9creedsolo_gf_exp.shape[0])) __pyx_t_11 = 0;
+  } else if (unlikely(__pyx_t_13 >= __pyx_v_8reedsolo_9creedsolo_gf_exp.shape[0])) __pyx_t_11 = 0;
   if (unlikely(__pyx_t_11 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_11);
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
-  __pyx_t_2 = __Pyx_PyInt_From_unsigned_char((*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_13)) )))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_unsigned_char((*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_13)) )))); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = PyNumber_Multiply(__pyx_int_2, __pyx_v_length); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -8139,7 +8160,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":390
+  /* "reedsolo\creedsolo.pyx":390
  *             #out[k] = 0
  *     out[2*length-2] = gf_exp[2*gf_log[poly[length-1]]]
  *     if out[0] == 0: out[0] = 2*poly[1] - 1             # <<<<<<<<<<<<<<
@@ -8167,7 +8188,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   }
   __pyx_L6:;
 
-  /* "reedsolomon\creedsolo.pyx":391
+  /* "reedsolo\creedsolo.pyx":391
  *     out[2*length-2] = gf_exp[2*gf_log[poly[length-1]]]
  *     if out[0] == 0: out[0] = 2*poly[1] - 1
  *     return out             # <<<<<<<<<<<<<<
@@ -8179,7 +8200,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __pyx_r = __pyx_v_out;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":377
+  /* "reedsolo\creedsolo.pyx":377
  *     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
  * 
  * def gf_poly_square(poly):             # <<<<<<<<<<<<<<
@@ -8194,7 +8215,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_square", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_square", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_length);
@@ -8207,7 +8228,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":393
+/* "reedsolo\creedsolo.pyx":393
  *     return out
  * 
  * def gf_poly_eval(poly, uint8_t x):             # <<<<<<<<<<<<<<
@@ -8216,12 +8237,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_36gf_poly_square(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_39gf_poly_eval(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_38gf_poly_eval[] = "Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_39gf_poly_eval = {"gf_poly_eval", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_39gf_poly_eval, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_38gf_poly_eval};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_39gf_poly_eval(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_39gf_poly_eval(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_38gf_poly_eval[] = "Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_39gf_poly_eval = {"gf_poly_eval", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_39gf_poly_eval, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_38gf_poly_eval};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_39gf_poly_eval(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_poly = 0;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -8267,24 +8288,24 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_39gf_poly_eval(PyObject *__py
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_poly_eval", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_eval", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_eval", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(__pyx_self, __pyx_v_poly, __pyx_v_x);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_38gf_poly_eval(__pyx_self, __pyx_v_poly, __pyx_v_x);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly, __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_38gf_poly_eval(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_poly, __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x) {
   int __pyx_v_i;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_y;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_y;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_2;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
   int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
@@ -8294,7 +8315,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_poly_eval", 0);
 
-  /* "reedsolomon\creedsolo.pyx":396
+  /* "reedsolo\creedsolo.pyx":396
  *     '''Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.'''
  *     cdef int i
  *     cdef uint8_t y = poly[0]             # <<<<<<<<<<<<<<
@@ -8307,7 +8328,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_y = __pyx_t_2;
 
-  /* "reedsolomon\creedsolo.pyx":397
+  /* "reedsolo\creedsolo.pyx":397
  *     cdef int i
  *     cdef uint8_t y = poly[0]
  *     for i in xrange(1, len(poly)):             # <<<<<<<<<<<<<<
@@ -8318,14 +8339,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   for (__pyx_t_4 = 1; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "reedsolomon\creedsolo.pyx":398
+    /* "reedsolo\creedsolo.pyx":398
  *     cdef uint8_t y = poly[0]
  *     for i in xrange(1, len(poly)):
  *         y = gf_mul(y, x) ^ poly[i]             # <<<<<<<<<<<<<<
  *     return y
  * 
  */
-    __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_v_y, __pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_v_y, __pyx_v_x, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_poly, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
@@ -8338,7 +8359,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
     __pyx_v_y = __pyx_t_2;
   }
 
-  /* "reedsolomon\creedsolo.pyx":399
+  /* "reedsolo\creedsolo.pyx":399
  *     for i in xrange(1, len(poly)):
  *         y = gf_mul(y, x) ^ poly[i]
  *     return y             # <<<<<<<<<<<<<<
@@ -8352,7 +8373,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":393
+  /* "reedsolo\creedsolo.pyx":393
  *     return out
  * 
  * def gf_poly_eval(poly, uint8_t x):             # <<<<<<<<<<<<<<
@@ -8365,7 +8386,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_poly_eval", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_poly_eval", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -8373,7 +8394,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":404
+/* "reedsolo\creedsolo.pyx":404
  * ################### REED-SOLOMON ENCODING ###################
  * 
  * def rs_generator_poly(nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -8382,10 +8403,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_38gf_poly_eval(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_41rs_generator_poly(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_40rs_generator_poly[] = "Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_41rs_generator_poly = {"rs_generator_poly", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_41rs_generator_poly, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_40rs_generator_poly};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_41rs_generator_poly(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_41rs_generator_poly(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_40rs_generator_poly[] = "Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_41rs_generator_poly = {"rs_generator_poly", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_41rs_generator_poly, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_40rs_generator_poly};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_41rs_generator_poly(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
   PyObject *__pyx_v_generator = 0;
@@ -8446,18 +8467,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_41rs_generator_poly(PyObject 
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_generator_poly", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_generator_poly", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_generator_poly", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(__pyx_self, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_40rs_generator_poly(__pyx_self, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_40rs_generator_poly(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
   int __pyx_v_i;
   __Pyx_memviewslice __pyx_v_g = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = NULL;
@@ -8470,14 +8491,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
   long __pyx_t_7;
   int __pyx_t_8;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_9;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_9;
   int __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_generator_poly", 0);
 
-  /* "reedsolomon\creedsolo.pyx":407
+  /* "reedsolo\creedsolo.pyx":407
  *     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
  *     cdef int i
  *     cdef uint8_t[:] g = bytearray([1])             # <<<<<<<<<<<<<<
@@ -8517,14 +8538,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_g = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":408
+  /* "reedsolo\creedsolo.pyx":408
  *     cdef int i
  *     cdef uint8_t[:] g = bytearray([1])
  *     for i in xrange(0, nsym):             # <<<<<<<<<<<<<<
@@ -8535,14 +8556,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "reedsolomon\creedsolo.pyx":409
+    /* "reedsolo\creedsolo.pyx":409
  *     cdef uint8_t[:] g = bytearray([1])
  *     for i in xrange(0, nsym):
  *         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])             # <<<<<<<<<<<<<<
  *     return bytearray(g)
  * 
  */
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_9 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_9 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -8552,7 +8573,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_9, __pyx_t_10, 0)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_9, __pyx_t_10, 0)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -8562,11 +8583,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
     __Pyx_GIVEREF(__pyx_t_5);
     PyList_SET_ITEM(__pyx_t_2, 1, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(__pyx_t_1, __pyx_t_2, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __pyx_f_8reedsolo_9creedsolo_gf_poly_mul(__pyx_t_1, __pyx_t_2, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_5);
+    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_5);
     if (unlikely(!__pyx_t_6.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 409; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __PYX_XDEC_MEMVIEW(&__pyx_v_g, 1);
@@ -8575,7 +8596,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
     __pyx_t_6.data = NULL;
   }
 
-  /* "reedsolomon\creedsolo.pyx":410
+  /* "reedsolo\creedsolo.pyx":410
  *     for i in xrange(0, nsym):
  *         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
  *     return bytearray(g)             # <<<<<<<<<<<<<<
@@ -8585,7 +8606,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_g, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -8617,7 +8638,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":404
+  /* "reedsolo\creedsolo.pyx":404
  * ################### REED-SOLOMON ENCODING ###################
  * 
  * def rs_generator_poly(nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -8633,7 +8654,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_generator_poly", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_generator_poly", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_g, 1);
@@ -8642,7 +8663,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":412
+/* "reedsolo\creedsolo.pyx":412
  *     return bytearray(g)
  * 
  * def rs_generator_poly_all(max_nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -8651,10 +8672,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_40rs_generator_poly(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_43rs_generator_poly_all(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_42rs_generator_poly_all[] = "Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_43rs_generator_poly_all = {"rs_generator_poly_all", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_43rs_generator_poly_all, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_42rs_generator_poly_all};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_43rs_generator_poly_all(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_43rs_generator_poly_all(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_42rs_generator_poly_all[] = "Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_43rs_generator_poly_all = {"rs_generator_poly_all", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_43rs_generator_poly_all, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_42rs_generator_poly_all};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_43rs_generator_poly_all(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_max_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
   PyObject *__pyx_v_generator = 0;
@@ -8715,18 +8736,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_43rs_generator_poly_all(PyObj
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_generator_poly_all", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_generator_poly_all", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_generator_poly_all", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(__pyx_self, __pyx_v_max_nsym, __pyx_v_fcr, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_42rs_generator_poly_all(__pyx_self, __pyx_v_max_nsym, __pyx_v_fcr, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_max_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_42rs_generator_poly_all(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_max_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
   PyObject *__pyx_v_g_all = NULL;
   PyObject *__pyx_v_nsym = NULL;
   PyObject *__pyx_r = NULL;
@@ -8744,7 +8765,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_generator_poly_all", 0);
 
-  /* "reedsolomon\creedsolo.pyx":414
+  /* "reedsolo\creedsolo.pyx":414
  * def rs_generator_poly_all(max_nsym, fcr=0, generator=2):
  *     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
  *     g_all = {}             # <<<<<<<<<<<<<<
@@ -8756,7 +8777,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   __pyx_v_g_all = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":415
+  /* "reedsolo\creedsolo.pyx":415
  *     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
  *     g_all = {}
  *     g_all[0] = g_all[1] = [1]             # <<<<<<<<<<<<<<
@@ -8772,7 +8793,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   if (unlikely(PyDict_SetItem(__pyx_v_g_all, __pyx_int_1, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 415; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":416
+  /* "reedsolo\creedsolo.pyx":416
  *     g_all = {}
  *     g_all[0] = g_all[1] = [1]
  *     for nsym in xrange(max_nsym):             # <<<<<<<<<<<<<<
@@ -8830,7 +8851,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
     __Pyx_XDECREF_SET(__pyx_v_nsym, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":417
+    /* "reedsolo\creedsolo.pyx":417
  *     g_all[0] = g_all[1] = [1]
  *     for nsym in xrange(max_nsym):
  *         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)             # <<<<<<<<<<<<<<
@@ -8872,7 +8893,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
     if (unlikely(PyDict_SetItem(__pyx_v_g_all, __pyx_v_nsym, __pyx_t_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":416
+    /* "reedsolo\creedsolo.pyx":416
  *     g_all = {}
  *     g_all[0] = g_all[1] = [1]
  *     for nsym in xrange(max_nsym):             # <<<<<<<<<<<<<<
@@ -8882,7 +8903,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":418
+  /* "reedsolo\creedsolo.pyx":418
  *     for nsym in xrange(max_nsym):
  *         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)
  *     return g_all             # <<<<<<<<<<<<<<
@@ -8894,7 +8915,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   __pyx_r = __pyx_v_g_all;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":412
+  /* "reedsolo\creedsolo.pyx":412
  *     return bytearray(g)
  * 
  * def rs_generator_poly_all(max_nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -8909,7 +8930,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_generator_poly_all", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_generator_poly_all", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_g_all);
@@ -8919,7 +8940,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":423
+/* "reedsolo\creedsolo.pyx":423
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
  * def rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -8928,10 +8949,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_42rs_generator_poly_all(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_45rs_encode_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_44rs_encode_msg[] = "Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_45rs_encode_msg = {"rs_encode_msg", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_45rs_encode_msg, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_44rs_encode_msg};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_45rs_encode_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_45rs_encode_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_44rs_encode_msg[] = "Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_45rs_encode_msg = {"rs_encode_msg", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_45rs_encode_msg, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_44rs_encode_msg};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_45rs_encode_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg_in = 0;
   CYTHON_UNUSED int __pyx_v_nsym;
   CYTHON_UNUSED int __pyx_v_fcr;
@@ -9017,26 +9038,26 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_45rs_encode_msg(PyObject *__p
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_encode_msg", 0, 2, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_encode_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_encode_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_gen);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_44rs_encode_msg(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_gen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, CYTHON_UNUSED int __pyx_v_nsym, CYTHON_UNUSED int __pyx_v_fcr, CYTHON_UNUSED int __pyx_v_generator, PyObject *__pyx_v_gen) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_44rs_encode_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, CYTHON_UNUSED int __pyx_v_nsym, CYTHON_UNUSED int __pyx_v_fcr, CYTHON_UNUSED int __pyx_v_generator, PyObject *__pyx_v_gen) {
   __Pyx_memviewslice __pyx_v_msg_in_t = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_gen_t = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_msg_out = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_v_i;
   int __pyx_v_j;
   __Pyx_memviewslice __pyx_v_lgen = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_coef;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_lcoef;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_coef;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_lcoef;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -9050,12 +9071,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
   Py_ssize_t __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   int __pyx_t_11;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_12;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_12;
   int __pyx_t_13;
   int __pyx_t_14;
   int __pyx_t_15;
   int __pyx_t_16;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_17;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_17;
   Py_ssize_t __pyx_t_18;
   int __pyx_t_19;
   int __pyx_t_20;
@@ -9065,7 +9086,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_encode_msg", 0);
 
-  /* "reedsolomon\creedsolo.pyx":429
+  /* "reedsolo\creedsolo.pyx":429
  *     # >> ValueError : negative count
  * 
  *     cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object             # <<<<<<<<<<<<<<
@@ -9099,27 +9120,27 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_1);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_1);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_msg_in_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":431
+  /* "reedsolo\creedsolo.pyx":431
  *     cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object
  *     #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
  *     cdef uint8_t[::1] gen_t = gen             # <<<<<<<<<<<<<<
  * 
  *     cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
  */
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_v_gen);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_v_gen);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_gen_t = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":433
+  /* "reedsolo\creedsolo.pyx":433
  *     cdef uint8_t[::1] gen_t = gen
  * 
  *     cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)             # <<<<<<<<<<<<<<
@@ -9128,7 +9149,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_msg_in_t, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_msg_in_t, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -9190,14 +9211,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_6);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_6);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 433; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_msg_out = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":436
+  /* "reedsolo\creedsolo.pyx":436
  * 
  *     cdef int i, j
  *     cdef uint8_t[::1] lgen = bytearray(gen_t.shape[0])             # <<<<<<<<<<<<<<
@@ -9234,14 +9255,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_6);
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_6);
   if (unlikely(!__pyx_t_5.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 436; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_lgen = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":440
+  /* "reedsolo\creedsolo.pyx":440
  *     cdef uint8_t coef, lcoef
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -9255,7 +9276,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
       #endif
       /*try:*/ {
 
-        /* "reedsolomon\creedsolo.pyx":442
+        /* "reedsolo\creedsolo.pyx":442
  *     with nogil:
  *         # Precompute the logarithm of every items in the generator
  *         for j in prange(gen_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -9275,7 +9296,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
             if (__pyx_t_10 > 0)
             {
                 #ifdef _OPENMP
-                #pragma omp parallel private(__pyx_t_12, __pyx_t_13, __pyx_t_11)
+                #pragma omp parallel private(__pyx_t_11, __pyx_t_12, __pyx_t_13)
                 #endif /* _OPENMP */
                 {
                     #ifdef _OPENMP
@@ -9285,7 +9306,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
                         {
                             __pyx_v_j = 0 + 1 * __pyx_t_9;
 
-                            /* "reedsolomon\creedsolo.pyx":443
+                            /* "reedsolo\creedsolo.pyx":443
  *         # Precompute the logarithm of every items in the generator
  *         for j in prange(gen_t.shape[0]):
  *             lgen[j] = gf_log[gen_t[j]]             # <<<<<<<<<<<<<<
@@ -9293,9 +9314,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
  *         # Extended synthetic division main loop
  */
                             __pyx_t_11 = __pyx_v_j;
-                            __pyx_t_12 = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_gen_t.data) + __pyx_t_11)) )));
+                            __pyx_t_12 = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_gen_t.data) + __pyx_t_11)) )));
                             __pyx_t_13 = __pyx_v_j;
-                            *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_lgen.data) + __pyx_t_13)) )) = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_12)) )));
+                            *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_lgen.data) + __pyx_t_13)) )) = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_12)) )));
                         }
                     }
                 }
@@ -9308,7 +9329,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
             #define unlikely(x) __builtin_expect(!!(x), 0)
         #endif
 
-        /* "reedsolomon\creedsolo.pyx":446
+        /* "reedsolo\creedsolo.pyx":446
  * 
  *         # Extended synthetic division main loop
  *         for i in xrange(msg_in_t.shape[0]):             # <<<<<<<<<<<<<<
@@ -9319,7 +9340,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_10; __pyx_t_14+=1) {
           __pyx_v_i = __pyx_t_14;
 
-          /* "reedsolomon\creedsolo.pyx":447
+          /* "reedsolo\creedsolo.pyx":447
  *         # Extended synthetic division main loop
  *         for i in xrange(msg_in_t.shape[0]):
  *             coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).             # <<<<<<<<<<<<<<
@@ -9327,9 +9348,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
  *             if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
  */
           __pyx_t_15 = __pyx_v_i;
-          __pyx_v_coef = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_msg_out.data) + __pyx_t_15)) )));
+          __pyx_v_coef = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_msg_out.data) + __pyx_t_15)) )));
 
-          /* "reedsolomon\creedsolo.pyx":449
+          /* "reedsolo\creedsolo.pyx":449
  *             coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).
  *             # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
  *             if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.             # <<<<<<<<<<<<<<
@@ -9339,7 +9360,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
           __pyx_t_16 = ((__pyx_v_coef != 0) != 0);
           if (__pyx_t_16) {
 
-            /* "reedsolomon\creedsolo.pyx":450
+            /* "reedsolo\creedsolo.pyx":450
  *             # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
  *             if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
  *                 lcoef = gf_log[coef] # precaching             # <<<<<<<<<<<<<<
@@ -9347,9 +9368,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
  *                 for j in prange(1, gen_t.shape[0]): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
  */
             __pyx_t_17 = __pyx_v_coef;
-            __pyx_v_lcoef = (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_log.data) + __pyx_t_17)) )));
+            __pyx_v_lcoef = (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_log.data) + __pyx_t_17)) )));
 
-            /* "reedsolomon\creedsolo.pyx":452
+            /* "reedsolo\creedsolo.pyx":452
  *                 lcoef = gf_log[coef] # precaching
  * 
  *                 for j in prange(1, gen_t.shape[0]): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)             # <<<<<<<<<<<<<<
@@ -9369,7 +9390,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
                 if (__pyx_t_18 > 0)
                 {
                     #ifdef _OPENMP
-                    #pragma omp parallel private(__pyx_t_21, __pyx_t_20, __pyx_t_19)
+                    #pragma omp parallel private(__pyx_t_21, __pyx_t_19, __pyx_t_20)
                     #endif /* _OPENMP */
                     {
                         #ifdef _OPENMP
@@ -9379,7 +9400,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
                             {
                                 __pyx_v_j = 1 + 1 * __pyx_t_8;
 
-                                /* "reedsolomon\creedsolo.pyx":453
+                                /* "reedsolo\creedsolo.pyx":453
  * 
  *                 for j in prange(1, gen_t.shape[0]): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
  *                     msg_out[i + j] ^= gf_exp[lcoef + lgen[j]] # optimization, equivalent to gf_mul(gen[j], msg_out[i]) and we just substract it to msg_out[i+j] (but since we are in GF256, it's equivalent to an addition and to an XOR). In other words, this is simply a "multiply-accumulate operation"             # <<<<<<<<<<<<<<
@@ -9387,9 +9408,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
  *     # Recopy the original message bytes (overwrites the part where the quotient was computed)
  */
                                 __pyx_t_19 = __pyx_v_j;
-                                __pyx_t_20 = (__pyx_v_lcoef + (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_lgen.data) + __pyx_t_19)) ))));
+                                __pyx_t_20 = (__pyx_v_lcoef + (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_lgen.data) + __pyx_t_19)) ))));
                                 __pyx_t_21 = (__pyx_v_i + __pyx_v_j);
-                                *((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_msg_out.data) + __pyx_t_21)) )) ^= (*((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_11reedsolomon_9creedsolo_uint8_t *) __pyx_v_11reedsolomon_9creedsolo_gf_exp.data) + __pyx_t_20)) )));
+                                *((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_msg_out.data) + __pyx_t_21)) )) ^= (*((__pyx_t_8reedsolo_9creedsolo_uint8_t *) ( /* dim=0 */ ((char *) (((__pyx_t_8reedsolo_9creedsolo_uint8_t *) __pyx_v_8reedsolo_9creedsolo_gf_exp.data) + __pyx_t_20)) )));
                             }
                         }
                     }
@@ -9407,7 +9428,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
         }
       }
 
-      /* "reedsolomon\creedsolo.pyx":440
+      /* "reedsolo\creedsolo.pyx":440
  *     cdef uint8_t coef, lcoef
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -9425,7 +9446,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
       }
   }
 
-  /* "reedsolomon\creedsolo.pyx":456
+  /* "reedsolo\creedsolo.pyx":456
  * 
  *     # Recopy the original message bytes (overwrites the part where the quotient was computed)
  *     msg_out[:msg_in_t.shape[0]] = msg_in_t # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym             # <<<<<<<<<<<<<<
@@ -9456,7 +9477,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_44rs_encode_msg(CYTHON_UNUSED
 if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 456; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
 
-  /* "reedsolomon\creedsolo.pyx":457
+  /* "reedsolo\creedsolo.pyx":457
  *     # Recopy the original message bytes (overwrites the part where the quotient was computed)
  *     msg_out[:msg_in_t.shape[0]] = msg_in_t # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
  *     return bytearray(msg_out)             # <<<<<<<<<<<<<<
@@ -9466,7 +9487,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_msg_out, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_msg_out, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_1 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -9498,7 +9519,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":423
+  /* "reedsolo\creedsolo.pyx":423
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
  * def rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -9515,7 +9536,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0
   __PYX_XDEC_MEMVIEW(&__pyx_t_5, 1);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_encode_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_encode_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_msg_in_t, 1);
@@ -9527,7 +9548,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":465
+/* "reedsolo\creedsolo.pyx":465
  * #gf_add_arr = bytearray(256*256)
  * 
  * def gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):             # <<<<<<<<<<<<<<
@@ -9536,9 +9557,9 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_msg_in_t, __pyx_t_5, 1, 1, 0
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_47gf_precomp_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_47gf_precomp_tables = {"gf_precomp_tables", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_47gf_precomp_tables, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_47gf_precomp_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_47gf_precomp_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_47gf_precomp_tables = {"gf_precomp_tables", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_47gf_precomp_tables, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_47gf_precomp_tables(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   CYTHON_UNUSED PyObject *__pyx_v_gf_exp = 0;
   CYTHON_UNUSED PyObject *__pyx_v_gf_log = 0;
   int __pyx_lineno = 0;
@@ -9592,18 +9613,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_47gf_precomp_tables(PyObject 
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("gf_precomp_tables", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_precomp_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_precomp_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(__pyx_self, __pyx_v_gf_exp, __pyx_v_gf_log);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_46gf_precomp_tables(__pyx_self, __pyx_v_gf_exp, __pyx_v_gf_log);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_gf_exp, CYTHON_UNUSED PyObject *__pyx_v_gf_log) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_46gf_precomp_tables(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_gf_exp, CYTHON_UNUSED PyObject *__pyx_v_gf_log) {
   long __pyx_v_i;
   long __pyx_v_j;
   PyObject *__pyx_r = NULL;
@@ -9618,7 +9639,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("gf_precomp_tables", 0);
 
-  /* "reedsolomon\creedsolo.pyx":468
+  /* "reedsolo\creedsolo.pyx":468
  *     global gf_mul_arr, gf_add_arr
  * 
  *     for i in xrange(256):             # <<<<<<<<<<<<<<
@@ -9628,7 +9649,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
   for (__pyx_t_1 = 0; __pyx_t_1 < 256; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "reedsolomon\creedsolo.pyx":469
+    /* "reedsolo\creedsolo.pyx":469
  * 
  *     for i in xrange(256):
  *         for j in xrange(256):             # <<<<<<<<<<<<<<
@@ -9638,14 +9659,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
     for (__pyx_t_2 = 0; __pyx_t_2 < 256; __pyx_t_2+=1) {
       __pyx_v_j = __pyx_t_2;
 
-      /* "reedsolomon\creedsolo.pyx":470
+      /* "reedsolo\creedsolo.pyx":470
  *     for i in xrange(256):
  *         for j in xrange(256):
  *             gf_mul_arr[i][j] = gf_mul(i, j)             # <<<<<<<<<<<<<<
  *             gf_add_arr[i][j] = i ^ j
  *             #gf_mul_arr[i*256+j] = gf_mul(i, j)
  */
-      __pyx_t_3 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_v_i, __pyx_v_j, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_v_i, __pyx_v_j, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_mul_arr); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 470; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
@@ -9656,7 +9677,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":471
+      /* "reedsolo\creedsolo.pyx":471
  *         for j in xrange(256):
  *             gf_mul_arr[i][j] = gf_mul(i, j)
  *             gf_add_arr[i][j] = i ^ j             # <<<<<<<<<<<<<<
@@ -9676,7 +9697,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
     }
   }
 
-  /* "reedsolomon\creedsolo.pyx":474
+  /* "reedsolo\creedsolo.pyx":474
  *             #gf_mul_arr[i*256+j] = gf_mul(i, j)
  *             #gf_add_arr[i*256+j] = i ^ j
  *     return gf_mul_arr, gf_add_arr             # <<<<<<<<<<<<<<
@@ -9700,7 +9721,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":465
+  /* "reedsolo\creedsolo.pyx":465
  * #gf_add_arr = bytearray(256*256)
  * 
  * def gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):             # <<<<<<<<<<<<<<
@@ -9713,7 +9734,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.gf_precomp_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.gf_precomp_tables", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -9721,7 +9742,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":476
+/* "reedsolo\creedsolo.pyx":476
  *     return gf_mul_arr, gf_add_arr
  * 
  * def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -9730,10 +9751,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_46gf_precomp_tables(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_49rs_encode_msg_precomp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_48rs_encode_msg_precomp[] = "Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_49rs_encode_msg_precomp = {"rs_encode_msg_precomp", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_49rs_encode_msg_precomp, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_48rs_encode_msg_precomp};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_49rs_encode_msg_precomp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_49rs_encode_msg_precomp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_48rs_encode_msg_precomp[] = "Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_49rs_encode_msg_precomp = {"rs_encode_msg_precomp", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_49rs_encode_msg_precomp, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_48rs_encode_msg_precomp};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_49rs_encode_msg_precomp(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg_in = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
@@ -9813,18 +9834,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_49rs_encode_msg_precomp(PyObj
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_encode_msg_precomp", 0, 2, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_encode_msg_precomp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_encode_msg_precomp", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_gen);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_48rs_encode_msg_precomp(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_gen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_gen) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_48rs_encode_msg_precomp(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_gen) {
   PyObject *__pyx_v_msg_out = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_v_coef = NULL;
@@ -9851,7 +9872,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __Pyx_INCREF(__pyx_v_msg_in);
   __Pyx_INCREF(__pyx_v_gen);
 
-  /* "reedsolomon\creedsolo.pyx":478
+  /* "reedsolo\creedsolo.pyx":478
  * def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):
  *     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
  *     if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))             # <<<<<<<<<<<<<<
@@ -9864,7 +9885,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_v_nsym); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9878,7 +9899,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_v_nsym); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -9904,7 +9925,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":479
+  /* "reedsolo\creedsolo.pyx":479
  *     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
  *     if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
  *     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)             # <<<<<<<<<<<<<<
@@ -9952,7 +9973,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   }
   __pyx_L4:;
 
-  /* "reedsolomon\creedsolo.pyx":481
+  /* "reedsolo\creedsolo.pyx":481
  *     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
  * 
  *     msg_in = bytearray(msg_in)             # <<<<<<<<<<<<<<
@@ -9989,7 +10010,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __Pyx_DECREF_SET(__pyx_v_msg_in, __pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":482
+  /* "reedsolo\creedsolo.pyx":482
  * 
  *     msg_in = bytearray(msg_in)
  *     msg_out = bytearray(msg_in) + bytearray(len(gen)-1)             # <<<<<<<<<<<<<<
@@ -10061,7 +10082,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __pyx_v_msg_out = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":493
+  /* "reedsolo\creedsolo.pyx":493
  *     # Fastest
  *     #mula = [gf_mul_arr[gen[j]] for j in xrange(len(gen))]
  *     for i in xrange(len(msg_in)): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]             # <<<<<<<<<<<<<<
@@ -10122,7 +10143,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":494
+    /* "reedsolo\creedsolo.pyx":494
  *     #mula = [gf_mul_arr[gen[j]] for j in xrange(len(gen))]
  *     for i in xrange(len(msg_in)): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]
  *         coef = msg_out[i]             # <<<<<<<<<<<<<<
@@ -10134,7 +10155,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     __Pyx_XDECREF_SET(__pyx_v_coef, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":496
+    /* "reedsolo\creedsolo.pyx":496
  *         coef = msg_out[i]
  *         # coef = gf_mul(msg_out[i], gf_inverse(gen[0])) # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
  *         if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)             # <<<<<<<<<<<<<<
@@ -10146,7 +10167,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     if (__pyx_t_6) {
 
-      /* "reedsolomon\creedsolo.pyx":497
+      /* "reedsolo\creedsolo.pyx":497
  *         # coef = gf_mul(msg_out[i], gf_inverse(gen[0])) # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
  *         if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)
  *             mula = gf_mul_arr[coef]             # <<<<<<<<<<<<<<
@@ -10161,7 +10182,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
       __Pyx_XDECREF_SET(__pyx_v_mula, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":498
+      /* "reedsolo\creedsolo.pyx":498
  *         if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)
  *             mula = gf_mul_arr[coef]
  *             for j in xrange(1, len(gen)): # optimization: can skip g0 because the first coefficient of the generator is always 1! (that's why we start at position 1)             # <<<<<<<<<<<<<<
@@ -10225,7 +10246,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
         __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_4);
         __pyx_t_4 = 0;
 
-        /* "reedsolomon\creedsolo.pyx":501
+        /* "reedsolo\creedsolo.pyx":501
  *                 #msg_out[i + j] = gf_add_arr[msg_out[i+j]][gf_mul_arr[coef][gen[j]]] # slow, which is weird since it's only accessing lists
  *                 #msg_out[i + j] ^= gf_mul_arr[coef][gen[j]] # faster
  *                 msg_out[i + j] ^= mula[gen[j]] # fastest             # <<<<<<<<<<<<<<
@@ -10249,7 +10270,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-        /* "reedsolomon\creedsolo.pyx":498
+        /* "reedsolo\creedsolo.pyx":498
  *         if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)
  *             mula = gf_mul_arr[coef]
  *             for j in xrange(1, len(gen)): # optimization: can skip g0 because the first coefficient of the generator is always 1! (that's why we start at position 1)             # <<<<<<<<<<<<<<
@@ -10262,7 +10283,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
     }
     __pyx_L7:;
 
-    /* "reedsolomon\creedsolo.pyx":493
+    /* "reedsolo\creedsolo.pyx":493
  *     # Fastest
  *     #mula = [gf_mul_arr[gen[j]] for j in xrange(len(gen))]
  *     for i in xrange(len(msg_in)): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]             # <<<<<<<<<<<<<<
@@ -10272,7 +10293,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":504
+  /* "reedsolo\creedsolo.pyx":504
  * 
  *     # Recopy the original message bytes
  *     msg_out[:len(msg_in)] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym             # <<<<<<<<<<<<<<
@@ -10282,7 +10303,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__Pyx_PyObject_SetSlice(__pyx_v_msg_out, __pyx_v_msg_in, 0, __pyx_t_1, NULL, NULL, NULL, 0, 1, 1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 504; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":505
+  /* "reedsolo\creedsolo.pyx":505
  *     # Recopy the original message bytes
  *     msg_out[:len(msg_in)] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
  *     return msg_out             # <<<<<<<<<<<<<<
@@ -10294,7 +10315,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __pyx_r = __pyx_v_msg_out;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":476
+  /* "reedsolo\creedsolo.pyx":476
  *     return gf_mul_arr, gf_add_arr
  * 
  * def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -10310,7 +10331,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_encode_msg_precomp", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_encode_msg_precomp", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_msg_out);
@@ -10325,7 +10346,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":511
+/* "reedsolo\creedsolo.pyx":511
  * ################### REED-SOLOMON DECODING ###################
  * 
  * def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -10334,10 +10355,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_48rs_encode_msg_precomp(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_51rs_calc_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_50rs_calc_syndromes[] = "Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.\n    Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).\n    ";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_51rs_calc_syndromes = {"rs_calc_syndromes", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_51rs_calc_syndromes, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_50rs_calc_syndromes};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_51rs_calc_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_51rs_calc_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_50rs_calc_syndromes[] = "Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.\n    Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).\n    ";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_51rs_calc_syndromes = {"rs_calc_syndromes", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_51rs_calc_syndromes, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_50rs_calc_syndromes};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_51rs_calc_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
@@ -10407,18 +10428,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_51rs_calc_syndromes(PyObject 
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_calc_syndromes", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_calc_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_calc_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(__pyx_self, __pyx_v_msg, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_50rs_calc_syndromes(__pyx_self, __pyx_v_msg, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_50rs_calc_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -10429,7 +10450,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
   Py_ssize_t __pyx_t_5;
   PyObject *(*__pyx_t_6)(PyObject *);
   PyObject *__pyx_t_7 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_8;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_8;
   PyObject *__pyx_t_9 = NULL;
   int __pyx_t_10;
   PyObject *__pyx_t_11 = NULL;
@@ -10440,7 +10461,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_calc_syndromes", 0);
 
-  /* "reedsolomon\creedsolo.pyx":517
+  /* "reedsolo\creedsolo.pyx":517
  *     # Note the "[0] +" : we add a 0 coefficient for the lowest degree (the constant). This effectively shifts the syndrome, and will shift every computations depending on the syndromes (such as the errors locator polynomial, errors evaluator polynomial, etc. but not the errors positions).
  *     # This is not necessary as anyway syndromes are defined such as there are only non-zero coefficients (the only 0 is the shift of the constant here) and subsequent computations will/must account for the shift by skipping the first iteration (eg, the often seen range(1, n-k+1)), but you can also avoid prepending the 0 coeff and adapt every subsequent computations to start from 0 instead of 1.
  *     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]             # <<<<<<<<<<<<<<
@@ -10512,7 +10533,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_8, __pyx_t_10, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_8, __pyx_t_10, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     __pyx_t_11 = NULL;
     __pyx_t_12 = 0;
@@ -10553,7 +10574,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":511
+  /* "reedsolo\creedsolo.pyx":511
  * ################### REED-SOLOMON DECODING ###################
  * 
  * def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -10571,7 +10592,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_calc_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_calc_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_i);
@@ -10580,18 +10601,19 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_50rs_calc_syndromes(CYTHON_UN
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":519
+/* "reedsolo\creedsolo.pyx":519
  *     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
  * 
  * def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata             # <<<<<<<<<<<<<<
- *     msg = bytearray(msg_in)
- *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
+ *     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+ *     global field_charac
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_53rs_correct_errata(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_53rs_correct_errata = {"rs_correct_errata", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_53rs_correct_errata, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_53rs_correct_errata(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_53rs_correct_errata(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_52rs_correct_errata[] = "Forney algorithm, computes the values (error magnitude) to correct the input message.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_53rs_correct_errata = {"rs_correct_errata", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_53rs_correct_errata, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_52rs_correct_errata};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_53rs_correct_errata(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg_in = 0;
   PyObject *__pyx_v_synd = 0;
   PyObject *__pyx_v_err_pos = 0;
@@ -10670,18 +10692,18 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_53rs_correct_errata(PyObject 
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("rs_correct_errata", 0, 3, 5, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_errata", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_errata", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(__pyx_self, __pyx_v_msg_in, __pyx_v_synd, __pyx_v_err_pos, __pyx_v_fcr, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_52rs_correct_errata(__pyx_self, __pyx_v_msg_in, __pyx_v_synd, __pyx_v_err_pos, __pyx_v_fcr, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_pos, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_52rs_correct_errata(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_pos, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
   PyObject *__pyx_v_msg = NULL;
   PyObject *__pyx_v_coef_pos = NULL;
   PyObject *__pyx_v_err_loc = NULL;
@@ -10692,13 +10714,13 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   PyObject *__pyx_v_E = NULL;
   Py_ssize_t __pyx_v_Xlength;
   PyObject *__pyx_v_Xi = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_Xi_inv;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_Xi_inv;
   PyObject *__pyx_v_err_loc_prime_tmp = NULL;
   Py_ssize_t __pyx_v_j;
   long __pyx_v_err_loc_prime;
   PyObject *__pyx_v_coef = NULL;
   PyObject *__pyx_v_y = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_magnitude;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_magnitude;
   PyObject *__pyx_v_p = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -10711,27 +10733,27 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   Py_ssize_t __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   PyObject *__pyx_t_9 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_10;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_10;
   int __pyx_t_11;
   int __pyx_t_12;
   Py_ssize_t __pyx_t_13;
   int __pyx_t_14;
   PyObject *__pyx_t_15 = NULL;
   PyObject *__pyx_t_16 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_17;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_17;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_correct_errata", 0);
 
-  /* "reedsolomon\creedsolo.pyx":520
- * 
- * def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata
+  /* "reedsolo\creedsolo.pyx":522
+ *     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+ *     global field_charac
  *     msg = bytearray(msg_in)             # <<<<<<<<<<<<<<
  *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
  *     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -10744,16 +10766,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_msg_in); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_msg_in); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_msg_in);
     __Pyx_GIVEREF(__pyx_v_msg_in);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_msg_in);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -10761,39 +10783,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __pyx_v_msg = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":522
+  /* "reedsolo\creedsolo.pyx":524
  *     msg = bytearray(msg_in)
  *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
  *     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])             # <<<<<<<<<<<<<<
  *     err_loc = rs_find_errata_locator(coef_pos, generator)
  *     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_v_err_pos)) || PyTuple_CheckExact(__pyx_v_err_pos)) {
     __pyx_t_2 = __pyx_v_err_pos; __Pyx_INCREF(__pyx_t_2); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
   } else {
-    __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_err_pos); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_err_pos); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   for (;;) {
     if (likely(!__pyx_t_6)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_2, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -10803,7 +10825,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -10811,27 +10833,27 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     }
     __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_7 = PyObject_Length(__pyx_v_msg); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = PyInt_FromSsize_t((__pyx_t_7 - 1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyObject_Length(__pyx_v_msg); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyInt_FromSsize_t((__pyx_t_7 - 1)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyNumber_Subtract(__pyx_t_4, __pyx_v_p); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Subtract(__pyx_t_4, __pyx_v_p); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_3))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 524; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_coef_pos = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":523
+  /* "reedsolo\creedsolo.pyx":525
  *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
  *     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
  *     err_loc = rs_find_errata_locator(coef_pos, generator)             # <<<<<<<<<<<<<<
  *     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
  *     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errata_locator); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 523; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errata_locator); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_5 = 0;
@@ -10845,7 +10867,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
       __pyx_t_5 = 1;
     }
   }
-  __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 523; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (__pyx_t_3) {
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -10856,26 +10878,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_5, __pyx_v_generator);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 523; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_err_loc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":525
+  /* "reedsolo\creedsolo.pyx":527
  *     err_loc = rs_find_errata_locator(coef_pos, generator)
  *     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
  *     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]             # <<<<<<<<<<<<<<
  * 
  *     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_evaluator); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_evaluator); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyObject_GetItem(__pyx_v_synd, __pyx_slice__11); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_4 = PyObject_GetItem(__pyx_v_synd, __pyx_slice__11); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = PyInt_FromSsize_t((__pyx_t_5 - 1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyInt_FromSsize_t((__pyx_t_5 - 1)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_8 = NULL;
   __pyx_t_5 = 0;
@@ -10889,7 +10911,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
       __pyx_t_5 = 1;
     }
   }
-  __pyx_t_9 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyTuple_New(3+__pyx_t_5); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   if (__pyx_t_8) {
     __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -10903,53 +10925,53 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   PyTuple_SET_ITEM(__pyx_t_9, 2+__pyx_t_5, __pyx_t_3);
   __pyx_t_4 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_GetItem(__pyx_t_1, __pyx_slice__12); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+  __pyx_t_2 = PyObject_GetItem(__pyx_t_1, __pyx_slice__12); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_err_eval = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":528
+  /* "reedsolo\creedsolo.pyx":530
  * 
  *     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
  *     X = [] # will store the position of the errors             # <<<<<<<<<<<<<<
  *     for i in xrange(len(coef_pos)):
  *         l = field_charac - coef_pos[i]
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_X = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":529
+  /* "reedsolo\creedsolo.pyx":531
  *     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
  *     X = [] # will store the position of the errors
  *     for i in xrange(len(coef_pos)):             # <<<<<<<<<<<<<<
  *         l = field_charac - coef_pos[i]
  *         X.append( gf_pow(generator, -l) )
  */
-  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_coef_pos); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_coef_pos); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
     __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
   } else {
-    __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   for (;;) {
@@ -10957,17 +10979,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         if (__pyx_t_5 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_5); __Pyx_INCREF(__pyx_t_2); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -10977,7 +10999,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 529; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -10986,42 +11008,42 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":530
+    /* "reedsolo\creedsolo.pyx":532
  *     X = [] # will store the position of the errors
  *     for i in xrange(len(coef_pos)):
  *         l = field_charac - coef_pos[i]             # <<<<<<<<<<<<<<
  *         X.append( gf_pow(generator, -l) )
  * 
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyObject_GetItem(__pyx_v_coef_pos, __pyx_v_i); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_9 = PyObject_GetItem(__pyx_v_coef_pos, __pyx_v_i); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_3 = PyNumber_Subtract(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 530; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Subtract(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF_SET(__pyx_v_l, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":531
+    /* "reedsolo\creedsolo.pyx":533
  *     for i in xrange(len(coef_pos)):
  *         l = field_charac - coef_pos[i]
  *         X.append( gf_pow(generator, -l) )             # <<<<<<<<<<<<<<
  * 
  *     # Forney algorithm: compute the magnitudes
  */
-    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyNumber_Negative(__pyx_v_l); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Negative(__pyx_v_l); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_10, __pyx_t_11, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_10, __pyx_t_11, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_X, __pyx_t_3); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_X, __pyx_t_3); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":529
+    /* "reedsolo\creedsolo.pyx":531
  *     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
  *     X = [] # will store the position of the errors
  *     for i in xrange(len(coef_pos)):             # <<<<<<<<<<<<<<
@@ -11031,17 +11053,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":534
+  /* "reedsolo\creedsolo.pyx":536
  * 
  *     # Forney algorithm: compute the magnitudes
  *     E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.             # <<<<<<<<<<<<<<
  *     Xlength = len(X)
  *     for i, Xi in enumerate(X):
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyObject_Length(__pyx_v_msg); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_9 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyObject_Length(__pyx_v_msg); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyInt_FromSsize_t(__pyx_t_5); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -11054,17 +11076,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_9); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_9); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
     __Pyx_GIVEREF(__pyx_t_9);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_9);
     __pyx_t_9 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -11072,17 +11094,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __pyx_v_E = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":535
+  /* "reedsolo\creedsolo.pyx":537
  *     # Forney algorithm: compute the magnitudes
  *     E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
  *     Xlength = len(X)             # <<<<<<<<<<<<<<
  *     for i, Xi in enumerate(X):
  * 
  */
-  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_X); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 535; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyList_GET_SIZE(__pyx_v_X); if (unlikely(__pyx_t_5 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 537; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_Xlength = __pyx_t_5;
 
-  /* "reedsolomon\creedsolo.pyx":536
+  /* "reedsolo\creedsolo.pyx":538
  *     E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
  *     Xlength = len(X)
  *     for i, Xi in enumerate(X):             # <<<<<<<<<<<<<<
@@ -11095,44 +11117,44 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   for (;;) {
     if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_COMPILING_IN_CPYTHON
-    __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_4); __pyx_t_5++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     #else
-    __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_Xi, __pyx_t_4);
     __pyx_t_4 = 0;
     __Pyx_INCREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
-    __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_int_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1);
     __pyx_t_1 = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":538
+    /* "reedsolo\creedsolo.pyx":540
  *     for i, Xi in enumerate(X):
  * 
  *         Xi_inv = gf_inverse(Xi)             # <<<<<<<<<<<<<<
  * 
  *         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
  */
-    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_Xi); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_v_Xi_inv = __pyx_f_11reedsolomon_9creedsolo_gf_inverse(__pyx_t_10, 0);
+    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_Xi); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 540; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_v_Xi_inv = __pyx_f_8reedsolo_9creedsolo_gf_inverse(__pyx_t_10, 0);
 
-    /* "reedsolomon\creedsolo.pyx":542
+    /* "reedsolo\creedsolo.pyx":544
  *         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
  *         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
  *         err_loc_prime_tmp = []             # <<<<<<<<<<<<<<
  *         for j in xrange(Xlength):
  *             if j != i:
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 542; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 544; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_XDECREF_SET(__pyx_v_err_loc_prime_tmp, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":543
+    /* "reedsolo\creedsolo.pyx":545
  *         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
  *         err_loc_prime_tmp = []
  *         for j in xrange(Xlength):             # <<<<<<<<<<<<<<
@@ -11143,42 +11165,42 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_7; __pyx_t_13+=1) {
       __pyx_v_j = __pyx_t_13;
 
-      /* "reedsolomon\creedsolo.pyx":544
+      /* "reedsolo\creedsolo.pyx":546
  *         err_loc_prime_tmp = []
  *         for j in xrange(Xlength):
  *             if j != i:             # <<<<<<<<<<<<<<
  *                 err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
  *         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
  */
-      __pyx_t_4 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 544; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_9 = PyObject_RichCompare(__pyx_t_4, __pyx_v_i, Py_NE); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 544; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyObject_RichCompare(__pyx_t_4, __pyx_v_i, Py_NE); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 544; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 546; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       if (__pyx_t_14) {
 
-        /* "reedsolomon\creedsolo.pyx":545
+        /* "reedsolo\creedsolo.pyx":547
  *         for j in xrange(Xlength):
  *             if j != i:
  *                 err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )             # <<<<<<<<<<<<<<
  *         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
  *         err_loc_prime = 1
  */
-        __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_X, __pyx_v_j, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+        __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_X, __pyx_v_j, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(__pyx_t_9 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_t_9); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_t_9); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_sub(1, __pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_v_Xi_inv, __pyx_t_10, 0), 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_sub(1, __pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_v_Xi_inv, __pyx_t_10, 0), 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_err_loc_prime_tmp, __pyx_t_9); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_err_loc_prime_tmp, __pyx_t_9); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 547; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         goto __pyx_L11;
       }
       __pyx_L11:;
     }
 
-    /* "reedsolomon\creedsolo.pyx":547
+    /* "reedsolo\creedsolo.pyx":549
  *                 err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
  *         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
  *         err_loc_prime = 1             # <<<<<<<<<<<<<<
@@ -11187,7 +11209,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
  */
     __pyx_v_err_loc_prime = 1;
 
-    /* "reedsolomon\creedsolo.pyx":548
+    /* "reedsolo\creedsolo.pyx":550
  *         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
  *         err_loc_prime = 1
  *         for coef in err_loc_prime_tmp:             # <<<<<<<<<<<<<<
@@ -11198,25 +11220,25 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     for (;;) {
       if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
       #if CYTHON_COMPILING_IN_CPYTHON
-      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 548; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       #else
-      __pyx_t_4 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 548; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       #endif
       __Pyx_XDECREF_SET(__pyx_v_coef, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":549
+      /* "reedsolo\creedsolo.pyx":551
  *         err_loc_prime = 1
  *         for coef in err_loc_prime_tmp:
  *             err_loc_prime = gf_mul(err_loc_prime, coef)             # <<<<<<<<<<<<<<
  *         # equivalent to: err_loc_prime = functools.reduce(gf_mul, err_loc_prime_tmp, 1)
  * 
  */
-      __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_coef); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 549; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_v_err_loc_prime = __pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_v_err_loc_prime, __pyx_t_10, 0);
+      __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_coef); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 551; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_v_err_loc_prime = __pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_v_err_loc_prime, __pyx_t_10, 0);
 
-      /* "reedsolomon\creedsolo.pyx":548
+      /* "reedsolo\creedsolo.pyx":550
  *         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
  *         err_loc_prime = 1
  *         for coef in err_loc_prime_tmp:             # <<<<<<<<<<<<<<
@@ -11226,18 +11248,18 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     }
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":555
+    /* "reedsolo\creedsolo.pyx":557
  *         # This is a more faithful translation of the theoretical equation contrary to the old forney method. Here it is exactly copy/pasted from the included presentation decoding_rs.pdf: Yl = omega(Xl.inverse()) / prod(1 - Xj*Xl.inverse()) for j in len(X) (in the paper it's for j in s, but it's useless when len(X) < s because we compute neutral terms 1 for nothing, and wrong when correcting more than s erasures or erasures+errors since it prevents computing all required terms).
  *         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.
  *         y = gf_poly_eval(err_eval[::-1], Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)             # <<<<<<<<<<<<<<
  *         y = gf_mul(gf_pow(Xi, 1-fcr), y) # adjust to fcr parameter
  * 
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_eval); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_eval); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyObject_GetItem(__pyx_v_err_eval, __pyx_slice__13); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_2 = PyObject_GetItem(__pyx_v_err_eval, __pyx_slice__13); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __Pyx_PyInt_From_unsigned_char(__pyx_v_Xi_inv); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_From_unsigned_char(__pyx_v_Xi_inv); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_15 = NULL;
     __pyx_t_7 = 0;
@@ -11251,7 +11273,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_16 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_16 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_16);
     if (__pyx_t_15) {
       __Pyx_GIVEREF(__pyx_t_15); PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_15); __pyx_t_15 = NULL;
@@ -11262,57 +11284,57 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
     PyTuple_SET_ITEM(__pyx_t_16, 1+__pyx_t_7, __pyx_t_8);
     __pyx_t_2 = 0;
     __pyx_t_8 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_16, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_16, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF_SET(__pyx_v_y, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":556
+    /* "reedsolo\creedsolo.pyx":558
  *         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.
  *         y = gf_poly_eval(err_eval[::-1], Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)
  *         y = gf_mul(gf_pow(Xi, 1-fcr), y) # adjust to fcr parameter             # <<<<<<<<<<<<<<
  * 
  *         # Compute the magnitude
  */
-    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_Xi); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_9 = PyNumber_Subtract(__pyx_int_1, __pyx_v_fcr); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = __Pyx_PyInt_As_unsigned_char(__pyx_v_Xi); if (unlikely((__pyx_t_10 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyNumber_Subtract(__pyx_int_1, __pyx_v_fcr); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_17 = __Pyx_PyInt_As_unsigned_char(__pyx_v_y); if (unlikely((__pyx_t_17 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_10, __pyx_t_11, 0), __pyx_t_17, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 556; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_17 = __Pyx_PyInt_As_unsigned_char(__pyx_v_y); if (unlikely((__pyx_t_17 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_10, __pyx_t_11, 0), __pyx_t_17, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 558; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF_SET(__pyx_v_y, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":559
+    /* "reedsolo\creedsolo.pyx":561
  * 
  *         # Compute the magnitude
  *         magnitude = gf_div(y, err_loc_prime) # magnitude value of the error, calculated by the Forney algorithm (an equation in fact): dividing the errata evaluator with the errata locator derivative gives us the errata magnitude (ie, value to repair) the ith symbol             # <<<<<<<<<<<<<<
  *         E[err_pos[i]] = magnitude # store the magnitude for this error into the magnitude polynomial
  * 
  */
-    __pyx_t_17 = __Pyx_PyInt_As_unsigned_char(__pyx_v_y); if (unlikely((__pyx_t_17 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 559; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_v_magnitude = __pyx_f_11reedsolomon_9creedsolo_gf_div(__pyx_t_17, __pyx_v_err_loc_prime, 0);
+    __pyx_t_17 = __Pyx_PyInt_As_unsigned_char(__pyx_v_y); if (unlikely((__pyx_t_17 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 561; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_v_magnitude = __pyx_f_8reedsolo_9creedsolo_gf_div(__pyx_t_17, __pyx_v_err_loc_prime, 0);
 
-    /* "reedsolomon\creedsolo.pyx":560
+    /* "reedsolo\creedsolo.pyx":562
  *         # Compute the magnitude
  *         magnitude = gf_div(y, err_loc_prime) # magnitude value of the error, calculated by the Forney algorithm (an equation in fact): dividing the errata evaluator with the errata locator derivative gives us the errata magnitude (ie, value to repair) the ith symbol
  *         E[err_pos[i]] = magnitude # store the magnitude for this error into the magnitude polynomial             # <<<<<<<<<<<<<<
  * 
  *     # Apply the correction of values to get our message corrected! (note that the ecc bytes also gets corrected!)
  */
-    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_v_magnitude); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_v_magnitude); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyObject_GetItem(__pyx_v_err_pos, __pyx_v_i); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = PyObject_GetItem(__pyx_v_err_pos, __pyx_v_i); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
-    if (unlikely(PyObject_SetItem(__pyx_v_E, __pyx_t_4, __pyx_t_9) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 560; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(PyObject_SetItem(__pyx_v_E, __pyx_t_4, __pyx_t_9) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 562; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":536
+    /* "reedsolo\creedsolo.pyx":538
  *     E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
  *     Xlength = len(X)
  *     for i, Xi in enumerate(X):             # <<<<<<<<<<<<<<
@@ -11323,14 +11345,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":564
+  /* "reedsolo\creedsolo.pyx":566
  *     # Apply the correction of values to get our message corrected! (note that the ecc bytes also gets corrected!)
  *     # (this isn't the Forney algorithm, we just apply the result of decoding here)
  *     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.             # <<<<<<<<<<<<<<
  *     return msg
  * 
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_9 = NULL;
   __pyx_t_5 = 0;
@@ -11344,7 +11366,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
       __pyx_t_5 = 1;
     }
   }
-  __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (__pyx_t_9) {
     __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -11355,14 +11377,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __Pyx_INCREF(__pyx_v_E);
   __Pyx_GIVEREF(__pyx_v_E);
   PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_5, __pyx_v_E);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF_SET(__pyx_v_msg, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":565
+  /* "reedsolo\creedsolo.pyx":567
  *     # (this isn't the Forney algorithm, we just apply the result of decoding here)
  *     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
  *     return msg             # <<<<<<<<<<<<<<
@@ -11374,12 +11396,12 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __pyx_r = __pyx_v_msg;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":519
+  /* "reedsolo\creedsolo.pyx":519
  *     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
  * 
  * def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata             # <<<<<<<<<<<<<<
- *     msg = bytearray(msg_in)
- *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
+ *     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+ *     global field_charac
  */
 
   /* function exit code */
@@ -11392,7 +11414,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_15);
   __Pyx_XDECREF(__pyx_t_16);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_errata", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_errata", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_msg);
@@ -11413,7 +11435,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":567
+/* "reedsolo\creedsolo.pyx":569
  *     return msg
  * 
  * def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):             # <<<<<<<<<<<<<<
@@ -11422,10 +11444,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_52rs_correct_errata(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_54rs_find_error_locator[] = "Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_55rs_find_error_locator = {"rs_find_error_locator", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_54rs_find_error_locator};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_55rs_find_error_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_54rs_find_error_locator[] = "Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_55rs_find_error_locator = {"rs_find_error_locator", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_55rs_find_error_locator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_54rs_find_error_locator};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_55rs_find_error_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_synd = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_erase_loc = 0;
@@ -11460,7 +11482,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsym)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_find_error_locator", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_find_error_locator", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -11474,7 +11496,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObj
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_error_locator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_error_locator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -11493,20 +11515,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObj
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_find_error_locator", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_find_error_locator", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_error_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_error_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(__pyx_self, __pyx_v_synd, __pyx_v_nsym, __pyx_v_erase_loc, __pyx_v_erase_count);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_54rs_find_error_locator(__pyx_self, __pyx_v_synd, __pyx_v_nsym, __pyx_v_erase_loc, __pyx_v_erase_count);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":621
+/* "reedsolo\creedsolo.pyx":623
  * 
  *     # Check if the result is correct, that there's not too many errors to correct
  *     err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size             # <<<<<<<<<<<<<<
@@ -11515,9 +11537,9 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_55rs_find_error_locator(PyObj
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21rs_find_error_locator_lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_21rs_find_error_locator_lambda1 = {"lambda1", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_21rs_find_error_locator_lambda1, METH_O, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_21rs_find_error_locator_lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_21rs_find_error_locator_lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_21rs_find_error_locator_lambda1 = {"lambda1", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_21rs_find_error_locator_lambda1, METH_O, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_21rs_find_error_locator_lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("lambda1 (wrapper)", 0);
@@ -11537,7 +11559,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda1", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_x, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_x, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
@@ -11545,7 +11567,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_error_locator.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_error_locator.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -11553,7 +11575,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":567
+/* "reedsolo\creedsolo.pyx":569
  *     return msg
  * 
  * def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):             # <<<<<<<<<<<<<<
@@ -11561,7 +11583,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
  *     # The idea is that BM will iteratively estimate the error locator polynomial.
  */
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_nsym, PyObject *__pyx_v_erase_loc, PyObject *__pyx_v_erase_count) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_54rs_find_error_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_nsym, PyObject *__pyx_v_erase_loc, PyObject *__pyx_v_erase_count) {
   PyObject *__pyx_v_err_loc = NULL;
   PyObject *__pyx_v_old_loc = NULL;
   PyObject *__pyx_v_synd_shift = NULL;
@@ -11583,8 +11605,8 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   PyObject *(*__pyx_t_8)(PyObject *);
   Py_ssize_t __pyx_t_9;
   PyObject *(*__pyx_t_10)(PyObject *);
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_11;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_12;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_11;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_12;
   PyObject *__pyx_t_13 = NULL;
   Py_ssize_t __pyx_t_14;
   PyObject *__pyx_t_15 = NULL;
@@ -11593,24 +11615,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_find_error_locator", 0);
 
-  /* "reedsolomon\creedsolo.pyx":574
+  /* "reedsolo\creedsolo.pyx":576
  * 
  *     # Init the polynomials
  *     if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial             # <<<<<<<<<<<<<<
  *         err_loc = bytearray(erase_loc)
  *         old_loc = bytearray(erase_loc)
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_erase_loc); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_erase_loc); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":575
+    /* "reedsolo\creedsolo.pyx":577
  *     # Init the polynomials
  *     if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
  *         err_loc = bytearray(erase_loc)             # <<<<<<<<<<<<<<
  *         old_loc = bytearray(erase_loc)
  *     else:
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_4 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -11623,16 +11645,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_erase_loc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_erase_loc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_erase_loc);
       __Pyx_GIVEREF(__pyx_v_erase_loc);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_erase_loc);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 575; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 577; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -11640,14 +11662,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     __pyx_v_err_loc = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":576
+    /* "reedsolo\creedsolo.pyx":578
  *     if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
  *         err_loc = bytearray(erase_loc)
  *         old_loc = bytearray(erase_loc)             # <<<<<<<<<<<<<<
  *     else:
  *         err_loc = bytearray([1]) # This is the main variable we want to fill, also called Sigma in other notations or more formally the errors/errata locator polynomial.
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -11660,16 +11682,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_erase_loc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_erase_loc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_erase_loc);
       __Pyx_GIVEREF(__pyx_v_erase_loc);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_erase_loc);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 576; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -11680,16 +11702,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":578
+    /* "reedsolo\creedsolo.pyx":580
  *         old_loc = bytearray(erase_loc)
  *     else:
  *         err_loc = bytearray([1]) # This is the main variable we want to fill, also called Sigma in other notations or more formally the errors/errata locator polynomial.             # <<<<<<<<<<<<<<
  *         old_loc = bytearray([1]) # BM is an iterative algorithm, and we need the errata locator polynomial of the previous iteration in order to update other necessary variables.
  *     #L = 0 # update flag variable, not needed here because we use an alternative equivalent way of checking if update is needed (but using the flag could potentially be faster depending on if using length(list) is taking linear time in your language, here in Python it's constant so it's as fast.
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 580; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 580; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -11705,17 +11727,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 580; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 580; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 578; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 580; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
@@ -11723,16 +11745,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     __pyx_v_err_loc = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":579
+    /* "reedsolo\creedsolo.pyx":581
  *     else:
  *         err_loc = bytearray([1]) # This is the main variable we want to fill, also called Sigma in other notations or more formally the errors/errata locator polynomial.
  *         old_loc = bytearray([1]) # BM is an iterative algorithm, and we need the errata locator polynomial of the previous iteration in order to update other necessary variables.             # <<<<<<<<<<<<<<
  *     #L = 0 # update flag variable, not needed here because we use an alternative equivalent way of checking if update is needed (but using the flag could potentially be faster depending on if using length(list) is taking linear time in your language, here in Python it's constant so it's as fast.
  * 
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 579; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 579; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -11748,17 +11770,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 579; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 579; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_GIVEREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_6);
       __pyx_t_6 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 579; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -11768,7 +11790,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":584
+  /* "reedsolo\creedsolo.pyx":586
  *     # Fix the syndrome shifting: when computing the syndrome, some implementations may prepend a 0 coefficient for the lowest degree term (the constant). This is a case of syndrome shifting, thus the syndrome will be bigger than the number of ecc symbols (I don't know what purpose serves this shifting). If that's the case, then we need to account for the syndrome shifting when we use the syndrome such as inside BM, by skipping those prepended coefficients.
  *     # Another way to detect the shifting is to detect the 0 coefficients: by definition, a syndrome does not contain any 0 coefficient (except if there are no errors/erasures, in this case they are all 0). This however doesn't work with the modified Forney syndrome, which set to 0 the coefficients corresponding to erasures, leaving only the coefficients corresponding to errors.
  *     synd_shift = 0             # <<<<<<<<<<<<<<
@@ -11778,25 +11800,25 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_synd_shift = __pyx_int_0;
 
-  /* "reedsolomon\creedsolo.pyx":585
+  /* "reedsolo\creedsolo.pyx":587
  *     # Another way to detect the shifting is to detect the 0 coefficients: by definition, a syndrome does not contain any 0 coefficient (except if there are no errors/erasures, in this case they are all 0). This however doesn't work with the modified Forney syndrome, which set to 0 the coefficients corresponding to erasures, leaving only the coefficients corresponding to errors.
  *     synd_shift = 0
  *     if len(synd) > nsym: synd_shift = len(synd) - nsym             # <<<<<<<<<<<<<<
  * 
  *     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).
  */
-  __pyx_t_7 = PyObject_Length(__pyx_v_synd); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyObject_Length(__pyx_v_synd); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_1) {
-    __pyx_t_7 = PyObject_Length(__pyx_v_synd); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyObject_Length(__pyx_v_synd); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_3, __pyx_v_nsym); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 585; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_3, __pyx_v_nsym); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_synd_shift, __pyx_t_2);
@@ -11805,30 +11827,30 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   }
   __pyx_L4:;
 
-  /* "reedsolomon\creedsolo.pyx":587
+  /* "reedsolo\creedsolo.pyx":589
  *     if len(synd) > nsym: synd_shift = len(synd) - nsym
  * 
  *     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).             # <<<<<<<<<<<<<<
  *         if erase_loc: # if an erasures locator polynomial was provided to init the errors locator polynomial, then we must skip the FIRST erase_count iterations (not the last iterations, this is very important!)
  *             K = erase_count+i+synd_shift
  */
-  __pyx_t_2 = PyNumber_Subtract(__pyx_v_nsym, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Subtract(__pyx_v_nsym, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
     __pyx_t_3 = __pyx_t_2; __Pyx_INCREF(__pyx_t_3); __pyx_t_7 = 0;
     __pyx_t_8 = NULL;
   } else {
-    __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_8 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   for (;;) {
@@ -11836,17 +11858,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_2); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_2); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_2); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_2); __pyx_t_7++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -11856,7 +11878,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -11865,26 +11887,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":588
+    /* "reedsolo\creedsolo.pyx":590
  * 
  *     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).
  *         if erase_loc: # if an erasures locator polynomial was provided to init the errors locator polynomial, then we must skip the FIRST erase_count iterations (not the last iterations, this is very important!)             # <<<<<<<<<<<<<<
  *             K = erase_count+i+synd_shift
  *         else: # if erasures locator is not provided, then either there's no erasures to account or we use the Forney syndromes, so we don't need to use erase_count nor erase_loc (the erasures have been trimmed out of the Forney syndromes).
  */
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_erase_loc); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 588; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_erase_loc); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 590; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_1) {
 
-      /* "reedsolomon\creedsolo.pyx":589
+      /* "reedsolo\creedsolo.pyx":591
  *     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).
  *         if erase_loc: # if an erasures locator polynomial was provided to init the errors locator polynomial, then we must skip the FIRST erase_count iterations (not the last iterations, this is very important!)
  *             K = erase_count+i+synd_shift             # <<<<<<<<<<<<<<
  *         else: # if erasures locator is not provided, then either there's no erasures to account or we use the Forney syndromes, so we don't need to use erase_count nor erase_loc (the erasures have been trimmed out of the Forney syndromes).
  *             K = i+synd_shift
  */
-      __pyx_t_2 = PyNumber_Add(__pyx_v_erase_count, __pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyNumber_Add(__pyx_v_erase_count, __pyx_v_i); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 591; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_v_synd_shift); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 589; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_v_synd_shift); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 591; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF_SET(__pyx_v_K, __pyx_t_5);
@@ -11893,43 +11915,43 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     }
     /*else*/ {
 
-      /* "reedsolomon\creedsolo.pyx":591
+      /* "reedsolo\creedsolo.pyx":593
  *             K = erase_count+i+synd_shift
  *         else: # if erasures locator is not provided, then either there's no erasures to account or we use the Forney syndromes, so we don't need to use erase_count nor erase_loc (the erasures have been trimmed out of the Forney syndromes).
  *             K = i+synd_shift             # <<<<<<<<<<<<<<
  * 
  *         # Compute the discrepancy Delta
  */
-      __pyx_t_5 = PyNumber_Add(__pyx_v_i, __pyx_v_synd_shift); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 591; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_Add(__pyx_v_i, __pyx_v_synd_shift); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 593; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_XDECREF_SET(__pyx_v_K, __pyx_t_5);
       __pyx_t_5 = 0;
     }
     __pyx_L7:;
 
-    /* "reedsolomon\creedsolo.pyx":598
+    /* "reedsolo\creedsolo.pyx":600
  *         # But this can be optimized: since we only need the Kth element, we don't need to compute the polynomial multiplication for any other element but the Kth. Thus to optimize, we compute the polymul only at the item we need, skipping the rest (avoiding a nested loop, thus we are linear time instead of quadratic).
  *         # This optimization is actually described in several figures of the book "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press.
  *         delta = synd[K]             # <<<<<<<<<<<<<<
  *         for j in xrange(1, len(err_loc)):
  *             delta ^= gf_mul(err_loc[-(j+1)], synd[K - j]) # delta is also called discrepancy. Here we do a partial polynomial multiplication (ie, we compute the polynomial multiplication only for the term of degree K). Should be equivalent to brownanrs.polynomial.mul_at().
  */
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_synd, __pyx_v_K); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 598; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = PyObject_GetItem(__pyx_v_synd, __pyx_v_K); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_XDECREF_SET(__pyx_v_delta, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":599
+    /* "reedsolo\creedsolo.pyx":601
  *         # This optimization is actually described in several figures of the book "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press.
  *         delta = synd[K]
  *         for j in xrange(1, len(err_loc)):             # <<<<<<<<<<<<<<
  *             delta ^= gf_mul(err_loc[-(j+1)], synd[K - j]) # delta is also called discrepancy. Here we do a partial polynomial multiplication (ie, we compute the polynomial multiplication only for the term of degree K). Should be equivalent to brownanrs.polynomial.mul_at().
  *         #print "delta", K, delta, list(gf_poly_mul(err_loc[::-1], synd)) # debugline
  */
-    __pyx_t_9 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_9); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -11937,16 +11959,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_2, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_2, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
       __pyx_t_2 = __pyx_t_5; __Pyx_INCREF(__pyx_t_2); __pyx_t_9 = 0;
       __pyx_t_10 = NULL;
     } else {
-      __pyx_t_9 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_10 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     for (;;) {
@@ -11954,17 +11976,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
         if (likely(PyList_CheckExact(__pyx_t_2))) {
           if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -11974,7 +11996,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 599; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -11983,39 +12005,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":600
+      /* "reedsolo\creedsolo.pyx":602
  *         delta = synd[K]
  *         for j in xrange(1, len(err_loc)):
  *             delta ^= gf_mul(err_loc[-(j+1)], synd[K - j]) # delta is also called discrepancy. Here we do a partial polynomial multiplication (ie, we compute the polynomial multiplication only for the term of degree K). Should be equivalent to brownanrs.polynomial.mul_at().             # <<<<<<<<<<<<<<
  *         #print "delta", K, delta, list(gf_poly_mul(err_loc[::-1], synd)) # debugline
  * 
  */
-      __pyx_t_5 = PyNumber_Add(__pyx_v_j, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_Add(__pyx_v_j, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = PyObject_GetItem(__pyx_v_err_loc, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_5 = PyObject_GetItem(__pyx_v_err_loc, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_11 = __Pyx_PyInt_As_unsigned_char(__pyx_t_5); if (unlikely((__pyx_t_11 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_11 = __Pyx_PyInt_As_unsigned_char(__pyx_t_5); if (unlikely((__pyx_t_11 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = PyNumber_Subtract(__pyx_v_K, __pyx_v_j); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_Subtract(__pyx_v_K, __pyx_v_j); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyObject_GetItem(__pyx_v_synd, __pyx_t_5); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_6 = PyObject_GetItem(__pyx_v_synd, __pyx_t_5); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_12 = __Pyx_PyInt_As_unsigned_char(__pyx_t_6); if (unlikely((__pyx_t_12 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __Pyx_PyInt_As_unsigned_char(__pyx_t_6); if (unlikely((__pyx_t_12 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_t_11, __pyx_t_12, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_t_11, __pyx_t_12, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = PyNumber_InPlaceXor(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 600; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_InPlaceXor(__pyx_v_delta, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 602; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF_SET(__pyx_v_delta, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":599
+      /* "reedsolo\creedsolo.pyx":601
  *         # This optimization is actually described in several figures of the book "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press.
  *         delta = synd[K]
  *         for j in xrange(1, len(err_loc)):             # <<<<<<<<<<<<<<
@@ -12025,16 +12047,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":604
+    /* "reedsolo\creedsolo.pyx":606
  * 
  *         # Shift polynomials to compute the next degree
  *         old_loc = old_loc + bytearray([0])             # <<<<<<<<<<<<<<
  * 
  *         # Iteratively estimate the errata locator and evaluator polynomials
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_GIVEREF(__pyx_int_0);
@@ -12050,59 +12072,59 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_GIVEREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_6);
       __pyx_t_6 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_13, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_v_old_loc, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 604; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyNumber_Add(__pyx_v_old_loc, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 606; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF_SET(__pyx_v_old_loc, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":607
+    /* "reedsolo\creedsolo.pyx":609
  * 
  *         # Iteratively estimate the errata locator and evaluator polynomials
  *         if delta != 0: # Update only if there's a discrepancy             # <<<<<<<<<<<<<<
  *             if len(old_loc) > len(err_loc): # Rule B (rule A is implicitly defined because rule A just says that we skip any modification for this iteration)
  *             #if 2*L <= K+erase_count: # equivalent to len(old_loc) > len(err_loc), as long as L is correctly computed
  */
-    __pyx_t_5 = PyObject_RichCompare(__pyx_v_delta, __pyx_int_0, Py_NE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyObject_RichCompare(__pyx_v_delta, __pyx_int_0, Py_NE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 609; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 609; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_1) {
 
-      /* "reedsolomon\creedsolo.pyx":608
+      /* "reedsolo\creedsolo.pyx":610
  *         # Iteratively estimate the errata locator and evaluator polynomials
  *         if delta != 0: # Update only if there's a discrepancy
  *             if len(old_loc) > len(err_loc): # Rule B (rule A is implicitly defined because rule A just says that we skip any modification for this iteration)             # <<<<<<<<<<<<<<
  *             #if 2*L <= K+erase_count: # equivalent to len(old_loc) > len(err_loc), as long as L is correctly computed
  *                 # Computing errata locator polynomial Sigma
  */
-      __pyx_t_9 = PyObject_Length(__pyx_v_old_loc); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_14 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_14 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 608; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyObject_Length(__pyx_v_old_loc); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 610; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_14 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 610; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __pyx_t_1 = ((__pyx_t_9 > __pyx_t_14) != 0);
       if (__pyx_t_1) {
 
-        /* "reedsolomon\creedsolo.pyx":611
+        /* "reedsolo\creedsolo.pyx":613
  *             #if 2*L <= K+erase_count: # equivalent to len(old_loc) > len(err_loc), as long as L is correctly computed
  *                 # Computing errata locator polynomial Sigma
  *                 new_loc = gf_poly_scale(old_loc, delta)             # <<<<<<<<<<<<<<
  *                 old_loc = gf_poly_scale(err_loc, gf_inverse(delta)) # effectively we are doing err_loc * 1/delta = err_loc // delta
  *                 err_loc = new_loc
  */
-        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 611; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         __pyx_t_13 = NULL;
         __pyx_t_14 = 0;
@@ -12116,7 +12138,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
             __pyx_t_14 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 611; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_13) {
           __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -12127,24 +12149,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
         __Pyx_INCREF(__pyx_v_delta);
         __Pyx_GIVEREF(__pyx_v_delta);
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_14, __pyx_v_delta);
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 611; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 613; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_XDECREF_SET(__pyx_v_new_loc, __pyx_t_5);
         __pyx_t_5 = 0;
 
-        /* "reedsolomon\creedsolo.pyx":612
+        /* "reedsolo\creedsolo.pyx":614
  *                 # Computing errata locator polynomial Sigma
  *                 new_loc = gf_poly_scale(old_loc, delta)
  *                 old_loc = gf_poly_scale(err_loc, gf_inverse(delta)) # effectively we are doing err_loc * 1/delta = err_loc // delta             # <<<<<<<<<<<<<<
  *                 err_loc = new_loc
  *                 # Update the update flag
  */
-        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_12 = __Pyx_PyInt_As_unsigned_char(__pyx_v_delta); if (unlikely((__pyx_t_12 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_inverse(__pyx_t_12, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = __Pyx_PyInt_As_unsigned_char(__pyx_v_delta); if (unlikely((__pyx_t_12 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_inverse(__pyx_t_12, 0)); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_13 = NULL;
         __pyx_t_14 = 0;
@@ -12158,7 +12180,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
             __pyx_t_14 = 1;
           }
         }
-        __pyx_t_4 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         if (__pyx_t_13) {
           __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -12169,14 +12191,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
         __Pyx_GIVEREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_14, __pyx_t_6);
         __pyx_t_6 = 0;
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 612; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF_SET(__pyx_v_old_loc, __pyx_t_5);
         __pyx_t_5 = 0;
 
-        /* "reedsolomon\creedsolo.pyx":613
+        /* "reedsolo\creedsolo.pyx":615
  *                 new_loc = gf_poly_scale(old_loc, delta)
  *                 old_loc = gf_poly_scale(err_loc, gf_inverse(delta)) # effectively we are doing err_loc * 1/delta = err_loc // delta
  *                 err_loc = new_loc             # <<<<<<<<<<<<<<
@@ -12189,16 +12211,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       }
       __pyx_L11:;
 
-      /* "reedsolomon\creedsolo.pyx":618
+      /* "reedsolo\creedsolo.pyx":620
  * 
  *             # Update with the discrepancy
  *             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))             # <<<<<<<<<<<<<<
  * 
  *     # Check if the result is correct, that there's not too many errors to correct
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_scale); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_13 = NULL;
       __pyx_t_14 = 0;
@@ -12212,7 +12234,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
           __pyx_t_14 = 1;
         }
       }
-      __pyx_t_15 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_15 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_15);
       if (__pyx_t_13) {
         __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -12223,7 +12245,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       __Pyx_INCREF(__pyx_v_delta);
       __Pyx_GIVEREF(__pyx_v_delta);
       PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_14, __pyx_v_delta);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_15, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_15, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -12239,7 +12261,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
           __pyx_t_14 = 1;
         }
       }
-      __pyx_t_15 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_15 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_15);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -12250,7 +12272,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_15, 1+__pyx_t_14, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 618; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_15, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -12260,7 +12282,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
     }
     __pyx_L10:;
 
-    /* "reedsolomon\creedsolo.pyx":587
+    /* "reedsolo\creedsolo.pyx":589
  *     if len(synd) > nsym: synd_shift = len(synd) - nsym
  * 
  *     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).             # <<<<<<<<<<<<<<
@@ -12270,19 +12292,19 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":621
+  /* "reedsolo\creedsolo.pyx":623
  * 
  *     # Check if the result is correct, that there's not too many errors to correct
  *     err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size             # <<<<<<<<<<<<<<
  *     errs = len(err_loc) - 1
  *     if (errs-erase_count) * 2 + erase_count > nsym:
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_itertools); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_itertools); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_dropwhile); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_dropwhile); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_21rs_find_error_locator_lambda1, 0, __pyx_n_s_rs_find_error_locator_locals_lam, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_21rs_find_error_locator_lambda1, 0, __pyx_n_s_rs_find_error_locator_locals_lam, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_15 = NULL;
   __pyx_t_7 = 0;
@@ -12296,7 +12318,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
       __pyx_t_7 = 1;
     }
   }
-  __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (__pyx_t_15) {
     __Pyx_GIVEREF(__pyx_t_15); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_15); __pyx_t_15 = NULL;
@@ -12307,68 +12329,68 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   __Pyx_GIVEREF(__pyx_v_err_loc);
   PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_7, __pyx_v_err_loc);
   __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 621; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF_SET(__pyx_v_err_loc, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":622
+  /* "reedsolo\creedsolo.pyx":624
  *     # Check if the result is correct, that there's not too many errors to correct
  *     err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size
  *     errs = len(err_loc) - 1             # <<<<<<<<<<<<<<
  *     if (errs-erase_count) * 2 + erase_count > nsym:
  *         raise ReedSolomonError("Too many errors to correct")
  */
-  __pyx_t_7 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = PyInt_FromSsize_t((__pyx_t_7 - 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_7 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyInt_FromSsize_t((__pyx_t_7 - 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_errs = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":623
+  /* "reedsolo\creedsolo.pyx":625
  *     err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size
  *     errs = len(err_loc) - 1
  *     if (errs-erase_count) * 2 + erase_count > nsym:             # <<<<<<<<<<<<<<
  *         raise ReedSolomonError("Too many errors to correct")
  * 
  */
-  __pyx_t_2 = PyNumber_Subtract(__pyx_v_errs, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Subtract(__pyx_v_errs, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 625; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_2, __pyx_int_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_2, __pyx_int_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 625; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_erase_count); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 625; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 625; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 625; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (__pyx_t_1) {
 
-    /* "reedsolomon\creedsolo.pyx":624
+    /* "reedsolo\creedsolo.pyx":626
  *     errs = len(err_loc) - 1
  *     if (errs-erase_count) * 2 + erase_count > nsym:
  *         raise ReedSolomonError("Too many errors to correct")             # <<<<<<<<<<<<<<
  * 
  *     return err_loc
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":626
+  /* "reedsolo\creedsolo.pyx":628
  *         raise ReedSolomonError("Too many errors to correct")
  * 
  *     return err_loc             # <<<<<<<<<<<<<<
@@ -12380,7 +12402,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   __pyx_r = __pyx_v_err_loc;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":567
+  /* "reedsolo\creedsolo.pyx":569
  *     return msg
  * 
  * def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):             # <<<<<<<<<<<<<<
@@ -12397,7 +12419,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_13);
   __Pyx_XDECREF(__pyx_t_15);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_error_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_error_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_err_loc);
@@ -12414,7 +12436,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":628
+/* "reedsolo\creedsolo.pyx":630
  *     return err_loc
  * 
  * def rs_find_errata_locator(e_pos, generator=2):             # <<<<<<<<<<<<<<
@@ -12423,10 +12445,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_54rs_find_error_locator(CYTHO
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_57rs_find_errata_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_56rs_find_errata_locator[] = "Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: \"hello worldxxxxxxxxx\" is tampered to \"h_ll_ worldxxxxxxxxx\" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_57rs_find_errata_locator = {"rs_find_errata_locator", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_57rs_find_errata_locator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_56rs_find_errata_locator};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_57rs_find_errata_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_57rs_find_errata_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_56rs_find_errata_locator[] = "Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: \"hello worldxxxxxxxxx\" is tampered to \"h_ll_ worldxxxxxxxxx\" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_57rs_find_errata_locator = {"rs_find_errata_locator", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_57rs_find_errata_locator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_56rs_find_errata_locator};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_57rs_find_errata_locator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_e_pos = 0;
   PyObject *__pyx_v_generator = 0;
   int __pyx_lineno = 0;
@@ -12460,7 +12482,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_57rs_find_errata_locator(PyOb
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_errata_locator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_errata_locator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -12475,20 +12497,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_57rs_find_errata_locator(PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_find_errata_locator", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_find_errata_locator", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_errata_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_errata_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(__pyx_self, __pyx_v_e_pos, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_56rs_find_errata_locator(__pyx_self, __pyx_v_e_pos, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_e_pos, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_56rs_find_errata_locator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_e_pos, PyObject *__pyx_v_generator) {
   PyObject *__pyx_v_e_loc = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_r = NULL;
@@ -12499,7 +12521,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_7;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_7;
   int __pyx_t_8;
   PyObject *__pyx_t_9 = NULL;
   PyObject *__pyx_t_10 = NULL;
@@ -12510,14 +12532,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_find_errata_locator", 0);
 
-  /* "reedsolomon\creedsolo.pyx":631
+  /* "reedsolo\creedsolo.pyx":633
  *     '''Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: "hello worldxxxxxxxxx" is tampered to "h_ll_ worldxxxxxxxxx" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.'''
  *     # See: http://ocw.usu.edu/Electrical_and_Computer_Engineering/Error_Control_Coding/lecture7.pdf and Blahut, Richard E. "Transform techniques for error control codes." IBM Journal of Research and development 23.3 (1979): 299-315. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.600&rep=rep1&type=pdf and also a MatLab implementation here: http://www.mathworks.com/matlabcentral/fileexchange/23567-reed-solomon-errors-and-erasures-decoder/content//RS_E_E_DEC.m
  *     e_loc = [1] # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term             # <<<<<<<<<<<<<<
  *     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
  *     for i in e_pos:
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
@@ -12525,7 +12547,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   __pyx_v_e_loc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":633
+  /* "reedsolo\creedsolo.pyx":635
  *     e_loc = [1] # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term
  *     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
  *     for i in e_pos:             # <<<<<<<<<<<<<<
@@ -12536,26 +12558,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
     __pyx_t_1 = __pyx_v_e_pos; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_e_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_e_pos); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -12565,7 +12587,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -12574,25 +12596,25 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":634
+    /* "reedsolo\creedsolo.pyx":636
  *     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
  *     for i in e_pos:
  *         e_loc = gf_poly_mul( e_loc, gf_poly_add([1], [gf_pow(generator, i), 0]) )             # <<<<<<<<<<<<<<
  *     return e_loc
  * 
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_add); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
     PyList_SET_ITEM(__pyx_t_6, 0, __pyx_int_1);
-    __pyx_t_7 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_7 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_i); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_7, __pyx_t_8, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_7 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_i); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_7, __pyx_t_8, 0)); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = PyList_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = PyList_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GIVEREF(__pyx_t_9);
     PyList_SET_ITEM(__pyx_t_10, 0, __pyx_t_9);
@@ -12612,7 +12634,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
         __pyx_t_11 = 1;
       }
     }
-    __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
     if (__pyx_t_9) {
       __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -12623,17 +12645,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
     PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_t_10);
     __pyx_t_6 = 0;
     __pyx_t_10 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(__pyx_v_e_loc, __pyx_t_4, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __pyx_f_8reedsolo_9creedsolo_gf_poly_mul(__pyx_v_e_loc, __pyx_t_4, 0); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF_SET(__pyx_v_e_loc, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":633
+    /* "reedsolo\creedsolo.pyx":635
  *     e_loc = [1] # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term
  *     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
  *     for i in e_pos:             # <<<<<<<<<<<<<<
@@ -12643,7 +12665,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":635
+  /* "reedsolo\creedsolo.pyx":637
  *     for i in e_pos:
  *         e_loc = gf_poly_mul( e_loc, gf_poly_add([1], [gf_pow(generator, i), 0]) )
  *     return e_loc             # <<<<<<<<<<<<<<
@@ -12655,7 +12677,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   __pyx_r = __pyx_v_e_loc;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":628
+  /* "reedsolo\creedsolo.pyx":630
  *     return err_loc
  * 
  * def rs_find_errata_locator(e_pos, generator=2):             # <<<<<<<<<<<<<<
@@ -12672,7 +12694,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_errata_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_errata_locator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_e_loc);
@@ -12682,7 +12704,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":637
+/* "reedsolo\creedsolo.pyx":639
  *     return e_loc
  * 
  * def rs_find_error_evaluator(synd, err_loc, nsym):             # <<<<<<<<<<<<<<
@@ -12691,10 +12713,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_56rs_find_errata_locator(CYTH
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_59rs_find_error_evaluator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_58rs_find_error_evaluator[] = "Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_59rs_find_error_evaluator = {"rs_find_error_evaluator", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_59rs_find_error_evaluator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_58rs_find_error_evaluator};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_59rs_find_error_evaluator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_59rs_find_error_evaluator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_58rs_find_error_evaluator[] = "Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_59rs_find_error_evaluator = {"rs_find_error_evaluator", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_59rs_find_error_evaluator, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_58rs_find_error_evaluator};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_59rs_find_error_evaluator(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_synd = 0;
   PyObject *__pyx_v_err_loc = 0;
   PyObject *__pyx_v_nsym = 0;
@@ -12725,16 +12747,16 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_59rs_find_error_evaluator(PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_err_loc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsym)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_error_evaluator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_error_evaluator") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -12749,20 +12771,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_59rs_find_error_evaluator(PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_find_error_evaluator", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_error_evaluator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_error_evaluator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(__pyx_self, __pyx_v_synd, __pyx_v_err_loc, __pyx_v_nsym);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_58rs_find_error_evaluator(__pyx_self, __pyx_v_synd, __pyx_v_err_loc, __pyx_v_nsym);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nsym) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_58rs_find_error_evaluator(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nsym) {
   CYTHON_UNUSED PyObject *__pyx_v__ = NULL;
   PyObject *__pyx_v_remainder = NULL;
   PyObject *__pyx_r = NULL;
@@ -12780,36 +12802,36 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_find_error_evaluator", 0);
 
-  /* "reedsolomon\creedsolo.pyx":640
+  /* "reedsolo\creedsolo.pyx":642
  *     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
  *     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
  *     _, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), ([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length             # <<<<<<<<<<<<<<
  * 
  *     # Faster way that is equivalent
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_div); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_div); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __pyx_f_11reedsolomon_9creedsolo_gf_poly_mul(__pyx_v_synd, __pyx_v_err_loc, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_f_8reedsolo_9creedsolo_gf_poly_mul(__pyx_v_synd, __pyx_v_err_loc, 0); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
   PyList_SET_ITEM(__pyx_t_4, 0, __pyx_int_1);
-  __pyx_t_5 = PyNumber_Add(__pyx_v_nsym, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyNumber_Add(__pyx_v_nsym, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
   PyList_SET_ITEM(__pyx_t_6, 0, __pyx_int_0);
-  { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_temp)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  { PyObject* __pyx_temp = PyNumber_InPlaceMultiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_temp)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_temp);
     __Pyx_DECREF(__pyx_t_6);
     __pyx_t_6 = __pyx_temp;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_Add(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyNumber_Add(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -12825,7 +12847,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
       __pyx_t_7 = 1;
     }
   }
-  __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (__pyx_t_6) {
     __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -12836,7 +12858,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_7, __pyx_t_5);
   __pyx_t_3 = 0;
   __pyx_t_5 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -12850,7 +12872,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -12863,15 +12885,15 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_4);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = Py_TYPE(__pyx_t_5)->tp_iternext;
@@ -12879,7 +12901,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
     __Pyx_GOTREF(__pyx_t_2);
     index = 1; __pyx_t_4 = __pyx_t_8(__pyx_t_5); if (unlikely(!__pyx_t_4)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_5), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_8(__pyx_t_5), 2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_8 = NULL;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L4_unpacking_done;
@@ -12887,7 +12909,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_8 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 642; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_L4_unpacking_done:;
   }
   __pyx_v__ = __pyx_t_2;
@@ -12895,7 +12917,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   __pyx_v_remainder = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":646
+  /* "reedsolo\creedsolo.pyx":648
  *     #remainder = remainder[len(remainder)-(nsym+1):] # then divide by a polynomial of the length we want, which is equivalent to slicing the list (which represents the polynomial)
  * 
  *     return remainder             # <<<<<<<<<<<<<<
@@ -12907,7 +12929,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   __pyx_r = __pyx_v_remainder;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":637
+  /* "reedsolo\creedsolo.pyx":639
  *     return e_loc
  * 
  * def rs_find_error_evaluator(synd, err_loc, nsym):             # <<<<<<<<<<<<<<
@@ -12923,7 +12945,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_error_evaluator", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_error_evaluator", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v__);
@@ -12933,7 +12955,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":648
+/* "reedsolo\creedsolo.pyx":650
  *     return remainder
  * 
  * def rs_find_errors(err_loc, nmess, generator=2):             # <<<<<<<<<<<<<<
@@ -12942,10 +12964,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_58rs_find_error_evaluator(CYT
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_60rs_find_errors[] = "Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_61rs_find_errors = {"rs_find_errors", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_60rs_find_errors};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_61rs_find_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_60rs_find_errors[] = "Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_61rs_find_errors = {"rs_find_errors", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_61rs_find_errors, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_60rs_find_errors};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_61rs_find_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_err_loc = 0;
   PyObject *__pyx_v_nmess = 0;
   PyObject *__pyx_v_generator = 0;
@@ -12977,7 +12999,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nmess)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_find_errors", 0, 2, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_find_errors", 0, 2, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -12986,7 +13008,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_errors") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_find_errors") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -13003,20 +13025,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_61rs_find_errors(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_find_errors", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_find_errors", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(__pyx_self, __pyx_v_err_loc, __pyx_v_nmess, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_60rs_find_errors(__pyx_self, __pyx_v_err_loc, __pyx_v_nmess, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_60rs_find_errors(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_err_loc, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator) {
   Py_ssize_t __pyx_v_errs;
   PyObject *__pyx_v_err_pos = NULL;
   PyObject *__pyx_v_i = NULL;
@@ -13027,7 +13049,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   PyObject *__pyx_t_3 = NULL;
   PyObject *(*__pyx_t_4)(PyObject *);
   PyObject *__pyx_t_5 = NULL;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_6;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_6;
   int __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   PyObject *__pyx_t_9 = NULL;
@@ -13040,50 +13062,50 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_find_errors", 0);
 
-  /* "reedsolomon\creedsolo.pyx":651
+  /* "reedsolo\creedsolo.pyx":653
  *     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
  *     # nmess = length of whole codeword (message + ecc symbols)
  *     errs = len(err_loc) - 1             # <<<<<<<<<<<<<<
  *     err_pos = []
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 651; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_Length(__pyx_v_err_loc); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_errs = (__pyx_t_1 - 1);
 
-  /* "reedsolomon\creedsolo.pyx":652
+  /* "reedsolo\creedsolo.pyx":654
  *     # nmess = length of whole codeword (message + ecc symbols)
  *     errs = len(err_loc) - 1
  *     err_pos = []             # <<<<<<<<<<<<<<
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
  *         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 652; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_err_pos = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":653
+  /* "reedsolo\creedsolo.pyx":655
  *     errs = len(err_loc) - 1
  *     err_pos = []
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols             # <<<<<<<<<<<<<<
  *         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
  *             err_pos.append(nmess - 1 - i)
  */
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_nmess);
   __Pyx_GIVEREF(__pyx_v_nmess);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_nmess);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2); __pyx_t_1 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_1 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -13091,17 +13113,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_1 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_1); __Pyx_INCREF(__pyx_t_3); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_1); __Pyx_INCREF(__pyx_t_3); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_1 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_1); __Pyx_INCREF(__pyx_t_3); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_1); __Pyx_INCREF(__pyx_t_3); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -13111,7 +13133,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -13120,18 +13142,18 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":654
+    /* "reedsolo\creedsolo.pyx":656
  *     err_pos = []
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
  *         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error             # <<<<<<<<<<<<<<
  *             err_pos.append(nmess - 1 - i)
  *     # Sanity check: the number of errors/errata positions found should be exactly the same as the length of the errata locator polynomial
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_eval); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_gf_poly_eval); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_6 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_i); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_8 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_6, __pyx_t_7, 0)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_6 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_i); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_6, __pyx_t_7, 0)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_9 = NULL;
     __pyx_t_10 = 0;
@@ -13145,7 +13167,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
         __pyx_t_10 = 1;
       }
     }
-    __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_9) {
       __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -13156,35 +13178,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_8);
     PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_10, __pyx_t_8);
     __pyx_t_8 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_11, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_11, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 654; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 656; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_12) {
 
-      /* "reedsolomon\creedsolo.pyx":655
+      /* "reedsolo\creedsolo.pyx":657
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
  *         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
  *             err_pos.append(nmess - 1 - i)             # <<<<<<<<<<<<<<
  *     # Sanity check: the number of errors/errata positions found should be exactly the same as the length of the errata locator polynomial
  *     if len(err_pos) != errs:
  */
-      __pyx_t_5 = PyNumber_Subtract(__pyx_v_nmess, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyNumber_Subtract(__pyx_v_nmess, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 657; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_v_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_v_i); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 657; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_err_pos, __pyx_t_3); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 655; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_err_pos, __pyx_t_3); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 657; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L5;
     }
     __pyx_L5:;
 
-    /* "reedsolomon\creedsolo.pyx":653
+    /* "reedsolo\creedsolo.pyx":655
  *     errs = len(err_loc) - 1
  *     err_pos = []
  *     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols             # <<<<<<<<<<<<<<
@@ -13194,35 +13216,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":657
+  /* "reedsolo\creedsolo.pyx":659
  *             err_pos.append(nmess - 1 - i)
  *     # Sanity check: the number of errors/errata positions found should be exactly the same as the length of the errata locator polynomial
  *     if len(err_pos) != errs:             # <<<<<<<<<<<<<<
  *         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
  *         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")
  */
-  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_err_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 657; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_GET_SIZE(__pyx_v_err_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_12 = ((__pyx_t_1 != __pyx_v_errs) != 0);
   if (__pyx_t_12) {
 
-    /* "reedsolomon\creedsolo.pyx":659
+    /* "reedsolo\creedsolo.pyx":661
  *     if len(err_pos) != errs:
  *         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
  *         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")             # <<<<<<<<<<<<<<
  *     return err_pos
  * 
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 661; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 661; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 661; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":660
+  /* "reedsolo\creedsolo.pyx":662
  *         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
  *         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")
  *     return err_pos             # <<<<<<<<<<<<<<
@@ -13234,7 +13256,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   __pyx_r = __pyx_v_err_pos;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":648
+  /* "reedsolo\creedsolo.pyx":650
  *     return remainder
  * 
  * def rs_find_errors(err_loc, nmess, generator=2):             # <<<<<<<<<<<<<<
@@ -13250,7 +13272,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_find_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_find_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_err_pos);
@@ -13260,7 +13282,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":662
+/* "reedsolo\creedsolo.pyx":664
  *     return err_pos
  * 
  * def rs_forney_syndromes(synd, pos, nmess, generator=2):             # <<<<<<<<<<<<<<
@@ -13269,9 +13291,9 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_60rs_find_errors(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_63rs_forney_syndromes = {"rs_forney_syndromes", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_63rs_forney_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_63rs_forney_syndromes = {"rs_forney_syndromes", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_63rs_forney_syndromes, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_63rs_forney_syndromes(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_synd = 0;
   PyObject *__pyx_v_pos = 0;
   PyObject *__pyx_v_nmess = 0;
@@ -13305,12 +13327,12 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes(PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_pos)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nmess)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (kw_args > 0) {
@@ -13319,7 +13341,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes(PyObjec
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_forney_syndromes") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_forney_syndromes") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -13338,24 +13360,24 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_63rs_forney_syndromes(PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_forney_syndromes", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_forney_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_forney_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(__pyx_self, __pyx_v_synd, __pyx_v_pos, __pyx_v_nmess, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_62rs_forney_syndromes(__pyx_self, __pyx_v_synd, __pyx_v_pos, __pyx_v_nmess, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_pos, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_62rs_forney_syndromes(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_synd, PyObject *__pyx_v_pos, PyObject *__pyx_v_nmess, PyObject *__pyx_v_generator) {
   PyObject *__pyx_v_erase_pos_reversed = NULL;
   PyObject *__pyx_v_fsynd = NULL;
   Py_ssize_t __pyx_v_i;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_v_x;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_v_x;
   PyObject *__pyx_v_j = NULL;
   PyObject *__pyx_v_p = NULL;
   PyObject *__pyx_r = NULL;
@@ -13367,7 +13389,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
   Py_ssize_t __pyx_t_7;
-  __pyx_t_11reedsolomon_9creedsolo_uint8_t __pyx_t_8;
+  __pyx_t_8reedsolo_9creedsolo_uint8_t __pyx_t_8;
   int __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   int __pyx_lineno = 0;
@@ -13375,39 +13397,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_forney_syndromes", 0);
 
-  /* "reedsolomon\creedsolo.pyx":664
+  /* "reedsolo\creedsolo.pyx":666
  * def rs_forney_syndromes(synd, pos, nmess, generator=2):
  *     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
  *     erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)             # <<<<<<<<<<<<<<
  * 
  *     # Optimized method, all operations are inlined
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_v_pos)) || PyTuple_CheckExact(__pyx_v_pos)) {
     __pyx_t_2 = __pyx_v_pos; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_pos); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_pos); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   for (;;) {
     if (likely(!__pyx_t_4)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
@@ -13417,7 +13439,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -13425,83 +13447,83 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
     }
     __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Subtract(__pyx_v_nmess, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyNumber_Subtract(__pyx_v_nmess, __pyx_int_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyNumber_Subtract(__pyx_t_5, __pyx_v_p); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyNumber_Subtract(__pyx_t_5, __pyx_v_p); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_6))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_6))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_erase_pos_reversed = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":667
+  /* "reedsolo\creedsolo.pyx":669
  * 
  *     # Optimized method, all operations are inlined
  *     fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition             # <<<<<<<<<<<<<<
  *     for i in xrange(len(pos)):
  *         x = gf_pow(generator, erase_pos_reversed[i])
  */
-  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_synd, 1, 0, NULL, NULL, &__pyx_slice__16, 1, 0, 1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 667; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_synd, 1, 0, NULL, NULL, &__pyx_slice__16, 1, 0, 1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 667; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_fsynd = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":668
+  /* "reedsolo\creedsolo.pyx":670
  *     # Optimized method, all operations are inlined
  *     fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
  *     for i in xrange(len(pos)):             # <<<<<<<<<<<<<<
  *         x = gf_pow(generator, erase_pos_reversed[i])
  *         for j in xrange(len(fsynd) - 1):
  */
-  __pyx_t_3 = PyObject_Length(__pyx_v_pos); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 668; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_Length(__pyx_v_pos); if (unlikely(__pyx_t_3 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_3; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "reedsolomon\creedsolo.pyx":669
+    /* "reedsolo\creedsolo.pyx":671
  *     fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
  *     for i in xrange(len(pos)):
  *         x = gf_pow(generator, erase_pos_reversed[i])             # <<<<<<<<<<<<<<
  *         for j in xrange(len(fsynd) - 1):
  *             fsynd[j] = gf_mul(fsynd[j], x) ^ fsynd[j + 1]
  */
-    __pyx_t_8 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_8 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_erase_pos_reversed, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_8 = __Pyx_PyInt_As_unsigned_char(__pyx_v_generator); if (unlikely((__pyx_t_8 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_erase_pos_reversed, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 1, 1, 1); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_v_x = __pyx_f_11reedsolomon_9creedsolo_gf_pow(__pyx_t_8, __pyx_t_9, 0);
+    __pyx_v_x = __pyx_f_8reedsolo_9creedsolo_gf_pow(__pyx_t_8, __pyx_t_9, 0);
 
-    /* "reedsolomon\creedsolo.pyx":670
+    /* "reedsolo\creedsolo.pyx":672
  *     for i in xrange(len(pos)):
  *         x = gf_pow(generator, erase_pos_reversed[i])
  *         for j in xrange(len(fsynd) - 1):             # <<<<<<<<<<<<<<
  *             fsynd[j] = gf_mul(fsynd[j], x) ^ fsynd[j + 1]
  *         #fsynd.pop() # useless? it doesn't change the results of computations to leave it there
  */
-    __pyx_t_10 = PyList_GET_SIZE(__pyx_v_fsynd); if (unlikely(__pyx_t_10 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_2 = PyInt_FromSsize_t((__pyx_t_10 - 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = PyList_GET_SIZE(__pyx_v_fsynd); if (unlikely(__pyx_t_10 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = PyInt_FromSsize_t((__pyx_t_10 - 1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
       __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_10 = 0;
       __pyx_t_4 = NULL;
     } else {
-      __pyx_t_10 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     for (;;) {
@@ -13509,17 +13531,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
         if (likely(PyList_CheckExact(__pyx_t_1))) {
           if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         } else {
           if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_10); __Pyx_INCREF(__pyx_t_2); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_2);
           #endif
         }
@@ -13529,7 +13551,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 672; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -13538,32 +13560,32 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
       __Pyx_XDECREF_SET(__pyx_v_j, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":671
+      /* "reedsolo\creedsolo.pyx":673
  *         x = gf_pow(generator, erase_pos_reversed[i])
  *         for j in xrange(len(fsynd) - 1):
  *             fsynd[j] = gf_mul(fsynd[j], x) ^ fsynd[j + 1]             # <<<<<<<<<<<<<<
  *         #fsynd.pop() # useless? it doesn't change the results of computations to leave it there
  * 
  */
-      __pyx_t_2 = PyObject_GetItem(__pyx_v_fsynd, __pyx_v_j); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_2 = PyObject_GetItem(__pyx_v_fsynd, __pyx_v_j); if (unlikely(__pyx_t_2 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_8 = __Pyx_PyInt_As_unsigned_char(__pyx_t_2); if (unlikely((__pyx_t_8 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyInt_As_unsigned_char(__pyx_t_2); if (unlikely((__pyx_t_8 == (unsigned char)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyInt_From_unsigned_char(__pyx_f_11reedsolomon_9creedsolo_gf_mul(__pyx_t_8, __pyx_v_x, 0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyInt_From_unsigned_char(__pyx_f_8reedsolo_9creedsolo_gf_mul(__pyx_t_8, __pyx_v_x, 0)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = PyNumber_Add(__pyx_v_j, __pyx_int_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyNumber_Add(__pyx_v_j, __pyx_int_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = PyObject_GetItem(__pyx_v_fsynd, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+      __pyx_t_5 = PyObject_GetItem(__pyx_v_fsynd, __pyx_t_6); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = PyNumber_Xor(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyNumber_Xor(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(PyObject_SetItem(__pyx_v_fsynd, __pyx_v_j, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(PyObject_SetItem(__pyx_v_fsynd, __pyx_v_j, __pyx_t_6) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":670
+      /* "reedsolo\creedsolo.pyx":672
  *     for i in xrange(len(pos)):
  *         x = gf_pow(generator, erase_pos_reversed[i])
  *         for j in xrange(len(fsynd) - 1):             # <<<<<<<<<<<<<<
@@ -13574,7 +13596,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":680
+  /* "reedsolo\creedsolo.pyx":682
  *     #fsynd = fsynd[len(pos):] # then trim the first erase_pos coefficients which are useless. Seems to be not necessary, but this reduces the computation time later in BM (thus it's an optimization).
  * 
  *     return fsynd             # <<<<<<<<<<<<<<
@@ -13586,7 +13608,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
   __pyx_r = __pyx_v_fsynd;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":662
+  /* "reedsolo\creedsolo.pyx":664
  *     return err_pos
  * 
  * def rs_forney_syndromes(synd, pos, nmess, generator=2):             # <<<<<<<<<<<<<<
@@ -13600,7 +13622,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_forney_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_forney_syndromes", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_erase_pos_reversed);
@@ -13612,7 +13634,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":682
+/* "reedsolo\creedsolo.pyx":684
  *     return fsynd
  * 
  * def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -13621,10 +13643,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_62rs_forney_syndromes(CYTHON_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_64rs_correct_msg[] = "Reed-Solomon main decoding function";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_65rs_correct_msg = {"rs_correct_msg", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_64rs_correct_msg};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_65rs_correct_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_64rs_correct_msg[] = "Reed-Solomon main decoding function";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_65rs_correct_msg = {"rs_correct_msg", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_65rs_correct_msg, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_64rs_correct_msg};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_65rs_correct_msg(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg_in = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
@@ -13665,7 +13687,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsym)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_correct_msg", 0, 2, 6, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_correct_msg", 0, 2, 6, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -13689,7 +13711,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_correct_msg") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_correct_msg") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -13712,20 +13734,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_65rs_correct_msg(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_correct_msg", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_correct_msg", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_erase_pos, __pyx_v_only_erasures);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_64rs_correct_msg(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_erase_pos, __pyx_v_only_erasures);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_64rs_correct_msg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
   PyObject *__pyx_v_msg_out = NULL;
   PyObject *__pyx_v_e_pos = NULL;
   PyObject *__pyx_v_synd = NULL;
@@ -13750,30 +13772,30 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __Pyx_RefNannySetupContext("rs_correct_msg", 0);
   __Pyx_INCREF(__pyx_v_erase_pos);
 
-  /* "reedsolomon\creedsolo.pyx":685
+  /* "reedsolo\creedsolo.pyx":687
  *     '''Reed-Solomon main decoding function'''
  *     global field_charac
  *     if len(msg_in) > field_charac:             # <<<<<<<<<<<<<<
  *         # Note that it is in fact possible to encode/decode messages that are longer than field_charac, but because this will be above the field, this will generate more error positions during Chien Search than it should, because this will generate duplicate values, which should normally be prevented thank's to the prime polynomial reduction (eg, because it can't discriminate between error at position 1 or 256, both being exactly equal under galois field 2^8). So it's really not advised to do it, but it's possible (but then you're not guaranted to be able to correct any error/erasure on symbols with a position above the length of field_charac -- if you really need a bigger message without chunking, then you should better enlarge c_exp so that you get a bigger field).
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 685; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = ((__pyx_t_1 > __pyx_v_11reedsolomon_9creedsolo_field_charac) != 0);
+  __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = ((__pyx_t_1 > __pyx_v_8reedsolo_9creedsolo_field_charac) != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":687
+    /* "reedsolo\creedsolo.pyx":689
  *     if len(msg_in) > field_charac:
  *         # Note that it is in fact possible to encode/decode messages that are longer than field_charac, but because this will be above the field, this will generate more error positions during Chien Search than it should, because this will generate duplicate values, which should normally be prevented thank's to the prime polynomial reduction (eg, because it can't discriminate between error at position 1 or 256, both being exactly equal under galois field 2^8). So it's really not advised to do it, but it's possible (but then you're not guaranted to be able to correct any error/erasure on symbols with a position above the length of field_charac -- if you really need a bigger message without chunking, then you should better enlarge c_exp so that you get a bigger field).
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))             # <<<<<<<<<<<<<<
  * 
  *     msg_out = bytearray(msg_in)     # copy of message
  */
-    __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -13781,30 +13803,30 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Message_is_too_long_i_when_max_i, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Message_is_too_long_i_when_max_i, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":689
+  /* "reedsolo\creedsolo.pyx":691
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
  * 
  *     msg_out = bytearray(msg_in)     # copy of message             # <<<<<<<<<<<<<<
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 691; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -13817,16 +13839,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_msg_in); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_msg_in); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 691; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
   } else {
-    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 691; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_msg_in);
     __Pyx_GIVEREF(__pyx_v_msg_in);
     PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_msg_in);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 691; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
@@ -13834,7 +13856,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __pyx_v_msg_out = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":691
+  /* "reedsolo\creedsolo.pyx":693
  *     msg_out = bytearray(msg_in)     # copy of message
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:             # <<<<<<<<<<<<<<
@@ -13845,14 +13867,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __pyx_t_7 = (__pyx_t_2 != 0);
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":692
+    /* "reedsolo\creedsolo.pyx":694
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:
  *         erase_pos = []             # <<<<<<<<<<<<<<
  *     else:
  *         for e_pos in erase_pos:
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_erase_pos, __pyx_t_4);
     __pyx_t_4 = 0;
@@ -13860,7 +13882,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":694
+    /* "reedsolo\creedsolo.pyx":696
  *         erase_pos = []
  *     else:
  *         for e_pos in erase_pos:             # <<<<<<<<<<<<<<
@@ -13871,26 +13893,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
       __pyx_t_4 = __pyx_v_erase_pos; __Pyx_INCREF(__pyx_t_4); __pyx_t_1 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_1 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     for (;;) {
       if (likely(!__pyx_t_8)) {
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_1 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_1 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -13900,7 +13922,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 694; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -13909,16 +13931,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
       __Pyx_XDECREF_SET(__pyx_v_e_pos, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":695
+      /* "reedsolo\creedsolo.pyx":697
  *     else:
  *         for e_pos in erase_pos:
  *             msg_out[e_pos] = 0             # <<<<<<<<<<<<<<
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
  */
-      if (unlikely(PyObject_SetItem(__pyx_v_msg_out, __pyx_v_e_pos, __pyx_int_0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 695; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(PyObject_SetItem(__pyx_v_msg_out, __pyx_v_e_pos, __pyx_int_0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "reedsolomon\creedsolo.pyx":694
+      /* "reedsolo\creedsolo.pyx":696
  *         erase_pos = []
  *     else:
  *         for e_pos in erase_pos:             # <<<<<<<<<<<<<<
@@ -13930,39 +13952,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   }
   __pyx_L4:;
 
-  /* "reedsolomon\creedsolo.pyx":697
+  /* "reedsolo\creedsolo.pyx":699
  *             msg_out[e_pos] = 0
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")             # <<<<<<<<<<<<<<
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_7) {
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":699
+  /* "reedsolo\creedsolo.pyx":701
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)             # <<<<<<<<<<<<<<
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_1 = 0;
@@ -13976,7 +13998,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (__pyx_t_6) {
     __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -13993,35 +14015,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_3, 3+__pyx_t_1, __pyx_v_generator);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_synd = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":701
+  /* "reedsolo\creedsolo.pyx":703
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:             # <<<<<<<<<<<<<<
  *         return msg_out[:-nsym], msg_out[-nsym:]  # no errors
  * 
  */
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_synd);
   __Pyx_GIVEREF(__pyx_v_synd);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_synd);
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":702
+    /* "reedsolo\creedsolo.pyx":704
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:
  *         return msg_out[:-nsym], msg_out[-nsym:]  # no errors             # <<<<<<<<<<<<<<
@@ -14029,17 +14051,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
  *     # Find errors locations
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 702; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_4, NULL, 0, 0, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 702; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_4, NULL, 0, 0, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 702; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 702; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 702; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
@@ -14052,24 +14074,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     goto __pyx_L0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":705
+  /* "reedsolo\creedsolo.pyx":707
  * 
  *     # Find errors locations
  *     if only_erasures:             # <<<<<<<<<<<<<<
  *         err_pos = []
  *     else:
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_only_erasures); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_only_erasures); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 707; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":706
+    /* "reedsolo\creedsolo.pyx":708
  *     # Find errors locations
  *     if only_erasures:
  *         err_pos = []             # <<<<<<<<<<<<<<
  *     else:
  *         # compute the Forney syndromes, which hide the erasures from the original syndrome (so that BM will just have to deal with errors, not erasures)
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 706; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 708; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_v_err_pos = __pyx_t_4;
     __pyx_t_4 = 0;
@@ -14077,17 +14099,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":709
+    /* "reedsolo\creedsolo.pyx":711
  *     else:
  *         # compute the Forney syndromes, which hide the erasures from the original syndrome (so that BM will just have to deal with errors, not erasures)
  *         fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out), generator)             # <<<<<<<<<<<<<<
  *         # compute the error locator polynomial using Berlekamp-Massey
  *         err_loc = rs_find_error_locator(fsynd, nsym, erase_count=len(erase_pos))
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_forney_syndromes); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_forney_syndromes); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_1 = 0;
@@ -14101,7 +14123,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
         __pyx_t_1 = 1;
       }
     }
-    __pyx_t_9 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -14118,23 +14140,23 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_v_generator);
     PyTuple_SET_ITEM(__pyx_t_9, 3+__pyx_t_1, __pyx_v_generator);
     __pyx_t_5 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_fsynd = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":711
+    /* "reedsolo\creedsolo.pyx":713
  *         fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out), generator)
  *         # compute the error locator polynomial using Berlekamp-Massey
  *         err_loc = rs_find_error_locator(fsynd, nsym, erase_count=len(erase_pos))             # <<<<<<<<<<<<<<
  *         # locate the message errors using Chien search (or bruteforce search)
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_locator); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_locator); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_fsynd);
     __Pyx_GIVEREF(__pyx_v_fsynd);
@@ -14142,14 +14164,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     __Pyx_INCREF(__pyx_v_nsym);
     __Pyx_GIVEREF(__pyx_v_nsym);
     PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_nsym);
-    __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_erase_count, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_erase_count, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, __pyx_t_9); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 711; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, __pyx_t_9); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -14157,19 +14179,19 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     __pyx_v_err_loc = __pyx_t_5;
     __pyx_t_5 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":713
+    /* "reedsolo\creedsolo.pyx":715
  *         err_loc = rs_find_error_locator(fsynd, nsym, erase_count=len(erase_pos))
  *         # locate the message errors using Chien search (or bruteforce search)
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)             # <<<<<<<<<<<<<<
  *         if err_pos is None:
  *             raise ReedSolomonError("Could not locate error")
  */
-    __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errors); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errors); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_3 = PyObject_GetItem(__pyx_v_err_loc, __pyx_slice__18); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_3 = PyObject_GetItem(__pyx_v_err_loc, __pyx_slice__18); if (unlikely(__pyx_t_3 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     __pyx_t_1 = 0;
@@ -14183,7 +14205,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
         __pyx_t_1 = 1;
       }
     }
-    __pyx_t_10 = PyTuple_New(3+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = PyTuple_New(3+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -14197,14 +14219,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_1, __pyx_v_generator);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_v_err_pos = __pyx_t_5;
     __pyx_t_5 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":714
+    /* "reedsolo\creedsolo.pyx":716
  *         # locate the message errors using Chien search (or bruteforce search)
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)
  *         if err_pos is None:             # <<<<<<<<<<<<<<
@@ -14215,35 +14237,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
     __pyx_t_2 = (__pyx_t_7 != 0);
     if (__pyx_t_2) {
 
-      /* "reedsolomon\creedsolo.pyx":715
+      /* "reedsolo\creedsolo.pyx":717
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)
  *         if err_pos is None:
  *             raise ReedSolomonError("Could not locate error")             # <<<<<<<<<<<<<<
  * 
  *     # Find errors values and apply them to correct the message
  */
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_Raise(__pyx_t_9, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   __pyx_L9:;
 
-  /* "reedsolomon\creedsolo.pyx":719
+  /* "reedsolo\creedsolo.pyx":721
  *     # Find errors values and apply them to correct the message
  *     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
  *     msg_out = rs_correct_errata(msg_out, synd, (erase_pos + err_pos), fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)             # <<<<<<<<<<<<<<
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_errata); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 719; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_errata); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_10 = PyNumber_Add(__pyx_v_erase_pos, __pyx_v_err_pos); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 719; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyNumber_Add(__pyx_v_erase_pos, __pyx_v_err_pos); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_4 = NULL;
   __pyx_t_1 = 0;
@@ -14257,7 +14279,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_3 = PyTuple_New(5+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 719; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(5+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (__pyx_t_4) {
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -14277,21 +14299,21 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_3, 4+__pyx_t_1, __pyx_v_generator);
   __pyx_t_10 = 0;
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 719; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF_SET(__pyx_v_msg_out, __pyx_t_9);
   __pyx_t_9 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":721
+  /* "reedsolo\creedsolo.pyx":723
  *     msg_out = rs_correct_errata(msg_out, synd, (erase_pos + err_pos), fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)             # <<<<<<<<<<<<<<
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = NULL;
   __pyx_t_1 = 0;
@@ -14305,7 +14327,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_10 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   if (__pyx_t_3) {
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -14322,52 +14344,52 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_10, 3+__pyx_t_1, __pyx_v_generator);
-  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 721; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF_SET(__pyx_v_synd, __pyx_t_9);
   __pyx_t_9 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":722
+  /* "reedsolo\creedsolo.pyx":724
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:             # <<<<<<<<<<<<<<
  *         raise ReedSolomonError("Could not correct message")
  *     # return the successfully decoded message
  */
-  __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 722; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyTuple_New(1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_INCREF(__pyx_v_synd);
   __Pyx_GIVEREF(__pyx_v_synd);
   PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_v_synd);
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_9, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 722; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_9, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 722; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_9); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 722; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":723
+    /* "reedsolo\creedsolo.pyx":725
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")             # <<<<<<<<<<<<<<
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  */
-    __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":725
+  /* "reedsolo\creedsolo.pyx":727
  *         raise ReedSolomonError("Could not correct message")
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()             # <<<<<<<<<<<<<<
@@ -14375,17 +14397,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
  * def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_9 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_5, NULL, 0, 0, 1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_5, NULL, 0, 0, 1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_10 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_5, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_5, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_9);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_9);
@@ -14397,7 +14419,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":682
+  /* "reedsolo\creedsolo.pyx":684
  *     return fsynd
  * 
  * def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -14413,7 +14435,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_msg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_msg_out);
@@ -14428,7 +14450,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":727
+/* "reedsolo\creedsolo.pyx":729
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -14437,10 +14459,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_64rs_correct_msg(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd[] = "Reed-Solomon main decoding function, without using the modified Forney syndromes";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd = {"rs_correct_msg_nofsynd", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_67rs_correct_msg_nofsynd(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_66rs_correct_msg_nofsynd[] = "Reed-Solomon main decoding function, without using the modified Forney syndromes";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_67rs_correct_msg_nofsynd = {"rs_correct_msg_nofsynd", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_67rs_correct_msg_nofsynd, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_66rs_correct_msg_nofsynd};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_67rs_correct_msg_nofsynd(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg_in = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
@@ -14481,7 +14503,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd(PyOb
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsym)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_correct_msg_nofsynd", 0, 2, 6, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_correct_msg_nofsynd", 0, 2, 6, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -14505,7 +14527,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd(PyOb
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_correct_msg_nofsynd") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_correct_msg_nofsynd") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -14528,20 +14550,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd(PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_correct_msg_nofsynd", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_correct_msg_nofsynd", 0, 2, 6, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_msg_nofsynd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_msg_nofsynd", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_erase_pos, __pyx_v_only_erasures);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_66rs_correct_msg_nofsynd(__pyx_self, __pyx_v_msg_in, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator, __pyx_v_erase_pos, __pyx_v_only_erasures);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_66rs_correct_msg_nofsynd(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg_in, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
   PyObject *__pyx_v_msg_out = NULL;
   PyObject *__pyx_v_e_pos = NULL;
   PyObject *__pyx_v_synd = NULL;
@@ -14569,30 +14591,30 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_RefNannySetupContext("rs_correct_msg_nofsynd", 0);
   __Pyx_INCREF(__pyx_v_erase_pos);
 
-  /* "reedsolomon\creedsolo.pyx":730
+  /* "reedsolo\creedsolo.pyx":732
  *     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
  *     global field_charac
  *     if len(msg_in) > field_charac:             # <<<<<<<<<<<<<<
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
  * 
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 730; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = ((__pyx_t_1 > __pyx_v_11reedsolomon_9creedsolo_field_charac) != 0);
+  __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 732; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = ((__pyx_t_1 > __pyx_v_8reedsolo_9creedsolo_field_charac) != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":731
+    /* "reedsolo\creedsolo.pyx":733
  *     global field_charac
  *     if len(msg_in) > field_charac:
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))             # <<<<<<<<<<<<<<
  * 
  *     msg_out = bytearray(msg_in)     # copy of message
  */
-    __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_msg_in); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_11reedsolomon_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_8reedsolo_9creedsolo_field_charac); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -14600,30 +14622,30 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
     PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
     __pyx_t_3 = 0;
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Message_is_too_long_i_when_max_i, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_Message_is_too_long_i_when_max_i, __pyx_t_5); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 731; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":733
+  /* "reedsolo\creedsolo.pyx":735
  *         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
  * 
  *     msg_out = bytearray(msg_in)     # copy of message             # <<<<<<<<<<<<<<
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -14636,16 +14658,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_msg_in); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_msg_in); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
   } else {
-    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_msg_in);
     __Pyx_GIVEREF(__pyx_v_msg_in);
     PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_msg_in);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
@@ -14653,7 +14675,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __pyx_v_msg_out = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":735
+  /* "reedsolo\creedsolo.pyx":737
  *     msg_out = bytearray(msg_in)     # copy of message
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:             # <<<<<<<<<<<<<<
@@ -14664,14 +14686,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __pyx_t_7 = (__pyx_t_2 != 0);
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":736
+    /* "reedsolo\creedsolo.pyx":738
  *     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
  *     if erase_pos is None:
  *         erase_pos = []             # <<<<<<<<<<<<<<
  *     else:
  *         for e_pos in erase_pos:
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 736; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_erase_pos, __pyx_t_4);
     __pyx_t_4 = 0;
@@ -14679,7 +14701,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":738
+    /* "reedsolo\creedsolo.pyx":740
  *         erase_pos = []
  *     else:
  *         for e_pos in erase_pos:             # <<<<<<<<<<<<<<
@@ -14690,26 +14712,26 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       __pyx_t_4 = __pyx_v_erase_pos; __Pyx_INCREF(__pyx_t_4); __pyx_t_1 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_1 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     for (;;) {
       if (likely(!__pyx_t_8)) {
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_1 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_1 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_4, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -14719,7 +14741,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 738; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 740; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -14728,16 +14750,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       __Pyx_XDECREF_SET(__pyx_v_e_pos, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "reedsolomon\creedsolo.pyx":739
+      /* "reedsolo\creedsolo.pyx":741
  *     else:
  *         for e_pos in erase_pos:
  *             msg_out[e_pos] = 0             # <<<<<<<<<<<<<<
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
  */
-      if (unlikely(PyObject_SetItem(__pyx_v_msg_out, __pyx_v_e_pos, __pyx_int_0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 739; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(PyObject_SetItem(__pyx_v_msg_out, __pyx_v_e_pos, __pyx_int_0) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-      /* "reedsolomon\creedsolo.pyx":738
+      /* "reedsolo\creedsolo.pyx":740
  *         erase_pos = []
  *     else:
  *         for e_pos in erase_pos:             # <<<<<<<<<<<<<<
@@ -14749,39 +14771,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   }
   __pyx_L4:;
 
-  /* "reedsolomon\creedsolo.pyx":741
+  /* "reedsolo\creedsolo.pyx":743
  *             msg_out[e_pos] = 0
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")             # <<<<<<<<<<<<<<
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_4, __pyx_v_nsym, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_7) {
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_Raise(__pyx_t_4, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":743
+  /* "reedsolo\creedsolo.pyx":745
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)             # <<<<<<<<<<<<<<
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_1 = 0;
@@ -14795,7 +14817,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (__pyx_t_6) {
     __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -14812,35 +14834,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_3, 3+__pyx_t_1, __pyx_v_generator);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_synd = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":745
+  /* "reedsolo\creedsolo.pyx":747
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:             # <<<<<<<<<<<<<<
  *         return msg_out[:-nsym], msg_out[-nsym:]  # no errors
  * 
  */
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_synd);
   __Pyx_GIVEREF(__pyx_v_synd);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_synd);
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyObject_RichCompare(__pyx_t_5, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":746
+    /* "reedsolo\creedsolo.pyx":748
  *     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
  *     if max(synd) == 0:
  *         return msg_out[:-nsym], msg_out[-nsym:]  # no errors             # <<<<<<<<<<<<<<
@@ -14848,17 +14870,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
  *     # prepare erasures locator and evaluator polynomials
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 748; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_4, NULL, 0, 0, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_4, NULL, 0, 0, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 748; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 748; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 748; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 748; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
@@ -14871,7 +14893,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
     goto __pyx_L0;
   }
 
-  /* "reedsolomon\creedsolo.pyx":749
+  /* "reedsolo\creedsolo.pyx":751
  * 
  *     # prepare erasures locator and evaluator polynomials
  *     erase_loc = None             # <<<<<<<<<<<<<<
@@ -14881,7 +14903,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_INCREF(Py_None);
   __pyx_v_erase_loc = Py_None;
 
-  /* "reedsolomon\creedsolo.pyx":751
+  /* "reedsolo\creedsolo.pyx":753
  *     erase_loc = None
  *     #erase_eval = None
  *     erase_count = 0             # <<<<<<<<<<<<<<
@@ -14890,59 +14912,59 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
  */
   __pyx_v_erase_count = 0;
 
-  /* "reedsolomon\creedsolo.pyx":752
+  /* "reedsolo\creedsolo.pyx":754
  *     #erase_eval = None
  *     erase_count = 0
  *     if erase_pos:             # <<<<<<<<<<<<<<
  *         erase_count = len(erase_pos)
  *         erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_erase_pos); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_erase_pos); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":753
+    /* "reedsolo\creedsolo.pyx":755
  *     erase_count = 0
  *     if erase_pos:
  *         erase_count = len(erase_pos)             # <<<<<<<<<<<<<<
  *         erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]
  *         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
  */
-    __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 753; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyObject_Length(__pyx_v_erase_pos); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_erase_count = __pyx_t_1;
 
-    /* "reedsolomon\creedsolo.pyx":754
+    /* "reedsolo\creedsolo.pyx":756
  *     if erase_pos:
  *         erase_count = len(erase_pos)
  *         erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]             # <<<<<<<<<<<<<<
  *         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
  *         #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     if (likely(PyList_CheckExact(__pyx_v_erase_pos)) || PyTuple_CheckExact(__pyx_v_erase_pos)) {
       __pyx_t_3 = __pyx_v_erase_pos; __Pyx_INCREF(__pyx_t_3); __pyx_t_1 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_1 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     for (;;) {
       if (likely(!__pyx_t_8)) {
         if (likely(PyList_CheckExact(__pyx_t_3))) {
           if (__pyx_t_1 >= PyList_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         } else {
           if (__pyx_t_1 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_1); __Pyx_INCREF(__pyx_t_5); __pyx_t_1++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_1); __pyx_t_1++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           #endif
         }
@@ -14952,7 +14974,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
@@ -14960,37 +14982,37 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       }
       __Pyx_XDECREF_SET(__pyx_v_eras, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_9 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_5 = PyInt_FromSsize_t((__pyx_t_9 - 1)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyInt_FromSsize_t((__pyx_t_9 - 1)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyNumber_Subtract(__pyx_t_5, __pyx_v_eras); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyNumber_Subtract(__pyx_t_5, __pyx_v_eras); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_6))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 754; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_6))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_erase_pos_reversed = ((PyObject*)__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":755
+    /* "reedsolo\creedsolo.pyx":757
  *         erase_count = len(erase_pos)
  *         erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]
  *         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)             # <<<<<<<<<<<<<<
  *         #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
  * 
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errata_locator); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errata_locator); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_INCREF(__pyx_v_erase_pos_reversed);
     __Pyx_GIVEREF(__pyx_v_erase_pos_reversed);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_erase_pos_reversed);
-    __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -15001,24 +15023,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   }
   __pyx_L9:;
 
-  /* "reedsolomon\creedsolo.pyx":759
+  /* "reedsolo\creedsolo.pyx":761
  * 
  *     # prepare errors/errata locator polynomial
  *     if only_erasures:             # <<<<<<<<<<<<<<
  *         err_loc = erase_loc[::-1]
  *         #err_eval = erase_eval[::-1]
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_only_erasures); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 759; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_only_erasures); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 761; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (__pyx_t_7) {
 
-    /* "reedsolomon\creedsolo.pyx":760
+    /* "reedsolo\creedsolo.pyx":762
  *     # prepare errors/errata locator polynomial
  *     if only_erasures:
  *         err_loc = erase_loc[::-1]             # <<<<<<<<<<<<<<
  *         #err_eval = erase_eval[::-1]
  *     else:
  */
-    __pyx_t_5 = PyObject_GetItem(__pyx_v_erase_loc, __pyx_slice__22); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_5 = PyObject_GetItem(__pyx_v_erase_loc, __pyx_slice__22); if (unlikely(__pyx_t_5 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_v_err_loc = __pyx_t_5;
     __pyx_t_5 = 0;
@@ -15026,16 +15048,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   }
   /*else*/ {
 
-    /* "reedsolomon\creedsolo.pyx":763
+    /* "reedsolo\creedsolo.pyx":765
  *         #err_eval = erase_eval[::-1]
  *     else:
  *         err_loc = rs_find_error_locator(synd, nsym, erase_loc=erase_loc, erase_count=erase_count)             # <<<<<<<<<<<<<<
  *         err_loc = err_loc[::-1]
  *         #err_eval = rs_find_error_evaluator(synd[::-1], err_loc[::-1], len(err_loc)-1)[::-1] # find error/errata evaluator polynomial (not really necessary since we already compute it at the same time as the error locator poly in BM)
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_locator); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_error_locator); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_v_synd);
     __Pyx_GIVEREF(__pyx_v_synd);
@@ -15043,14 +15065,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
     __Pyx_INCREF(__pyx_v_nsym);
     __Pyx_GIVEREF(__pyx_v_nsym);
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_v_nsym);
-    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_erase_loc, __pyx_v_erase_loc) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = PyInt_FromSsize_t(__pyx_v_erase_count); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_erase_loc, __pyx_v_erase_loc) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyInt_FromSsize_t(__pyx_v_erase_count); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_erase_count, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_erase_count, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 763; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -15058,31 +15080,31 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
     __pyx_v_err_loc = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":764
+    /* "reedsolo\creedsolo.pyx":766
  *     else:
  *         err_loc = rs_find_error_locator(synd, nsym, erase_loc=erase_loc, erase_count=erase_count)
  *         err_loc = err_loc[::-1]             # <<<<<<<<<<<<<<
  *         #err_eval = rs_find_error_evaluator(synd[::-1], err_loc[::-1], len(err_loc)-1)[::-1] # find error/errata evaluator polynomial (not really necessary since we already compute it at the same time as the error locator poly in BM)
  * 
  */
-    __pyx_t_4 = PyObject_GetItem(__pyx_v_err_loc, __pyx_slice__23); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_4 = PyObject_GetItem(__pyx_v_err_loc, __pyx_slice__23); if (unlikely(__pyx_t_4 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF_SET(__pyx_v_err_loc, __pyx_t_4);
     __pyx_t_4 = 0;
   }
   __pyx_L12:;
 
-  /* "reedsolomon\creedsolo.pyx":768
+  /* "reedsolo\creedsolo.pyx":770
  * 
  *     # locate the message errors
  *     err_pos = rs_find_errors(err_loc, len(msg_out), generator) # find the roots of the errata locator polynomial (ie: the positions of the errors/errata)             # <<<<<<<<<<<<<<
  *     if err_pos is None:
  *         raise ReedSolomonError("Could not locate error")
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errors); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_find_errors); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyObject_Length(__pyx_v_msg_out); if (unlikely(__pyx_t_1 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyInt_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_5 = NULL;
   __pyx_t_1 = 0;
@@ -15096,7 +15118,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_10 = PyTuple_New(3+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyTuple_New(3+__pyx_t_1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   if (__pyx_t_5) {
     __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -15110,14 +15132,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_10, 2+__pyx_t_1, __pyx_v_generator);
   __pyx_t_6 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_err_pos = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":769
+  /* "reedsolo\creedsolo.pyx":771
  *     # locate the message errors
  *     err_pos = rs_find_errors(err_loc, len(msg_out), generator) # find the roots of the errata locator polynomial (ie: the positions of the errors/errata)
  *     if err_pos is None:             # <<<<<<<<<<<<<<
@@ -15128,33 +15150,33 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __pyx_t_2 = (__pyx_t_7 != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":770
+    /* "reedsolo\creedsolo.pyx":772
  *     err_pos = rs_find_errors(err_loc, len(msg_out), generator) # find the roots of the errata locator polynomial (ie: the positions of the errors/errata)
  *     if err_pos is None:
  *         raise ReedSolomonError("Could not locate error")             # <<<<<<<<<<<<<<
  * 
  *     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":773
+  /* "reedsolo\creedsolo.pyx":775
  * 
  *     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
  *     msg_out = rs_correct_errata(msg_out, synd, err_pos, fcr=fcr, generator=generator)             # <<<<<<<<<<<<<<
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_errata); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_errata); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_msg_out);
   __Pyx_GIVEREF(__pyx_v_msg_out);
@@ -15165,11 +15187,11 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_INCREF(__pyx_v_err_pos);
   __Pyx_GIVEREF(__pyx_v_err_pos);
   PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_err_pos);
-  __pyx_t_10 = PyDict_New(); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyDict_New(); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
-  if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_10); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 773; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_10); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -15177,14 +15199,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_DECREF_SET(__pyx_v_msg_out, __pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":775
+  /* "reedsolo\creedsolo.pyx":777
  *     msg_out = rs_correct_errata(msg_out, synd, err_pos, fcr=fcr, generator=generator)
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)             # <<<<<<<<<<<<<<
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")
  */
-  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_4 = NULL;
   __pyx_t_1 = 0;
@@ -15198,7 +15220,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
       __pyx_t_1 = 1;
     }
   }
-  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(4+__pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   if (__pyx_t_4) {
     __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -15215,52 +15237,52 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_3, 3+__pyx_t_1, __pyx_v_generator);
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 775; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF_SET(__pyx_v_synd, __pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":776
+  /* "reedsolo\creedsolo.pyx":778
  *     # check if the final message is fully repaired
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:             # <<<<<<<<<<<<<<
  *         raise ReedSolomonError("Could not correct message")
  *     # return the successfully decoded message
  */
-  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_v_synd);
   __Pyx_GIVEREF(__pyx_v_synd);
   PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_synd);
-  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyObject_RichCompare(__pyx_t_10, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":777
+    /* "reedsolo\creedsolo.pyx":779
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")             # <<<<<<<<<<<<<<
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  */
-    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ReedSolomonError); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_Raise(__pyx_t_10, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
 
-  /* "reedsolomon\creedsolo.pyx":779
+  /* "reedsolo\creedsolo.pyx":781
  *         raise ReedSolomonError("Could not correct message")
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()             # <<<<<<<<<<<<<<
@@ -15268,17 +15290,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
  * def rs_check(msg, nsym, fcr=0, generator=2):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_10 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_6 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_10, NULL, 0, 0, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, NULL, &__pyx_t_10, NULL, 0, 0, 1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyNumber_Negative(__pyx_v_nsym); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_10, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_msg_out, 0, 0, &__pyx_t_10, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_6);
   PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6);
@@ -15290,7 +15312,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":727
+  /* "reedsolo\creedsolo.pyx":729
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -15305,7 +15327,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_correct_msg_nofsynd", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_correct_msg_nofsynd", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_msg_out);
@@ -15322,7 +15344,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":781
+/* "reedsolo\creedsolo.pyx":783
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_check(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -15331,10 +15353,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_66rs_correct_msg_nofsynd(CYTH
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_69rs_check(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_68rs_check[] = "Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_69rs_check = {"rs_check", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_69rs_check, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_68rs_check};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_69rs_check(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_69rs_check(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_68rs_check[] = "Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_69rs_check = {"rs_check", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_69rs_check, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_68rs_check};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_69rs_check(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_msg = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_fcr = 0;
@@ -15369,7 +15391,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_69rs_check(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsym)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rs_check", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("rs_check", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -15383,7 +15405,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_69rs_check(PyObject *__pyx_se
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_check") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rs_check") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -15402,20 +15424,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_69rs_check(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rs_check", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("rs_check", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_check", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_check", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_68rs_check(__pyx_self, __pyx_v_msg, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_68rs_check(__pyx_self, __pyx_v_msg, __pyx_v_nsym, __pyx_v_fcr, __pyx_v_generator);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_68rs_check(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_msg, PyObject *__pyx_v_nsym, PyObject *__pyx_v_fcr, PyObject *__pyx_v_generator) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -15428,7 +15450,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("rs_check", 0);
 
-  /* "reedsolomon\creedsolo.pyx":783
+  /* "reedsolo\creedsolo.pyx":785
  * def rs_check(msg, nsym, fcr=0, generator=2):
  *     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
  *     return ( max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0 )             # <<<<<<<<<<<<<<
@@ -15436,7 +15458,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_calc_syndromes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -15450,7 +15472,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
       __pyx_t_4 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(4+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(4+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_3) {
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -15467,25 +15489,25 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
   __Pyx_INCREF(__pyx_v_generator);
   __Pyx_GIVEREF(__pyx_v_generator);
   PyTuple_SET_ITEM(__pyx_t_5, 3+__pyx_t_4, __pyx_v_generator);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":781
+  /* "reedsolo\creedsolo.pyx":783
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_check(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -15499,7 +15521,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.rs_check", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.rs_check", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -15507,7 +15529,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":806
+/* "reedsolo\creedsolo.pyx":808
  *     '''
  * 
  *     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
@@ -15516,10 +15538,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_68rs_check(CYTHON_UNUSED PyOb
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_7RSCodec___init__[] = "Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_1__init__ = {"__init__", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_1__init__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_7RSCodec___init__};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_7RSCodec___init__[] = "Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_7RSCodec_1__init__ = {"__init__", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_7RSCodec_1__init__, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_7RSCodec___init__};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_1__init__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_nsym = 0;
   PyObject *__pyx_v_nsize = 0;
@@ -15593,7 +15615,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_1__init__(PyObject *
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -15618,20 +15640,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_1__init__(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 7, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 1, 7, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(__pyx_self, __pyx_v_self, __pyx_v_nsym, __pyx_v_nsize, __pyx_v_fcr, __pyx_v_prim, __pyx_v_generator, __pyx_v_c_exp);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_7RSCodec___init__(__pyx_self, __pyx_v_self, __pyx_v_nsym, __pyx_v_nsize, __pyx_v_fcr, __pyx_v_prim, __pyx_v_generator, __pyx_v_c_exp);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_nsize, PyObject *__pyx_v_fcr, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_nsym, PyObject *__pyx_v_nsize, PyObject *__pyx_v_fcr, PyObject *__pyx_v_prim, PyObject *__pyx_v_generator, PyObject *__pyx_v_c_exp) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -15644,68 +15666,68 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "reedsolomon\creedsolo.pyx":808
+  /* "reedsolo\creedsolo.pyx":810
  *     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):
  *         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
  *         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).             # <<<<<<<<<<<<<<
  *         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
  *         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nsym, __pyx_v_nsym) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nsym, __pyx_v_nsym) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 810; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":809
+  /* "reedsolo\creedsolo.pyx":811
  *         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
  *         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
  *         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)             # <<<<<<<<<<<<<<
  *         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1
  *         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nsize, __pyx_v_nsize) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nsize, __pyx_v_nsize) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 811; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":810
+  /* "reedsolo\creedsolo.pyx":812
  *         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
  *         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
  *         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1             # <<<<<<<<<<<<<<
  *         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
  *         self.generator = generator # generator integer, must be prime
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 810; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 812; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":811
+  /* "reedsolo\creedsolo.pyx":813
  *         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
  *         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1
  *         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly             # <<<<<<<<<<<<<<
  *         self.generator = generator # generator integer, must be prime
  *         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_prim, __pyx_v_prim) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 811; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_prim, __pyx_v_prim) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":812
+  /* "reedsolo\creedsolo.pyx":814
  *         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1
  *         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
  *         self.generator = generator # generator integer, must be prime             # <<<<<<<<<<<<<<
  *         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.
  * 
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 812; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":813
+  /* "reedsolo\creedsolo.pyx":815
  *         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
  *         self.generator = generator # generator integer, must be prime
  *         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.             # <<<<<<<<<<<<<<
  * 
  *         # Initialize the look-up tables for easy and quick multiplication/division
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_c_exp, __pyx_v_c_exp) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 813; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_c_exp, __pyx_v_c_exp) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 815; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":816
+  /* "reedsolo\creedsolo.pyx":818
  * 
  *         # Initialize the look-up tables for easy and quick multiplication/division
  *         init_tables(prim, generator, c_exp)             # <<<<<<<<<<<<<<
  *         # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_init_tables); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 816; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_init_tables); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -15719,7 +15741,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
       __pyx_t_4 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 816; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(3+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_3) {
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -15733,39 +15755,39 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
   __Pyx_INCREF(__pyx_v_c_exp);
   __Pyx_GIVEREF(__pyx_v_c_exp);
   PyTuple_SET_ITEM(__pyx_t_5, 2+__pyx_t_4, __pyx_v_c_exp);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 816; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":818
+  /* "reedsolo\creedsolo.pyx":820
  *         init_tables(prim, generator, c_exp)
  *         # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)             # <<<<<<<<<<<<<<
  * 
  *     def encode(self, data):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_generator_poly_all); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_generator_poly_all); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_nsize);
   __Pyx_GIVEREF(__pyx_v_nsize);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_nsize);
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_fcr, __pyx_v_fcr) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_generator, __pyx_v_generator) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_g_all, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_g_all, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":806
+  /* "reedsolo\creedsolo.pyx":808
  *     '''
  * 
  *     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
@@ -15781,7 +15803,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -15789,7 +15811,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":820
+/* "reedsolo\creedsolo.pyx":822
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
  * 
  *     def encode(self, data):             # <<<<<<<<<<<<<<
@@ -15798,10 +15820,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec___init__(CYTHON_UNUS
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_3encode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_7RSCodec_2encode[] = "Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_3encode = {"encode", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_3encode, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_7RSCodec_2encode};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_3encode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_3encode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_7RSCodec_2encode[] = "Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_7RSCodec_3encode = {"encode", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_7RSCodec_3encode, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_7RSCodec_2encode};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_3encode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_data = 0;
   int __pyx_lineno = 0;
@@ -15830,11 +15852,11 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_3encode(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("encode", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("encode", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "encode") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "encode") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -15847,20 +15869,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_3encode(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("encode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("encode", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(__pyx_self, __pyx_v_self, __pyx_v_data);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_7RSCodec_2encode(__pyx_self, __pyx_v_self, __pyx_v_data);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec_2encode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_v_chunk_size = NULL;
   PyObject *__pyx_v_enc = NULL;
   PyObject *__pyx_v_i = NULL;
@@ -15886,7 +15908,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   __Pyx_RefNannySetupContext("encode", 0);
   __Pyx_INCREF(__pyx_v_data);
 
-  /* "reedsolomon\creedsolo.pyx":822
+  /* "reedsolo\creedsolo.pyx":824
  *     def encode(self, data):
  *         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
  *         if isinstance(data, str):             # <<<<<<<<<<<<<<
@@ -15897,14 +15919,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":823
+    /* "reedsolo\creedsolo.pyx":825
  *         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
  *         if isinstance(data, str):
  *             data = bytearray(data, "latin-1")             # <<<<<<<<<<<<<<
  *         chunk_size = self.nsize - self.nsym
  *         enc = bytearray()
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 823; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -15918,7 +15940,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
         __pyx_t_6 = 1;
       }
     }
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 823; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -15929,7 +15951,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
     __Pyx_INCREF(__pyx_kp_s_latin_1);
     __Pyx_GIVEREF(__pyx_kp_s_latin_1);
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_kp_s_latin_1);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 823; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -15939,32 +15961,32 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":824
+  /* "reedsolo\creedsolo.pyx":826
  *         if isinstance(data, str):
  *             data = bytearray(data, "latin-1")
  *         chunk_size = self.nsize - self.nsym             # <<<<<<<<<<<<<<
  *         enc = bytearray()
  *         for i in xrange(0, len(data), chunk_size):
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = PyNumber_Subtract(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyNumber_Subtract(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_chunk_size = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":825
+  /* "reedsolo\creedsolo.pyx":827
  *             data = bytearray(data, "latin-1")
  *         chunk_size = self.nsize - self.nsym
  *         enc = bytearray()             # <<<<<<<<<<<<<<
  *         for i in xrange(0, len(data), chunk_size):
  *             chunk = data[i:i+chunk_size]
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -15977,27 +15999,27 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 825; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_enc = __pyx_t_7;
   __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":826
+  /* "reedsolo\creedsolo.pyx":828
  *         chunk_size = self.nsize - self.nsym
  *         enc = bytearray()
  *         for i in xrange(0, len(data), chunk_size):             # <<<<<<<<<<<<<<
  *             chunk = data[i:i+chunk_size]
  *             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
  */
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -16008,16 +16030,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   __Pyx_GIVEREF(__pyx_v_chunk_size);
   PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_chunk_size);
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_4, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_4, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   if (likely(PyList_CheckExact(__pyx_t_7)) || PyTuple_CheckExact(__pyx_t_7)) {
     __pyx_t_4 = __pyx_t_7; __Pyx_INCREF(__pyx_t_4); __pyx_t_6 = 0;
     __pyx_t_8 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_7); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   for (;;) {
@@ -16025,17 +16047,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
       if (likely(PyList_CheckExact(__pyx_t_4))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         #endif
       }
@@ -16045,7 +16067,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 826; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -16054,35 +16076,35 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":827
+    /* "reedsolo\creedsolo.pyx":829
  *         enc = bytearray()
  *         for i in xrange(0, len(data), chunk_size):
  *             chunk = data[i:i+chunk_size]             # <<<<<<<<<<<<<<
  *             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
  *         return enc
  */
-    __pyx_t_7 = PyNumber_Add(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyNumber_Add(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_v_i, &__pyx_t_7, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 827; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_v_i, &__pyx_t_7, NULL, 0, 0, 1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 829; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_XDECREF_SET(__pyx_v_chunk, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":828
+    /* "reedsolo\creedsolo.pyx":830
  *         for i in xrange(0, len(data), chunk_size):
  *             chunk = data[i:i+chunk_size]
  *             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))             # <<<<<<<<<<<<<<
  *         return enc
  * 
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_enc, __pyx_n_s_extend); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_enc, __pyx_n_s_extend); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_encode_msg); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_encode_msg); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_INCREF(__pyx_v_chunk);
     __Pyx_GIVEREF(__pyx_v_chunk);
@@ -16090,27 +16112,27 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_9);
     PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_9);
     __pyx_t_9 = 0;
-    __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fcr); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fcr); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_fcr, __pyx_t_11) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_fcr, __pyx_t_11) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_generator); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_generator); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_generator, __pyx_t_11) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_generator, __pyx_t_11) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_g_all); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_g_all); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = PyObject_GetItem(__pyx_t_11, __pyx_t_12); if (unlikely(__pyx_t_13 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_13 = PyObject_GetItem(__pyx_t_11, __pyx_t_12); if (unlikely(__pyx_t_13 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_gen, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_gen, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, __pyx_t_9); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, __pyx_t_9); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -16126,24 +16148,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
       }
     }
     if (!__pyx_t_9) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_13); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_13); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else {
-      __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9); __pyx_t_9 = NULL;
       __Pyx_GIVEREF(__pyx_t_13);
       PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_13);
       __pyx_t_13 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":826
+    /* "reedsolo\creedsolo.pyx":828
  *         chunk_size = self.nsize - self.nsym
  *         enc = bytearray()
  *         for i in xrange(0, len(data), chunk_size):             # <<<<<<<<<<<<<<
@@ -16153,7 +16175,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":829
+  /* "reedsolo\creedsolo.pyx":831
  *             chunk = data[i:i+chunk_size]
  *             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
  *         return enc             # <<<<<<<<<<<<<<
@@ -16165,7 +16187,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   __pyx_r = __pyx_v_enc;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":820
+  /* "reedsolo\creedsolo.pyx":822
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
  * 
  *     def encode(self, data):             # <<<<<<<<<<<<<<
@@ -16184,7 +16206,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.encode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_chunk_size);
@@ -16197,7 +16219,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "reedsolomon\creedsolo.pyx":831
+/* "reedsolo\creedsolo.pyx":833
  *         return enc
  * 
  *     def decode(self, data, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -16206,10 +16228,10 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_2encode(CYTHON_UNUSE
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_11reedsolomon_9creedsolo_7RSCodec_4decode[] = "Repair a message, whatever its size is, by using chunking";
-static PyMethodDef __pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_5decode = {"decode", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_7RSCodec_4decode};
-static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_5decode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_8reedsolo_9creedsolo_7RSCodec_4decode[] = "Repair a message, whatever its size is, by using chunking";
+static PyMethodDef __pyx_mdef_8reedsolo_9creedsolo_7RSCodec_5decode = {"decode", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_7RSCodec_5decode, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_7RSCodec_4decode};
+static PyObject *__pyx_pw_8reedsolo_9creedsolo_7RSCodec_5decode(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   PyObject *__pyx_v_data = 0;
   PyObject *__pyx_v_erase_pos = 0;
@@ -16244,7 +16266,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode(PyObject *__
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("decode", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("decode", 0, 2, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (kw_args > 0) {
@@ -16258,7 +16280,7 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode(PyObject *__
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "decode") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "decode") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -16277,20 +16299,20 @@ static PyObject *__pyx_pw_11reedsolomon_9creedsolo_7RSCodec_5decode(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("decode", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("decode", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.decode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.decode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(__pyx_self, __pyx_v_self, __pyx_v_data, __pyx_v_erase_pos, __pyx_v_only_erasures);
+  __pyx_r = __pyx_pf_8reedsolo_9creedsolo_7RSCodec_4decode(__pyx_self, __pyx_v_self, __pyx_v_data, __pyx_v_erase_pos, __pyx_v_only_erasures);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
+static PyObject *__pyx_pf_8reedsolo_9creedsolo_7RSCodec_4decode(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_data, PyObject *__pyx_v_erase_pos, PyObject *__pyx_v_only_erasures) {
   PyObject *__pyx_v_dec = NULL;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_v_chunk = NULL;
@@ -16318,7 +16340,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_INCREF(__pyx_v_erase_pos);
 
-  /* "reedsolomon\creedsolo.pyx":834
+  /* "reedsolo\creedsolo.pyx":836
  *         '''Repair a message, whatever its size is, by using chunking'''
  *         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
  *         if isinstance(data, str):             # <<<<<<<<<<<<<<
@@ -16329,14 +16351,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "reedsolomon\creedsolo.pyx":835
+    /* "reedsolo\creedsolo.pyx":837
  *         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
  *         if isinstance(data, str):
  *             data = bytearray(data, "latin-1")             # <<<<<<<<<<<<<<
  *         dec = bytearray()
  *         for i in xrange(0, len(data), self.nsize):
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_6 = 0;
@@ -16350,7 +16372,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
         __pyx_t_6 = 1;
       }
     }
-    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     if (__pyx_t_5) {
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -16361,7 +16383,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
     __Pyx_INCREF(__pyx_kp_s_latin_1);
     __Pyx_GIVEREF(__pyx_kp_s_latin_1);
     PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_kp_s_latin_1);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 835; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -16371,14 +16393,14 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   }
   __pyx_L3:;
 
-  /* "reedsolomon\creedsolo.pyx":836
+  /* "reedsolo\creedsolo.pyx":838
  *         if isinstance(data, str):
  *             data = bytearray(data, "latin-1")
  *         dec = bytearray()             # <<<<<<<<<<<<<<
  *         for i in xrange(0, len(data), self.nsize):
  *             # Split the long message in a chunk
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_bytearray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -16391,29 +16413,29 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
     }
   }
   if (__pyx_t_7) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 836; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 838; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_dec = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":837
+  /* "reedsolo\creedsolo.pyx":839
  *             data = bytearray(data, "latin-1")
  *         dec = bytearray()
  *         for i in xrange(0, len(data), self.nsize):             # <<<<<<<<<<<<<<
  *             # Split the long message in a chunk
  *             chunk = data[i:i+self.nsize]
  */
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(3); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -16424,16 +16446,16 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_7, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_xrange, __pyx_t_7, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
     __pyx_t_7 = __pyx_t_4; __Pyx_INCREF(__pyx_t_7); __pyx_t_6 = 0;
     __pyx_t_8 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_7 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = -1; __pyx_t_7 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = Py_TYPE(__pyx_t_7)->tp_iternext; if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   for (;;) {
@@ -16441,17 +16463,17 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
       if (likely(PyList_CheckExact(__pyx_t_7))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_7)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_7, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_7, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_7, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_7, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_7)) break;
         #if CYTHON_COMPILING_IN_CPYTHON
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_7, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_7, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_7, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_7, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -16461,7 +16483,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
         break;
       }
@@ -16470,118 +16492,52 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":839
+    /* "reedsolo\creedsolo.pyx":841
  *         for i in xrange(0, len(data), self.nsize):
  *             # Split the long message in a chunk
  *             chunk = data[i:i+self.nsize]             # <<<<<<<<<<<<<<
  *             # Extract the erasures for this chunk
  *             e_pos = []
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyNumber_Add(__pyx_v_i, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyNumber_Add(__pyx_v_i, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_v_i, &__pyx_t_3, NULL, 0, 0, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 839; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_v_i, &__pyx_t_3, NULL, 0, 0, 1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF_SET(__pyx_v_chunk, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":841
+    /* "reedsolo\creedsolo.pyx":843
  *             chunk = data[i:i+self.nsize]
  *             # Extract the erasures for this chunk
  *             e_pos = []             # <<<<<<<<<<<<<<
  *             if erase_pos:
  *                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
  */
-    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_XDECREF_SET(__pyx_v_e_pos, ((PyObject*)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":842
+    /* "reedsolo\creedsolo.pyx":844
  *             # Extract the erasures for this chunk
  *             e_pos = []
  *             if erase_pos:             # <<<<<<<<<<<<<<
  *                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
  *                 e_pos = [x for x in erase_pos if x <= self.nsize]
  */
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_erase_pos); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 842; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_erase_pos); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_2) {
 
-      /* "reedsolomon\creedsolo.pyx":844
+      /* "reedsolo\creedsolo.pyx":846
  *             if erase_pos:
  *                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
  *                 e_pos = [x for x in erase_pos if x <= self.nsize]             # <<<<<<<<<<<<<<
  *                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
  *                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]
- */
-      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_4);
-      if (likely(PyList_CheckExact(__pyx_v_erase_pos)) || PyTuple_CheckExact(__pyx_v_erase_pos)) {
-        __pyx_t_3 = __pyx_v_erase_pos; __Pyx_INCREF(__pyx_t_3); __pyx_t_9 = 0;
-        __pyx_t_10 = NULL;
-      } else {
-        __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      }
-      for (;;) {
-        if (likely(!__pyx_t_10)) {
-          if (likely(PyList_CheckExact(__pyx_t_3))) {
-            if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_3)) break;
-            #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            #else
-            __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_5);
-            #endif
-          } else {
-            if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
-            #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            #else
-            __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_5);
-            #endif
-          }
-        } else {
-          __pyx_t_5 = __pyx_t_10(__pyx_t_3);
-          if (unlikely(!__pyx_t_5)) {
-            PyObject* exc_type = PyErr_Occurred();
-            if (exc_type) {
-              if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            }
-            break;
-          }
-          __Pyx_GOTREF(__pyx_t_5);
-        }
-        __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_5);
-        __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_11 = PyObject_RichCompare(__pyx_v_x, __pyx_t_5, Py_LE); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        if (__pyx_t_2) {
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_v_x))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          goto __pyx_L9;
-        }
-        __pyx_L9:;
-      }
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF_SET(__pyx_v_e_pos, ((PyObject*)__pyx_t_4));
-      __pyx_t_4 = 0;
-
-      /* "reedsolomon\creedsolo.pyx":846
- *                 e_pos = [x for x in erase_pos if x <= self.nsize]
- *                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
- *                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]             # <<<<<<<<<<<<<<
- *             # Decode/repair this chunk!
- *             dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)[0])
  */
       __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
@@ -16598,17 +16554,83 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
           if (likely(PyList_CheckExact(__pyx_t_3))) {
             if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_3)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_5);
+            #endif
+          } else {
+            if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+            #if CYTHON_COMPILING_IN_CPYTHON
+            __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_5); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            #else
+            __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_5);
+            #endif
+          }
+        } else {
+          __pyx_t_5 = __pyx_t_10(__pyx_t_3);
+          if (unlikely(!__pyx_t_5)) {
+            PyObject* exc_type = PyErr_Occurred();
+            if (exc_type) {
+              if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            }
+            break;
+          }
+          __Pyx_GOTREF(__pyx_t_5);
+        }
+        __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_5);
+        __pyx_t_5 = 0;
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_5);
+        __pyx_t_11 = PyObject_RichCompare(__pyx_v_x, __pyx_t_5, Py_LE); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        if (__pyx_t_2) {
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_v_x))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          goto __pyx_L9;
+        }
+        __pyx_L9:;
+      }
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF_SET(__pyx_v_e_pos, ((PyObject*)__pyx_t_4));
+      __pyx_t_4 = 0;
+
+      /* "reedsolo\creedsolo.pyx":848
+ *                 e_pos = [x for x in erase_pos if x <= self.nsize]
+ *                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
+ *                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]             # <<<<<<<<<<<<<<
+ *             # Decode/repair this chunk!
+ *             dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)[0])
+ */
+      __pyx_t_4 = PyList_New(0); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      if (likely(PyList_CheckExact(__pyx_v_erase_pos)) || PyTuple_CheckExact(__pyx_v_erase_pos)) {
+        __pyx_t_3 = __pyx_v_erase_pos; __Pyx_INCREF(__pyx_t_3); __pyx_t_9 = 0;
+        __pyx_t_10 = NULL;
+      } else {
+        __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_erase_pos); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      }
+      for (;;) {
+        if (likely(!__pyx_t_10)) {
+          if (likely(PyList_CheckExact(__pyx_t_3))) {
+            if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_3)) break;
+            #if CYTHON_COMPILING_IN_CPYTHON
+            __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            #else
+            __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
             #endif
           } else {
             if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
             #endif
           }
@@ -16618,7 +16640,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             }
             break;
           }
@@ -16626,22 +16648,22 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
         }
         __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_5 = PyObject_RichCompare(__pyx_v_x, __pyx_t_11, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = PyObject_RichCompare(__pyx_v_x, __pyx_t_11, Py_GT); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         if (__pyx_t_2) {
-          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsize); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_11 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_11 = PyNumber_Add(__pyx_t_5, __pyx_int_1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = PyNumber_Subtract(__pyx_v_x, __pyx_t_11); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = PyNumber_Subtract(__pyx_v_x, __pyx_t_11); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_5))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 846; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_4, (PyObject*)__pyx_t_5))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           goto __pyx_L12;
         }
@@ -16654,20 +16676,20 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
     }
     __pyx_L6:;
 
-    /* "reedsolomon\creedsolo.pyx":848
+    /* "reedsolo\creedsolo.pyx":850
  *                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]
  *             # Decode/repair this chunk!
  *             dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)[0])             # <<<<<<<<<<<<<<
  *         return dec
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_dec, __pyx_n_s_extend); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_dec, __pyx_n_s_extend); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_msg); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_rs_correct_msg); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nsym); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_INCREF(__pyx_v_chunk);
     __Pyx_GIVEREF(__pyx_v_chunk);
@@ -16675,24 +16697,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fcr); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fcr); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
-    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_fcr, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_fcr, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_generator); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_generator); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
-    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_generator, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_generator, __pyx_t_13) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_erase_pos, __pyx_v_e_pos) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_only_erasures, __pyx_v_only_erasures) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_erase_pos, __pyx_v_e_pos) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_only_erasures, __pyx_v_only_erasures) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_13, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
+    __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_13, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_11 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __pyx_t_13 = NULL;
@@ -16706,24 +16728,24 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
       }
     }
     if (!__pyx_t_13) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_11); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_GOTREF(__pyx_t_4);
     } else {
-      __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13); __pyx_t_13 = NULL;
       __Pyx_GIVEREF(__pyx_t_11);
       PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_11);
       __pyx_t_11 = 0;
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 848; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":837
+    /* "reedsolo\creedsolo.pyx":839
  *             data = bytearray(data, "latin-1")
  *         dec = bytearray()
  *         for i in xrange(0, len(data), self.nsize):             # <<<<<<<<<<<<<<
@@ -16733,7 +16755,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":849
+  /* "reedsolo\creedsolo.pyx":851
  *             # Decode/repair this chunk!
  *             dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)[0])
  *         return dec             # <<<<<<<<<<<<<<
@@ -16744,7 +16766,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   __pyx_r = __pyx_v_dec;
   goto __pyx_L0;
 
-  /* "reedsolomon\creedsolo.pyx":831
+  /* "reedsolo\creedsolo.pyx":833
  *         return enc
  * 
  *     def decode(self, data, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
@@ -16761,7 +16783,7 @@ static PyObject *__pyx_pf_11reedsolomon_9creedsolo_7RSCodec_4decode(CYTHON_UNUSE
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_12);
   __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_AddTraceback("reedsolomon.creedsolo.RSCodec.decode", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("reedsolo.creedsolo.RSCodec.decode", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_dec);
@@ -28043,14 +28065,14 @@ static void __pyx_memoryview__slice_assign_scalar(char *__pyx_v_data, Py_ssize_t
   /* function exit code */
 }
 
-static struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_freelist_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[8];
-static int __pyx_freecount_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = 0;
+static struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *__pyx_freelist_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[8];
+static int __pyx_freecount_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = 0;
 
-static PyObject *__pyx_tp_new_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow)))) {
-    o = (PyObject*)__pyx_freelist_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[--__pyx_freecount_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow];
-    memset(o, 0, sizeof(struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow));
+  if (CYTHON_COMPILING_IN_CPYTHON && likely((__pyx_freecount_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow > 0) & (t->tp_basicsize == sizeof(struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow)))) {
+    o = (PyObject*)__pyx_freelist_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[--__pyx_freecount_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow];
+    memset(o, 0, sizeof(struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow));
     (void) PyObject_INIT(o, t);
     PyObject_GC_Track(o);
   } else {
@@ -28060,41 +28082,41 @@ static PyObject *__pyx_tp_new_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mu
   return o;
 }
 
-static void __pyx_tp_dealloc_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o) {
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
+static void __pyx_tp_dealloc_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o) {
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
   PyObject_GC_UnTrack(o);
   Py_CLEAR(p->__pyx_v_bit_length);
-  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow)))) {
-    __pyx_freelist_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[__pyx_freecount_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow++] = ((struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o);
+  if (CYTHON_COMPILING_IN_CPYTHON && ((__pyx_freecount_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow < 8) & (Py_TYPE(o)->tp_basicsize == sizeof(struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow)))) {
+    __pyx_freelist_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow[__pyx_freecount_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow++] = ((struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o);
   } else {
     (*Py_TYPE(o)->tp_free)(o);
   }
 }
 
-static int __pyx_tp_traverse_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
   if (p->__pyx_v_bit_length) {
     e = (*v)(p->__pyx_v_bit_length, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o) {
+static int __pyx_tp_clear_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
+  struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *p = (struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow *)o;
   tmp = ((PyObject*)p->__pyx_v_bit_length);
   p->__pyx_v_bit_length = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyTypeObject __pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = {
+static PyTypeObject __pyx_type_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = {
   PyVarObject_HEAD_INIT(0, 0)
-  "reedsolomon.creedsolo.__pyx_scope_struct__gf_mult_noLUT_slow", /*tp_name*/
-  sizeof(struct __pyx_obj_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow), /*tp_basicsize*/
+  "reedsolo.creedsolo.__pyx_scope_struct__gf_mult_noLUT_slow", /*tp_name*/
+  sizeof(struct __pyx_obj_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_dealloc*/
+  __pyx_tp_dealloc_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -28115,8 +28137,8 @@ static PyTypeObject __pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_m
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_traverse*/
-  __pyx_tp_clear_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_clear*/
+  __pyx_tp_traverse_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_traverse*/
+  __pyx_tp_clear_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
@@ -28131,7 +28153,7 @@ static PyTypeObject __pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_m
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_new*/
+  __pyx_tp_new_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -28263,7 +28285,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "reedsolomon.creedsolo.array", /*tp_name*/
+  "reedsolo.creedsolo.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -28368,7 +28390,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "reedsolomon.creedsolo.Enum", /*tp_name*/
+  "reedsolo.creedsolo.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -28614,7 +28636,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "reedsolomon.creedsolo.memoryview", /*tp_name*/
+  "reedsolo.creedsolo.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -28738,7 +28760,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "reedsolomon.creedsolo._memoryviewslice", /*tp_name*/
+  "reedsolo.creedsolo._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -28802,15 +28824,15 @@ static PyTypeObject __pyx_type___pyx_memoryviewslice = {
 };
 
 static PyMethodDef __pyx_methods[] = {
-  {"gf_add", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_9gf_add, METH_VARARGS|METH_KEYWORDS, 0},
-  {"gf_sub", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_11gf_sub, METH_VARARGS|METH_KEYWORDS, 0},
-  {"gf_neg", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_13gf_neg, METH_O, 0},
-  {"gf_inverse", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_15gf_inverse, METH_O, 0},
-  {"gf_mul", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_17gf_mul, METH_VARARGS|METH_KEYWORDS, 0},
-  {"gf_div", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_19gf_div, METH_VARARGS|METH_KEYWORDS, 0},
-  {"gf_pow", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_21gf_pow, METH_VARARGS|METH_KEYWORDS, 0},
-  {"gf_mult_noLUT", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_25gf_mult_noLUT, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_24gf_mult_noLUT},
-  {"gf_poly_mul", (PyCFunction)__pyx_pw_11reedsolomon_9creedsolo_31gf_poly_mul, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11reedsolomon_9creedsolo_30gf_poly_mul},
+  {"gf_add", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_9gf_add, METH_VARARGS|METH_KEYWORDS, 0},
+  {"gf_sub", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_11gf_sub, METH_VARARGS|METH_KEYWORDS, 0},
+  {"gf_neg", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_13gf_neg, METH_O, 0},
+  {"gf_inverse", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_15gf_inverse, METH_O, 0},
+  {"gf_mul", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_17gf_mul, METH_VARARGS|METH_KEYWORDS, 0},
+  {"gf_div", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_19gf_div, METH_VARARGS|METH_KEYWORDS, 0},
+  {"gf_pow", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_21gf_pow, METH_VARARGS|METH_KEYWORDS, 0},
+  {"gf_mult_noLUT", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_25gf_mult_noLUT, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_24gf_mult_noLUT},
+  {"gf_poly_mul", (PyCFunction)__pyx_pw_8reedsolo_9creedsolo_31gf_poly_mul, METH_VARARGS|METH_KEYWORDS, __pyx_doc_8reedsolo_9creedsolo_30gf_poly_mul},
   {0, 0, 0, 0}
 };
 
@@ -28836,7 +28858,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_A_Reed_Solomon_encoder_decoder, __pyx_k_A_Reed_Solomon_encoder_decoder, sizeof(__pyx_k_A_Reed_Solomon_encoder_decoder), 0, 0, 1, 0},
   {&__pyx_n_s_B, __pyx_k_B, sizeof(__pyx_k_B), 0, 0, 1, 1},
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
-  {&__pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_k_C_git_rfigc_reedsolomon_creedsol, sizeof(__pyx_k_C_git_rfigc_reedsolomon_creedsol), 0, 0, 1, 0},
+  {&__pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_k_C_git_rfigc_reedsolo_creedsolo_p, sizeof(__pyx_k_C_git_rfigc_reedsolo_creedsolo_p), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_only_create_a_buffer_that_is, __pyx_k_Can_only_create_a_buffer_that_is, sizeof(__pyx_k_Can_only_create_a_buffer_that_is), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
   {&__pyx_kp_s_Could_not_correct_message, __pyx_k_Could_not_correct_message, sizeof(__pyx_k_Could_not_correct_message), 0, 0, 1, 0},
@@ -28883,6 +28905,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
   {&__pyx_n_s_c_exp, __pyx_k_c_exp, sizeof(__pyx_k_c_exp), 0, 0, 1, 1},
+  {&__pyx_n_s_carryless, __pyx_k_carryless, sizeof(__pyx_k_carryless), 0, 0, 1, 1},
   {&__pyx_n_s_ch, __pyx_k_ch, sizeof(__pyx_k_ch), 0, 0, 1, 1},
   {&__pyx_n_s_chunk, __pyx_k_chunk, sizeof(__pyx_k_chunk), 0, 0, 1, 1},
   {&__pyx_n_s_chunk_size, __pyx_k_chunk_size, sizeof(__pyx_k_chunk_size), 0, 0, 1, 1},
@@ -29016,7 +29039,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_qualname, __pyx_k_qualname, sizeof(__pyx_k_qualname), 0, 0, 1, 1},
   {&__pyx_n_s_r, __pyx_k_r, sizeof(__pyx_k_r), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-  {&__pyx_n_s_reedsolomon_creedsolo, __pyx_k_reedsolomon_creedsolo, sizeof(__pyx_k_reedsolomon_creedsolo), 0, 0, 1, 1},
+  {&__pyx_n_s_reedsolo_creedsolo, __pyx_k_reedsolo_creedsolo, sizeof(__pyx_k_reedsolo_creedsolo), 0, 0, 1, 1},
   {&__pyx_n_s_remainder, __pyx_k_remainder, sizeof(__pyx_k_remainder), 0, 0, 1, 1},
   {&__pyx_n_s_result, __pyx_k_result, sizeof(__pyx_k_result), 0, 0, 1, 1},
   {&__pyx_n_s_root_charac, __pyx_k_root_charac, sizeof(__pyx_k_root_charac), 0, 0, 1, 1},
@@ -29070,12 +29093,12 @@ static int __Pyx_InitCachedBuiltins(void) {
   #else
   __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ord = __Pyx_GetBuiltinName(__pyx_n_s_ord); if (!__pyx_builtin_ord) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 536; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 701; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 538; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_Ellipsis = __Pyx_GetBuiltinName(__pyx_n_s_Ellipsis); if (!__pyx_builtin_Ellipsis) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -29091,7 +29114,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "reedsolomon\creedsolo.pyx":99
+  /* "reedsolo\creedsolo.pyx":99
  *     def bytearray(obj = 0, encoding = "latin-1"):
  *         if isinstance(obj, str):
  *             obj = [ord(ch) for ch in obj.encode("latin-1")]             # <<<<<<<<<<<<<<
@@ -29102,7 +29125,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "reedsolomon\creedsolo.pyx":255
+  /* "reedsolo\creedsolo.pyx":255
  * 
  *     ### Define bitwise carry-less operations as inner functions ###
  *     def cl_mult(x,y):             # <<<<<<<<<<<<<<
@@ -29112,9 +29135,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__2 = PyTuple_Pack(4, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_z, __pyx_n_s_i); if (unlikely(!__pyx_tuple__2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_cl_mult, 255, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_cl_mult, 255, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 255; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":265
+  /* "reedsolo\creedsolo.pyx":265
  *         return z
  * 
  *     def bit_length(n):             # <<<<<<<<<<<<<<
@@ -29124,9 +29147,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__4 = PyTuple_Pack(2, __pyx_n_s_n, __pyx_n_s_bits); if (unlikely(!__pyx_tuple__4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_bit_length, 265, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_bit_length, 265, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":271
+  /* "reedsolo\creedsolo.pyx":271
  *         return bits
  * 
  *     def cl_div(dividend, divisor=None):             # <<<<<<<<<<<<<<
@@ -29136,165 +29159,165 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__6 = PyTuple_Pack(5, __pyx_n_s_dividend, __pyx_n_s_divisor, __pyx_n_s_dl1, __pyx_n_s_dl2, __pyx_n_s_i); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_cl_div, 271, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_cl_div, 271, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_tuple__8 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 271; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "reedsolomon\creedsolo.pyx":525
+  /* "reedsolo\creedsolo.pyx":527
  *     err_loc = rs_find_errata_locator(coef_pos, generator)
  *     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
  *     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]             # <<<<<<<<<<<<<<
  * 
  *     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
  */
-  __pyx_slice__11 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__11 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__11);
   __Pyx_GIVEREF(__pyx_slice__11);
-  __pyx_slice__12 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 525; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__12 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 527; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__12);
   __Pyx_GIVEREF(__pyx_slice__12);
 
-  /* "reedsolomon\creedsolo.pyx":555
+  /* "reedsolo\creedsolo.pyx":557
  *         # This is a more faithful translation of the theoretical equation contrary to the old forney method. Here it is exactly copy/pasted from the included presentation decoding_rs.pdf: Yl = omega(Xl.inverse()) / prod(1 - Xj*Xl.inverse()) for j in len(X) (in the paper it's for j in s, but it's useless when len(X) < s because we compute neutral terms 1 for nothing, and wrong when correcting more than s erasures or erasures+errors since it prevents computing all required terms).
  *         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.
  *         y = gf_poly_eval(err_eval[::-1], Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)             # <<<<<<<<<<<<<<
  *         y = gf_mul(gf_pow(Xi, 1-fcr), y) # adjust to fcr parameter
  * 
  */
-  __pyx_slice__13 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 555; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__13 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 557; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__13);
   __Pyx_GIVEREF(__pyx_slice__13);
 
-  /* "reedsolomon\creedsolo.pyx":624
+  /* "reedsolo\creedsolo.pyx":626
  *     errs = len(err_loc) - 1
  *     if (errs-erase_count) * 2 + erase_count > nsym:
  *         raise ReedSolomonError("Too many errors to correct")             # <<<<<<<<<<<<<<
  * 
  *     return err_loc
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_Too_many_errors_to_correct); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_Too_many_errors_to_correct); if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 626; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "reedsolomon\creedsolo.pyx":659
+  /* "reedsolo\creedsolo.pyx":661
  *     if len(err_pos) != errs:
  *         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
  *         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")             # <<<<<<<<<<<<<<
  *     return err_pos
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_Too_many_or_few_errors_found_by); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 659; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_Too_many_or_few_errors_found_by); if (unlikely(!__pyx_tuple__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 661; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "reedsolomon\creedsolo.pyx":667
+  /* "reedsolo\creedsolo.pyx":669
  * 
  *     # Optimized method, all operations are inlined
  *     fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition             # <<<<<<<<<<<<<<
  *     for i in xrange(len(pos)):
  *         x = gf_pow(generator, erase_pos_reversed[i])
  */
-  __pyx_slice__16 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 667; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__16 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 669; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__16);
   __Pyx_GIVEREF(__pyx_slice__16);
 
-  /* "reedsolomon\creedsolo.pyx":697
+  /* "reedsolo\creedsolo.pyx":699
  *             msg_out[e_pos] = 0
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")             # <<<<<<<<<<<<<<
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_Too_many_erasures_to_correct); if (unlikely(!__pyx_tuple__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 697; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_Too_many_erasures_to_correct); if (unlikely(!__pyx_tuple__17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 699; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "reedsolomon\creedsolo.pyx":713
+  /* "reedsolo\creedsolo.pyx":715
  *         err_loc = rs_find_error_locator(fsynd, nsym, erase_count=len(erase_pos))
  *         # locate the message errors using Chien search (or bruteforce search)
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)             # <<<<<<<<<<<<<<
  *         if err_pos is None:
  *             raise ReedSolomonError("Could not locate error")
  */
-  __pyx_slice__18 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__18 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__18);
   __Pyx_GIVEREF(__pyx_slice__18);
 
-  /* "reedsolomon\creedsolo.pyx":715
+  /* "reedsolo\creedsolo.pyx":717
  *         err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)
  *         if err_pos is None:
  *             raise ReedSolomonError("Could not locate error")             # <<<<<<<<<<<<<<
  * 
  *     # Find errors values and apply them to correct the message
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_Could_not_locate_error); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 715; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_Could_not_locate_error); if (unlikely(!__pyx_tuple__19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 717; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "reedsolomon\creedsolo.pyx":723
+  /* "reedsolo\creedsolo.pyx":725
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")             # <<<<<<<<<<<<<<
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Could_not_correct_message); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Could_not_correct_message); if (unlikely(!__pyx_tuple__20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "reedsolomon\creedsolo.pyx":741
+  /* "reedsolo\creedsolo.pyx":743
  *             msg_out[e_pos] = 0
  *     # check if there are too many erasures
  *     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")             # <<<<<<<<<<<<<<
  *     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Too_many_erasures_to_correct); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Too_many_erasures_to_correct); if (unlikely(!__pyx_tuple__21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 743; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "reedsolomon\creedsolo.pyx":760
+  /* "reedsolo\creedsolo.pyx":762
  *     # prepare errors/errata locator polynomial
  *     if only_erasures:
  *         err_loc = erase_loc[::-1]             # <<<<<<<<<<<<<<
  *         #err_eval = erase_eval[::-1]
  *     else:
  */
-  __pyx_slice__22 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 760; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__22 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__22);
   __Pyx_GIVEREF(__pyx_slice__22);
 
-  /* "reedsolomon\creedsolo.pyx":764
+  /* "reedsolo\creedsolo.pyx":766
  *     else:
  *         err_loc = rs_find_error_locator(synd, nsym, erase_loc=erase_loc, erase_count=erase_count)
  *         err_loc = err_loc[::-1]             # <<<<<<<<<<<<<<
  *         #err_eval = rs_find_error_evaluator(synd[::-1], err_loc[::-1], len(err_loc)-1)[::-1] # find error/errata evaluator polynomial (not really necessary since we already compute it at the same time as the error locator poly in BM)
  * 
  */
-  __pyx_slice__23 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_slice__23 = PySlice_New(Py_None, Py_None, __pyx_int_neg_1); if (unlikely(!__pyx_slice__23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_slice__23);
   __Pyx_GIVEREF(__pyx_slice__23);
 
-  /* "reedsolomon\creedsolo.pyx":770
+  /* "reedsolo\creedsolo.pyx":772
  *     err_pos = rs_find_errors(err_loc, len(msg_out), generator) # find the roots of the errata locator polynomial (ie: the positions of the errors/errata)
  *     if err_pos is None:
  *         raise ReedSolomonError("Could not locate error")             # <<<<<<<<<<<<<<
  * 
  *     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
  */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_Could_not_locate_error); if (unlikely(!__pyx_tuple__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 770; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_Could_not_locate_error); if (unlikely(!__pyx_tuple__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 772; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
 
-  /* "reedsolomon\creedsolo.pyx":777
+  /* "reedsolo\creedsolo.pyx":779
  *     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
  *     if max(synd) > 0:
  *         raise ReedSolomonError("Could not correct message")             # <<<<<<<<<<<<<<
  *     # return the successfully decoded message
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  */
-  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_Could_not_correct_message); if (unlikely(!__pyx_tuple__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_Could_not_correct_message); if (unlikely(!__pyx_tuple__25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 779; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
@@ -29433,7 +29456,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
 
-  /* "reedsolomon\creedsolo.pyx":97
+  /* "reedsolo\creedsolo.pyx":97
  *     bytearray
  * except NameError:
  *     def bytearray(obj = 0, encoding = "latin-1"):             # <<<<<<<<<<<<<<
@@ -29443,9 +29466,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__38 = PyTuple_Pack(3, __pyx_n_s_obj, __pyx_n_s_encoding, __pyx_n_s_ch); if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_bytearray, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_bytearray, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":117
+  /* "reedsolo\creedsolo.pyx":117
  * ################### GALOIS FIELD ELEMENTS MATHS ###################
  * 
  * def rwh_primes1(n):             # <<<<<<<<<<<<<<
@@ -29455,9 +29478,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_n, __pyx_n_s_sieve, __pyx_n_s_i); if (unlikely(!__pyx_tuple__40)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rwh_primes1, 117, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rwh_primes1, 117, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":126
+  /* "reedsolo\creedsolo.pyx":126
  *     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
  * 
  * def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):             # <<<<<<<<<<<<<<
@@ -29467,9 +29490,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__42 = PyTuple_Pack(14, __pyx_n_s_generator, __pyx_n_s_c_exp, __pyx_n_s_fast_primes, __pyx_n_s_single, __pyx_n_s_root_charac, __pyx_n_s_field_charac, __pyx_n_s_field_charac_next, __pyx_n_s_prim_candidates, __pyx_n_s_correct_primes, __pyx_n_s_prim, __pyx_n_s_seen, __pyx_n_s_conflict, __pyx_n_s_x, __pyx_n_s_i); if (unlikely(!__pyx_tuple__42)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
-  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(4, 0, 14, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_find_prime_polys, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__43 = (PyObject*)__Pyx_PyCode_New(4, 0, 14, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__42, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_find_prime_polys, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__43)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":180
+  /* "reedsolo\creedsolo.pyx":180
  *     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
  * 
  * def init_tables(prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
@@ -29479,9 +29502,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__44 = PyTuple_Pack(5, __pyx_n_s_prim, __pyx_n_s_generator, __pyx_n_s_c_exp, __pyx_n_s_x, __pyx_n_s_i); if (unlikely(!__pyx_tuple__44)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_init_tables, 180, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_init_tables, 180, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":251
+  /* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
@@ -29491,9 +29514,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__46 = PyTuple_Pack(10, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_prim, __pyx_n_s_cl_mult, __pyx_n_s_cl_mult, __pyx_n_s_bit_length, __pyx_n_s_bit_length, __pyx_n_s_cl_div, __pyx_n_s_cl_div, __pyx_n_s_result); if (unlikely(!__pyx_tuple__46)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__46);
   __Pyx_GIVEREF(__pyx_tuple__46);
-  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_mult_noLUT_slow, 251, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__47 = (PyObject*)__Pyx_PyCode_New(3, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__46, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_mult_noLUT_slow, 251, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__47)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":312
+  /* "reedsolo\creedsolo.pyx":312
  * ################### GALOIS FIELD POLYNOMIALS MATHS ###################
  * 
  * def gf_poly_scale(p, x):             # <<<<<<<<<<<<<<
@@ -29503,9 +29526,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__48 = PyTuple_Pack(3, __pyx_n_s_p, __pyx_n_s_x, __pyx_n_s_i); if (unlikely(!__pyx_tuple__48)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
-  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_scale, 312, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__49 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__48, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_scale, 312, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__49)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":315
+  /* "reedsolo\creedsolo.pyx":315
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
  * 
  * def gf_poly_add(p, q):             # <<<<<<<<<<<<<<
@@ -29515,9 +29538,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__50 = PyTuple_Pack(4, __pyx_n_s_p, __pyx_n_s_q, __pyx_n_s_r, __pyx_n_s_i); if (unlikely(!__pyx_tuple__50)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
-  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_add, 315, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__51 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__50, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_add, 315, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__51)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":347
+  /* "reedsolo\creedsolo.pyx":347
  *     return bytearray(r)
  * 
  * def gf_poly_neg(poly):             # <<<<<<<<<<<<<<
@@ -29527,9 +29550,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__52 = PyTuple_Pack(1, __pyx_n_s_poly); if (unlikely(!__pyx_tuple__52)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
-  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_neg, 347, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__53 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__52, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_neg, 347, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__53)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":351
+  /* "reedsolo\creedsolo.pyx":351
  *     return poly
  * 
  * def gf_poly_div(dividend, divisor):             # <<<<<<<<<<<<<<
@@ -29539,9 +29562,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__54 = PyTuple_Pack(11, __pyx_n_s_dividend, __pyx_n_s_divisor, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_coef, __pyx_n_s_lcoef, __pyx_n_s_dividend_t, __pyx_n_s_msg_out, __pyx_n_s_divisor_t, __pyx_n_s_ldivisor_t, __pyx_n_s_separator); if (unlikely(!__pyx_tuple__54)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__54);
   __Pyx_GIVEREF(__pyx_tuple__54);
-  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_div, 351, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__55 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__54, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_div, 351, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__55)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":377
+  /* "reedsolo\creedsolo.pyx":377
  *     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
  * 
  * def gf_poly_square(poly):             # <<<<<<<<<<<<<<
@@ -29551,9 +29574,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__56 = PyTuple_Pack(6, __pyx_n_s_poly, __pyx_n_s_length, __pyx_n_s_out, __pyx_n_s_i, __pyx_n_s_p, __pyx_n_s_k); if (unlikely(!__pyx_tuple__56)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__56);
   __Pyx_GIVEREF(__pyx_tuple__56);
-  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_square, 377, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__57 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__56, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_square, 377, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__57)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":393
+  /* "reedsolo\creedsolo.pyx":393
  *     return out
  * 
  * def gf_poly_eval(poly, uint8_t x):             # <<<<<<<<<<<<<<
@@ -29563,9 +29586,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__58 = PyTuple_Pack(4, __pyx_n_s_poly, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_y); if (unlikely(!__pyx_tuple__58)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
-  __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_poly_eval, 393, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__59 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__58, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_poly_eval, 393, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__59)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":404
+  /* "reedsolo\creedsolo.pyx":404
  * ################### REED-SOLOMON ENCODING ###################
  * 
  * def rs_generator_poly(nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -29575,9 +29598,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__60 = PyTuple_Pack(5, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_i, __pyx_n_s_g); if (unlikely(!__pyx_tuple__60)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__60);
   __Pyx_GIVEREF(__pyx_tuple__60);
-  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_generator_poly, 404, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__61 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__60, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_generator_poly, 404, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":412
+  /* "reedsolo\creedsolo.pyx":412
  *     return bytearray(g)
  * 
  * def rs_generator_poly_all(max_nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -29587,9 +29610,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__62 = PyTuple_Pack(5, __pyx_n_s_max_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_g_all, __pyx_n_s_nsym); if (unlikely(!__pyx_tuple__62)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__62);
   __Pyx_GIVEREF(__pyx_tuple__62);
-  __pyx_codeobj__63 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_generator_poly_all, 412, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__63)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__63 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__62, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_generator_poly_all, 412, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__63)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":423
+  /* "reedsolo\creedsolo.pyx":423
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
  * def rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -29599,9 +29622,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__64 = PyTuple_Pack(13, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_gen, __pyx_n_s_msg_in_t, __pyx_n_s_gen_t, __pyx_n_s_msg_out, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_lgen, __pyx_n_s_coef, __pyx_n_s_lcoef); if (unlikely(!__pyx_tuple__64)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__64);
   __Pyx_GIVEREF(__pyx_tuple__64);
-  __pyx_codeobj__65 = (PyObject*)__Pyx_PyCode_New(5, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__64, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_encode_msg, 423, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__65)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__65 = (PyObject*)__Pyx_PyCode_New(5, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__64, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_encode_msg, 423, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__65)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":460
+  /* "reedsolo\creedsolo.pyx":460
  * 
  * ####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
  * gf_mul_arr = [bytearray(256) for _ in xrange(256)]             # <<<<<<<<<<<<<<
@@ -29615,7 +29638,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__68);
   __Pyx_GIVEREF(__pyx_tuple__68);
 
-  /* "reedsolomon\creedsolo.pyx":461
+  /* "reedsolo\creedsolo.pyx":461
  * ####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
  * gf_mul_arr = [bytearray(256) for _ in xrange(256)]
  * gf_add_arr = [bytearray(256) for _ in xrange(256)]             # <<<<<<<<<<<<<<
@@ -29629,7 +29652,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__70);
   __Pyx_GIVEREF(__pyx_tuple__70);
 
-  /* "reedsolomon\creedsolo.pyx":465
+  /* "reedsolo\creedsolo.pyx":465
  * #gf_add_arr = bytearray(256*256)
  * 
  * def gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):             # <<<<<<<<<<<<<<
@@ -29639,9 +29662,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__71 = PyTuple_Pack(4, __pyx_n_s_gf_exp, __pyx_n_s_gf_log, __pyx_n_s_i, __pyx_n_s_j); if (unlikely(!__pyx_tuple__71)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__71);
   __Pyx_GIVEREF(__pyx_tuple__71);
-  __pyx_codeobj__72 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__71, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_gf_precomp_tables, 465, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__72)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__72 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__71, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_gf_precomp_tables, 465, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__72)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":476
+  /* "reedsolo\creedsolo.pyx":476
  *     return gf_mul_arr, gf_add_arr
  * 
  * def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):             # <<<<<<<<<<<<<<
@@ -29651,9 +29674,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__73 = PyTuple_Pack(10, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_gen, __pyx_n_s_msg_out, __pyx_n_s_i, __pyx_n_s_coef, __pyx_n_s_mula, __pyx_n_s_j); if (unlikely(!__pyx_tuple__73)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__73);
   __Pyx_GIVEREF(__pyx_tuple__73);
-  __pyx_codeobj__74 = (PyObject*)__Pyx_PyCode_New(5, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__73, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_encode_msg_precomp, 476, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__74)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__74 = (PyObject*)__Pyx_PyCode_New(5, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__73, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_encode_msg_precomp, 476, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__74)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":511
+  /* "reedsolo\creedsolo.pyx":511
  * ################### REED-SOLOMON DECODING ###################
  * 
  * def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
@@ -29663,155 +29686,155 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__75 = PyTuple_Pack(5, __pyx_n_s_msg, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_i); if (unlikely(!__pyx_tuple__75)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__75);
   __Pyx_GIVEREF(__pyx_tuple__75);
-  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__75, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_calc_syndromes, 511, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(4, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__75, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_calc_syndromes, 511, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":519
+  /* "reedsolo\creedsolo.pyx":519
  *     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
  * 
  * def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata             # <<<<<<<<<<<<<<
- *     msg = bytearray(msg_in)
- *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
+ *     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+ *     global field_charac
  */
   __pyx_tuple__77 = PyTuple_Pack(23, __pyx_n_s_msg_in, __pyx_n_s_synd, __pyx_n_s_err_pos, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_msg, __pyx_n_s_coef_pos, __pyx_n_s_err_loc, __pyx_n_s_err_eval, __pyx_n_s_X, __pyx_n_s_i, __pyx_n_s_l, __pyx_n_s_E, __pyx_n_s_Xlength, __pyx_n_s_Xi, __pyx_n_s_Xi_inv, __pyx_n_s_err_loc_prime_tmp, __pyx_n_s_j, __pyx_n_s_err_loc_prime, __pyx_n_s_coef, __pyx_n_s_y, __pyx_n_s_magnitude, __pyx_n_s_p); if (unlikely(!__pyx_tuple__77)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__77);
   __Pyx_GIVEREF(__pyx_tuple__77);
-  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(5, 0, 23, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__77, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_correct_errata, 519, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(5, 0, 23, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__77, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_correct_errata, 519, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":567
+  /* "reedsolo\creedsolo.pyx":569
  *     return msg
  * 
  * def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):             # <<<<<<<<<<<<<<
  *     '''Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm'''
  *     # The idea is that BM will iteratively estimate the error locator polynomial.
  */
-  __pyx_tuple__79 = PyTuple_Pack(13, __pyx_n_s_synd, __pyx_n_s_nsym, __pyx_n_s_erase_loc, __pyx_n_s_erase_count, __pyx_n_s_err_loc, __pyx_n_s_old_loc, __pyx_n_s_synd_shift, __pyx_n_s_i, __pyx_n_s_K, __pyx_n_s_delta, __pyx_n_s_j, __pyx_n_s_new_loc, __pyx_n_s_errs); if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__79 = PyTuple_Pack(13, __pyx_n_s_synd, __pyx_n_s_nsym, __pyx_n_s_erase_loc, __pyx_n_s_erase_count, __pyx_n_s_err_loc, __pyx_n_s_old_loc, __pyx_n_s_synd_shift, __pyx_n_s_i, __pyx_n_s_K, __pyx_n_s_delta, __pyx_n_s_j, __pyx_n_s_new_loc, __pyx_n_s_errs); if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__79);
   __Pyx_GIVEREF(__pyx_tuple__79);
-  __pyx_codeobj__80 = (PyObject*)__Pyx_PyCode_New(4, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__79, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_find_error_locator, 567, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__80)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__80 = (PyObject*)__Pyx_PyCode_New(4, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__79, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_find_error_locator, 569, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__80)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":628
+  /* "reedsolo\creedsolo.pyx":630
  *     return err_loc
  * 
  * def rs_find_errata_locator(e_pos, generator=2):             # <<<<<<<<<<<<<<
  *     '''Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: "hello worldxxxxxxxxx" is tampered to "h_ll_ worldxxxxxxxxx" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.'''
  *     # See: http://ocw.usu.edu/Electrical_and_Computer_Engineering/Error_Control_Coding/lecture7.pdf and Blahut, Richard E. "Transform techniques for error control codes." IBM Journal of Research and development 23.3 (1979): 299-315. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.600&rep=rep1&type=pdf and also a MatLab implementation here: http://www.mathworks.com/matlabcentral/fileexchange/23567-reed-solomon-errors-and-erasures-decoder/content//RS_E_E_DEC.m
  */
-  __pyx_tuple__81 = PyTuple_Pack(4, __pyx_n_s_e_pos, __pyx_n_s_generator, __pyx_n_s_e_loc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__81 = PyTuple_Pack(4, __pyx_n_s_e_pos, __pyx_n_s_generator, __pyx_n_s_e_loc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__81);
   __Pyx_GIVEREF(__pyx_tuple__81);
-  __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_find_errata_locator, 628, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_find_errata_locator, 630, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":637
+  /* "reedsolo\creedsolo.pyx":639
  *     return e_loc
  * 
  * def rs_find_error_evaluator(synd, err_loc, nsym):             # <<<<<<<<<<<<<<
  *     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
  *     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
  */
-  __pyx_tuple__83 = PyTuple_Pack(5, __pyx_n_s_synd, __pyx_n_s_err_loc, __pyx_n_s_nsym, __pyx_n_s__67, __pyx_n_s_remainder); if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__83 = PyTuple_Pack(5, __pyx_n_s_synd, __pyx_n_s_err_loc, __pyx_n_s_nsym, __pyx_n_s__67, __pyx_n_s_remainder); if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__83);
   __Pyx_GIVEREF(__pyx_tuple__83);
-  __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__83, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_find_error_evaluator, 637, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__83, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_find_error_evaluator, 639, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":648
+  /* "reedsolo\creedsolo.pyx":650
  *     return remainder
  * 
  * def rs_find_errors(err_loc, nmess, generator=2):             # <<<<<<<<<<<<<<
  *     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
  *     # nmess = length of whole codeword (message + ecc symbols)
  */
-  __pyx_tuple__85 = PyTuple_Pack(6, __pyx_n_s_err_loc, __pyx_n_s_nmess, __pyx_n_s_generator, __pyx_n_s_errs, __pyx_n_s_err_pos, __pyx_n_s_i); if (unlikely(!__pyx_tuple__85)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__85 = PyTuple_Pack(6, __pyx_n_s_err_loc, __pyx_n_s_nmess, __pyx_n_s_generator, __pyx_n_s_errs, __pyx_n_s_err_pos, __pyx_n_s_i); if (unlikely(!__pyx_tuple__85)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__85);
   __Pyx_GIVEREF(__pyx_tuple__85);
-  __pyx_codeobj__86 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__85, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_find_errors, 648, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__86 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__85, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_find_errors, 650, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":662
+  /* "reedsolo\creedsolo.pyx":664
  *     return err_pos
  * 
  * def rs_forney_syndromes(synd, pos, nmess, generator=2):             # <<<<<<<<<<<<<<
  *     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
  *     erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)
  */
-  __pyx_tuple__87 = PyTuple_Pack(10, __pyx_n_s_synd, __pyx_n_s_pos, __pyx_n_s_nmess, __pyx_n_s_generator, __pyx_n_s_erase_pos_reversed, __pyx_n_s_fsynd, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_j, __pyx_n_s_p); if (unlikely(!__pyx_tuple__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__87 = PyTuple_Pack(10, __pyx_n_s_synd, __pyx_n_s_pos, __pyx_n_s_nmess, __pyx_n_s_generator, __pyx_n_s_erase_pos_reversed, __pyx_n_s_fsynd, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_j, __pyx_n_s_p); if (unlikely(!__pyx_tuple__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__87);
   __Pyx_GIVEREF(__pyx_tuple__87);
-  __pyx_codeobj__88 = (PyObject*)__Pyx_PyCode_New(4, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__87, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_forney_syndromes, 662, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__88 = (PyObject*)__Pyx_PyCode_New(4, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__87, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_forney_syndromes, 664, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":682
+  /* "reedsolo\creedsolo.pyx":684
  *     return fsynd
  * 
  * def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon main decoding function'''
  *     global field_charac
  */
-  __pyx_tuple__89 = PyTuple_Pack(12, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_msg_out, __pyx_n_s_e_pos, __pyx_n_s_synd, __pyx_n_s_err_pos, __pyx_n_s_fsynd, __pyx_n_s_err_loc); if (unlikely(!__pyx_tuple__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__89 = PyTuple_Pack(12, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_msg_out, __pyx_n_s_e_pos, __pyx_n_s_synd, __pyx_n_s_err_pos, __pyx_n_s_fsynd, __pyx_n_s_err_loc); if (unlikely(!__pyx_tuple__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__89);
   __Pyx_GIVEREF(__pyx_tuple__89);
-  __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_correct_msg, 682, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_correct_msg, 684, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":727
+  /* "reedsolo\creedsolo.pyx":729
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
  *     global field_charac
  */
-  __pyx_tuple__91 = PyTuple_Pack(15, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_msg_out, __pyx_n_s_e_pos, __pyx_n_s_synd, __pyx_n_s_erase_loc, __pyx_n_s_erase_count, __pyx_n_s_erase_pos_reversed, __pyx_n_s_err_loc, __pyx_n_s_err_pos, __pyx_n_s_eras); if (unlikely(!__pyx_tuple__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__91 = PyTuple_Pack(15, __pyx_n_s_msg_in, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_msg_out, __pyx_n_s_e_pos, __pyx_n_s_synd, __pyx_n_s_erase_loc, __pyx_n_s_erase_count, __pyx_n_s_erase_pos_reversed, __pyx_n_s_err_loc, __pyx_n_s_err_pos, __pyx_n_s_eras); if (unlikely(!__pyx_tuple__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__91);
   __Pyx_GIVEREF(__pyx_tuple__91);
-  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(6, 0, 15, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_correct_msg_nofsynd, 727, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(6, 0, 15, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_correct_msg_nofsynd, 729, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":781
+  /* "reedsolo\creedsolo.pyx":783
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_check(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
  *     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
  *     return ( max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0 )
  */
-  __pyx_tuple__93 = PyTuple_Pack(4, __pyx_n_s_msg, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator); if (unlikely(!__pyx_tuple__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__93 = PyTuple_Pack(4, __pyx_n_s_msg, __pyx_n_s_nsym, __pyx_n_s_fcr, __pyx_n_s_generator); if (unlikely(!__pyx_tuple__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__93);
   __Pyx_GIVEREF(__pyx_tuple__93);
-  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__93, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_rs_check, 781, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__93, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_rs_check, 783, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":806
+  /* "reedsolo\creedsolo.pyx":808
  *     '''
  * 
  *     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
  *         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
  *         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
  */
-  __pyx_tuple__95 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_nsym, __pyx_n_s_nsize, __pyx_n_s_fcr, __pyx_n_s_prim, __pyx_n_s_generator, __pyx_n_s_c_exp); if (unlikely(!__pyx_tuple__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__95 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_nsym, __pyx_n_s_nsize, __pyx_n_s_fcr, __pyx_n_s_prim, __pyx_n_s_generator, __pyx_n_s_c_exp); if (unlikely(!__pyx_tuple__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__95);
   __Pyx_GIVEREF(__pyx_tuple__95);
-  __pyx_codeobj__96 = (PyObject*)__Pyx_PyCode_New(7, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__95, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_init, 806, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__97 = PyTuple_Pack(6, ((PyObject *)__pyx_int_10), ((PyObject *)__pyx_int_255), ((PyObject *)__pyx_int_0), ((PyObject *)__pyx_int_285), ((PyObject *)__pyx_int_2), ((PyObject *)__pyx_int_8)); if (unlikely(!__pyx_tuple__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__96 = (PyObject*)__Pyx_PyCode_New(7, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__95, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_init, 808, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__97 = PyTuple_Pack(6, ((PyObject *)__pyx_int_10), ((PyObject *)__pyx_int_255), ((PyObject *)__pyx_int_0), ((PyObject *)__pyx_int_285), ((PyObject *)__pyx_int_2), ((PyObject *)__pyx_int_8)); if (unlikely(!__pyx_tuple__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__97);
   __Pyx_GIVEREF(__pyx_tuple__97);
 
-  /* "reedsolomon\creedsolo.pyx":820
+  /* "reedsolo\creedsolo.pyx":822
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
  * 
  *     def encode(self, data):             # <<<<<<<<<<<<<<
  *         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
  *         if isinstance(data, str):
  */
-  __pyx_tuple__98 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_chunk_size, __pyx_n_s_enc, __pyx_n_s_i, __pyx_n_s_chunk); if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__98 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_chunk_size, __pyx_n_s_enc, __pyx_n_s_i, __pyx_n_s_chunk); if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__98);
   __Pyx_GIVEREF(__pyx_tuple__98);
-  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_encode, 820, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_encode, 822, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "reedsolomon\creedsolo.pyx":831
+  /* "reedsolo\creedsolo.pyx":833
  *         return enc
  * 
  *     def decode(self, data, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *         '''Repair a message, whatever its size is, by using chunking'''
  *         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
  */
-  __pyx_tuple__100 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_dec, __pyx_n_s_i, __pyx_n_s_chunk, __pyx_n_s_e_pos, __pyx_n_s_x); if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__100 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_erase_pos, __pyx_n_s_only_erasures, __pyx_n_s_dec, __pyx_n_s_i, __pyx_n_s_chunk, __pyx_n_s_e_pos, __pyx_n_s_x); if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__100);
   __Pyx_GIVEREF(__pyx_tuple__100);
-  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(4, 0, 9, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolomon_creedsol, __pyx_n_s_decode, 831, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__102 = PyTuple_Pack(2, ((PyObject *)Py_None), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__101 = (PyObject*)__Pyx_PyCode_New(4, 0, 9, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__100, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_C_git_rfigc_reedsolo_creedsolo_p, __pyx_n_s_decode, 833, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__102 = PyTuple_Pack(2, ((PyObject *)Py_None), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__102);
   __Pyx_GIVEREF(__pyx_tuple__102);
 
@@ -29973,14 +29996,14 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  if (__pyx_module_is_main_reedsolomon__creedsolo) {
+  if (__pyx_module_is_main_reedsolo__creedsolo) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!PyDict_GetItemString(modules, "reedsolomon.creedsolo")) {
-      if (unlikely(PyDict_SetItemString(modules, "reedsolomon.creedsolo", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!PyDict_GetItemString(modules, "reedsolo.creedsolo")) {
+      if (unlikely(PyDict_SetItemString(modules, "reedsolo.creedsolo", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
@@ -29997,9 +30020,9 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow.tp_print = 0;
-  __pyx_ptype_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = &__pyx_type_11reedsolomon_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow;
+  if (PyType_Ready(&__pyx_type_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_type_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow.tp_print = 0;
+  __pyx_ptype_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow = &__pyx_type_8reedsolo_9creedsolo___pyx_scope_struct__gf_mult_noLUT_slow;
   if (PyType_Ready(&__pyx_type___pyx_array) < 0) {__pyx_filename = __pyx_f[2]; __pyx_lineno = 99; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type___pyx_array.tp_print = 0;
   __pyx_array_type = &__pyx_type___pyx_array;
@@ -30042,7 +30065,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   /*--- Function import code ---*/
   /*--- Execution code ---*/
 
-  /* "reedsolomon\creedsolo.pyx":88
+  /* "reedsolo\creedsolo.pyx":88
  * from cython.parallel import parallel, prange
  * 
  * import itertools             # <<<<<<<<<<<<<<
@@ -30054,7 +30077,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_itertools, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 88; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":94
+  /* "reedsolo\creedsolo.pyx":94
  * ################### INIT and stuff ###################
  * 
  * try:             # <<<<<<<<<<<<<<
@@ -30068,7 +30091,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
     __Pyx_XGOTREF(__pyx_t_4);
     /*try:*/ {
 
-      /* "reedsolomon\creedsolo.pyx":95
+      /* "reedsolo\creedsolo.pyx":95
  * 
  * try:
  *     bytearray             # <<<<<<<<<<<<<<
@@ -30086,7 +30109,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
     __pyx_L2_error:;
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "reedsolomon\creedsolo.pyx":96
+    /* "reedsolo\creedsolo.pyx":96
  * try:
  *     bytearray
  * except NameError:             # <<<<<<<<<<<<<<
@@ -30095,20 +30118,20 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
  */
     __pyx_t_5 = PyErr_ExceptionMatches(__pyx_builtin_NameError);
     if (__pyx_t_5) {
-      __Pyx_AddTraceback("reedsolomon.creedsolo", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("reedsolo.creedsolo", __pyx_clineno, __pyx_lineno, __pyx_filename);
       if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_6, &__pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L4_except_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "reedsolomon\creedsolo.pyx":97
+      /* "reedsolo\creedsolo.pyx":97
  *     bytearray
  * except NameError:
  *     def bytearray(obj = 0, encoding = "latin-1"):             # <<<<<<<<<<<<<<
  *         if isinstance(obj, str):
  *             obj = [ord(ch) for ch in obj.encode("latin-1")]
  */
-      __pyx_t_8 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_1bytearray, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L4_except_error;}
+      __pyx_t_8 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_1bytearray, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L4_except_error;}
       __Pyx_GOTREF(__pyx_t_8);
       if (PyDict_SetItem(__pyx_d, __pyx_n_s_bytearray, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L4_except_error;}
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -30132,7 +30155,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
     __pyx_L9_try_end:;
   }
 
-  /* "reedsolomon\creedsolo.pyx":104
+  /* "reedsolo\creedsolo.pyx":104
  *         return array("B", obj)
  * 
  * class ReedSolomonError(Exception):             # <<<<<<<<<<<<<<
@@ -30146,7 +30169,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_builtin_Exception);
   __pyx_t_6 = __Pyx_CalculateMetaclass(NULL, __pyx_t_7); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_6, __pyx_t_7, __pyx_n_s_ReedSolomonError, __pyx_n_s_ReedSolomonError, (PyObject *) NULL, __pyx_n_s_reedsolomon_creedsolo, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Py3MetaclassPrepare(__pyx_t_6, __pyx_t_7, __pyx_n_s_ReedSolomonError, __pyx_n_s_ReedSolomonError, (PyObject *) NULL, __pyx_n_s_reedsolo_creedsolo, (PyObject *) NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_8 = __Pyx_Py3ClassCreate(__pyx_t_6, __pyx_n_s_ReedSolomonError, __pyx_t_7, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
@@ -30156,7 +30179,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":110
+  /* "reedsolo\creedsolo.pyx":110
  * cimport cpython.array as array
  * 
  * cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac             # <<<<<<<<<<<<<<
@@ -30200,15 +30223,15 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_7);
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_7);
   if (unlikely(!__pyx_t_10.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __PYX_XDEC_MEMVIEW(&__pyx_v_11reedsolomon_9creedsolo_gf_exp, 1);
-  __pyx_v_11reedsolomon_9creedsolo_gf_exp = __pyx_t_10;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_8reedsolo_9creedsolo_gf_exp, 1);
+  __pyx_v_8reedsolo_9creedsolo_gf_exp = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":111
+  /* "reedsolo\creedsolo.pyx":111
  * 
  * cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
  * cdef uint8_t[::1] gf_log = bytearray([0] * 256)             # <<<<<<<<<<<<<<
@@ -30252,15 +30275,15 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(__pyx_t_7);
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(__pyx_t_7);
   if (unlikely(!__pyx_t_10.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __PYX_XDEC_MEMVIEW(&__pyx_v_11reedsolomon_9creedsolo_gf_log, 1);
-  __pyx_v_11reedsolomon_9creedsolo_gf_log = __pyx_t_10;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_8reedsolo_9creedsolo_gf_log, 1);
+  __pyx_v_8reedsolo_9creedsolo_gf_log = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "reedsolomon\creedsolo.pyx":112
+  /* "reedsolo\creedsolo.pyx":112
  * cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
  * cdef uint8_t[::1] gf_log = bytearray([0] * 256)
  * cdef int field_charac = int(2**8 - 1)             # <<<<<<<<<<<<<<
@@ -30271,165 +30294,165 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_7); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_v_11reedsolomon_9creedsolo_field_charac = __pyx_t_5;
+  __pyx_v_8reedsolo_9creedsolo_field_charac = __pyx_t_5;
 
-  /* "reedsolomon\creedsolo.pyx":117
+  /* "reedsolo\creedsolo.pyx":117
  * ################### GALOIS FIELD ELEMENTS MATHS ###################
  * 
  * def rwh_primes1(n):             # <<<<<<<<<<<<<<
  *     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
  *     ''' Returns  a list of primes < n '''
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_3rwh_primes1, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_3rwh_primes1, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rwh_primes1, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":126
+  /* "reedsolo\creedsolo.pyx":126
  *     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
  * 
  * def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):             # <<<<<<<<<<<<<<
  *     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
  *     # fast_primes will output less results but will be significantly faster.
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_5find_prime_polys, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_5find_prime_polys, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_prime_polys, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":180
+  /* "reedsolo\creedsolo.pyx":180
  *     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
  * 
  * def init_tables(prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
  *     '''Precompute the logarithm and anti-log tables for faster computation later, using the provided primitive polynomial.
  *     These tables are used for multiplication/division since addition/substraction are simple XOR operations inside GF of characteristic 2.
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_7init_tables, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_7init_tables, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_init_tables, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 180; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":251
+  /* "reedsolo\creedsolo.pyx":251
  *     return ret
  * 
  * def gf_mult_noLUT_slow(x, y, prim=0):             # <<<<<<<<<<<<<<
  *     '''Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
  * 
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_23gf_mult_noLUT_slow, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_23gf_mult_noLUT_slow, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_mult_noLUT_slow, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":312
+  /* "reedsolo\creedsolo.pyx":312
  * ################### GALOIS FIELD POLYNOMIALS MATHS ###################
  * 
  * def gf_poly_scale(p, x):             # <<<<<<<<<<<<<<
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
  * 
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_27gf_poly_scale, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_27gf_poly_scale, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_scale, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":315
+  /* "reedsolo\creedsolo.pyx":315
  *     return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
  * 
  * def gf_poly_add(p, q):             # <<<<<<<<<<<<<<
  *     r = bytearray( max(len(p), len(q)) )
  *     r[len(r)-len(p):len(r)] = p
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_29gf_poly_add, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_29gf_poly_add, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_add, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":347
+  /* "reedsolo\creedsolo.pyx":347
  *     return bytearray(r)
  * 
  * def gf_poly_neg(poly):             # <<<<<<<<<<<<<<
  *     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
  *     return poly
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_33gf_poly_neg, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_33gf_poly_neg, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_neg, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":351
+  /* "reedsolo\creedsolo.pyx":351
  *     return poly
  * 
  * def gf_poly_div(dividend, divisor):             # <<<<<<<<<<<<<<
  *     '''Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).'''
  *     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_35gf_poly_div, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_35gf_poly_div, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_div, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":377
+  /* "reedsolo\creedsolo.pyx":377
  *     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
  * 
  * def gf_poly_square(poly):             # <<<<<<<<<<<<<<
  *     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
  *     length = len(poly)
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_37gf_poly_square, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_37gf_poly_square, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_square, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 377; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":393
+  /* "reedsolo\creedsolo.pyx":393
  *     return out
  * 
  * def gf_poly_eval(poly, uint8_t x):             # <<<<<<<<<<<<<<
  *     '''Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.'''
  *     cdef int i
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_39gf_poly_eval, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_39gf_poly_eval, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_poly_eval, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":404
+  /* "reedsolo\creedsolo.pyx":404
  * ################### REED-SOLOMON ENCODING ###################
  * 
  * def rs_generator_poly(nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
  *     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
  *     cdef int i
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_41rs_generator_poly, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_41rs_generator_poly, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_generator_poly, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":412
+  /* "reedsolo\creedsolo.pyx":412
  *     return bytearray(g)
  * 
  * def rs_generator_poly_all(max_nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
  *     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
  *     g_all = {}
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_43rs_generator_poly_all, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_43rs_generator_poly_all, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_generator_poly_all, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":423
+  /* "reedsolo\creedsolo.pyx":423
  * @cython.wraparound(False)
  * @cython.initializedcheck(False)
  * def rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/'''
  *     # IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_45rs_encode_msg, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_45rs_encode_msg, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_encode_msg, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":460
+  /* "reedsolo\creedsolo.pyx":460
  * 
  * ####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
  * gf_mul_arr = [bytearray(256) for _ in xrange(256)]             # <<<<<<<<<<<<<<
@@ -30494,7 +30517,7 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_mul_arr, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 460; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":461
+  /* "reedsolo\creedsolo.pyx":461
  * ####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
  * gf_mul_arr = [bytearray(256) for _ in xrange(256)]
  * gf_add_arr = [bytearray(256) for _ in xrange(256)]             # <<<<<<<<<<<<<<
@@ -30559,233 +30582,233 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_add_arr, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 461; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":465
+  /* "reedsolo\creedsolo.pyx":465
  * #gf_add_arr = bytearray(256*256)
  * 
  * def gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):             # <<<<<<<<<<<<<<
  *     global gf_mul_arr, gf_add_arr
  * 
  */
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_11reedsolomon_9creedsolo_gf_exp, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_exp.memview)) { __Pyx_RaiseUnboundLocalError("gf_exp"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_8reedsolo_9creedsolo_gf_exp, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_k__9 = __pyx_t_7;
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
-  if (unlikely(!__pyx_v_11reedsolomon_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
-  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_11reedsolomon_9creedsolo_gf_log, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__pyx_v_8reedsolo_9creedsolo_gf_log.memview)) { __Pyx_RaiseUnboundLocalError("gf_log"); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;} }
+  __pyx_t_7 = __pyx_memoryview_fromslice(__pyx_v_8reedsolo_9creedsolo_gf_log, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, 0);; if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_k__10 = __pyx_t_7;
   __Pyx_GIVEREF(__pyx_t_7);
   __pyx_t_7 = 0;
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_47gf_precomp_tables, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_47gf_precomp_tables, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_gf_precomp_tables, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 465; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":476
+  /* "reedsolo\creedsolo.pyx":476
  *     return gf_mul_arr, gf_add_arr
  * 
  * def rs_encode_msg_precomp(msg_in, nsym, fcr=0, generator=2, gen=None):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
  *     if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_49rs_encode_msg_precomp, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_49rs_encode_msg_precomp, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_encode_msg_precomp, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":511
+  /* "reedsolo\creedsolo.pyx":511
  * ################### REED-SOLOMON DECODING ###################
  * 
  * def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
  *     '''Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.
  *     Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_51rs_calc_syndromes, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_51rs_calc_syndromes, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_calc_syndromes, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":519
+  /* "reedsolo\creedsolo.pyx":519
  *     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
  * 
  * def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata             # <<<<<<<<<<<<<<
- *     msg = bytearray(msg_in)
- *     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
+ *     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
+ *     global field_charac
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_53rs_correct_errata, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_53rs_correct_errata, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_correct_errata, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 519; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":567
+  /* "reedsolo\creedsolo.pyx":569
  *     return msg
  * 
  * def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):             # <<<<<<<<<<<<<<
  *     '''Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm'''
  *     # The idea is that BM will iteratively estimate the error locator polynomial.
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_55rs_find_error_locator, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_55rs_find_error_locator, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_error_locator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 567; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_error_locator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 569; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":628
+  /* "reedsolo\creedsolo.pyx":630
  *     return err_loc
  * 
  * def rs_find_errata_locator(e_pos, generator=2):             # <<<<<<<<<<<<<<
  *     '''Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: "hello worldxxxxxxxxx" is tampered to "h_ll_ worldxxxxxxxxx" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.'''
  *     # See: http://ocw.usu.edu/Electrical_and_Computer_Engineering/Error_Control_Coding/lecture7.pdf and Blahut, Richard E. "Transform techniques for error control codes." IBM Journal of Research and development 23.3 (1979): 299-315. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.600&rep=rep1&type=pdf and also a MatLab implementation here: http://www.mathworks.com/matlabcentral/fileexchange/23567-reed-solomon-errors-and-erasures-decoder/content//RS_E_E_DEC.m
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_57rs_find_errata_locator, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_57rs_find_errata_locator, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_errata_locator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 628; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_errata_locator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 630; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":637
+  /* "reedsolo\creedsolo.pyx":639
  *     return e_loc
  * 
  * def rs_find_error_evaluator(synd, err_loc, nsym):             # <<<<<<<<<<<<<<
  *     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
  *     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_59rs_find_error_evaluator, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_59rs_find_error_evaluator, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_error_evaluator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_error_evaluator, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 639; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":648
+  /* "reedsolo\creedsolo.pyx":650
  *     return remainder
  * 
  * def rs_find_errors(err_loc, nmess, generator=2):             # <<<<<<<<<<<<<<
  *     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
  *     # nmess = length of whole codeword (message + ecc symbols)
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_61rs_find_errors, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_61rs_find_errors, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_errors, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 648; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_find_errors, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 650; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":662
+  /* "reedsolo\creedsolo.pyx":664
  *     return err_pos
  * 
  * def rs_forney_syndromes(synd, pos, nmess, generator=2):             # <<<<<<<<<<<<<<
  *     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
  *     erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_63rs_forney_syndromes, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_63rs_forney_syndromes, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_forney_syndromes, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_forney_syndromes, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 664; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":682
+  /* "reedsolo\creedsolo.pyx":684
  *     return fsynd
  * 
  * def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon main decoding function'''
  *     global field_charac
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_65rs_correct_msg, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_65rs_correct_msg, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_correct_msg, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 682; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_correct_msg, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 684; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":727
+  /* "reedsolo\creedsolo.pyx":729
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
  *     global field_charac
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_67rs_correct_msg_nofsynd, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_67rs_correct_msg_nofsynd, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_correct_msg_nofsynd, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_correct_msg_nofsynd, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 729; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":781
+  /* "reedsolo\creedsolo.pyx":783
  *     return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
  * 
  * def rs_check(msg, nsym, fcr=0, generator=2):             # <<<<<<<<<<<<<<
  *     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
  *     return ( max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0 )
  */
-  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_69rs_check, NULL, __pyx_n_s_reedsolomon_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyCFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_69rs_check, NULL, __pyx_n_s_reedsolo_creedsolo); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_check, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 781; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_rs_check, __pyx_t_7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 783; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":789
+  /* "reedsolo\creedsolo.pyx":791
  * # API
  * #===================================================================================================
  * class RSCodec(object):             # <<<<<<<<<<<<<<
  *     '''
  *     A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a
  */
-  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_builtin_object);
   __Pyx_GIVEREF(__pyx_builtin_object);
   PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_builtin_object);
-  __pyx_t_9 = __Pyx_CalculateMetaclass(NULL, __pyx_t_7); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_9 = __Pyx_CalculateMetaclass(NULL, __pyx_t_7); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = __Pyx_Py3MetaclassPrepare(__pyx_t_9, __pyx_t_7, __pyx_n_s_RSCodec, __pyx_n_s_RSCodec, (PyObject *) NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_kp_s_A_Reed_Solomon_encoder_decoder); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_Py3MetaclassPrepare(__pyx_t_9, __pyx_t_7, __pyx_n_s_RSCodec, __pyx_n_s_RSCodec, (PyObject *) NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_kp_s_A_Reed_Solomon_encoder_decoder); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
 
-  /* "reedsolomon\creedsolo.pyx":806
+  /* "reedsolo\creedsolo.pyx":808
  *     '''
  * 
  *     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):             # <<<<<<<<<<<<<<
  *         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
  *         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
  */
-  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_1__init__, 0, __pyx_n_s_RSCodec___init, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__96)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_7RSCodec_1__init__, 0, __pyx_n_s_RSCodec___init, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__96)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__97);
-  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_init, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 806; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_init, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":820
+  /* "reedsolo\creedsolo.pyx":822
  *         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
  * 
  *     def encode(self, data):             # <<<<<<<<<<<<<<
  *         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
  *         if isinstance(data, str):
  */
-  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_3encode, 0, __pyx_n_s_RSCodec_encode, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_7RSCodec_3encode, 0, __pyx_n_s_RSCodec_encode, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_encode, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 820; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_encode, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 822; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":831
+  /* "reedsolo\creedsolo.pyx":833
  *         return enc
  * 
  *     def decode(self, data, erase_pos=None, only_erasures=False):             # <<<<<<<<<<<<<<
  *         '''Repair a message, whatever its size is, by using chunking'''
  *         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
  */
-  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_11reedsolomon_9creedsolo_7RSCodec_5decode, 0, __pyx_n_s_RSCodec_decode, NULL, __pyx_n_s_reedsolomon_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8reedsolo_9creedsolo_7RSCodec_5decode, 0, __pyx_n_s_RSCodec_decode, NULL, __pyx_n_s_reedsolo_creedsolo, __pyx_d, ((PyObject *)__pyx_codeobj__101)); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__102);
-  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_decode, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 831; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_6, __pyx_n_s_decode, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 833; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":789
+  /* "reedsolo\creedsolo.pyx":791
  * # API
  * #===================================================================================================
  * class RSCodec(object):             # <<<<<<<<<<<<<<
  *     '''
  *     A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a
  */
-  __pyx_t_8 = __Pyx_Py3ClassCreate(__pyx_t_9, __pyx_n_s_RSCodec, __pyx_t_7, __pyx_t_6, NULL, 0, 1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_Py3ClassCreate(__pyx_t_9, __pyx_n_s_RSCodec, __pyx_t_7, __pyx_t_6, NULL, 0, 1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RSCodec, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 789; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RSCodec, __pyx_t_8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 791; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "reedsolomon\creedsolo.pyx":1
+  /* "reedsolo\creedsolo.pyx":1
  * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
  * 
  * # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
@@ -30924,11 +30947,11 @@ PyMODINIT_FUNC PyInit_creedsolo(void)
   __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init reedsolomon.creedsolo", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init reedsolo.creedsolo", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init reedsolomon.creedsolo");
+    PyErr_SetString(PyExc_ImportError, "init reedsolo.creedsolo");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -34106,14 +34129,14 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_char(unsigned char valu
     }
 }
 
-static PyObject *__pyx_memview_get_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(const char *itemp) {
-    return (PyObject *) __Pyx_PyInt_From_unsigned_char(*(__pyx_t_11reedsolomon_9creedsolo_uint8_t *) itemp);
+static PyObject *__pyx_memview_get_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(const char *itemp) {
+    return (PyObject *) __Pyx_PyInt_From_unsigned_char(*(__pyx_t_8reedsolo_9creedsolo_uint8_t *) itemp);
 }
-static int __pyx_memview_set_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(const char *itemp, PyObject *obj) {
-    __pyx_t_11reedsolomon_9creedsolo_uint8_t value = __Pyx_PyInt_As_unsigned_char(obj);
+static int __pyx_memview_set_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(const char *itemp, PyObject *obj) {
+    __pyx_t_8reedsolo_9creedsolo_uint8_t value = __Pyx_PyInt_As_unsigned_char(obj);
     if ((value == (unsigned char)-1) && PyErr_Occurred())
         return 0;
-    *(__pyx_t_11reedsolomon_9creedsolo_uint8_t *) itemp = value;
+    *(__pyx_t_8reedsolo_9creedsolo_uint8_t *) itemp = value;
     return 1;
 }
 
@@ -34735,7 +34758,7 @@ no_fail:
     return retval;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -34746,7 +34769,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn_
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT | PyBUF_WRITABLE), 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -34757,7 +34780,7 @@ __pyx_fail:
     return result;
 }
 
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t(PyObject *obj) {
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_8reedsolo_9creedsolo_uint8_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -34768,7 +34791,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn_
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_11reedsolomon_9creedsolo_uint8_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_8reedsolo_9creedsolo_uint8_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;

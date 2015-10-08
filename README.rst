@@ -1,6 +1,12 @@
 Reed Solomon
 ============
 
+.. image:: https://travis-ci.org/lrq3000/reedsolomon.svg?branch=master
+    :target: https://travis-ci.org/lrq3000/reedsolomon
+
+.. image:: https://coveralls.io/repos/lrq3000/reedsolomon/badge.svg?branch=master&service=github
+  :target: https://coveralls.io/github/lrq3000/reedsolomon?branch=master
+
 A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at
 `wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,

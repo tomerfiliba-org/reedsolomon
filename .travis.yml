@@ -1,4 +1,6 @@
 language: python
+sudo: false # build in a container, which is a lot faster! http://docs.travis-ci.com/user/migrating-from-legacy/
+cache: pip
 python:
     - 2.6
     - 2.7

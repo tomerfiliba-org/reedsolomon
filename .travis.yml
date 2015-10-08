@@ -11,6 +11,7 @@ python:
 install:
     - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install importlib unittest2; fi
     - if [[ $TRAVIS_PYTHON_VERSION != pypy* ]]; then pip install --install-option='--no-cython-compile' cython ; fi
+    - pip install 'coverage<4'
     - pip install coveralls
 
 script:

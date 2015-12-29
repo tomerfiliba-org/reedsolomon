@@ -19,18 +19,20 @@ The algorithm can correct up to 2*e+v <= nsym, where e is the number of errors,
 v the number of erasures and nsym = n-k = the number of ECC (error correction code) symbols.
 This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
 (errors where you know the position), and a combination of both errors and erasures.
-The code should work on pretty much any reasonable version of python (2.4-3.2),
-but I'm only testing on 2.5 - 3.2.
+The code should work on pretty much any reasonable version of python (2.4-3.5),
+but I'm only testing on 2.7 - 3.4.
 
 .. note::
    The codec is universal, meaning that it can decode any message encoded by another RS encoder
    as long as you provide the correct parameters.
-   Note however that even if the algorithms and calculations can support Galois Fields > 2^8, the
-   current implementation is based on bytearray structures to get faster computations. But this is
-   easily fixable, just change bytearray to array('i', [...]) and it should work flawlessly for any GF.
+   Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
+   we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
+   Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
+   your messages, the longer it will take to encode/decode (quadratically!).
 
    The algorithm itself can handle messages up to (2^c_exp)-1 symbols, including the ECC symbols,
-   and each symbol can only have a value of up to (2^c_exp)-1. By default, we use the field GF(2^8),
+   and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
+   value for one character is constrained by the same mathematical reason). By default, we use the field GF(2^8),
    which means that you are limited to values between 0 and 255 (perfect to represent a single hexadecimal
    symbol on computers, so you can encode any binary stream) and limited to messages+ecc of maximum
    length 255. However, you can "chunk" longer messages to fit them into the message length limit.
@@ -91,9 +93,10 @@ import itertools
 
 try:
     bytearray
+    _bytearray = bytearray
 except NameError:
     from array import array
-    def bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
+    def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
         if isinstance(obj, str):
             obj = [ord(ch) for ch in obj.encode("latin-1")]
         elif isinstance(obj, int):
@@ -108,8 +111,8 @@ except NameError:
 class ReedSolomonError(Exception):
     pass
 
-gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % 255. For more infos on how to generate this extended exponentiation table, see paper: "Fast software implementation of finite field operations", Cheng Huang and Lihao Xu, Washington University in St. Louis, Tech. Rep (2003).
-gf_log = bytearray(256)
+gf_exp = _bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % 255. For more infos on how to generate this extended exponentiation table, see paper: "Fast software implementation of finite field operations", Cheng Huang and Lihao Xu, Washington University in St. Louis, Tech. Rep (2003).
+gf_log = _bytearray(256)
 field_charac = int(2**8 - 1)
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
@@ -152,7 +155,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     # Start of the main loop
     correct_primes = []
     for prim in prim_candidates: # try potential candidates primitive irreducible polys
-        seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
+        seen = _bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
 
         # Second loop, build the whole Galois Field
@@ -189,10 +192,22 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     # note that the choice of generator or prime polynomial doesn't matter very much: any two finite fields of size p^n have identical structure, even if they give the individual elements different names (ie, the coefficients of the codeword will be different, but the final result will be the same: you can always correct as many errors/erasures with any choice for those parameters). That's why it makes sense to refer to all the finite fields, and all decoders based on Reed-Solomon, of size p^n as one concept: GF(p^n). It can however impact sensibly the speed (because some parameters will generate sparser tables).
     # c_exp is the exponent for the field's characteristic GF(2^c_exp)
 
+    # Redefine _bytearray() in case we need to support integers or messages of length > 256
+    if c_exp > 8:
+        global _bytearray
+        from array import array
+        def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
+            if isinstance(obj, str):
+                obj = [ord(ch) for ch in obj.encode("latin-1")]
+            elif isinstance(obj, int):
+                obj = [0] * obj
+            return array("i", obj)
+
+    # Init global tables
     global gf_exp, gf_log, field_charac
     field_charac = int(2**c_exp - 1)
-    gf_exp = bytearray(field_charac * 2) # anti-log (exponential) table. The first two elements will always be [GF256int(1), generator]
-    gf_log = bytearray(field_charac+1) # log table, log[0] is impossible and thus unused
+    gf_exp = _bytearray(field_charac * 2) # anti-log (exponential) table. The first two elements will always be [GF256int(1), generator]
+    gf_log = _bytearray(field_charac+1) # log table, log[0] is impossible and thus unused
 
     # For each possible value in the galois field 2^8, we will pre-compute the logarithm and anti-logarithm (exponential) of this value
     # To do that, we generate the Galois Field F(2^p) by building a list starting with the element 0 followed by the (p-1) successive powers of the generator α : 1, α, α^1, α^2, ..., α^(p-1).
@@ -302,10 +317,10 @@ def gf_mult_noLUT(x, y, prim=0, field_charac_full=256, carryless=True):
 ################### GALOIS FIELD POLYNOMIALS MATHS ###################
 
 def gf_poly_scale(p, x):
-    return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
+    return _bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
 
 def gf_poly_add(p, q):
-    r = bytearray( max(len(p), len(q)) )
+    r = _bytearray( max(len(p), len(q)) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
         #r[i + len(r) - len(p)] = p[i]
@@ -316,7 +331,7 @@ def gf_poly_add(p, q):
 def gf_poly_mul(p, q):
     '''Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.'''
     # Pre-allocate the result array
-    r = bytearray(len(p) + len(q) - 1)
+    r = _bytearray(len(p) + len(q) - 1)
     # Precompute the logarithm of p
     lp = [gf_log[p[i]] for i in xrange(len(p))]
     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
@@ -332,7 +347,7 @@ def gf_poly_mul(p, q):
 def gf_poly_mul_simple(p, q): # simple equivalent way of multiplying two polynomials without precomputation, but thus it's slower
     '''Multiply two polynomials, inside Galois Field'''
     # Pre-allocate the result array
-    r = bytearray(len(p) + len(q) - 1)
+    r = _bytearray(len(p) + len(q) - 1)
     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
     for j in xrange(len(q)):
         for i in xrange(len(p)):
@@ -347,7 +362,7 @@ def gf_poly_div(dividend, divisor):
     '''Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).'''
     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
 
-    msg_out = bytearray(dividend) # Copy the dividend list and pad with 0 where the ecc bytes will be computed
+    msg_out = _bytearray(dividend) # Copy the dividend list and pad with 0 where the ecc bytes will be computed
     #normalizer = divisor[0] # precomputing for performance
     for i in xrange(len(dividend) - (len(divisor)-1)):
         #msg_out[i] /= normalizer # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]. For more infos, see http://en.wikipedia.org/wiki/Synthetic_division
@@ -364,7 +379,7 @@ def gf_poly_div(dividend, divisor):
 def gf_poly_square(poly):
     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
     length = len(poly)
-    out = bytearray(2*length - 1)
+    out = _bytearray(2*length - 1)
     for i in xrange(length-1):
         p = poly[i]
         k = 2*i
@@ -389,7 +404,7 @@ def gf_poly_eval(poly, x):
 
 def rs_generator_poly(nsym, fcr=0, generator=2):
     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
-    g = bytearray([1])
+    g = _bytearray([1])
     for i in xrange(nsym):
         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
     return g
@@ -409,7 +424,7 @@ def rs_simple_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
     # Pad the message, then divide it by the irreducible generator polynomial
-    _, remainder = gf_poly_div(msg_in + bytearray(len(gen)-1), gen)
+    _, remainder = gf_poly_div(msg_in + _bytearray(len(gen)-1), gen)
     # The remainder is our RS code! Just append it to our original message to get our full codeword (this represents a polynomial of max 256 terms)
     msg_out = msg_in + remainder
     # Return the codeword
@@ -421,11 +436,11 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     if (len(msg_in) + nsym) > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
-    msg_in = bytearray(msg_in)
-    msg_out = bytearray(msg_in) + bytearray(len(gen)-1) # init msg_out with the values inside msg_in and pad with len(gen)-1 bytes (which is the number of ecc symbols).
+    msg_in = _bytearray(msg_in)
+    msg_out = _bytearray(msg_in) + _bytearray(len(gen)-1) # init msg_out with the values inside msg_in and pad with len(gen)-1 bytes (which is the number of ecc symbols).
 
     # Precompute the logarithm of every items in the generator
-    lgen = bytearray([gf_log[gen[j]] for j in xrange(len(gen))])
+    lgen = _bytearray([gf_log[gen[j]] for j in xrange(len(gen))])
 
     # Extended synthetic division main loop
     # Fastest implementation with PyPy (but the Cython version in creedsolo.pyx is about 2x faster)
@@ -457,7 +472,7 @@ def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
 def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
     global field_charac
-    msg = bytearray(msg_in)
+    msg = _bytearray(msg_in)
     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
     err_loc = rs_find_errata_locator(coef_pos, generator)
@@ -471,7 +486,7 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
         X.append( gf_pow(generator, -l) )
 
     # Forney algorithm: compute the magnitudes
-    E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
+    E = _bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
     Xlength = len(X)
     for i, Xi in enumerate(X):
 
@@ -512,11 +527,11 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
 
     # Init the polynomials
     if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
-        err_loc = bytearray(erase_loc)
-        old_loc = bytearray(erase_loc)
+        err_loc = _bytearray(erase_loc)
+        old_loc = _bytearray(erase_loc)
     else:
-        err_loc = bytearray([1]) # This is the main variable we want to fill, also called Sigma in other notations or more formally the errors/errata locator polynomial.
-        old_loc = bytearray([1]) # BM is an iterative algorithm, and we need the errata locator polynomial of the previous iteration in order to update other necessary variables.
+        err_loc = _bytearray([1]) # This is the main variable we want to fill, also called Sigma in other notations or more formally the errors/errata locator polynomial.
+        old_loc = _bytearray([1]) # BM is an iterative algorithm, and we need the errata locator polynomial of the previous iteration in order to update other necessary variables.
     #L = 0 # update flag variable, not needed here because we use an alternative equivalent way of checking if update is needed (but using the flag could potentially be faster depending on if using length(list) is taking linear time in your language, here in Python it's constant so it's as fast.
 
     # Fix the syndrome shifting: when computing the syndrome, some implementations may prepend a 0 coefficient for the lowest degree term (the constant). This is a case of syndrome shifting, thus the syndrome will be bigger than the number of ecc symbols (I don't know what purpose serves this shifting). If that's the case, then we need to account for the syndrome shifting when we use the syndrome such as inside BM, by skipping those prepended coefficients.
@@ -541,7 +556,7 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
         #print "delta", K, delta, list(gf_poly_mul(err_loc[::-1], synd)) # debugline
 
         # Shift polynomials to compute the next degree
-        old_loc = old_loc + bytearray([0])
+        old_loc = old_loc + _bytearray([0])
 
         # Iteratively estimate the errata locator and evaluator polynomials
         if delta != 0: # Update only if there's a discrepancy
@@ -571,7 +586,7 @@ def rs_find_errata_locator(e_pos, generator=2):
     e_loc = [1] # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term
     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
     for i in e_pos:
-        e_loc = gf_poly_mul( e_loc, gf_poly_add([1], [gf_pow(generator, i), 0]) )
+        e_loc = gf_poly_mul( e_loc, gf_poly_add(_bytearray([1]), [gf_pow(generator, i), 0]) )
     return e_loc
 
 def rs_find_error_evaluator(synd, err_loc, nsym):
@@ -626,7 +641,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
         # Note that it is in fact possible to encode/decode messages that are longer than field_charac, but because this will be above the field, this will generate more error positions during Chien Search than it should, because this will generate duplicate values, which should normally be prevented thank's to the prime polynomial reduction (eg, because it can't discriminate between error at position 1 or 256, both being exactly equal under galois field 2^8). So it's really not advised to do it, but it's possible (but then you're not guaranted to be able to correct any error/erasure on symbols with a position above the length of field_charac -- if you really need a bigger message without chunking, then you should better enlarge c_exp so that you get a bigger field).
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
-    msg_out = bytearray(msg_in)     # copy of message
+    msg_out = _bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
         erase_pos = []
@@ -640,7 +655,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
         return msg_out[:-nsym], msg_out[-nsym:]  # no errors
-    
+
     # Find errors locations
     if only_erasures:
         err_pos = []
@@ -656,7 +671,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
 
     # Find errors values and apply them to correct the message
     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
-    msg_out = rs_correct_errata(msg_out, synd, (erase_pos + err_pos), fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)
+    msg_out = rs_correct_errata(msg_out, synd, erase_pos + err_pos, fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)
     # check if the final message is fully repaired
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     if max(synd) > 0:
@@ -670,7 +685,7 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
     if len(msg_in) > field_charac:
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
-    msg_out = bytearray(msg_in)     # copy of message
+    msg_out = _bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
         erase_pos = []
@@ -758,9 +773,9 @@ class RSCodec(object):
     def encode(self, data):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
         if isinstance(data, str):
-            data = bytearray(data, "latin-1")
+            data = _bytearray(data, "latin-1")
         chunk_size = self.nsize - self.nsym
-        enc = bytearray()
+        enc = _bytearray()
         for i in xrange(0, len(data), chunk_size):
             chunk = data[i:i+chunk_size]
             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator))
@@ -770,8 +785,8 @@ class RSCodec(object):
         '''Repair a message, whatever its size is, by using chunking'''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
         if isinstance(data, str):
-            data = bytearray(data, "latin-1")
-        dec = bytearray()
+            data = _bytearray(data, "latin-1")
+        dec = _bytearray()
         for i in xrange(0, len(data), self.nsize):
             # Split the long message in a chunk
             chunk = data[i:i+self.nsize]

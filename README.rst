@@ -17,8 +17,8 @@ The algorithm can correct up to 2*e+v <= nsym, where e is the number of errors,
 v the number of erasures and nsym = n-k = the number of ECC (error correction code) symbols.
 This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
 (errors where you know the position), and a combination of both errors and erasures.
-The code should work on pretty much any reasonable version of python (2.4-3.2),
-but I'm only testing on 2.5 - 3.2.
+The code should work on pretty much any reasonable version of python (2.4-3.5),
+but I'm only testing on 2.7 - 3.4.
 
 The codec has quite reasonable performances if you either use PyPy on the pure-python
 implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.py
@@ -27,12 +27,14 @@ implementation (reedsolo.py) or either if you compile the Cython extension creed
 .. note::
    The codec is universal, meaning that it can decode any message encoded by another RS encoder
    as long as you provide the correct parameters.
-   Note however that even if the algorithms and calculations can support Galois Fields > 2^8, the
-   current implementation is based on bytearray structures to get faster computations. But this is
-   easily fixable, just change bytearray to array('i', [...]) and it should work flawlessly for any GF.
+   Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
+   we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
+   Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
+   your messages, the longer it will take to encode/decode (quadratically!).
 
    The algorithm itself can handle messages up to (2^c_exp)-1 symbols, including the ECC symbols,
-   and each symbol can only have a value of up to (2^c_exp)-1. By default, we use the field GF(2^8),
+   and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
+   value for one character is constrained by the same mathematical reason). By default, we use the field GF(2^8),
    which means that you are limited to values between 0 and 255 (perfect to represent a single hexadecimal
    symbol on computers, so you can encode any binary stream) and limited to messages+ecc of maximum
    length 255. However, you can "chunk" longer messages to fit them into the message length limit.

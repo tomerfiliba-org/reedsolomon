@@ -45,27 +45,42 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
 
 ::
 
-    >>> rs = RSCodec(10)
-    >>> rs.encode([1,2,3,4])
+    # Initialization
+    >>> from reedsolo import RSCodec
+    >>> rsc = RSCodec(10)  # 10 ecc symbols
+
+    # Encoding
+    >>> rsc.encode([1,2,3,4])
     b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
-    >>> rs.encode(b'hello world')
+    >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
-    >>> rs.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')
+
+    # Decoding (repairing)
+    >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]
     b'hello world'
-    >>> rs.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 3 errors
+    >>> rsc.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')[0]     # 3 errors
     b'hello world'
-    >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 5 errors
+    >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')[0]     # 5 errors
     b'hello world'
-    >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')        # 6 errors - fail
+    >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')[0]        # 6 errors - fail
     Traceback (most recent call last):
       ...
     ReedSolomonError: Could not locate error
 
-    >>> rs = RSCodec(12)
-    >>> rs.encode(b'hello world')
+    >>> rsc = RSCodec(12)  # using 2 more ecc symbols (to correct max 6 errors or 12 erasures)
+    >>> rsc.encode(b'hello world')
     b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
-    >>> rs.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')         # 6 errors - ok
+    >>> rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')[0]         # 6 errors - ok
     b'hello world'
+    >>> rsc.decode(b'helXXXXXXXXXXy\xb2XX\x01q\xb9\xe3\xe2=', erase_pos=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16])[0]  # 12 erasures - OK
+    b'hello world'
+
+    # Checking
+    >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    [False]
+    >> rmes, rmesecc = rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    >> rsc.check(rmesecc)
+    [True]
 
     If you want full control, you can skip the API and directly use the library as-is. Here's how:
 

@@ -41,27 +41,42 @@ but I'm only testing on 2.7 - 3.4.
 
 ::
 
-    >>> rs = RSCodec(10)
-    >>> rs.encode([1,2,3,4])
+    # Initialization
+    >>> from reedsolo import RSCodec
+    >>> rsc = RSCodec(10)  # 10 ecc symbols
+
+    # Encoding
+    >>> rsc.encode([1,2,3,4])
     b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
-    >>> rs.encode(b'hello world')
+    >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
-    >>> rs.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')
+
+    # Decoding (repairing)
+    >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]
     b'hello world'
-    >>> rs.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 3 errors
+    >>> rsc.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')[0]     # 3 errors
     b'hello world'
-    >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')     # 5 errors
+    >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')[0]     # 5 errors
     b'hello world'
-    >>> rs.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')        # 6 errors - fail
+    >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')[0]        # 6 errors - fail
     Traceback (most recent call last):
       ...
     ReedSolomonError: Could not locate error
 
-    >>> rs = RSCodec(12)
-    >>> rs.encode(b'hello world')
+    >>> rsc = RSCodec(12)  # using 2 more ecc symbols (to correct max 6 errors or 12 erasures)
+    >>> rsc.encode(b'hello world')
     b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
-    >>> rs.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')         # 6 errors - ok
+    >>> rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')[0]         # 6 errors - ok
     b'hello world'
+    >>> rsc.decode(b'helXXXXXXXXXXy\xb2XX\x01q\xb9\xe3\xe2=', erase_pos=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16])[0]  # 12 erasures - OK
+    b'hello world'
+
+    # Checking
+    >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    [False]
+    >> rmes, rmesecc = rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    >> rsc.check(rmesecc)
+    [True]
 
     If you want full control, you can skip the API and directly use the library as-is. Here's how:
 
@@ -116,7 +131,7 @@ except NameError:
     from array import array
     def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
         if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.encode("latin-1")]
+            obj = [ord(ch) for ch in obj.decode("latin-1")]
         elif isinstance(obj, int):
             obj = [0] * obj
         return array("B", obj)
@@ -216,7 +231,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
         from array import array
         def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
             if isinstance(obj, str):
-                obj = [ord(ch) for ch in obj.encode("latin-1")]
+                obj = [ord(ch) for ch in obj.decode("latin-1")]
             elif isinstance(obj, int):
                 obj = [0] * obj
             return array("i", obj)
@@ -787,27 +802,42 @@ class RSCodec(object):
 
         # Initialize the look-up tables for easy and quick multiplication/division
         init_tables(prim, generator, c_exp)
+        # Precompute the generator polynomials
+        self.gen = rs_generator_poly_all(nsize)
 
-    def encode(self, data):
+    def chunk(self, data, chunksize):
+        '''Split a long message into chunks'''
+        for i in xrange(0, len(data), chunksize):
+            # Split the long message in a chunk
+            chunk = data[i:i+chunksize]
+            yield chunk
+
+    def encode(self, data, nsym=None):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
+        if not nsym:
+            nsym = self.nsym
+
         if isinstance(data, str):
-            data = _bytearray(data, "latin-1")
-        chunk_size = self.nsize - self.nsym
+            data = _bytearray(data)
         enc = _bytearray()
-        for i in xrange(0, len(data), chunk_size):
-            chunk = data[i:i+chunk_size]
-            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator))
+        for chunk in self.chunk(data, self.nsize - self.nsym):
+            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.gen[nsym]))
         return enc
 
-    def decode(self, data, erase_pos=None, only_erasures=False):
-        '''Repair a message, whatever its size is, by using chunking'''
+    def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):
+        '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym.
+        Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
+        Usage: rmes, rmesecc = RSCodec.decode(data).
+        '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
+        if not nsym:
+            nsym = self.nsym
+
         if isinstance(data, str):
-            data = _bytearray(data, "latin-1")
+            data = _bytearray(data)
         dec = _bytearray()
-        for i in xrange(0, len(data), self.nsize):
-            # Split the long message in a chunk
-            chunk = data[i:i+self.nsize]
+        dec_full = _bytearray()
+        for chunk in self.chunk(data, self.nsize):
             # Extract the erasures for this chunk
             e_pos = []
             if erase_pos:
@@ -816,6 +846,18 @@ class RSCodec(object):
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]
             # Decode/repair this chunk!
-            dec.extend(rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)[0])
-        return dec
+            rmes, recc = rs_correct_msg(chunk, nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
+            dec.extend(rmes)
+            dec_full.extend(rmes+recc)
+        return dec, dec_full
 
+    def check(self, data, nsym=None):
+        '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
+        if not nsym:
+            nsym = self.nsym
+        if isinstance(data, str):
+            data = _bytearray(data)
+        check = []
+        for chunk in self.chunk(data, self.nsize):
+            check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
+        return check

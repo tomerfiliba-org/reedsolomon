@@ -82,6 +82,19 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
     >> rsc.check(rmesecc)
     [True]
 
+    # To use longer chunks or bigger values than 255 (may be very slow)
+    >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
+    >> rsc = RSCodec(12, c_exp=12)  # alternative way to set nsize=4095
+    >> mes = 'a'*255 + 'b'*255 + 'c'*511
+    >> mesecc = rsc.encode(mes)
+    >> mesecc[2] = 1
+    >> mesecc[-1] = 1
+    >> rmes, rmesecc = rsc.decode(mesecc)
+    >> rsc.check(mesecc)
+    [False]
+    >> rsc.check(rmesecc)
+    [True]
+
     If you want full control, you can skip the API and directly use the library as-is. Here's how:
 
     First you need to init the precomputed tables:

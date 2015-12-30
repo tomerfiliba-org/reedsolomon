@@ -78,6 +78,19 @@ but I'm only testing on 2.7 - 3.4.
     >> rsc.check(rmesecc)
     [True]
 
+    # To use longer chunks or bigger values than 255 (may be very slow)
+    >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
+    >> rsc = RSCodec(12, c_exp=12)  # alternative way to set nsize=4095
+    >> mes = 'a'*255 + 'b'*255 + 'c'*511
+    >> mesecc = rsc.encode(mes)
+    >> mesecc[2] = 1
+    >> mesecc[-1] = 1
+    >> rmes, rmesecc = rsc.decode(mesecc)
+    >> rsc.check(mesecc)
+    [False]
+    >> rsc.check(rmesecc)
+    [True]
+
     If you want full control, you can skip the API and directly use the library as-is. Here's how:
 
     First you need to init the precomputed tables:
@@ -120,6 +133,7 @@ but I'm only testing on 2.7 - 3.4.
 # TODO IMPORTANT: try to keep the same convention for the ordering of polynomials inside lists throughout the code and functions (because for now there are a lot of list reversing in order to make it work, you never know the order of a polynomial, ie, if the first coefficient is the major degree or the constant term...).
 
 import itertools
+import math
 
 
 ################### INIT and stuff ###################
@@ -791,8 +805,23 @@ class RSCodec(object):
     0x11d)
     '''
 
-    def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):
-        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
+    def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8, single_gen=True):
+        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).
+        nsym : number of ecc symbols (you can repair nsym/2 errors and nsym erasures.
+        nsize : maximum length of each chunk. If higher than 255, will use a higher Galois Field, but the algorithm's complexity and computational cost will raise quadratically...
+        single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen = False.
+        '''
+
+        # Auto-setup if galois field or message length longer than 255
+        if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
+            # Get the next closest power of two
+            c_exp = int(math.log(2 ** (math.floor(math.log((nsize+1)) / math.log(2)) + 1), 2))
+        if c_exp > 8 and prim == 0x11d:  # prim was not correctly defined, find one
+            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
+            if nsize == 255:  # resize chunk size if not set
+                nsize = int(2**c_exp - 1)
+
+        # Memorize variables
         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1
@@ -803,7 +832,11 @@ class RSCodec(object):
         # Initialize the look-up tables for easy and quick multiplication/division
         init_tables(prim, generator, c_exp)
         # Precompute the generator polynomials
-        self.gen = rs_generator_poly_all(nsize)
+        if single_gen:
+            self.gen = {}
+            self.gen[nsym] = rs_generator_poly(nsym, fcr=fcr, generator=generator)
+        else:
+            self.gen = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
     def chunk(self, data, chunksize):
         '''Split a long message into chunks'''

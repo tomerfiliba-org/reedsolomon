@@ -24,6 +24,8 @@ The codec has quite reasonable performances if you either use PyPy on the pure-p
 implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.py
 (which is about 2x faster than PyPy). You can expect encoding rate of several MB/s.
 
+This library is also thoroughly unit tested so that any encoding/decoding case should be covered.
+
 .. note::
    The codec is universal, meaning that it can decode any message encoded by another RS encoder
    as long as you provide the correct parameters.
@@ -68,18 +70,36 @@ implementation (reedsolo.py) or either if you compile the Cython extension creed
     If you want full control, you can skip the API and directly use the library as-is. Here's how:
 
     First you need to init the precomputed tables:
-    >> init_tables(0x11d)
+    >> import reedsolo as rs
+    >> rs.init_tables(0x11d)
     Pro tip: if you get the error: ValueError: byte must be in range(0, 256), please check that your prime polynomial is correct for your field.
+    Pro tip2: by default, you can only encode messages of max length and max symbol value = 256. If you want to encode bigger messages,
+    please use the following (where c_exp is the exponent of your Galois Field, eg, 12 = max length 2^12 = 4096):
+    >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)
+    >> rs.init_tables(c_exp=12, prim=prim)
+    
+    Let's define our RS message and ecc size:
+    >> n = 255  # length of total message+ecc
+    >> nsym = 12  # length of ecc
+    >> mes = "a" * (n-nsym)  # generate a sample message
+
+    To optimize, you can precompute the generator polynomial:
+    >> gen = rs.rs_generator_poly_all(n)
 
     Then to encode:
-    >> mesecc = rs_encode_msg(mes, n-k)
+    >> mesecc = rs.rs_encode_msg(mes, nsym, gen=gen[nsym])
+
+    Let's tamper our message:
+    >> mesecc[1] = 0
 
     To decode:
-    >> mes, ecc = rs_correct_msg(mes + ecc, n-k, erase_pos=erase_pos)
-    
+    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
+    Note that both the message and the ecc are corrected (if possible of course).
+    Pro tip: if you know a few erasures positions, you can specify them in a list `erase_pos` to double the repair power. But you can also just specify an empty list.
+
     If the decoding fails, it will normally automatically check and raise a ReedSolomonError exception that you can handle.
     However if you want to manually check if the repaired message is correct, you can do so:
-    >> rsman.check(rmes + recc, k=k)
+    >> rs.rs_check(rmes + recc, nsym)
 
     Read the sourcecode's comments for more infos about how it works, and for the various parameters you can setup if
     you need to interface with other RS codecs.

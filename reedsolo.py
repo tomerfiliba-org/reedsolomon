@@ -138,22 +138,24 @@ import math
 
 ################### INIT and stuff ###################
 
-try:
+try:  # pragma: no cover
     bytearray
     _bytearray = bytearray
-except NameError:
+except NameError:  # pragma: no cover
     from array import array
-    def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
+    def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
         '''Simple bytearray replacement'''
+        # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
         if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.encode("latin-1")]
+            obj = [ord(ch) for ch in obj.encode(encoding)]
         elif isinstance(obj, int):
             obj = [0] * obj
         return array("B", obj)
 
-try: # compatibility with Python 3+
+try:  # pragma: no cover
     xrange
-except NameError:
+except NameError:  # pragma: no cover
+    # compatibility with Python 3+
     xrange = range
 
 class ReedSolomonError(Exception):
@@ -246,10 +248,11 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
         _bytearray = bytearray
     else:
         from array import array
-        def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
+        def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
             '''Fake bytearray replacement, supporting int values above 255'''
+            # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
             if isinstance(obj, str):  # obj is a string, convert to list of ints
-                obj = obj.encode("latin-1")
+                obj = obj.encode(encoding)
                 if isinstance(obj, str):  # Py2 str: convert to list of ascii ints
                     obj = [ord(chr) for chr in obj]
                 elif isinstance(obj, bytes):  # Py3 bytes: characters are bytes, need to convert to int for array.array('i', obj)

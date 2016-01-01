@@ -437,7 +437,7 @@ def gf_poly_div(dividend, divisor):
     separator = -(len(divisor)-1)
     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
 
-def gf_poly_square(poly):
+def gf_poly_square(poly):  # pragma: no cover
     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
     length = len(poly)
     out = _bytearray(2*length - 1)

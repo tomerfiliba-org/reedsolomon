@@ -248,7 +248,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
         _bytearray = bytearray
     else:
         from array import array
-        def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
+        def _bytearray(obj = 0, encoding = "latin-1"):
             '''Fake bytearray replacement, supporting int values above 255'''
             # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
             if isinstance(obj, str):  # obj is a string, convert to list of ints

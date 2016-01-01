@@ -17,7 +17,7 @@ from reedsolo import *
 try:
     bytearray
 except NameError:
-    from reedsolo import bytearray
+    from reedsolo import _bytearray as bytearray
 
 try: # compatibility with Python 3+
     xrange
@@ -30,31 +30,51 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
-        dec = rs.decode(enc)
+        dec, dec_enc = rs.decode(enc)
         self.assertEqual(dec, msg)
-    
+        self.assertEqual(dec_enc, enc)
+
     def test_correction(self):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
-        self.assertEqual(rs.decode(enc), msg)
+        rmsg, renc = rs.decode(enc)
+        self.assertEqual(rmsg, msg)
+        self.assertEqual(renc, enc)
         for i in [27, -3, -9, 7, 0]:
             enc[i] = 99
-            self.assertEqual(rs.decode(enc), msg)
+            rmsg, renc = rs.decode(enc)
+            self.assertEqual(rmsg, msg)
         enc[82] = 99
         self.assertRaises(ReedSolomonError, rs.decode, enc)
-    
+
+    def test_check(self):
+        rs = RSCodec(10)
+        msg = bytearray("hello world " * 10, "latin1")
+        enc = rs.encode(msg)
+        rmsg, renc = rs.decode(enc)
+        self.assertEqual(rs.check(enc), [True])
+        self.assertEqual(rs.check(renc), [True])
+        for i in [27, -3, -9, 7, 0]:
+            enc[i] = 99
+            rmsg, renc = rs.decode(enc)
+            self.assertEqual(rs.check(enc), [False])
+            self.assertEqual(rs.check(renc), [True])
+
     def test_long(self):
         rs = RSCodec(10)
         msg = bytearray("a" * 10000, "latin1")
         enc = rs.encode(msg)
-        dec = rs.decode(enc)
+        dec, dec_enc = rs.decode(enc)
         self.assertEqual(dec, msg)
-        enc[177] = 99
-        enc[2212] = 88
-        dec2 = rs.decode(enc)
+        self.assertEqual(dec_enc, enc)
+        enc2 = list(enc)
+        enc2[177] = 99
+        enc2[2212] = 88
+        dec2, dec_enc2 = rs.decode(enc2)
         self.assertEqual(dec2, msg)
-        
+        self.assertEqual(dec_enc2, enc)
+
     def test_prim_fcr_basic(self):
         nn = 30
         kk = 18
@@ -67,14 +87,15 @@ class TestReedSolomon(unittest.TestCase):
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-        tdm = rs.decode(tem)
+        tdm, rtem = rs.decode(tem)
         self.assertEqual(tdm, decmsg, msg="decoded does not match original")
+        self.assertEqual(rtem, tem, msg="decoded mesecc does not match original")
         tem1 = bytearray(tem) # clone a copy
         # encoding and decoding intact message seem OK, so test errors
         numerrs = tt >> 1 # inject tt/2 errors (expected to recover fully)
         for i in sample(range(nn), numerrs): # inject errors in random places
             tem1[i] ^= 0xff # flip all 8 bits
-        tdm = rs.decode(tem1)
+        tdm, _ = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
         tem1 = bytearray(tem) # clone another copy
@@ -96,16 +117,20 @@ class TestReedSolomon(unittest.TestCase):
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-        tdm = rs.decode(tem)
+        tdm, rtem = rs.decode(tem)
         self.assertEqual(tdm, decmsg, 
             msg="decoded does not match original")
+        self.assertEqual(rtem, tem, 
+            msg="decoded mesecc does not match original")
         tem1 = bytearray(tem)
         numerrs = tt >> 1
         for i in sample(range(nn), numerrs):
             tem1[i] ^= 0xff
-        tdm = rs.decode(tem1)
+        tdm, rtem = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
+        self.assertEqual(rtem, tem,
+            msg="decoded mesecc with errors does not match original")
         tem1 = bytearray(tem)
         numerrs += 1
         for i in sample(range(nn), numerrs):
@@ -116,7 +141,7 @@ class TestReedSolomon(unittest.TestCase):
         '''Test if generator poly finder is working correctly and if the all generators poly finder does output the same result'''
         n = 11
         k = 3
-        
+
         # Base 2 test
         fcr = 120
         generator = 2
@@ -168,6 +193,43 @@ class TestReedSolomon(unittest.TestCase):
             log_t, exp_t = init_tables(prim=p[0], generator=p[1], c_exp=p[2])
             self.assertEqual( list(log_t) , expected_log_t )
             self.assertEqual( list(exp_t) , expected_exp_t )
+
+class TestBigReedSolomon(unittest.TestCase):
+    def test_find_prime_polys(self):
+        self.assertEqual(find_prime_polys(c_exp=4), [19, 25])
+        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=False), [285, 299, 301, 333, 351, 355, 357, 361, 369, 391, 397, 425, 451, 463, 487, 501])
+        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=True), [397, 463, 487])
+        self.assertEqual(find_prime_polys(c_exp=9, fast_primes=True, single=True), 557)
+
+    def test_c_exp_9(self):
+        rsc = RSCodec(12, c_exp=9)
+        rsc2 = RSCodec(12, nsize=511)
+        self.assertEqual(rsc.c_exp, rsc2.c_exp)
+        self.assertEqual(rsc.nsize, rsc2.nsize)
+
+        mes = 'a'*((511-12)*2)
+        mesecc = rsc.encode(mes)
+        mesecc[2] = 1
+        mesecc[-1] = 1
+        rmes, rmesecc = rsc.decode(mesecc)
+        self.assertEqual(rsc.check(mesecc), [False, False])
+        self.assertEqual(rsc.check(rmesecc), [True, True])
+        self.assertEqual([x for x in rmes], [ord(x) for x in mes])
+
+    def test_c_exp_12(self):
+        rsc = RSCodec(12, c_exp=12)
+        rsc2 = RSCodec(12, nsize=4095)
+        self.assertEqual(rsc.c_exp, rsc2.c_exp)
+        self.assertEqual(rsc.nsize, rsc2.nsize)
+
+        mes = 'a'*(4095-12)
+        mesecc = rsc.encode(mes)
+        mesecc[2] = 1
+        mesecc[-1] = 1
+        rmes, rmesecc = rsc.decode(mesecc)
+        self.assertEqual(rsc.check(mesecc), [False])
+        self.assertEqual(rsc.check(rmesecc), [True])
+        self.assertEqual([x for x in rmes], [ord(x) for x in mes])
 
 class TestGFArithmetics(unittest.TestCase):
     '''Test Galois Field arithmetics'''
@@ -237,7 +299,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                 erratanb = case["erratasnb_errorsnb_onlyeras"][0]
                 errnb = case["erratasnb_errorsnb_onlyeras"][1]
                 only_erasures = case["erratasnb_errorsnb_onlyeras"][2]
-                
+
                 it += 1
                 if debugg:
                     print("it ", it)

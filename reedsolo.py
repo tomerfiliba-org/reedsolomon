@@ -81,7 +81,7 @@ but I'm only testing on 2.7 - 3.4.
     # To use longer chunks or bigger values than 255 (may be very slow)
     >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
     >> rsc = RSCodec(12, c_exp=12)  # alternative way to set nsize=4095
-    >> mes = 'a'*255 + 'b'*255 + 'c'*511
+    >> mes = 'a' * (4095-12)
     >> mesecc = rsc.encode(mes)
     >> mesecc[2] = 1
     >> mesecc[-1] = 1
@@ -144,8 +144,9 @@ try:
 except NameError:
     from array import array
     def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
+        '''Simple bytearray replacement'''
         if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.decode("latin-1")]
+            obj = [ord(ch) for ch in obj.encode("latin-1")]
         elif isinstance(obj, int):
             obj = [0] * obj
         return array("B", obj)
@@ -167,11 +168,11 @@ field_charac = int(2**8 - 1)
 def rwh_primes1(n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     ''' Returns  a list of primes < n '''
-    sieve = [True] * (n/2)
+    sieve = [True] * int(n/2)
     for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i/2]:
-            sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
+        if sieve[int(i/2)]:
+            sieve[int((i*i)/2)::i] = [False] * int((n-i*i-1)/(2*i)+1)
+    return [2] + [2*i+1 for i in xrange(1,int(n/2)) if sieve[i]]
 
 def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
@@ -240,14 +241,24 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     # c_exp is the exponent for the field's characteristic GF(2^c_exp)
 
     # Redefine _bytearray() in case we need to support integers or messages of length > 256
-    if c_exp > 8:
-        global _bytearray
+    global _bytearray
+    if c_exp <= 8:
+        _bytearray = bytearray
+    else:
         from array import array
         def _bytearray(obj = 0, encoding = "latin-1"): # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
-            if isinstance(obj, str):
-                obj = [ord(ch) for ch in obj.decode("latin-1")]
-            elif isinstance(obj, int):
+            '''Fake bytearray replacement, supporting int values above 255'''
+            if isinstance(obj, str):  # obj is a string, convert to list of ints
+                obj = obj.encode("latin-1")
+                if isinstance(obj, str):  # Py2 str: convert to list of ascii ints
+                    obj = [ord(chr) for chr in obj]
+                elif isinstance(obj, bytes):  # Py3 bytes: characters are bytes, need to convert to int for array.array('i', obj)
+                    obj = [int(chr) for chr in obj]
+                else:
+                    raise(ValueError, "Type of object not recognized!")
+            elif isinstance(obj, int):  # compatibility with list preallocation bytearray(int)
                 obj = [0] * obj
+            # Else obj is a list of int, it's ok
             return array("i", obj)
 
     # Init global tables
@@ -815,7 +826,7 @@ class RSCodec(object):
         # Auto-setup if galois field or message length longer than 255
         if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
             # Get the next closest power of two
-            c_exp = int(math.log(2 ** (math.floor(math.log((nsize+1)) / math.log(2)) + 1), 2))
+            c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1), 2))
         if c_exp > 8 and prim == 0x11d:  # prim was not correctly defined, find one
             prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
             if nsize == 255:  # resize chunk size if not set

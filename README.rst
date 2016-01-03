@@ -129,5 +129,16 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
     However if you want to manually check if the repaired message is correct, you can do so:
     >> rs.rs_check(rmes + recc, nsym)
 
-    Read the sourcecode's comments for more infos about how it works, and for the various parameters you can setup if
+    Note: if you want to use multiple reedsolomon with different parameters, you need to backup the globals and restore them before calling reedsolo functions:
+    >> rs.init_tables()
+    >> global gf_log, gf_exp, field_charac
+    >> bak_gf_log, bak_gf_exp, bak_field_charac = gf_log, gf_exp, field_charac
+    Then at anytime, you can do:
+    >> global gf_log, gf_exp, field_charac
+    >> gf_log, gf_exp, field_charac = bak_gf_log, bak_gf_exp, bak_field_charac
+    >> mesecc = rs.rs_encode_msg(mes, nsym)
+    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym)
+    The globals backup is not necessary if you use RSCodec, it will be automatically managed.
+
+    Read the sourcecode's comments for more info about how it works, and for the various parameters you can setup if
     you need to interface with other RS codecs.

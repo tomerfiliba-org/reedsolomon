@@ -125,7 +125,18 @@ but I'm only testing on 2.7 - 3.4.
     However if you want to manually check if the repaired message is correct, you can do so:
     >> rs.rs_check(rmes + recc, nsym)
 
-    Read the sourcecode's comments for more infos about how it works, and for the various parameters you can setup if
+    Note: if you want to use multiple reedsolomon with different parameters, you need to backup the globals and restore them before calling reedsolo functions:
+    >> rs.init_tables()
+    >> global gf_log, gf_exp, field_charac
+    >> bak_gf_log, bak_gf_exp, bak_field_charac = gf_log, gf_exp, field_charac
+    Then at anytime, you can do:
+    >> global gf_log, gf_exp, field_charac
+    >> gf_log, gf_exp, field_charac = bak_gf_log, bak_gf_exp, bak_field_charac
+    >> mesecc = rs.rs_encode_msg(mes, nsym)
+    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym)
+    The globals backup is not necessary if you use RSCodec, it will be automatically managed.
+
+    Read the sourcecode's comments for more info about how it works, and for the various parameters you can setup if
     you need to interface with other RS codecs.
 
 '''
@@ -287,7 +298,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     for i in xrange(field_charac, field_charac * 2):
         gf_exp[i] = gf_exp[i - field_charac]
 
-    return [gf_log, gf_exp]
+    return [gf_log, gf_exp, field_charac]
 
 def gf_add(x, y):
     return x ^ y
@@ -844,7 +855,7 @@ class RSCodec(object):
         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.
 
         # Initialize the look-up tables for easy and quick multiplication/division
-        init_tables(prim, generator, c_exp)
+        self.gf_log, self.gf_exp, self.field_charac = init_tables(prim, generator, c_exp)
         # Precompute the generator polynomials
         if single_gen:
             self.gen = {}
@@ -861,6 +872,10 @@ class RSCodec(object):
 
     def encode(self, data, nsym=None):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
+        # Restore precomputed tables (allow to use multiple RSCodec in one script)
+        global gf_log, gf_exp, field_charac
+        gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
+
         if not nsym:
             nsym = self.nsym
 
@@ -877,6 +892,11 @@ class RSCodec(object):
         Usage: rmes, rmesecc = RSCodec.decode(data).
         '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
+
+        # Restore precomputed tables (allow to use multiple RSCodec in one script)
+        global gf_log, gf_exp, field_charac
+        gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
+
         if not nsym:
             nsym = self.nsym
 

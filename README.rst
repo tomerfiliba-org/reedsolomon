@@ -52,8 +52,11 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
     # Encoding
     >>> rsc.encode([1,2,3,4])
     b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
+    >>> rsc.encode(bytearray([1,2,3,4]))
+    bytearray(b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M')
     >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
+    # Note that chunking is supported transparently to encode any string length.
 
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]

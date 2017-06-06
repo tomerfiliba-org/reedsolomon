@@ -3,7 +3,7 @@
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
 # Copyright (c) 2015 rotorgit
-# Copyright (c) 2015 Stephen Larroque <LRQ3000@gmail.com>
+# Copyright (c) 2015-2017 Stephen Larroque <LRQ3000@gmail.com>
 
 '''
 Reed Solomon
@@ -48,8 +48,11 @@ but I'm only testing on 2.7 - 3.4.
     # Encoding
     >>> rsc.encode([1,2,3,4])
     b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
+    >>> rsc.encode(bytearray([1,2,3,4]))
+    bytearray(b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M')
     >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
+    # Note that chunking is supported transparently to encode any string length.
 
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]
@@ -837,11 +840,11 @@ class RSCodec(object):
         single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen = False.
         '''
 
-        # Auto-setup if galois field or message length longer than 255
+        # Auto-setup if galois field or message length is different than default (exponent 8)
         if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
             # Get the next closest power of two
             c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1), 2))
-        if c_exp > 8 and prim == 0x11d:  # prim was not correctly defined, find one
+        if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
             prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
             if nsize == 255:  # resize chunk size if not set
                 nsize = int(2**c_exp - 1)

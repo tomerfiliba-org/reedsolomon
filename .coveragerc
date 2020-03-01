@@ -1,11 +1,10 @@
 [run]
 branch = True
-omit =
-    */home/*
 [report]
 omit =
     */home/*
     */python?.?/*
     */site-packages/nose/*
     */opt/python/pypy*
+    */tests/*
 show_missing = True

@@ -25,7 +25,7 @@ try:
             pass
 
 # Else we're not under PyPy, we can run the test
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     __pypy__ = None
 
     from creedsolo import *

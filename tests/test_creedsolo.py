@@ -28,10 +28,11 @@ inpypy = True
 if PY3:
     # If Python 3, we can't just import __pypy__ to check if there is an ImportError, because it raises a ModuleNotFoundError on Travis CI that is never caught, dunno why
     # So we test manually without raising any exception
-    import platform
+    import platform, os
     inpypy = platform.python_implementation().lower().startswith("pypy")
 
     # BUT if we are running inside Travis, we skip in all cases, because they put very hard limits on cython so that it's very hard for complex code to run properly
+    # see also https://github.com/cython/cython/issues/2247
     # TODO: fix me, maybe we can configure travis to set a higher limit for recursion? Or there is really something wrong with the `from creedsolo import *`, but it works on local computer, so it seems to be specific to Travis
     is_travis = 'TRAVIS' in os.environ
     if is_travis:

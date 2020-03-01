@@ -2,6 +2,7 @@
 # To use this Makefile, pip install py-make
 # You also need to pip install also other required modules: `pip install flake8 nose coverage twine`
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
+# To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
 
 .PHONY:
 	alltests
@@ -9,6 +10,7 @@
 	flake8
 	test
 	testsetup
+    testsetuppost
 	testcoverage
 	distclean
 	coverclean
@@ -22,7 +24,7 @@
 	help
 
 help:
-	@pymake -p
+	@+make -p
 
 alltests:
 	@+make test
@@ -38,17 +40,19 @@ flake8:
 
 test:
      # Build the Cython extension
-    python setup.py build_ext --inplace
+	python setup.py build_ext --inplace
      # Run the tests
 	python -m unittest discover tests
 
 testsetup:
 	python setup.py check --metadata --restructuredtext --strict
-	python setup.py make none
+
+testsetuppost:
+	twine check "dist/*"
 
 testcoverage:
      # Does not work yet
-	@make coverclean
+	@+make coverclean
 	nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
 
 distclean:
@@ -71,21 +75,22 @@ toxclean:
 
 
 installdev:
-	python setup.py develop --uninstall
-	python setup.py develop
+	@+python setup.py develop --uninstall
+	@+python setup.py develop
 
 install:
-	python setup.py install
+	@+python setup.py install
 
 build:
-	@make prebuildclean
-	@make testsetup
-	python setup.py sdist bdist_wheel
-	# python setup.py bdist_wininst
+	@+make prebuildclean
+	@+make testsetup
+	@+python setup.py sdist bdist_wheel
+	# @+python setup.py bdist_wininst
+    pymake testsetuppost  # @+make does not work here, dunno why
 
 pypi:
 	twine upload dist/*
 
 buildupload:
-	@make build
-	@make pypi
+	@+make build
+	@+make pypi

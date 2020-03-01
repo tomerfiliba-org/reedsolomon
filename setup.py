@@ -30,7 +30,7 @@ extensions = [
 if USE_CYTHON: extensions = cythonize(extensions)
 
 setup(name = "reedsolo",
-    version = "1.4.2",
+    version = "1.4.3",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",
@@ -41,6 +41,7 @@ setup(name = "reedsolo",
     py_modules = ["reedsolo"],
     platforms = ["any"],
     long_description = open("README.rst", "r").read(),
+    long_description_content_type = 'text/x-rst',
     classifiers = [
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

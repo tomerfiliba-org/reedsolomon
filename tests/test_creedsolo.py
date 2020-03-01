@@ -29,7 +29,7 @@ try:
             pass
 
 # Else we're not under PyPy, we can run the test
-except (ImportError, ModuleNotFoundError) as exc:
+except (ImportError, ModuleNotFoundError, Exception) as exc:  # TODO: on Travis, ModuleNotFoundError cannot be caught, dunno why, so we catch all Exception and consider this means pypy is not running
     __pypy__ = None
 
     from creedsolo import *

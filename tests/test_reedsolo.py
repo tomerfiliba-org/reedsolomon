@@ -30,7 +30,7 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
-        dec, dec_enc = rs.decode(enc)
+        dec, dec_enc, errata_pos = rs.decode(enc)
         self.assertEqual(dec, msg)
         self.assertEqual(dec_enc, enc)
 
@@ -38,12 +38,12 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
-        rmsg, renc = rs.decode(enc)
+        rmsg, renc, errata_pos = rs.decode(enc)
         self.assertEqual(rmsg, msg)
         self.assertEqual(renc, enc)
         for i in [27, -3, -9, 7, 0]:
             enc[i] = 99
-            rmsg, renc = rs.decode(enc)
+            rmsg, renc, errata_pos = rs.decode(enc)
             self.assertEqual(rmsg, msg)
         enc[82] = 99
         self.assertRaises(ReedSolomonError, rs.decode, enc)
@@ -52,12 +52,12 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = bytearray("hello world " * 10, "latin1")
         enc = rs.encode(msg)
-        rmsg, renc = rs.decode(enc)
+        rmsg, renc, errata_pos = rs.decode(enc)
         self.assertEqual(rs.check(enc), [True])
         self.assertEqual(rs.check(renc), [True])
         for i in [27, -3, -9, 7, 0]:
             enc[i] = 99
-            rmsg, renc = rs.decode(enc)
+            rmsg, renc, errata_pos = rs.decode(enc)
             self.assertEqual(rs.check(enc), [False])
             self.assertEqual(rs.check(renc), [True])
 
@@ -65,13 +65,13 @@ class TestReedSolomon(unittest.TestCase):
         rs = RSCodec(10)
         msg = bytearray("a" * 10000, "latin1")
         enc = rs.encode(msg)
-        dec, dec_enc = rs.decode(enc)
+        dec, dec_enc, errata_pos = rs.decode(enc)
         self.assertEqual(dec, msg)
         self.assertEqual(dec_enc, enc)
         enc2 = list(enc)
         enc2[177] = 99
         enc2[2212] = 88
-        dec2, dec_enc2 = rs.decode(enc2)
+        dec2, dec_enc2, errata_pos = rs.decode(enc2)
         self.assertEqual(dec2, msg)
         self.assertEqual(dec_enc2, enc)
 
@@ -87,7 +87,7 @@ class TestReedSolomon(unittest.TestCase):
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-        tdm, rtem = rs.decode(tem)
+        tdm, rtem, errata_pos = rs.decode(tem)
         self.assertEqual(tdm, decmsg, msg="decoded does not match original")
         self.assertEqual(rtem, tem, msg="decoded mesecc does not match original")
         tem1 = bytearray(tem) # clone a copy
@@ -95,7 +95,7 @@ class TestReedSolomon(unittest.TestCase):
         numerrs = tt >> 1 # inject tt/2 errors (expected to recover fully)
         for i in sample(range(nn), numerrs): # inject errors in random places
             tem1[i] ^= 0xff # flip all 8 bits
-        tdm, _ = rs.decode(tem1)
+        tdm, _, _ = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
         tem1 = bytearray(tem) # clone another copy
@@ -117,7 +117,7 @@ class TestReedSolomon(unittest.TestCase):
         decmsg = encmsg[:kk]
         tem = rs.encode(decmsg)
         self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-        tdm, rtem = rs.decode(tem)
+        tdm, rtem, errata_pos = rs.decode(tem)
         self.assertEqual(tdm, decmsg, 
             msg="decoded does not match original")
         self.assertEqual(rtem, tem, 
@@ -126,7 +126,7 @@ class TestReedSolomon(unittest.TestCase):
         numerrs = tt >> 1
         for i in sample(range(nn), numerrs):
             tem1[i] ^= 0xff
-        tdm, rtem = rs.decode(tem1)
+        tdm, rtem, errata_pos = rs.decode(tem1)
         self.assertEqual(tdm, decmsg,
             msg="decoded with errors does not match original")
         self.assertEqual(rtem, tem,
@@ -228,7 +228,7 @@ class TestBigReedSolomon(unittest.TestCase):
         mesecc = rsc.encode(mes)
         mesecc[2] = 1
         mesecc[-1] = 1
-        rmes, rmesecc = rsc.decode(mesecc)
+        rmes, rmesecc, errata_pos = rsc.decode(mesecc)
         self.assertEqual(rsc.check(mesecc), [False, False])
         self.assertEqual(rsc.check(rmesecc), [True, True])
         self.assertEqual([x for x in rmes], [ord(x) for x in mes])
@@ -243,7 +243,7 @@ class TestBigReedSolomon(unittest.TestCase):
         mesecc = rsc.encode(mes)
         mesecc[2] = 1
         mesecc[-1] = 1
-        rmes, rmesecc = rsc.decode(mesecc)
+        rmes, rmesecc, errata_pos = rsc.decode(mesecc)
         self.assertEqual(rsc.check(mesecc), [False])
         self.assertEqual(rsc.check(rmesecc), [True])
         self.assertEqual([x for x in rmes], [ord(x) for x in mes])
@@ -422,7 +422,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                 # Decoding the corrupted codeword
                 # -- Forney syndrome method
                 try:
-                    rmes, recc = rs_correct_msg(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
+                    rmes, recc, errata_pos = rs_correct_msg(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
                     results_br.append( rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) ) # check if correct by syndrome analysis (can be wrong)
                     results_br.append( rmesecc_orig == (rmes+recc) ) # check if correct by comparing to the original message (always correct)
                     if debugg and not rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) or not (rmesecc_orig == (rmes+recc)): raise ReedSolomonError("False!!!!!")
@@ -443,7 +443,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                         raise exc
                 # -- Without Forney syndrome method
                 try:
-                    mes, ecc = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
+                    mes, ecc, errata_pos = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
                     results_br.append( rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) )
                     results_br.append( rmesecc_orig == (rmes+recc) )
                 except ReedSolomonError as exc:

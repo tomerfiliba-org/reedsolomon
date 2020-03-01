@@ -120,7 +120,7 @@ but I'm only testing on 2.7 - 3.4.
     >> mesecc[1] = 0
 
     To decode:
-    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
+    >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
     Note that both the message and the ecc are corrected (if possible of course).
     Pro tip: if you know a few erasures positions, you can specify them in a list `erase_pos` to double the repair power. But you can also just specify an empty list.
 
@@ -136,7 +136,7 @@ but I'm only testing on 2.7 - 3.4.
     >> global gf_log, gf_exp, field_charac
     >> gf_log, gf_exp, field_charac = bak_gf_log, bak_gf_exp, bak_field_charac
     >> mesecc = rs.rs_encode_msg(mes, nsym)
-    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym)
+    >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym)
     The globals backup is not necessary if you use RSCodec, it will be automatically managed.
 
     Read the sourcecode's comments for more info about how it works, and for the various parameters you can setup if
@@ -733,7 +733,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
-        return msg_out[:-nsym], msg_out[-nsym:]  # no errors
+        return msg_out[:-nsym], msg_out[-nsym:], []  # no errors
 
     # Find errors locations
     if only_erasures:
@@ -756,7 +756,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     if max(synd) > 0:
         raise ReedSolomonError("Could not correct message")
     # return the successfully decoded message
-    return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
+    return msg_out[:-nsym], msg_out[-nsym:], erase_pos + err_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
 def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasures=False):
     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
@@ -777,7 +777,7 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
-        return msg_out[:-nsym], msg_out[-nsym:]  # no errors
+        return msg_out[:-nsym], msg_out[-nsym:], []  # no errors
 
     # prepare erasures locator and evaluator polynomials
     erase_loc = None
@@ -810,7 +810,7 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
     if max(synd) > 0:
         raise ReedSolomonError("Could not correct message")
     # return the successfully decoded message
-    return msg_out[:-nsym], msg_out[-nsym:] # also return the corrected ecc block so that the user can check()
+    return msg_out[:-nsym], msg_out[-nsym:], erase_pos + err_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
 def rs_check(msg, nsym, fcr=0, generator=2):
     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
@@ -911,6 +911,7 @@ class RSCodec(object):
             data = _bytearray(data)
         dec = _bytearray()
         dec_full = _bytearray()
+        errata_pos_all = _bytearray()
         for chunk in self.chunk(data, self.nsize):
             # Extract the erasures for this chunk
             e_pos = []
@@ -920,10 +921,11 @@ class RSCodec(object):
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
                 erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]
             # Decode/repair this chunk!
-            rmes, recc = rs_correct_msg(chunk, nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
+            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)
             dec_full.extend(rmes+recc)
-        return dec, dec_full
+            errata_pos_all.extend(errata_pos)
+        return dec, dec_full, errata_pos_all
 
     def check(self, data, nsym=None):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''

@@ -54,22 +54,26 @@ Basic usage with high-level RSCodec class
     >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')[0]        # 6 errors - fail
     Traceback (most recent call last):
       ...
-    ReedSolomonError: Could not locate error
+    reedsolo.ReedSolomonError: Too many (or few) errors found by Chien Search for the errata locator polynomial!
 
     >>> rsc = RSCodec(12)  # using 2 more ecc symbols (to correct max 6 errors or 12 erasures)
     >>> rsc.encode(b'hello world')
     b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
-    >>> rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')[0]         # 6 errors - ok
+    >>> rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')[0]         # 6 errors - ok, but any more would fail
     b'hello world'
     >>> rsc.decode(b'helXXXXXXXXXXy\xb2XX\x01q\xb9\xe3\xe2=', erase_pos=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16])[0]  # 12 erasures - OK
     b'hello world'
 
+Note: this shows that we can decode twice as many erasures (where we provide the location of errors ourselves) than errors (with unknown locations). This is the cost of error correction compared to erasure correction.
+
     # Checking
-    >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')  # Tampered message will return False
     [False]
-    >> rmes, rmesecc = rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
-    >> rsc.check(rmesecc)
+    >> rmes, rmesecc, errata_pos = rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
+    >> rsc.check(rmesecc)  # Corrected message will return True
     [True]
+    >> print('Number of detected errors and erasures: %i, their positions: %s' % (len(errata_pos), list(errata_pos)))
+    Number of detected errors and erasures: 6, their positions: [16, 15, 12, 11, 10, 9]
 
     # To use longer chunks or bigger values than 255 (may be very slow)
     >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
@@ -78,7 +82,7 @@ Basic usage with high-level RSCodec class
     >> mesecc = rsc.encode(mes)
     >> mesecc[2] = 1
     >> mesecc[-1] = 1
-    >> rmes, rmesecc = rsc.decode(mesecc)
+    >> rmes, rmesecc, errata_pos = rsc.decode(mesecc)
     >> rsc.check(mesecc)
     [False]
     >> rsc.check(rmesecc)
@@ -135,10 +139,16 @@ To decode:
 
 .. code:: python
 
-    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
+    >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
 
 Note that both the message and the ecc are corrected (if possible of course).
 Pro tip: if you know a few erasures positions, you can specify them in a list `erase_pos` to double the repair power. But you can also just specify an empty list.
+
+You can check how many errors and/or erasures were corrected, which can be useful to design adaptive bitrate algorithms:
+
+.. code:: python
+
+    >> print('A total of %i errata were corrected over all chunks of this message.' % len(errata_pos))
 
 If the decoding fails, it will normally automatically check and raise a ReedSolomonError exception that you can handle.
 However if you want to manually check if the repaired message is correct, you can do so:
@@ -163,7 +173,7 @@ Then at anytime, you can do:
     >> global gf_log, gf_exp, field_charac
     >> gf_log, gf_exp, field_charac = bak_gf_log, bak_gf_exp, bak_field_charac
     >> mesecc = rs.rs_encode_msg(mes, nsym)
-    >> rmes, recc = rs.rs_correct_msg(mesecc, nsym)
+    >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym)
 
 The globals backup is not necessary if you use RSCodec, it will be automatically managed.
 

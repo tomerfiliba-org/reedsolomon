@@ -15,8 +15,9 @@ The algorithm can correct up to 2*e+v <= nsym, where e is the number of errors,
 v the number of erasures and nsym = n-k = the number of ECC (error correction code) symbols.
 This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
 (errors where you know the position), and a combination of both errors and erasures.
-The code should work on pretty much any reasonable version of python (2.4-3.5),
-but I'm only testing on 2.7 - 3.4.
+The code should work on pretty much any reasonable version of python (2.4-3.7),
+but I'm only testing on 2.7 and 3.7. Python 3.8 should work except for Cython which is
+currently incompatible with this version.
 
 The codec has quite reasonable performances if you either use PyPy on the pure-python
 implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.py

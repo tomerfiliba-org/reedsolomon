@@ -2,7 +2,7 @@
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
 # Copyright (c) 2015 rotorgit
-# Copyright (c) 2015 Stephen Larroque <LRQ3000@gmail.com>
+# Copyright (c) 2015-2020 Stephen Larroque <LRQ3000@gmail.com>
 
 '''
 Reed Solomon
@@ -86,7 +86,7 @@ cimport cython
 from cython.parallel import parallel, prange
 
 import itertools
-from cpython cimport array
+from cython.view cimport array as cvarray
 
 
 ################### INIT and stuff ###################
@@ -99,13 +99,12 @@ except NameError:
             obj = [ord(ch) for ch in obj.encode("latin-1")]
         elif isinstance(obj, int):
             obj = [0] * obj
-        return array("B", obj)
+        return cvarray("B", obj)
 
 class ReedSolomonError(Exception):
     pass
 
 ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
-cimport cpython.array as array
 
 cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
 cdef uint8_t[::1] gf_log = bytearray([0] * 256)

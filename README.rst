@@ -145,3 +145,6 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
 
     Read the sourcecode's comments for more info about how it works, and for the various parameters you can setup if
     you need to interface with other RS codecs.
+
+
+To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type `python setup.py build_ext --inplace`. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`.

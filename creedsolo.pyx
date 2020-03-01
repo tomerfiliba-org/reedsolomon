@@ -550,6 +550,10 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
             err_loc_prime = gf_mul(err_loc_prime, coef)
         # equivalent to: err_loc_prime = functools.reduce(gf_mul, err_loc_prime_tmp, 1)
 
+        # Test if we could find the errata locator, else we raise an Exception (because else since we divide y by err_loc_prime to compute the magnitude, we will get a ZeroDivisionError exception otherwise)
+        if err_loc_prime == 0:
+            raise ReedSolomonError("Decoding failed: Forney algorithm could not properly detect where the errors are located (errata locator prime is 0).")
+
         # Compute y (evaluation of the errata evaluator polynomial)
         # This is a more faithful translation of the theoretical equation contrary to the old forney method. Here it is exactly copy/pasted from the included presentation decoding_rs.pdf: Yl = omega(Xl.inverse()) / prod(1 - Xj*Xl.inverse()) for j in len(X) (in the paper it's for j in s, but it's useless when len(X) < s because we compute neutral terms 1 for nothing, and wrong when correcting more than s erasures or erasures+errors since it prevents computing all required terms).
         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.

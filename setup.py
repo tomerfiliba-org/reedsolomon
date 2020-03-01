@@ -30,7 +30,7 @@ extensions = [
 if USE_CYTHON: extensions = cythonize(extensions)
 
 setup(name = "reedsolo",
-    version = "1.4.7",
+    version = "1.4.8",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

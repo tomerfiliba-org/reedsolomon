@@ -220,6 +220,20 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
 
 To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type `python setup.py build_ext --inplace`. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`.
 
+Authors
+-------
+
+This module was conceived and developed by Tomer Filiba.
+
+It was further extended and is currently maintained by Stephen Karl Larroque.
+
+License
+-------
+
+This software is released to the Public Domain.
+
+If the Public Domain is not adequate for your purpose, you can instead consider this module under the MIT License as you prefer.
+
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/reedsolo.svg
    :target: https://pypi.org/project/reedsolo

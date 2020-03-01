@@ -1,11 +1,9 @@
 Reed Solomon
 ============
 
-.. image:: https://travis-ci.org/lrq3000/reedsolomon.svg?branch=master
-    :target: https://travis-ci.org/lrq3000/reedsolomon
+|PyPI-Status| |PyPI-Versions| |PyPI-Downloads|
 
-.. image:: https://coveralls.io/repos/lrq3000/reedsolomon/badge.svg?branch=master&service=github
-  :target: https://coveralls.io/github/lrq3000/reedsolomon?branch=master
+|Build-Status| |Coverage|
 
 A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at
@@ -148,3 +146,15 @@ This library is also thoroughly unit tested so that any encoding/decoding case s
 
 
 To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type `python setup.py build_ext --inplace`. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`.
+
+
+.. |PyPI-Status| image:: https://img.shields.io/pypi/v/reedsolo.svg
+   :target: https://pypi.org/project/reedsolo
+.. |PyPI-Versions| image:: https://img.shields.io/pypi/pyversions/reedsolo.svg?logo=python&logoColor=white
+   :target: https://pypi.org/project/reedsolo
+.. |PyPI-Downloads| image:: https://img.shields.io/pypi/dm/reedsolo.svg?label=pypi%20downloads&logo=python&logoColor=white
+   :target: https://pypi.org/project/reedsolo
+.. |Build-Status| image:: https://travis-ci.org/tomerfiliba/reedsolomon.svg?branch=master
+    :target: https://travis-ci.org/tomerfiliba/reedsolomon
+.. |Coverage| image:: https://coveralls.io/repos/tomerfiliba/reedsolomon/badge.svg?branch=master&service=github
+  :target: https://coveralls.io/github/tomerfiliba/reedsolomon?branch=master

@@ -44,6 +44,9 @@ test:
      # Run the tests
 	python -m unittest discover tests
 
+testnose:
+    nosetests -vv --with-coverage
+
 testsetup:
 	python setup.py check --metadata --restructuredtext --strict
 

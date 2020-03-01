@@ -12,6 +12,10 @@ try:
 except ImportError:  #python3.x
     izip = zip
 
+try:
+    ModuleNotFoundError
+except:  # python2.x does not have ModuleNotFoundError
+    ModuleNotFoundError = ImportError
 
 # Skip this whole module test if running under PyPy (incompatible with Cython)
 try:
@@ -25,7 +29,7 @@ try:
             pass
 
 # Else we're not under PyPy, we can run the test
-except (ImportError, ModuleNotFoundError):
+except (ImportError, ModuleNotFoundError) as exc:
     __pypy__ = None
 
     from creedsolo import *

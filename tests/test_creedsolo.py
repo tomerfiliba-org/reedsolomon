@@ -17,19 +17,36 @@ try:
 except:  # python2.x does not have ModuleNotFoundError
     ModuleNotFoundError = ImportError
 
+# Test whether we use Python 2 or 3
+if sys.version_info >= (3, 0):
+    PY3 = True
+else:
+    PY3 = False
+
+nopypy = False
 # Skip this whole module test if running under PyPy (incompatible with Cython)
-try:
-    import __pypy__
+if PY3:
+    # If Python 3, we can't just import __pypy__ to check if there is an ImportError, because it raises a ModuleNotFoundError on Travis CI that is never caught, dunno why
+    # So we test manually without raising any exception    
+    import importlib
+    pypy_spec = importlib.util.find_spec("__pypy__")
+    nopypy = pypy_spec is None
+else:
+    # Python 2 way to test
+    try:
+        import __pypy__
 
-    # Empty test unit to show the reason of skipping
-    class TestMissingDependency(unittest.TestCase):
+        # Empty test unit to show the reason of skipping
+        class TestMissingDependency(unittest.TestCase):
 
-        @unittest.skip('Missing dependency - Cython is incompatible with PyPy')
-        def test_fail():
-            pass
+            @unittest.skip('Missing dependency - Cython is incompatible with PyPy')
+            def test_fail():
+                pass
+    except (ImportError, ModuleNotFoundError, Exception) as exc:  # TODO: on Travis, ModuleNotFoundError cannot be caught, dunno why, so we catch all Exception and consider this means pypy is not running
+        nopypy = True
 
 # Else we're not under PyPy, we can run the test
-except (ImportError, ModuleNotFoundError, Exception) as exc:  # TODO: on Travis, ModuleNotFoundError cannot be caught, dunno why, so we catch all Exception and consider this means pypy is not running
+if nopypy:
     __pypy__ = None
 
     from creedsolo import *

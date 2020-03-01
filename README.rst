@@ -66,6 +66,8 @@ Basic usage with high-level RSCodec class
 
 Note: this shows that we can decode twice as many erasures (where we provide the location of errors ourselves) than errors (with unknown locations). This is the cost of error correction compared to erasure correction.
 
+.. code:: python
+
     # Checking
     >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')  # Tampered message will return False
     [False]
@@ -198,6 +200,7 @@ implementation (reedsolo.py) or either if you compile the Cython extension creed
 This library is also thoroughly unit tested so that any encoding/decoding case should be covered.
 
 .. note::
+
    The codec is universal, meaning that it can decode any message encoded by another RS encoder
    as long as you provide the correct parameters.
    Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because

@@ -56,6 +56,25 @@ Basic usage with high-level RSCodec class
       ...
     reedsolo.ReedSolomonError: Too many (or few) errors found by Chien Search for the errata locator polynomial!
 
+__Important upgrade notice for pre-1.0 users:__ Note that `RSCodec.decode()` returns 3 variables: the decoded (corrected) message, the decoded message and error correction code (which is itself also corrected), and the listt of positions of the errata (errors and erasures):
+
+.. code:: python
+
+    >>> tampered_msg = b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa'
+    >>> decoded_msg, decoded_msgecc, errata_pos = rsc.decode(tampered_msg)
+    >>> print(decoded_msg)
+    bytearray(b'hello world')
+    >>> print(decoded_msgecc)
+    bytearray(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')
+    >>> print(errata_pos)  # errata_pos is returned as a bytearray, hardly intelligible
+    bytearray(b'\x10\t\x02')
+    >>> print(list(errata_pos))  # convert to a list to get the errata positions as integer indices
+    [16, 9, 2]
+
+Since we failed to decode with 6 errors with a codec set to 10 error correction code (ecc) symbols, let's try to use a bigger codec, with 12 ecc symbols.
+
+.. code:: python
+
     >>> rsc = RSCodec(12)  # using 2 more ecc symbols (to correct max 6 errors or 12 erasures)
     >>> rsc.encode(b'hello world')
     b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='

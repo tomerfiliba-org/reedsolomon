@@ -60,7 +60,7 @@ Basic usage with high-level RSCodec class
 
     1. the decoded (corrected) message
     2. the decoded message and error correction code (which is itself also corrected)
-    3. and the listt of positions of the errata (errors and erasures):
+    3. and the list of positions of the errata (errors and erasures)
 
 Here is an example:
 

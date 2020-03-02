@@ -937,3 +937,38 @@ class RSCodec(object):
         for chunk in self.chunk(data, self.nsize):
             check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
         return check
+
+    def maxerrata(self, errors=None, erasures=None, verbose=False):
+        '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
+        Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
+        Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.
+        By default, return a tuple wth the maximum number of errors (2nd output) OR erasures (2nd output) that can be corrected.
+        If errors or erasures (not both) is specified as argument, computes the remaining **simultaneous** correction capacity (eg, if errors specified, compute the number of erasures that can be simultaneously corrected).
+        Set verbose to True to get print a report.'''
+        nsym = self.nsym
+        # Compute the maximum number of errors OR erasures
+        maxerrors = int(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
+        maxerasures = nsym
+        # Compute the maximum of simultaneous errors AND erasures
+        if erasures is not None and erasures >= 0:
+            # We know the erasures count, we want to know how many errors we can correct simultaneously
+            if erasures > maxerasures:
+                raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")
+            maxerrors = int((nsym-erasures)/2)
+            if verbose:
+                print('This codec can correct up to %i errors and %i erasures simultaneously' % (maxerrors, erasures))
+            # Return a tuple with the maximum number of simultaneously corrected errors and erasures
+            return maxerrors, erasures
+        if errors is not None and errors >= 0:
+            # We know the errors count, we want to know how many erasures we can correct simultaneously
+            if errors > maxerrors:
+                raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")
+            maxerasures = int(nsym-(errors*2))
+            if verbose:
+                print('This codec can correct up to %i errors and %i erasures simultaneously' % (errors, maxerasures))
+            # Return a tuple with the maximum number of simultaneously corrected errors and erasures
+            return errors, maxerasures
+        # Return a tuple with the maximum number of errors and erasures (independently corrected)
+        if verbose:
+            print('This codec can correct up to %i errors and %i erasures independently' % (maxerrors, maxerasures))
+        return maxerrors, maxerasures

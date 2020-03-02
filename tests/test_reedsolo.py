@@ -24,6 +24,11 @@ try: # compatibility with Python 3+
 except NameError:
     xrange = range
 
+try:  # python2.x
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
 
 class TestReedSolomon(unittest.TestCase):
     def test_simple(self):
@@ -453,6 +458,28 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                 if debugg: print("-----")
 
         self.assertTrue(results_br.count(True) == len(results_br))
+
+class TestHelperFuncs(unittest.TestCase):
+    '''Test helper functions'''
+
+    def test_maxerrata(self):
+        rs = RSCodec(10)
+        self.assertEqual(rs.maxerrata(), (5, 10))
+        self.assertEqual(rs.maxerrata(erasures=8), (1, 8))
+        self.assertEqual(rs.maxerrata(errors=2), (2, 6))
+        self.assertRaises(ReedSolomonError, rs.maxerrata, erasures=11)
+        self.assertRaises(ReedSolomonError, rs.maxerrata, errors=6)
+
+    def test_maxerrata_verbose(self):
+        output = StringIO()
+        sys.stdout = output
+        rs = RSCodec(10)
+        rs.maxerrata(verbose=True)
+        rs.maxerrata(erasures=2, verbose=True)
+        rs.maxerrata(errors=4, verbose=True)
+        sys.stdout = sys.__stdout__
+        self.assertEqual(output.getvalue(), "This codec can correct up to 5 errors and 10 erasures independently\nThis codec can correct up to 4 errors and 2 erasures simultaneously\nThis codec can correct up to 4 errors and 2 erasures simultaneously\n")
+
 
 if __name__ == "__main__":
     unittest.main()

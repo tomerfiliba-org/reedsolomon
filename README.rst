@@ -64,7 +64,36 @@ Basic usage with high-level RSCodec class
     >>> rsc.decode(b'helXXXXXXXXXXy\xb2XX\x01q\xb9\xe3\xe2=', erase_pos=[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16])[0]  # 12 erasures - OK
     b'hello world'
 
-Note: this shows that we can decode twice as many erasures (where we provide the location of errors ourselves) than errors (with unknown locations). This is the cost of error correction compared to erasure correction.
+This shows that we can decode twice as many erasures (where we provide the location of errors ourselves) than errors (with unknown locations). This is the cost of error correction compared to erasure correction.
+
+To get the maximum number of errors OR erasures that can be independently corrected (ie, not simultaneously):
+
+.. code:: python
+
+    >>> maxerrors, maxerasures = rsc.maxerrata(verbose=True)
+    This codec can correct up to 6 errors and 12 erasures independently
+    >>> print(maxerrors, maxerasures)
+    6 12
+
+To get the maximum number of errors AND erasures that can be simultaneously corrected, you need to specify the number of errors or erasures you expect:
+
+.. code:: python
+
+    >>> maxerrors, maxerasures = rsc.maxerrata(erasures=6, verbose=True)  # we know the number of erasures, will calculate how many errors we can afford
+    This codec can correct up to 3 errors and 6 erasures simultaneously
+    >>> print(maxerrors, maxerasures)
+    3 6
+    >>> maxerrors, maxerasures = rsc.maxerrata(errors=5, verbose=True)  # we know the number of errors, will calculate how many erasures we can afford
+    This codec can correct up to 5 errors and 2 erasures simultaneously
+    >>> print(maxerrors, maxerasures)
+    5 2
+
+Note that if a message/chunk has more errors and erasures than the Singleton Bound as calculated by the `maxerrata()` method, the codec will try to raise a `ReedSolomonError` exception,
+but may very well not detect any error either (this is a theoretical limitation of error correction codes). In other words, error correction codes are unreliable to detect if a message
+is corrupted beyond the Singleton Bound. If you want more reliability in errata detection, use a checksum or hash such as SHA or MD5 on your message, these are much more reliable and have no bounds
+on the number of errata (the only potential issue is with collision but the probability is very very low).
+
+To check a message given its error correction symbols, without decoding, use the `check()` method:
 
 .. code:: python
 
@@ -76,6 +105,10 @@ Note: this shows that we can decode twice as many erasures (where we provide the
     [True]
     >> print('Number of detected errors and erasures: %i, their positions: %s' % (len(errata_pos), list(errata_pos)))
     Number of detected errors and erasures: 6, their positions: [16, 15, 12, 11, 10, 9]
+
+By default, most Reed-Solomon codecs are limited to characters that can be encoded in 256 bits and with a length of maximum 256 characters. But this codec is universal, you can reduce or increase the length and maximum character value by increasing the Galois Field:
+
+.. code:: python
 
     # To use longer chunks or bigger values than 255 (may be very slow)
     >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
@@ -189,33 +222,35 @@ The algorithm can correct up to 2*e+v <= nsym, where e is the number of errors,
 v the number of erasures and nsym = n-k = the number of ECC (error correction code) symbols.
 This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
 (errors where you know the position), and a combination of both errors and erasures.
+This is called the Singleton Bound, and is the maximum/optimal theoretical number
+of erasures and errors any error correction algorithm can correct (although there
+are experimental approaches to go a bit further, named list decoding, not implemented
+here, but feel free to do pull request!).
 The code should work on pretty much any reasonable version of python (2.4-3.7),
 but I'm only testing on 2.7 and 3.7. Python 3.8 should work except for Cython which is
 currently incompatible with this version.
 
 The codec has quite reasonable performances if you either use PyPy on the pure-python
-implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.py
-(which is about 2x faster than PyPy). You can expect encoding rate of several MB/s.
+implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.pyx
+(which is about 2x faster than PyPy). You can expect encoding rates of several MB/s.
 
-This library is also thoroughly unit tested so that any encoding/decoding case should be covered.
+This library is also thoroughly unit tested so that nearly any encoding/decoding case should be covered.
 
-.. note::
+The codec is universal, meaning that it can decode any message encoded by another RS encoder
+as long as you provide the correct parameters.
+Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
+we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
+Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
+your messages, the longer it will take to encode/decode (quadratically!).
 
-   The codec is universal, meaning that it can decode any message encoded by another RS encoder
-   as long as you provide the correct parameters.
-   Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
-   we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
-   Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
-   your messages, the longer it will take to encode/decode (quadratically!).
-
-   The algorithm itself can handle messages up to (2^c_exp)-1 symbols, including the ECC symbols,
-   and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
-   value for one character is constrained by the same mathematical reason). By default, we use the field GF(2^8),
-   which means that you are limited to values between 0 and 255 (perfect to represent a single hexadecimal
-   symbol on computers, so you can encode any binary stream) and limited to messages+ecc of maximum
-   length 255. However, you can "chunk" longer messages to fit them into the message length limit.
-   The ``RSCodec`` class will automatically apply chunking, by splitting longer messages into chunks and
-   encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
+The algorithm itself can handle messages of a length up to (2^c_exp)-1 symbols per message (or chunk), including the ECC symbols,
+and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
+value for one character is constrained by the same mathematical reason). By default, we use the field GF(2^8),
+which means that you are limited to values between 0 and 255 (perfect to represent a single hexadecimal
+symbol on computers, so you can encode any binary stream) and limited to messages+ecc of maximum
+length 255. However, you can "chunk" longer messages to fit them into the message length limit.
+The ``RSCodec`` class will automatically apply chunking, by splitting longer messages into chunks and
+encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
 
 To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type `python setup.py build_ext --inplace`. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`.

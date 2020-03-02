@@ -56,7 +56,13 @@ Basic usage with high-level RSCodec class
       ...
     reedsolo.ReedSolomonError: Too many (or few) errors found by Chien Search for the errata locator polynomial!
 
-**Important upgrade notice for pre-1.0 users:** Note that `RSCodec.decode()` returns 3 variables: the decoded (corrected) message, the decoded message and error correction code (which is itself also corrected), and the listt of positions of the errata (errors and erasures):
+**Important upgrade notice for pre-1.0 users:** Note that `RSCodec.decode()` returns 3 variables:
+
+    1. the decoded (corrected) message
+    2. the decoded message and error correction code (which is itself also corrected)
+    3. and the listt of positions of the errata (errors and erasures):
+
+Here is an example:
 
 .. code:: python
 

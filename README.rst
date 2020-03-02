@@ -68,9 +68,9 @@ Here is an example:
 
     >>> tampered_msg = b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa'
     >>> decoded_msg, decoded_msgecc, errata_pos = rsc.decode(tampered_msg)
-    >>> print(decoded_msg)
+    >>> print(decoded_msg)  # decoded/corrected message
     bytearray(b'hello world')
-    >>> print(decoded_msgecc)
+    >>> print(decoded_msgecc)  # decoded/corrected message and ecc symbols
     bytearray(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')
     >>> print(errata_pos)  # errata_pos is returned as a bytearray, hardly intelligible
     bytearray(b'\x10\t\x02')

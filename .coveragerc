@@ -2,7 +2,6 @@
 branch = True
 [report]
 omit =
-    */home/*
     */python?.?/*
     */site-packages/nose/*
     */opt/python/pypy*

@@ -118,7 +118,7 @@ but may very well not detect any error either (this is a theoretical limitation 
 is corrupted beyond the Singleton Bound. If you want more reliability in errata detection, use a checksum or hash such as SHA or MD5 on your message, these are much more reliable and have no bounds
 on the number of errata (the only potential issue is with collision but the probability is very very low).
 
-To check a message given its error correction symbols, without decoding, use the `check()` method:
+To check if a message is tampered given its error correction symbols, without decoding, use the `check()` method:
 
 .. code:: python
 
@@ -126,7 +126,7 @@ To check a message given its error correction symbols, without decoding, use the
     >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')  # Tampered message will return False
     [False]
     >> rmes, rmesecc, errata_pos = rsc.decode(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')
-    >> rsc.check(rmesecc)  # Corrected message will return True
+    >> rsc.check(rmesecc)  # Corrected or untampered message will return True
     [True]
     >> print('Number of detected errors and erasures: %i, their positions: %s' % (len(errata_pos), list(errata_pos)))
     Number of detected errors and erasures: 6, their positions: [16, 15, 12, 11, 10, 9]

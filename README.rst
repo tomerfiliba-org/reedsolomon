@@ -113,8 +113,8 @@ To get the maximum number of errors AND erasures that can be simultaneously corr
     >>> print(maxerrors, maxerasures)
     5 2
 
-Note that if a message/chunk has more errors and erasures than the Singleton Bound as calculated by the `maxerrata()` method, the codec will try to raise a `ReedSolomonError` exception,
-but may very well not detect any error either (this is a theoretical limitation of error correction codes). In other words, error correction codes are unreliable to detect if a message
+Note that if a chunk has more errors and erasures than the Singleton Bound as calculated by the `maxerrata()` method, the codec will try to raise a `ReedSolomonError` exception,
+but may very well not detect any error either (this is a theoretical limitation of error correction codes). In other words, error correction codes are unreliable to detect if a chunk of a message
 is corrupted beyond the Singleton Bound. If you want more reliability in errata detection, use a checksum or hash such as SHA or MD5 on your message, these are much more reliable and have no bounds
 on the number of errata (the only potential issue is with collision but the probability is very very low).
 
@@ -147,6 +147,9 @@ By default, most Reed-Solomon codecs are limited to characters that can be encod
     [False]
     >> rsc.check(rmesecc)
     [True]
+
+Note that the `RSCodec` class supports transparent chunking, so you don't need to increase the Galois Field to support longer messages, but characters will still be limited to 256 bits (or
+whatever field you set with `c_exp`).
 
 Low-level usage via direct access to math functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

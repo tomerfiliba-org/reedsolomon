@@ -1,5 +1,7 @@
 [run]
 branch = True
+omit =
+    home/*
 [report]
 omit =
     */python?.?/*

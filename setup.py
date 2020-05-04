@@ -17,17 +17,11 @@ import os
 
 try:
     from Cython.Build import cythonize
-    USE_CYTHON = True
+    print("Cython is installed, building creedsolo module")
+    extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ])
 except ImportError:
-    USE_CYTHON = False
-
-ext = '.pyx' if USE_CYTHON else '.c'
-
-extensions = [
-                        Extension('creedsolo', [os.path.join('creedsolo'+ext)]),
-                    ]
-
-if USE_CYTHON: extensions = cythonize(extensions)
+    print("Cython is not installed, no creedsolo module will be built")
+    extensions = None
 
 setup(name = "reedsolo",
     version = "1.5.2",

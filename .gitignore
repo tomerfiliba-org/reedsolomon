@@ -5,4 +5,3 @@ __pycache__
 *.egg-info
 dist/
 build/
-creedsolo.c

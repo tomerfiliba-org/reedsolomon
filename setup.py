@@ -13,18 +13,32 @@ except ImportError:
     from distutils.core import setup
     from distutils.extension import Extension
 
-import os
+import os, sys
 
 try:
+    # Test if Cython is installed
+    if '--nocython' in sys.argv:
+        # Skip if user does not want to use Cython
+        sys.argv.remove('--nocython')
+        raise(ImportError('Skip Cython'))
+    # If Cython is installed, transpile the optimized Cython module to C and compile as a .pyd to be distributed
     from Cython.Build import cythonize
     print("Cython is installed, building creedsolo module")
     extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ])
 except ImportError:
-    print("Cython is not installed, no creedsolo module will be built")
-    extensions = None
+    # Else Cython is not installed (or user explicitly wanted to skip)
+    if '--compile' in sys.argv:
+        # Compile pyd from pre-transpiled creedsolo.c
+        print("Cython is not installed, but the creedsolo module will be built from the pre-transpiled creedsolo.c file using the locally installed C compiler")
+        sys.argv.remove('--compile')
+        extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
+    else:
+        # Else run in pure python mode (no compilation)
+        print("Cython is not installed or is explicitly skipped using --nocython, no creedsolo module will be built")
+        extensions = None
 
 setup(name = "reedsolo",
-    version = "1.5.2",
+    version = "1.5.3",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

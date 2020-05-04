@@ -1,8 +1,12 @@
 [run]
 branch = True
+include =
+    reedsolo.py
 omit =
     home/*
 [report]
+include =
+    reedsolo.py
 omit =
     */python?.?/*
     */site-packages/nose/*

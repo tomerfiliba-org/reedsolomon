@@ -289,7 +289,7 @@ The ``RSCodec`` class will automatically apply chunking, by splitting longer mes
 encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
 
-To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--compile`` arguments for ``setup.py``.
+To use the Cython implementation, you need to ``pip install cython`` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--compile`` arguments for ``setup.py``.
 
 Authors
 -------
@@ -297,6 +297,8 @@ Authors
 This module was conceived and developed by Tomer Filiba.
 
 It was further extended and is currently maintained by Stephen Karl Larroque.
+
+For a list of all contributors, see `this page <https://github.com/tomerfiliba/reedsolomon/graphs/contributors>`_.
 
 License
 -------

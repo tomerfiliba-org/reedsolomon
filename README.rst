@@ -23,6 +23,14 @@ Installation
 
     pip install --upgrade reedsolo
 
+.. note::
+
+    When installing from source using ``python setup.py install``, the setup.py will try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed. You can override this behavior by typing: ``python setup.py install --nocython``.
+
+    A pre-transpiled ``creedsolo.c`` is also available, and can be compiled without Cython by typing: ``python setup.py install --compile``.
+
+    The package on ``pip`` includes a pre-compiled ``creedsolo.pyd`` module for Windows 10 x64.
+
 Usage
 -----
 
@@ -56,7 +64,7 @@ Basic usage with high-level RSCodec class
       ...
     reedsolo.ReedSolomonError: Too many (or few) errors found by Chien Search for the errata locator polynomial!
 
-**Important upgrade notice for pre-1.0 users:** Note that `RSCodec.decode()` returns 3 variables:
+**Important upgrade notice for pre-1.0 users:** Note that ``RSCodec.decode()`` returns 3 variables:
 
     1. the decoded (corrected) message
     2. the decoded message and error correction code (which is itself also corrected)
@@ -113,12 +121,12 @@ To get the maximum number of errors AND erasures that can be simultaneously corr
     >>> print(maxerrors, maxerasures)
     5 2
 
-Note that if a chunk has more errors and erasures than the Singleton Bound as calculated by the `maxerrata()` method, the codec will try to raise a `ReedSolomonError` exception,
+Note that if a chunk has more errors and erasures than the Singleton Bound as calculated by the ``maxerrata()`` method, the codec will try to raise a ``ReedSolomonError`` exception,
 but may very well not detect any error either (this is a theoretical limitation of error correction codes). In other words, error correction codes are unreliable to detect if a chunk of a message
 is corrupted beyond the Singleton Bound. If you want more reliability in errata detection, use a checksum or hash such as SHA or MD5 on your message, these are much more reliable and have no bounds
 on the number of errata (the only potential issue is with collision but the probability is very very low).
 
-To check if a message is tampered given its error correction symbols, without decoding, use the `check()` method:
+To check if a message is tampered given its error correction symbols, without decoding, use the ``check()`` method:
 
 .. code:: python
 
@@ -148,8 +156,8 @@ By default, most Reed-Solomon codecs are limited to characters that can be encod
     >> rsc.check(rmesecc)
     [True]
 
-Note that the `RSCodec` class supports transparent chunking, so you don't need to increase the Galois Field to support longer messages, but characters will still be limited to 256 bits (or
-whatever field you set with `c_exp`).
+Note that the ``RSCodec`` class supports transparent chunking, so you don't need to increase the Galois Field to support longer messages, but characters will still be limited to 256 bits (or
+whatever field you set with ``c_exp``).
 
 Low-level usage via direct access to math functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -205,7 +213,7 @@ To decode:
     >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
 
 Note that both the message and the ecc are corrected (if possible of course).
-Pro tip: if you know a few erasures positions, you can specify them in a list `erase_pos` to double the repair power. But you can also just specify an empty list.
+Pro tip: if you know a few erasures positions, you can specify them in a list ``erase_pos`` to double the repair power. But you can also just specify an empty list.
 
 You can check how many errors and/or erasures were corrected, which can be useful to design adaptive bitrate algorithms:
 
@@ -281,7 +289,7 @@ The ``RSCodec`` class will automatically apply chunking, by splitting longer mes
 encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
 
-To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type `python setup.py build_ext --inplace`. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`.
+To use the Cython implementation, you need to `pip install cython` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--compile`` arguments for ``setup.py``.
 
 Authors
 -------

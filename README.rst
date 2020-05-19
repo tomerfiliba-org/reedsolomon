@@ -27,7 +27,7 @@ Installation
 
     When installing from source using ``python setup.py install``, the setup.py will try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed. You can override this behavior by typing: ``python setup.py install --nocython``.
 
-    A pre-transpiled ``creedsolo.c`` is also available, and can be compiled without Cython by typing: ``python setup.py install --compile``.
+    A pre-transpiled ``creedsolo.c`` is also available, and can be compiled without Cython by typing: ``python setup.py install --native-compile``.
 
     The package on ``pip`` includes a pre-compiled ``creedsolo.pyd`` module for Windows 10 x64.
 
@@ -289,7 +289,7 @@ The ``RSCodec`` class will automatically apply chunking, by splitting longer mes
 encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
 
-To use the Cython implementation, you need to ``pip install cython`` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--compile`` arguments for ``setup.py``.
+To use the Cython implementation, you need to ``pip install cython`` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--native-compile`` arguments for ``setup.py``.
 
 Authors
 -------

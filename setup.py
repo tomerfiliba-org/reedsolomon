@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+# Authors:
+# Tomer Filiba
+# Stephen Larroque
+# Rotorgit
+# Angus Gratton
+#
+# Licensed under the Public Domain or MIT License at your convenience.
 
 # See:
 # https://docs.python.org/2/distutils/setupscript.html
@@ -38,7 +45,7 @@ except ImportError:
         extensions = None
 
 setup(name = "reedsolo",
-    version = "1.5.3",
+    version = "1.5.4",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

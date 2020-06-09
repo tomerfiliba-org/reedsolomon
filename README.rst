@@ -102,7 +102,7 @@ Since we failed to decode with 6 errors with a codec set with 10 error correctio
 
 This shows that we can decode twice as many erasures (where we provide the location of errors ourselves) than errors (with unknown locations). This is the cost of error correction compared to erasure correction.
 
-To get the maximum number of errors OR erasures that can be independently corrected (ie, not simultaneously):
+To get the maximum number of errors *or* erasures that can be independently corrected (ie, not simultaneously):
 
 .. code:: python
 
@@ -111,7 +111,7 @@ To get the maximum number of errors OR erasures that can be independently correc
     >>> print(maxerrors, maxerasures)
     6 12
 
-To get the maximum number of errors AND erasures that can be simultaneously corrected, you need to specify the number of errors or erasures you expect:
+To get the maximum number of errors *and* erasures that can be simultaneously corrected, you need to specify the number of errors or erasures you expect:
 
 .. code:: python
 

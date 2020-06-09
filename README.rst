@@ -44,16 +44,18 @@ Basic usage with high-level RSCodec class
     >>> rsc = RSCodec(10)  # 10 ecc symbols
 
     # Encoding
+    # just a list of numbers/symbols:
     >>> rsc.encode([1,2,3,4])
     b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M'
+    # bytearrays are accepted and the output will be matched:
     >>> rsc.encode(bytearray([1,2,3,4]))
     bytearray(b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M')
+    # Longer strings than the Galois field will use chunking transparently to encode strings of any length:
     >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
-    # Note that chunking is supported transparently to encode any string length.
 
     # Decoding (repairing)
-    >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]
+    >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]  # original
     b'hello world'
     >>> rsc.decode(b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa')[0]     # 3 errors
     b'hello world'
@@ -70,7 +72,7 @@ Basic usage with high-level RSCodec class
     2. the decoded message and error correction code (which is itself also corrected)
     3. and the list of positions of the errata (errors and erasures)
 
-Here is an example:
+Here is how to use these outputs:
 
 .. code:: python
 
@@ -85,7 +87,7 @@ Here is an example:
     >>> print(list(errata_pos))  # convert to a list to get the errata positions as integer indices
     [16, 9, 2]
 
-Since we failed to decode with 6 errors with a codec set to 10 error correction code (ecc) symbols, let's try to use a bigger codec, with 12 ecc symbols.
+Since we failed to decode with 6 errors with a codec set with 10 error correction code (ecc) symbols, let's try to use a bigger codec, with 12 ecc symbols.
 
 .. code:: python
 

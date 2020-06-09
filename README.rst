@@ -40,7 +40,7 @@ Basic usage with high-level RSCodec class
 .. code:: python
 
     # Initialization
-    >>> from reedsolo import RSCodec
+    >>> from reedsolo import RSCodec, ReedSolomonError
     >>> rsc = RSCodec(10)  # 10 ecc symbols
 
     # Encoding
@@ -125,6 +125,8 @@ Note that if a chunk has more errors and erasures than the Singleton Bound as ca
 but may very well not detect any error either (this is a theoretical limitation of error correction codes). In other words, error correction codes are unreliable to detect if a chunk of a message
 is corrupted beyond the Singleton Bound. If you want more reliability in errata detection, use a checksum or hash such as SHA or MD5 on your message, these are much more reliable and have no bounds
 on the number of errata (the only potential issue is with collision but the probability is very very low).
+
+Note: to catch a ``ReedSolomonError`` exception, do not forget to import it first with: ``from reedsolo import ReedSolomonError``
 
 To check if a message is tampered given its error correction symbols, without decoding, use the ``check()`` method:
 

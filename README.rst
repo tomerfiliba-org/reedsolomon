@@ -50,9 +50,10 @@ Basic usage with high-level RSCodec class
     # bytearrays are accepted and the output will be matched:
     >>> rsc.encode(bytearray([1,2,3,4]))
     bytearray(b'\x01\x02\x03\x04,\x9d\x1c+=\xf8h\xfa\x98M')
-    # Longer strings than the Galois field will use chunking transparently to encode strings of any length:
+    # encoding a byte string is as easy:
     >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
+    # Note: strings of any length, even if longer than the Galois field, will be encoded as well using transparent chunking.
 
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]  # original

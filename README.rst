@@ -296,6 +296,11 @@ encode/decode them separately; it shouldn't make a difference from an API perspe
 
 To use the Cython implementation, you need to ``pip install cython`` and a C++ compiler (Microsoft Visual C++ 14.0 for Windows and Python 3.7). Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module will be automatically transpiled and compiled if both Cython and a C compiler are installed. This behavior can be modified using the ``--nocython`` and ``--native-compile`` arguments for ``setup.py``.
 
+Recommended reading
+-------------------
+
+* "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press. `Readable online on Google Books <https://books.google.fr/books?id=eQs2i-R9-oYC&lpg=PR11&ots=atCPQJm3OJ&dq=%22Algebraic%20codes%20for%20data%20transmission%22%2C%20Blahut%2C%20Richard%20E.%2C%202003%2C%20Cambridge%20university%20press.&lr&hl=fr&pg=PA193#v=onepage&q=%22Algebraic%20codes%20for%20data%20transmission%22,%20Blahut,%20Richard%20E.,%202003,%20Cambridge%20university%20press.&f=false>`_. This book was pivotal in helping to understand the intricacies of the universal Berlekamp-Massey algorithm (see figures 7.5 and 7.10).
+
 Authors
 -------
 

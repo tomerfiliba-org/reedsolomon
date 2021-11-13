@@ -8,7 +8,7 @@ Reed Solomon
 A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,
 written by "Bobmath" and "LRQ3000". If you are just starting with Reed-Solomon error correction codes, the Wikiversity article is a
-good beginner's introduction.
+good beginner's introduction. This is a burst-type implementation, so that it supports any Galois field higher than 2^3, but not binary streams.
 
 ------------------------------------
 

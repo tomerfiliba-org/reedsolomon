@@ -1,7 +1,7 @@
 Reed Solomon
 ============
 
-|PyPI-Status| |PyPI-Versions| |PyPI-Downloads|
+|PyPI-Status| |Conda-Forge-Status| |PyPI-Versions| |PyPI-Downloads|
 
 |Build-Status| |Coverage|
 
@@ -330,6 +330,8 @@ If the Public Domain is not adequate for your purpose, you can instead consider 
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/reedsolo.svg
    :target: https://pypi.org/project/reedsolo
+.. |Conda-Forge-Status| image:: https://img.shields.io/conda/vn/conda-forge/reedsolo.svg
+   :target: https://anaconda.org/conda-forge/reedsolo
 .. |PyPI-Versions| image:: https://img.shields.io/pypi/pyversions/reedsolo.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/reedsolo
 .. |PyPI-Downloads| image:: https://img.shields.io/pypi/dm/reedsolo.svg?label=pypi%20downloads&logo=python&logoColor=white

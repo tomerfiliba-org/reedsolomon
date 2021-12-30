@@ -733,7 +733,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
-        return msg_out[:-nsym], msg_out[-nsym:], []  # no errors
+        return msg_out[:-nsym], msg_out[-nsym:], erase_pos  # no errors
 
     # Find errors locations
     if only_erasures:

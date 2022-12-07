@@ -31,7 +31,7 @@ try:
     # If Cython is installed, transpile the optimized Cython module to C and compile as a .pyd to be distributed
     from Cython.Build import cythonize
     print("Cython is installed, building creedsolo module")
-    extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ])
+    extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], force=True)
 except ImportError:
     # Else Cython is not installed (or user explicitly wanted to skip)
     if '--native-compile' in sys.argv:

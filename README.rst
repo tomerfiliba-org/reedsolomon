@@ -310,6 +310,8 @@ To use the Cython implementation, you need to ``pip install cython`` and a C++ c
 
 Then, use `import RSCodec from creedsolo` instead of importing from the `reedsolo` module, and finally only feed `bytearray()` objects to the `RSCodec` object. Exclusively using bytearrays is one of the reasons creedsolo is faster than reedsolo. You can convert any string by specifying the encoding: `bytearray("Hello World", "UTF-8")`.
 
+Note that there is an inherent limitation of the C implementation which cannot work with higher galois fields than 8 (= characters of max 255 value) because the C implementation only works with bytearrays, and bytearrays only support characters up to 255. If you want to use higher galois fields, you need to use the pure python version, or rewrite the C implementation to use lists instead of bytearrays (which will be MUCH slower so this defeats the purpose and you are better off simply using the pure python version under PyPy).
+
 Edge cases
 -------------
 

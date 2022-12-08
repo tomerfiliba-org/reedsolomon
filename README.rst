@@ -5,7 +5,7 @@ Reed Solomon
 
 |Build-Status| |Coverage|
 
-Conda Forge package: |Conda-Forge-Status| |Conda-Forge-Platforms| |Conda-Forge-Downloads|
+|Conda-Forge-Status| |Conda-Forge-Platforms| |Conda-Forge-Downloads|
 
 A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,

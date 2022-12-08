@@ -3,7 +3,8 @@
 # You also need to pip install also other required modules: `pip install flake8 nose coverage twine`
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
-# To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
+# To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
+# for Python 3.10, read the updated instructions at: https://wiki.python.org/moin/WindowsCompilers
 
 .PHONY:
 	alltests

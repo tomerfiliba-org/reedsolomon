@@ -45,7 +45,7 @@ except ImportError:
     extensions = None
 
 setup(name = "reedsolo",
-    version = "1.5.8",
+    version = "1.5.9",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",
@@ -67,7 +67,6 @@ setup(name = "reedsolo",
         'Operating System :: POSIX :: Linux',
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",

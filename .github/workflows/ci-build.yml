@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["2.7", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12.0-alpha.3", pypy-2.7, pypy-3.8]
+        python-version: ["2.7", "3.7", "3.9", "3.10", "3.11", "3.12.0-alpha.3", pypy-2.7, pypy-3.8]
         #os: [ ubuntu-latest, windows-latest, macos-latest ] # jobs that run on Windows and macOS runners that GitHub hosts consume minutes at 2 and 10 times the rate that jobs on Linux runners consume respectively.
         os: [ ubuntu-latest ]
     steps:
@@ -44,17 +44,7 @@ jobs:
       run: |
         coverage run --branch -m pytest .
         coverage report -m
-    - name: Coveralls
-      uses: AndreMiras/coveralls-python-action@develop
-      with:
-        parallel: true
-        flag-name: Unit Test
-
-  coveralls_finish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
-      with:
-        parallel-finished: true
+    - name: Send coverage to Coveralls
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: coveralls --service=github

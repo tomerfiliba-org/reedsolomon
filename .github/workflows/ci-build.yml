@@ -47,7 +47,7 @@ jobs:
         python setup.py build_ext --inplace
     - name: Test with pytest
       run: |
-        coverage run --branch -m pytest .
+        coverage run --branch -m pytest . -v
         coverage report -m
     - name: Send coverage to Coveralls
       env:

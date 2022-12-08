@@ -6,18 +6,20 @@ name: Python package runtests
 on:
   push:
     branches:
-      - [ $default-branch ]
+      - [ ${{ github.event.repository.default_branch }} ] # $default-branch only works in Workflows templates, not in Workflows, see https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
   pull_request:
     branches:
-      - [ $default-branch ]
+      - [ ${{ github.event.repository.default_branch }} ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         python-version: ["2.7", "3.7", "3.8", "3.9", "3.10", pypy-2.7, pypy-3.8]
+        #os: [ ubuntu-latest, windows-latest, macos-latest ] # jobs that run on Windows and macOS runners that GitHub hosts consume minutes at 2 and 10 times the rate that jobs on Linux runners consume respectively.
+        os: [ ubuntu-latest ]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}

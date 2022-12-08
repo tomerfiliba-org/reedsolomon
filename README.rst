@@ -1,9 +1,11 @@
 Reed Solomon
 ============
 
-|PyPI-Status| |Conda-Forge-Status| |PyPI-Versions| |PyPI-Downloads|
+|PyPI-Status| |PyPI-Versions| |PyPI-Downloads|
 
 |Build-Status| |Coverage|
+
+Conda Forge package: |Conda-Forge-Status| |Conda-Forge-Platforms| |Conda-Forge-Downloads|
 
 A pure-python `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_
 , based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders>`_,
@@ -336,8 +338,6 @@ If the Public Domain is not adequate for your purpose, you can instead consider 
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/reedsolo.svg
    :target: https://pypi.org/project/reedsolo
-.. |Conda-Forge-Status| image:: https://img.shields.io/conda/vn/conda-forge/reedsolo.svg
-   :target: https://anaconda.org/conda-forge/reedsolo
 .. |PyPI-Versions| image:: https://img.shields.io/pypi/pyversions/reedsolo.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/reedsolo
 .. |PyPI-Downloads| image:: https://img.shields.io/pypi/dm/reedsolo.svg?label=pypi%20downloads&logo=python&logoColor=white
@@ -346,3 +346,9 @@ If the Public Domain is not adequate for your purpose, you can instead consider 
     :target: https://github.com/tomerfiliba/reedsolomon/actions/workflows/ci-build.yml
 .. |Coverage| image:: https://coveralls.io/repos/tomerfiliba/reedsolomon/badge.svg?branch=master&service=github
   :target: https://coveralls.io/github/tomerfiliba/reedsolomon?branch=master
+.. |Conda-Forge-Status| image:: https://img.shields.io/conda/vn/conda-forge/reedsolo.svg
+   :target: https://anaconda.org/conda-forge/reedsolo
+.. |Conda-Forge-Platforms| image:: https://anaconda.org/conda-forge/reedsolo/badges/platforms.svg
+   :target: https://anaconda.org/conda-forge/reedsolo
+.. |Conda-Forge-Downloads| image:: https://anaconda.org/conda-forge/reedsolo/badges/downloads.svg
+   :target: https://anaconda.org/conda-forge/reedsolo

@@ -1,6 +1,7 @@
 # This Makefile runs tests and builds the package to upload to pypi
 # To use this Makefile, pip install py-make
-# You also need to pip install also other required modules: `pip install flake8 nose coverage twine`
+# You also need to pip install also other required modules: `pip install flake8 nose coverage twine pytest pytest-cov`
+# Up to Python 3.9 included, nosetests was used, but from 3.10 onward, support for it was dropped since it is not maintained anymore, so that pytest and pytest-cov are used instead.
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
 # To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
@@ -64,7 +65,14 @@ testsetuppost:
 testcoverage:
      # Does not work yet
 	@+make coverclean
-	nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
+	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
+     # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
+     #python setup.py develop
+     #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
+     #python setup.py develop --uninstall
+    coverage run --branch -m pytest .
+    coverage report -m
+
 
 distclean:
 	@+make coverclean

@@ -35,7 +35,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install nose 'coverage<4' coveralls
+        python -m pip install nose
+        if [ ${{ matrix.python-version }} <= 3.7 ]; then python -m pip install 'coverage<4'; else python -m pip install coverage; fi
+        python -m pip install coveralls
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with nosetests
       run: |

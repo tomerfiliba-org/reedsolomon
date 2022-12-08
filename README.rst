@@ -32,7 +32,7 @@ Installation
 
     The package on ``pip`` includes a pre-compiled ``creedsolo.pyd`` module for Windows 10 x64.
     
-As an alternative you can use `conda <https://docs.conda.io/en/latest/>`_ for installing which comes with compiled versions for various platforms:
+As an alternative you can use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 
 .. code:: sh
 

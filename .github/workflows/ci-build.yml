@@ -39,11 +39,12 @@ jobs:
         python -m pip install pytest pytest-cov
         if [ ${{ matrix.python-version }} <= 3.7 ]; then python -m pip install 'coverage<4'; else python -m pip install coverage; fi
         python -m pip install coveralls
-        if [ ${{ matrix.python-version }} == 3.7 ]; then pip install --install-option='--no-cython-compile' cython ; fi
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Compile the Cython extension (only on Python 3.10)
       if: ${{ matrix.python-version == 3.10 }}
-      run: python setup.py build_ext --inplace
+      run: |
+        pip install --install-option='--no-cython-compile' cython
+        python setup.py build_ext --inplace
     - name: Test with pytest
       run: |
         coverage run --branch -m pytest .

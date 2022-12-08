@@ -44,8 +44,16 @@ else:
     except (ImportError, ModuleNotFoundError, Exception) as exc:  # TODO: on Travis, ModuleNotFoundError cannot be caught, dunno why, so we catch all Exception and consider this means pypy is not running
         inpypy = False
 
+cython_available = True
+try:
+    # If Cython is installed, try to import it to see if it works
+    from Cython.Build import cythonize
+except ImportError:
+    # Otherwise, we skip this whole test
+    cython_available = False
+
 # Skip this whole module test if running under PyPy (incompatible with Cython)
-if inpypy:
+if inpypy or not cython_available:
     # Empty test unit to show the reason of skipping
     class TestMissingDependency(unittest.TestCase):
 
@@ -219,6 +227,16 @@ else:
                 log_t, exp_t = init_tables(prim=p[0], generator=p[1], c_exp=p[2])
                 self.assertEqual( list(log_t) , expected_log_t )
                 self.assertEqual( list(exp_t) , expected_exp_t )
+
+        def test_consistent_zero_report(self):
+            # Ensure we always return 0 among errors and erasures when an erratum is detected at position 0 - it used to not always be the case!
+            _ = init_tables()
+            msg = rs_encode_msg(bytes(range(10)), nsym=4)
+            self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
+            self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[0])[2], [0])
+            msg[0] = 0xFF
+            self.assertEqual(rs_correct_msg(msg, nsym=4)[2], [0])
+            self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[0])[2], [0])
 
     class cTestGFArithmetics(unittest.TestCase):
         '''Test Galois Field arithmetics'''

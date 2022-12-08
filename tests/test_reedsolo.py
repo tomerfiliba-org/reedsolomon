@@ -216,6 +216,16 @@ class TestReedSolomon(unittest.TestCase):
             self.assertEqual( list(log_t) , expected_log_t )
             self.assertEqual( list(exp_t) , expected_exp_t )
 
+    def test_consistent_zero_report(self):
+        # Ensure we always return 0 among errors and erasures when an erratum is detected at position 0 - it used to not always be the case!
+        _ = init_tables()
+        msg = rs_encode_msg(bytes(range(10)), nsym=4)
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[0])[2], [0])
+        msg[0] = 0xFF
+        self.assertEqual(rs_correct_msg(msg, nsym=4)[2], [0])
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[0])[2], [0])
+
 class TestBigReedSolomon(unittest.TestCase):
     def test_find_prime_polys(self):
         self.assertEqual(find_prime_polys(c_exp=4), [19, 25])

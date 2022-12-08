@@ -334,7 +334,7 @@ If the Public Domain is not adequate for your purpose, you can instead consider 
    :target: https://pypi.org/project/reedsolo
 .. |PyPI-Downloads| image:: https://img.shields.io/pypi/dm/reedsolo.svg?label=pypi%20downloads&logo=python&logoColor=white
    :target: https://pypi.org/project/reedsolo
-.. |Build-Status| image:: https://travis-ci.org/tomerfiliba/reedsolomon.svg?branch=master
-    :target: https://travis-ci.org/tomerfiliba/reedsolomon
+.. |Build-Status| image:: https://github.com/tomerfiliba/reedsolomon/actions/workflows/ci-build.yml/badge.svg?event=push
+    :target: https://github.com/tomerfiliba/reedsolomon/actions/workflows/ci-build.yml
 .. |Coverage| image:: https://coveralls.io/repos/tomerfiliba/reedsolomon/badge.svg?branch=master&service=github
   :target: https://coveralls.io/github/tomerfiliba/reedsolomon?branch=master

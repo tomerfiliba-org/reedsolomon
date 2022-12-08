@@ -1,15 +1,16 @@
 # This workflow will install Python dependencies and run tests with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# and https://www.youtube.com/watch?v=l6fV09z5XHk
 
 name: Python package runtests
 
 on:
   push:
     branches:
-      - [ ${{ github.event.repository.default_branch }} ] # $default-branch only works in Workflows templates, not in Workflows, see https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
+      - master # $default-branch only works in Workflows templates, not in Workflows, see https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
   pull_request:
     branches:
-      - [ ${{ github.event.repository.default_branch }} ]
+      - master
 
 jobs:
   build:

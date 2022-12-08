@@ -34,15 +34,15 @@ try:
     extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], force=True)
 except ImportError:
     # Else Cython is not installed (or user explicitly wanted to skip)
-    if '--native-compile' in sys.argv:
+    #if '--native-compile' in sys.argv:
         # Compile pyd from pre-transpiled creedsolo.c
-        print("Cython is not installed, but the creedsolo module will be built from the pre-transpiled creedsolo.c file using the locally installed C compiler")
-        sys.argv.remove('--native-compile')
-        extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
-    else:
-        # Else run in pure python mode (no compilation)
-        print("Cython is not installed or is explicitly skipped using --nocython, no creedsolo module will be built")
-        extensions = None
+        #print("Cython is not installed, but the creedsolo module will be built from the pre-transpiled creedsolo.c file using the locally installed C compiler")
+        #sys.argv.remove('--native-compile')
+        #extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
+    #else:
+    # Else run in pure python mode (no compilation)
+    print("Cython is not installed or is explicitly skipped using --nocython, no creedsolo module will be built")
+    extensions = None
 
 setup(name = "reedsolo",
     version = "1.5.7",

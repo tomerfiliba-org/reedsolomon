@@ -4,7 +4,7 @@
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
 # Copyright (c) 2015 rotorgit
-# Copyright (c) 2015-2020 Stephen Larroque <LRQ3000@gmail.com>
+# Copyright (c) 2015-2022 Stephen Larroque <LRQ3000@gmail.com>
 
 '''
 Reed Solomon

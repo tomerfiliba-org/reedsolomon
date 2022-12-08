@@ -31,8 +31,14 @@ Installation
     When installing from source using ``python setup.py install``, the setup.py will try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed. You can override this behavior by typing: ``python setup.py install --nocython``.
 
     The package on ``pip`` includes a pre-compiled ``creedsolo.pyd`` module for Windows 10 x64.
-    
-As an alternative you can use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
+
+If you have some issues installing through pip, maybe this command may help:
+
+.. code:: sh
+
+    pip install reedsolo --no-binary={reedsolo}
+
+As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 
 .. code:: sh
 

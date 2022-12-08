@@ -6,10 +6,10 @@ name: Python package runtests
 on:
   push:
     branches:
-      - master
+      - [ $default-branch ]
   pull_request:
     branches:
-      - master
+      - [ $default-branch ]
 
 jobs:
   build:
@@ -24,6 +24,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     # You can test your matrix by printing the current Python version
     - name: Display Python version
       run: |

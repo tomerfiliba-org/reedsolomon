@@ -330,9 +330,13 @@ Recommended reading
 Authors
 -------
 
-This module was conceived and developed by Tomer Filiba.
+This module was conceived and developed by Tomer Filiba in 2012.
 
-It was further extended and is currently maintained by Stephen Karl Larroque.
+It was further extended and is currently maintained by Stephen Karl Larroque since 2015.
+
+And several other contributors helped improve and make it more robust:
+
+|Contributors|
 
 For a list of all contributors, see `this page <https://github.com/tomerfiliba/reedsolomon/graphs/contributors>`_.
 
@@ -360,3 +364,5 @@ If the Public Domain is not adequate for your purpose, you can instead consider 
    :target: https://anaconda.org/conda-forge/reedsolo
 .. |Conda-Forge-Downloads| image:: https://anaconda.org/conda-forge/reedsolo/badges/downloads.svg
    :target: https://anaconda.org/conda-forge/reedsolo
+.. |Contributors| image:: https://contrib.rocks/image?repo=tomerfiliba/reedsolomon
+   :target: https://github.com/tomerfiliba/reedsolomon/graphs/contributors

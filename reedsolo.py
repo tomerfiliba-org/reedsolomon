@@ -855,6 +855,8 @@ class RSCodec(object):
             prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
             if nsize == 255:  # resize chunk size if not set
                 nsize = int(2**c_exp - 1)
+        if nsym >= nsize:
+            raise ValueError('ECC symbols must be strictly less than the total message length (nsym < nsize).')
 
         # Memorize variables
         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).

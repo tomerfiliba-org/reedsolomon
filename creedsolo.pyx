@@ -811,7 +811,7 @@ class RSCodec(object):
     '''
 
     def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):
-        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).'''
+        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.'''
         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1

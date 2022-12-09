@@ -167,6 +167,7 @@ except NameError:  # pragma: no cover
         return array("B", obj)
 
 try:  # pragma: no cover
+    # compatibility with Python 2.7
     xrange
 except NameError:  # pragma: no cover
     # compatibility with Python 3+

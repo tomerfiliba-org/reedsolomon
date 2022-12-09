@@ -276,6 +276,8 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
                     raise(ValueError, "Type of object not recognized!")
             elif isinstance(obj, int):  # compatibility with list preallocation bytearray(int)
                 obj = [0] * obj
+            elif isinstance(obj, bytes):
+                obj = [int(b) for b in obj]
             # Else obj is a list of int, it's ok
             return array("i", obj)
 

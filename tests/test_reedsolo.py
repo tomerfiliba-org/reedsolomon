@@ -281,6 +281,13 @@ class TestBigReedSolomon(unittest.TestCase):
         bytearray(rs_256.decode(rs_256.encode(mes))[0])
         # At this point, there should not have been any exception raised!
 
+    def test_higher_galois_fields_bytes(self):
+        rs = RSCodec(12, c_exp=12) # same as nsize=4095
+        str_msg = "This is a message"
+        bytes_msg = b"This is a binary message"
+        result = rs.encode(str_msg) # this always worked
+        result_b = rs.encode(bytes_msg) # this is the dege case that used to fail
+
 class TestGFArithmetics(unittest.TestCase):
     '''Test Galois Field arithmetics'''
 

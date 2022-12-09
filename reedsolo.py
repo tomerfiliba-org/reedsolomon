@@ -918,9 +918,9 @@ class RSCodec(object):
             e_pos = []
             if erase_pos:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
-                e_pos = [x for x in erase_pos if x <= self.nsize]
+                e_pos = [x for x in erase_pos if x < self.nsize]
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
-                erase_pos = [x - (self.nsize+1) for x in erase_pos if x > self.nsize]
+                erase_pos = [x - self.nsize for x in erase_pos if x >= self.nsize]
             # Decode/repair this chunk!
             rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)

@@ -238,6 +238,13 @@ else:
             self.assertEqual(rs.decode(msg)[2], bytearray([1]))
             self.assertEqual(rs.decode(msg, erase_pos=[1])[2], bytearray([1]))
 
+        def test_erasures_chunking(self):
+            # Test whether providing positions for erasures in the 2nd chunk or later is working
+            rs = RSCodec(30)
+            encoded = rs.encode(b'0' * 226)
+            _, _, _ = rs.decode(encoded, erase_pos=[255], only_erasures=True)
+            # If it works, no exception should be raised
+
     class cTestGFArithmetics(unittest.TestCase):
         '''Test Galois Field arithmetics'''
         def test_multiply_nolut(self):

@@ -226,6 +226,13 @@ class TestReedSolomon(unittest.TestCase):
         self.assertEqual(rs_correct_msg(msg, nsym=4)[2], [1])
         self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
 
+    def test_erasures_chunking(self):
+        # Test whether providing positions for erasures in the 2nd chunk or later is working
+        rs = RSCodec(30)
+        encoded = rs.encode(b'0' * 226)
+        _, _, _ = rs.decode(encoded, erase_pos=[255], only_erasures=True)
+        # If it works, no exception should be raised
+
 class TestBigReedSolomon(unittest.TestCase):
     def test_find_prime_polys(self):
         self.assertEqual(find_prime_polys(c_exp=4), [19, 25])

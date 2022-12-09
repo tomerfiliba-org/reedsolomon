@@ -338,7 +338,7 @@ And several other contributors helped improve and make it more robust:
 
 |Contributors|
 
-For a list of all contributors, see `this page <https://github.com/tomerfiliba/reedsolomon/graphs/contributors>`_.
+For a list of all contributors, please see `the GitHub Contributors graph <https://github.com/tomerfiliba/reedsolomon/graphs/contributors>`_ and the `commits history <https://github.com/tomerfiliba/reedsolomon/commits/master>`_.
 
 License
 -------

@@ -344,9 +344,7 @@ For a list of all contributors, please see `the GitHub Contributors graph <https
 License
 -------
 
-This software is released to the Public Domain.
-
-If the Public Domain is not adequate for your purpose, you can instead consider this module under the MIT License as you prefer.
+This software is released under your choice of the Unlicense or the MIT-0 (MIT No Attribution) License. Both licenses are `public-domain-equivalent licenses <https://en.wikipedia.org/wiki/Public-domain-equivalent_license>`_, as intended by the original author Tomer Filiba.
 
 
 .. |PyPI-Status| image:: https://img.shields.io/pypi/v/reedsolo.svg

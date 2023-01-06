@@ -45,23 +45,25 @@ except ImportError:
     extensions = None
 
 setup(name = "reedsolo",
-    version = "1.6.0",
+    version = "1.6.1",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",
     maintainer = "Stephen Karl Larroque",
     maintainer_email = "lrq3000@gmail.com",
-    license = "Public Domain",
+    license = "Public Domain",  # the license field can only store one license, use classifiers below to declare multiple licenses https://github.com/pypi/warehouse/issues/8960
     url = "https://github.com/tomerfiliba/reedsolomon",
     py_modules = ["reedsolo"],
     platforms = ["any"],
     long_description = open("README.rst", "r").read(),
     long_description_content_type = 'text/x-rst',
+    license_files = ('LICENSE',),  # force include LICENSE file, requires setuptools >= 42.0.0. Note that this field only support one line text, do not input the full license content here. The full LICENSE file is currently forcefully included via MANIFEST.in, but other methods exist, see: https://stackoverflow.com/a/66443941/1121352
     classifiers = [
         "Development Status :: 6 - Mature",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: The Unlicense (Unlicense)",  # Unlicense OR MIT-0 at the user preference
+        "License :: OSI Approved :: MIT No Attribution License (MIT-0)",
         'Operating System :: Microsoft :: Windows',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',

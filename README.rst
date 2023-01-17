@@ -35,15 +35,27 @@ For the latest development release (do not use in production!), use:
 
     pip install --upgrade git+https://github.com/tomerfiliba/reedsolomon
 
-.. note::
-
-    A cythonized binary can be built optionally with: ``pip install --upgrade reedsolo --install-option="--cythonize" --verbose`` or locally with: ``python setup.py install --cythonize``. The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
-
 If you have some issues installing through pip, maybe this command may help:
 
 .. code:: sh
 
     pip install reedsolo --no-binary={reedsolo}
+
+.. note::
+
+    By default, only a pure-python implementation is installed. If you have Cython and a C++ compiler, a faster cythonized binary can be optionally built with:
+    
+    .. code:: sh
+    
+    pip install --upgrade reedsolo --install-option="--cythonize" --verbose
+    
+    or locally with:
+    
+    .. code:: sh
+    
+    python setup.py install --cythonize
+    
+    The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
 
 As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 

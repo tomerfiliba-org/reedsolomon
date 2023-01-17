@@ -67,7 +67,7 @@ testcoverage:
 	@+make coverclean
      # Build the Cython extension
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
-    python setup.py --cythonize
+    python setup.py develop --cythonize
      # Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
      # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)

@@ -44,7 +44,7 @@ jobs:
       if: ${{ matrix.python-version == 3.10 }}
       run: |
         pip install --install-option='--no-cython-compile' cython
-        python setup.py --cythonize
+        python setup.py develop --cythonize
     - name: Test with pytest
       run: |
         coverage run --branch -m pytest . -v

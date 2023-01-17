@@ -23,12 +23,14 @@ except ImportError:
 import os, sys
 
 if '--cythonize' in sys.argv:
+    # Remove the special argument, otherwise setuptools will raise an exception
+    sys.argv.remove('--cythonize')
     try:
         # If Cython is installed, transpile the optimized Cython module to C and compile as a .pyd to be distributed
-        from Cython.Build import cythonize  # this acts as a check whether Cython is installed, otherwise this will fail
+        from Cython.Build import cythonize, build_ext  # this acts as a check whether Cython is installed, otherwise this will fail
         print("Cython is installed, building creedsolo module")
         extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], force=True)  # this may fail hard if Cython is installed but there is no C compiler for current Python version, and we have no way to know. Alternatively, we could supply exclude_failures=True , but then for those who really want the cythonized compiled extension, it would be much harder to debug
-        cmdclass = {'build_ext': Cython.Build.build_ext, '--inplace': True}  # avoids the need to call python setup.py build_ext --inplace
+        cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
     except ImportError:
         # Else Cython is not installed (or user explicitly wanted to skip)
         #if '--native-compile' in sys.argv:
@@ -42,6 +44,9 @@ if '--cythonize' in sys.argv:
         print("Cython is not installed or is explicitly skipped using --nocython, no creedsolo module will be built")
         extensions = None
         cmdclass = None
+else:
+    extensions = None
+    cmdclass = None
 
 setup(name = "reedsolo",
     version = "1.6.1",

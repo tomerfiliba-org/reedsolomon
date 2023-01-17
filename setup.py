@@ -43,10 +43,10 @@ if '--cythonize' in sys.argv:
         # Else run in pure python mode (no compilation)
         print("Cython is not installed or is explicitly skipped using --nocython, no creedsolo module will be built")
         extensions = None
-        cmdclass = None
+        cmdclass = {}
 else:
     extensions = None
-    cmdclass = None
+    cmdclass = {}
 
 setup(name = "reedsolo",
     version = "1.6.1",

@@ -23,9 +23,17 @@ Based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/
 Installation
 ------------
 
+For the latest stable release, use:
+
 .. code:: sh
 
     pip install --upgrade reedsolo
+
+For the latest development release (do not use in production!), use:
+
+.. code:: sh
+
+    pip install --upgrade git+https://github.com/tomerfiliba/reedsolomon
 
 .. note::
 

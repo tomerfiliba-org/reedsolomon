@@ -57,7 +57,7 @@ if inpypy or not cython_available:
     # Empty test unit to show the reason of skipping
     class TestMissingDependency(unittest.TestCase):
 
-        @unittest.skip('Missing dependency - Cython is incompatible with PyPy')
+        @unittest.skip('Missing dependency - Cython missing or PyPy present (Cython is incompatible with PyPy)')
         def test_fail():
             pass
 

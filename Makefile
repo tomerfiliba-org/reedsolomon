@@ -49,6 +49,11 @@ test:
      # Run the tests
 	python -m unittest discover tests
 
+testnobinary:
+     # Run the tests
+	python -m unittest discover tests
+     #pytest --cov-branch
+
 testnose:
     nosetests -vv --with-coverage
 

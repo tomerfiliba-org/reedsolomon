@@ -23,7 +23,7 @@ Based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/
 Installation
 ------------
 
-For the latest stable release, use:
+For the latest stable release, install with:
 
 .. code:: sh
 

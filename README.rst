@@ -41,21 +41,19 @@ If you have some issues installing through pip, maybe this command may help:
 
     pip install reedsolo --no-binary={reedsolo}
 
-.. note::
-
-    By default, only a pure-python implementation is installed. If you have Cython and a C++ compiler, a faster cythonized binary can be optionally built with:
+By default, only a pure-python implementation is installed. If you have Cython and a C++ compiler, a faster cythonized binary can be optionally built with:
     
-    .. code:: sh
+.. code:: sh
     
     pip install --upgrade reedsolo --install-option="--cythonize" --verbose
     
-    or locally with:
-    
-    .. code:: sh
-    
+or locally with:
+
+.. code:: sh
+
     python setup.py install --cythonize
-    
-    The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
+
+The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
 
 As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 

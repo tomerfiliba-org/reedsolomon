@@ -1,3 +1,4 @@
 * Cythonize more, read recent tutorials:
     * https://www.peterbaumgartner.com/blog/intro-to-just-enough-cython-to-be-useful/
     * https://members.loria.fr/LMendoza/link/Cython_speedup_notes.html
+    * chunking should be moved to functions outside of RSCodec python object, so that we can make a cpdef and use memoryviews. Essentially, all looping functions should be done in cythonized functions, outside of Python objects (we can't cythonize Python objects methods).

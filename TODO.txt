@@ -1,0 +1,3 @@
+* Cythonize more, read recent tutorials:
+    * https://www.peterbaumgartner.com/blog/intro-to-just-enough-cython-to-be-useful/
+    * https://members.loria.fr/LMendoza/link/Cython_speedup_notes.html

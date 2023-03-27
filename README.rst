@@ -53,6 +53,15 @@ or locally with:
 
     python setup.py install --cythonize
 
+or under pep517:
+
+.. code:: sh
+
+    pip install build
+    python -sBm build -w --no-isolation -C=--build-option=--cythonize
+    # or
+    pip install --upgrade reedsolo --install-option="--cythonize" --verbose --use-pip517
+
 The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
 
 As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:

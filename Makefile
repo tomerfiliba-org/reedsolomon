@@ -110,6 +110,10 @@ installdev:
 install:
 	@+python setup.py install
 
+installpep517:
+    # requires `pip install build`
+    @+python -sBm build -w --no-isolation -C=--build-option=--cythonize
+
 build:
 	@+make prebuildclean
 	@+make testsetup

@@ -41,10 +41,11 @@ If you have some issues installing through pip, maybe this command may help:
 
     pip install reedsolo --no-binary={reedsolo}
 
-By default, only a pure-python implementation is installed. If you have Cython and a C++ compiler, a faster cythonized binary can be optionally built with:
+By default, only a pure-python implementation is installed. If you have Cython (>=3.0.0) and a C++ compiler, a faster cythonized binary can be optionally built with:
     
 .. code:: sh
     
+    pip install cython==3.0.0b2
     pip install --upgrade reedsolo --install-option="--cythonize" --verbose
     
 or locally with:

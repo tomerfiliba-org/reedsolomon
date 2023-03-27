@@ -29,7 +29,7 @@ if '--cythonize' in sys.argv:
         # If Cython is installed, transpile the optimized Cython module to C and compile as a .pyd to be distributed
         from Cython.Build import cythonize, build_ext  # this acts as a check whether Cython is installed, otherwise this will fail
         print("Cython is installed, building creedsolo module")
-        extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], compiler_directives={"language_level": "3"}, annotate=True, force=True)  # this may fail hard if Cython is installed but there is no C compiler for current Python version, and we have no way to know. Alternatively, we could supply exclude_failures=True , but then for those who really want the cythonized compiled extension, it would be much harder to debug
+        extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], force=True)  # this may fail hard if Cython is installed but there is no C compiler for current Python version, and we have no way to know. Alternatively, we could supply exclude_failures=True , but then for those who really want the cythonized compiled extension, it would be much harder to debug
         cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
     except ImportError:
         # Else Cython is not installed (or user explicitly wanted to skip)

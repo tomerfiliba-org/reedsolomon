@@ -245,6 +245,11 @@ else:
             _, _, _ = rs.decode(encoded, erase_pos=[255], only_erasures=True)
             # If it works, no exception should be raised
 
+        def test_too_many_ecc_symbols(self):
+            RSCodec(254).encode(b'a')
+            self.assertRaises(ValueError, RSCodec, 255) # nsym=255
+            self.assertRaises(ValueError, RSCodec, 2000) # nsym=2000
+
     class cTestGFArithmetics(unittest.TestCase):
         '''Test Galois Field arithmetics'''
 

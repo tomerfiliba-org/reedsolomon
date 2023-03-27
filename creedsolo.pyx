@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #!python
 #cython: language_level=3
+#cython: annotate=true
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
 # Copyright (c) 2015 rotorgit
@@ -88,7 +89,11 @@ cimport cython
 from cython.parallel import parallel, prange
 
 import itertools
+import math
 from cython.view cimport array as cvarray
+
+from cython.cimports.cpython import array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
+import array
 
 
 ################### INIT and stuff ###################
@@ -470,7 +475,7 @@ gf_add_arr = [bytearray(256) for _ in xrange(256)]
 #gf_mul_arr = bytearray(256*256)
 #gf_add_arr = bytearray(256*256)
 
-cpdef gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
+cpdef (uint8_t, uint8_t) gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
     cdef int i, j
     global gf_mul_arr, gf_add_arr
 
@@ -482,7 +487,11 @@ cpdef gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
             #gf_add_arr[i*256+j] = i ^ j
     return gf_mul_arr, gf_add_arr
 
-cpdef rs_encode_msg_precomp(msg_in, int nsym, int fcr=0, int generator=2, gen=None):
+@cython.cfunc
+#@cython.exceptval([], check=True)
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint8_t generator=2, gen=None):
     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
     cdef int i, j
 
@@ -672,7 +681,7 @@ cpdef rs_find_errors(err_loc, int nmess, int generator=2):
     # nmess = length of whole codeword (message + ecc symbols)
     cdef int i
 
-    errs = len(err_loc) - 1
+    cdef uint8_t errs = len(err_loc) - 1
     err_pos = []
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
@@ -829,8 +838,21 @@ class RSCodec(object):
     0x11d)
     '''
 
-    def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8):
+    def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8):
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.'''
+
+        # Auto-setup if galois field or message length is different than default (exponent 8)
+        if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
+            # Get the next closest power of two
+            c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1), 2))
+        if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
+            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
+            if nsize == 255:  # resize chunk size if not set
+                nsize = int(2**c_exp - 1)
+        if nsym >= nsize:
+            raise ValueError('ECC symbols must be strictly less than the total message length (nsym < nsize).')
+
+        # Memorize variables
         self.nsym = nsym # number of ecc symbols (ie, the repairing rate will be r=(nsym/2)/nsize, so for example if you have nsym=5 and nsize=10, you have a rate r=0.25, so you can correct up to 0.25% errors (or exactly 2 symbols out of 10), and 0.5% erasures (5 symbols out of 10).
         self.nsize = nsize # maximum length of one chunk (ie, message + ecc symbols after encoding, for the message alone it's nsize-nsym)
         self.fcr = fcr # first consecutive root, can be any value between 0 and (2**c_exp)-1

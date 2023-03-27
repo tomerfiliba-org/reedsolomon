@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 #!python
 #cython: language_level=3
-#cython: annotate=true
 
 # Copyright (c) 2012-2015 Tomer Filiba <tomerfiliba@gmail.com>
 # Copyright (c) 2015 rotorgit

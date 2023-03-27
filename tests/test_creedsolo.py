@@ -247,6 +247,7 @@ else:
 
     class cTestGFArithmetics(unittest.TestCase):
         '''Test Galois Field arithmetics'''
+
         def test_multiply_nolut(self):
             '''Try to multiply without look-up tables (necessary to build the look-up tables!)'''
             a = 30
@@ -269,6 +270,46 @@ else:
             # Multiplications outside of the finite field (we revert to standard integer multiplications just to see if it works)
             self.assertEqual( gf_mult_noLUT(3, 125, prim=0, carryless=False) , 375 )
             self.assertEqual( gf_mult_noLUT_slow(4, 125, prim=0) , 500 ) # the second method, just to check that everything's alright
+
+        def test_gf_operations(self):
+            '''Try various Galois Field 2 operations'''
+            init_tables(prim=0x11d, generator=2, c_exp=8)
+
+            a = 30
+            b = 19
+
+            # Addition and subtraction (they are the same in GF(2^p)
+            self.assertEqual(gf_add(0, 0), 0)
+            self.assertEqual(gf_add(0, 0), gf_sub(0, 0))
+            self.assertEqual(gf_add(1, 0), 1)
+            self.assertEqual(gf_add(1, 0), gf_sub(1, 0))
+            self.assertEqual(gf_add(0, 1), 1)
+            self.assertEqual(gf_add(0, 1), gf_sub(0, 1))
+            self.assertEqual(gf_add(1, 1), 0)
+            self.assertEqual(gf_add(1, 1), gf_sub(1, 1))
+            self.assertEqual(gf_add(a, b), 13)
+            self.assertEqual(gf_add(a, b), gf_sub(a, b))
+            self.assertEqual(gf_add(0, b), b)
+            self.assertEqual(gf_add(0, b), gf_sub(0, b))
+            self.assertEqual(gf_add(a, 0), a)
+            self.assertEqual(gf_add(a, 0), gf_sub(a,0))
+            self.assertEqual(gf_add(a, 1), (a+1))
+            self.assertEqual(gf_add(a, 1), gf_sub(a, 1))
+            self.assertEqual(gf_add(1, a), (a+1))
+            self.assertEqual(gf_add(1, a), gf_sub(1, a))
+            self.assertEqual(gf_add(255, 1), 254)
+
+            # Negation
+            self.assertEqual(gf_neg(a), a)
+            self.assertEqual(gf_neg(b), b)
+
+            # Division
+            self.assertEqual(gf_div(a, 1), a)
+            self.assertEqual(gf_div(12, 3), 4)
+            self.assertEqual(gf_div(a, b), 222)
+            self.assertEqual(gf_div(b, a), 25)
+            self.assertEqual(gf_div(0, a), 0)
+            self.assertRaises(ZeroDivisionError, gf_div, *[a, 0])
 
     class cTestRSCodecUniversalCrossValidation(unittest.TestCase):
         '''Ultimate set of tests of a full set of different parameters for encoding and decoding. If this passes, the codec is universal and can correctly interface with any other RS codec!'''

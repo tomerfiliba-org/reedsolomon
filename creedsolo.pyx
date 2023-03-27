@@ -225,10 +225,11 @@ cpdef uint8_t gf_neg(uint8_t x):
     return x
 
 cpdef uint8_t gf_inverse(uint8_t x):
+    global gf_exp, gf_log, field_charac
     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
 
 cpdef uint8_t gf_mul(uint8_t x, uint8_t y):
-    global gf_exp, gf_log
+    global gf_exp, gf_log, field_charac
     if x == 0 or y == 0:
         return 0
     cdef uint8_t lx = gf_log[x]
@@ -237,7 +238,10 @@ cpdef uint8_t gf_mul(uint8_t x, uint8_t y):
     cdef uint8_t ret = gf_exp[z]
     return ret
 
-cpdef uint8_t gf_div(uint8_t x, uint8_t y):
+@cython.cfunc
+@cython.exceptval(0, check=True)  # alternative in Cython >= 3 to adding `except? 0` in cpdef line, with `check=True` being the equivalent of `except?` or `except *` or `except +` which signal that the chosen exception return value is not reserved, it can be a legal value, so Cython should do additional checks
+cpdef uint8_t gf_div(uint8_t x, uint8_t y) except? 0:
+    global gf_exp, gf_log, field_charac
     if y == 0:
         raise ZeroDivisionError()
     if x == 0:
@@ -245,6 +249,7 @@ cpdef uint8_t gf_div(uint8_t x, uint8_t y):
     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
 
 cpdef uint8_t gf_pow(uint8_t x, int power):
+    global gf_exp, gf_log, field_charac
     cdef uint8_t x1 = gf_log[x]
     cdef uint8_t x2 = (x1 * power) % field_charac
     cdef uint8_t ret = gf_exp[x2]

@@ -304,7 +304,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     for i in xrange(field_charac, field_charac * 2):
         gf_exp[i] = gf_exp[i - field_charac]
 
-    return [gf_log, gf_exp, field_charac]
+    return gf_log, gf_exp, field_charac
 
 def gf_add(x, y):
     return x ^ y

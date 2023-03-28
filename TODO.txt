@@ -6,9 +6,13 @@
         * maybe replace all bytearrays by array 'i' and check if no more python calls
         * or maybe try to create an array with nogil, no PyObject call
         * or another way to make a pure C array? Or any kind of chained list? Something to store an array of items? We just need a basic array, nothing fancy, but with no Python call.
+        * cpython array is much more efficient than cython view array! https://groups.google.com/g/cython-users/c/CwtU_jYADgM
+            * then use nogil in cdef to ensure there is no python object (try with gf_poly_add() ).
         * use vector as a variable https://stackoverflow.com/questions/54759483/how-to-return-two-values-in-cython-cdef-without-gil-nogil
+            * great to specify inside ctuples in cdef function definition return value
         * once return type is changed, try to change the exception type, maybe if pointer we set exception to a int instead
     * return types for each functions, especially those returning an array, maybe I can retry returning memoryviews now?
+        * especially for rs_encode_msg() and decoding functions (may require a change in return values, to drop the tuples, or use vectors instead to return inside a ctuple)
     * replace all len() with array.shape[0]:
     regex search: len\(([^\)]+)\)
     replace: \1.shape[0]

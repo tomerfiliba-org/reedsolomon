@@ -596,8 +596,8 @@ cpdef rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uint8_t[::1] err
     # Forney algorithm: compute the magnitudes
     cdef uint8_t[::1] E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
     cdef int Xlength = len(X)
-    for i, Xi in enumerate(X):
-
+    for i in xrange(len(X)):
+        Xi = X[i]
         Xi_inv = gf_inverse(Xi)
 
         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
@@ -637,7 +637,7 @@ cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, uint8_t[::1] erase_loc=
     # The idea is that BM will iteratively estimate the error locator polynomial.
     # To do this, it will compute a Discrepancy term called Delta, which will tell us if the error locator polynomial needs an update or not
     # (hence why it's called discrepancy: it tells us when we are getting off board from the correct value).
-    cdef int i, j, synd_shift, K, delta, x
+    cdef int i, j, synd_shift, K, delta
 
     # Init the polynomials
     if erase_loc.shape[0] > 0: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
@@ -687,8 +687,8 @@ cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, uint8_t[::1] erase_loc=
             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))
 
     # Check if the result is correct, that there's not too many errors to correct
-    for i, x in enumerate(err_loc):  #drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython and JIT compilers cannot optimize, such as `err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))`
-        if x != 0:
+    for i in xrange(len(err_loc)):  #drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython and JIT compilers cannot optimize, such as `err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))`
+        if err_loc[i] != 0:
             err_loc = err_loc[i:]
             break
     errs = len(err_loc) - 1

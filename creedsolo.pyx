@@ -87,12 +87,11 @@ import cython
 cimport cython
 from cython.parallel import parallel, prange
 
-import itertools
+import itertools  # beware of this bug: https://stackoverflow.com/questions/66892748/itertools-chain-behaves-differently-in-cython
 from cython.cimports.libc cimport math
 from cython.view cimport array as cvarray
 
-from cython.cimports.cpython import array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
-import array
+from cython.cimports.cpython cimport array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
 
 
 ################### INIT and stuff ###################
@@ -109,11 +108,17 @@ except NameError:
     #    return cvarray("B", obj)
     raise NameError("For some reason, bytearray is not available, this cythonized extension cannot be used.")
 
-class ReedSolomonError(Exception):
+cdef class ReedSolomonError(Exception):
     pass
 
 ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
 
+#cdef int[:] _bytearray(int size, int val):
+#    cdef int[size] arr #array.array('i', input)
+#    cdef int[:] arrview = arr
+#    return arrview
+
+#gf_exp2 = _bytearray(512, 1) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
 cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
 cdef uint8_t[::1] gf_log = bytearray([0] * 256)
 cdef int field_charac = int(2**8 - 1)
@@ -130,7 +135,7 @@ def rwh_primes1(n):
             sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
 
-def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
+cpdef find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False, bint single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
     # fast_primes will output less results but will be significantly faster.
     # single will output the first prime polynomial found, so if all you want is to just find one prime polynomial to generate the LUT for Reed-Solomon to work, then just use that.
@@ -143,11 +148,13 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     # Here is implemented a bruteforce approach to find all these prime polynomials, by generating every possible prime polynomials (ie, every integers between field_charac+1 and field_charac*2), and then we build the whole Galois Field, and we reject the candidate prime polynomial if it duplicates even one value or if it generates a value above field_charac (ie, cause an overflow).
     # Note that this algorithm is slow if the field is too big (above 12), because it's an exhaustive search algorithm. There are probabilistic approaches, and almost surely prime approaches, but there is no determistic polynomial time algorithm to find irreducible monic polynomials. More info can be found at: http://people.mpi-inf.mpg.de/~csaha/lectures/lec9.pdf
     # Another faster algorithm may be found at Adleman, Leonard M., and Hendrik W. Lenstra. "Finding irreducible polynomials over finite fields." Proceedings of the eighteenth annual ACM symposium on Theory of computing. ACM, 1986.
+    
+    cdef int x
 
     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
-    root_charac = 2 # we're in GF(2)
-    field_charac = int(root_charac**c_exp - 1)
-    field_charac_next = int(root_charac**(c_exp+1) - 1)
+    cdef uint8_t root_charac = 2 # we're in GF(2)
+    cdef int field_charac = int(root_charac**c_exp - 1)
+    cdef int field_charac_next = int(root_charac**(c_exp+1) - 1)
 
     prim_candidates = []
     if fast_primes:
@@ -157,7 +164,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
         prim_candidates = xrange(field_charac+2, field_charac_next, root_charac) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
 
     # Start of the main loop
-    correct_primes = []
+    cdef list correct_primes = []
     for prim in prim_candidates: # try potential candidates primitive irreducible polys
         seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
@@ -307,7 +314,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
  
     return result
 
-cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int carryless=True):
+cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, bint carryless=True):
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     r = 0
@@ -322,10 +329,13 @@ cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, int
 
 ################### GALOIS FIELD POLYNOMIALS MATHS ###################
 
-def gf_poly_scale(p, x):
-    return bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
+cpdef gf_poly_scale(p, int x):
+    cdef int i, plen
+    plen = len(p)
+    return bytearray([gf_mul(p[i], x) for i in xrange(plen)])
 
-def gf_poly_add(p, q):
+cpdef gf_poly_add(p, q):
+    cdef int i
     r = bytearray( max(len(p), len(q)) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
@@ -357,11 +367,11 @@ cpdef gf_poly_mul(p, q):
                     r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
     return bytearray(r)
 
-def gf_poly_neg(poly):
+cpdef gf_poly_neg(poly):
     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
     return poly
 
-def gf_poly_div(dividend, divisor):
+cpdef gf_poly_div(dividend, divisor):
     '''Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).'''
     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
 
@@ -425,7 +435,7 @@ cpdef rs_generator_poly(nsym, int fcr=0, int generator=2):
 
 cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
-    g_all = [[1]] * max_nsym  # pre-allocate the list of lists
+    cdef list g_all = [[1]] * max_nsym  # pre-allocate the list of lists
     for nsym in xrange(max_nsym):
         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)
     return g_all
@@ -433,7 +443,7 @@ cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.initializedcheck(False)
-cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, gen=None):
+cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] gen=None):
     '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/'''
     # IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
     # >> cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
@@ -475,7 +485,7 @@ gf_add_arr = [bytearray(256) for _ in xrange(256)]
 #gf_mul_arr = bytearray(256*256)
 #gf_add_arr = bytearray(256*256)
 
-cpdef (uint8_t, uint8_t) gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
+cpdef (uint8_t, uint8_t) gf_precomp_tables(uint8_t[::1] gf_exp=gf_exp, uint8_t[::1] gf_log=gf_log):
     cdef int i, j
     global gf_mul_arr, gf_add_arr
 
@@ -491,9 +501,9 @@ cpdef (uint8_t, uint8_t) gf_precomp_tables(gf_exp=gf_exp, gf_log=gf_log):
 #@cython.exceptval([], check=True)
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint8_t generator=2, gen=None):
+cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint8_t generator=2, uint8_t[::1] gen=None):
     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
-    cdef int i, j
+    cdef int i, j, coef, msg_in_len, gen_len
 
     if len(msg_in) + nsym > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
@@ -508,20 +518,24 @@ cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint
     #for i in xrange(msg_in.size):
         #msg_out[i+1:i+len(gen)] = gf_add_arr[msg_out[i+1:i+len(gen)], gf_mul_arr[gen[1:], msg_out[i]]]
 
+    # Cache lengths
+    msg_in_len = len(msg_in)
+    gen_len = len(gen)
+
     # Fastest
     #mula = [gf_mul_arr[gen[j]] for j in xrange(len(gen))]
-    for i in xrange(len(msg_in)): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]
+    for i in xrange(msg_in_len): # [i for i in xrange(len(msg_in)) if msg_in[i] != 0]
         coef = msg_out[i]
         # coef = gf_mul(msg_out[i], gf_inverse(gen[0])) # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
         if coef != 0:  # coef 0 is normally undefined so we manage it manually here (and it also serves as an optimization btw)
             mula = gf_mul_arr[coef]
-            for j in xrange(1, len(gen)): # optimization: can skip g0 because the first coefficient of the generator is always 1! (that's why we start at position 1)
+            for j in xrange(1, gen_len): # optimization: can skip g0 because the first coefficient of the generator is always 1! (that's why we start at position 1)
                 #msg_out[i + j] = gf_add_arr[msg_out[i+j]][gf_mul_arr[coef][gen[j]]] # slow, which is weird since it's only accessing lists
                 #msg_out[i + j] ^= gf_mul_arr[coef][gen[j]] # faster
                 msg_out[i + j] ^= mula[gen[j]] # fastest
 
     # Recopy the original message bytes
-    msg_out[:len(msg_in)] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
+    msg_out[:msg_in_len] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
     return msg_out
 ############### end of precomputing attempt ###########
 
@@ -593,11 +607,12 @@ cpdef rs_correct_errata(msg_in, synd, err_pos, int fcr=0, int generator=2): # er
     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
     return msg
 
-def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
+cpdef rs_find_error_locator(synd, int nsym, erase_loc=None, int erase_count=0) except *:
     '''Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm'''
     # The idea is that BM will iteratively estimate the error locator polynomial.
     # To do this, it will compute a Discrepancy term called Delta, which will tell us if the error locator polynomial needs an update or not
     # (hence why it's called discrepancy: it tells us when we are getting off board from the correct value).
+    cdef int i, j, synd_shift, K, delta, x
 
     # Init the polynomials
     if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
@@ -647,7 +662,11 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))
 
     # Check if the result is correct, that there's not too many errors to correct
-    err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size
+    #err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))  # drop leading 0s, else errs will not be of the correct size
+    for i, x in enumerate(err_loc):  # equivalent way to drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython does not yet support in cdef functions.
+        if x != 0:
+            err_loc = err_loc[i:]
+            break
     errs = len(err_loc) - 1
     if (errs-erase_count) * 2 + erase_count > nsym:
         raise ReedSolomonError("Too many errors to correct")
@@ -714,7 +733,7 @@ cpdef rs_forney_syndromes(synd, pos, int nmess, int generator=2):
 
     return fsynd
 
-cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, only_erasures=False):
+cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False):
     '''Reed-Solomon main decoding function'''
     global field_charac
     if len(msg_in) > field_charac:
@@ -759,7 +778,7 @@ cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=Non
     # return the successfully decoded message
     return msg_out[:-nsym], msg_out[-nsym:], erase_pos + err_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
-cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, only_erasures=False):
+cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False):
     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
     global field_charac
     if len(msg_in) > field_charac:
@@ -885,7 +904,7 @@ cdef class RSCodec(object):
             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
         return enc
 
-    cpdef decode(self, data, erase_pos=None, only_erasures=False):
+    cpdef decode(self, data, erase_pos=None, bint only_erasures=False):
         '''Repair a message, whatever its size is, by using chunking'''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
         if isinstance(data, str):
@@ -924,7 +943,7 @@ cdef class RSCodec(object):
             check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
         return check
 
-    cpdef maxerrata(self, errors=None, erasures=None, verbose=False):
+    cpdef maxerrata(self, errors=None, erasures=None, bint verbose=False):
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.

@@ -397,12 +397,13 @@ def gf_poly_scale(p, x):
     return _bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
 
 def gf_poly_add(p, q):
-    r = _bytearray( max(len(p), len(q)) )
+    q_len = len(q)
+    r = _bytearray( max(len(p), q_len) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
         #r[i + len(r) - len(p)] = p[i]
-    for i in xrange(len(q)):
-        r[i + len(r) - len(q)] ^= q[i]
+    for i in xrange(q_len):
+        r[i + len(r) - q_len] ^= q[i]
     return r
 
 def gf_poly_mul(p, q):

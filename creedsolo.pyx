@@ -316,7 +316,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
 cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, bint carryless=True):
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
-    r = 0
+    cdef int r = 0
     while y: # while y is above 0
         if y & 1: r = r ^ x if carryless else r + x # y is odd, then add the corresponding x to r (the sum of all x's corresponding to odd y's will give the final product). Note that since we're in GF(2), the addition is in fact an XOR (very important because in GF(2) the multiplication and additions are carry-less, thus it changes the result!).
         y = y >> 1 # equivalent to y // 2
@@ -328,19 +328,20 @@ cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, bin
 
 ################### GALOIS FIELD POLYNOMIALS MATHS ###################
 
-cpdef gf_poly_scale(p, int x):
+cpdef gf_poly_scale(uint8_t[::1] p, int x):
     cdef int i, plen
     plen = len(p)
     return bytearray([gf_mul(p[i], x) for i in xrange(plen)])
 
 cpdef gf_poly_add(p, q):
-    cdef int i
-    r = bytearray( max(len(p), len(q)) )
+    cdef int i, q_len
+    q_len = len(q)
+    r = bytearray( max(len(p), q_len) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
         #r[i + len(r) - len(p)] = p[i]
-    for i in xrange(len(q)):
-        r[i + len(r) - len(q)] ^= q[i]
+    for i in xrange(q_len):
+        r[i + len(r) - q_len] ^= q[i]
     return r
 
 cpdef gf_poly_mul(p, q):

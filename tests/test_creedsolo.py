@@ -232,17 +232,17 @@ else:
             # Ensure we always at least return the erasures we used as input
             rs = RSCodec(10)
             msg = rs.encode(bytearray("hello world ", "latin1"))
-            self.assertEqual(rs.decode(msg, erase_pos=[1])[2], bytearray([1]))
-            self.assertEqual(rs.decode(msg, erase_pos=[1])[2], bytearray([1]))
+            self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
+            self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
             msg[1] = 0xFF
             self.assertEqual(rs.decode(msg)[2], bytearray([1]))
-            self.assertEqual(rs.decode(msg, erase_pos=[1])[2], bytearray([1]))
+            self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
 
         def test_erasures_chunking(self):
             # Test whether providing positions for erasures in the 2nd chunk or later is working
             rs = RSCodec(30)
             encoded = rs.encode(b'0' * 226)
-            _, _, _ = rs.decode(encoded, erase_pos=[255], only_erasures=True)
+            _, _, _ = rs.decode(encoded, erase_pos=bytearray([255]), only_erasures=True)
             # If it works, no exception should be raised
 
         def test_too_many_ecc_symbols(self):
@@ -372,7 +372,7 @@ else:
                     g = rs_generator_poly_all(n, fcr=fcr, generator=generator)
                     # Encode the message
                     rmesecc = rs_encode_msg(orig_mes, n-k, gen=g[n-k])
-                    rmesecc_orig = rmesecc[:] # make a copy of the original message to check later if fully corrected (because the syndrome may be wrong sometimes)
+                    rmesecc_orig = bytearray(rmesecc[:]) # make a copy of the original message to check later if fully corrected (because the syndrome may be wrong sometimes)
                     # Tamper the message
                     if erratanb > 0:
                         if errmode == 1:
@@ -396,10 +396,11 @@ else:
                     # Decoding the corrupted codeword
                     # -- Forney syndrome method
                     try:
-                        rmes, recc, errata_pos = rs_correct_msg(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
-                        results_br.append( rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) ) # check if correct by syndrome analysis (can be wrong)
-                        results_br.append( rmesecc_orig == (rmes+recc) ) # check if correct by comparing to the original message (always correct)
-                        if debugg and not rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) or not (rmesecc_orig == (rmes+recc)): raise ReedSolomonError("False!!!!!")
+                        rmes, recc, errata_pos = rs_correct_msg(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=bytearray(erase_pos), only_erasures=only_erasures)
+                        rmesecc_post = bytearray(rmes) + bytearray(recc)
+                        results_br.append( rs_check(rmesecc_post, n-k, fcr=fcr, generator=generator) ) # check if correct by syndrome analysis (can be wrong)
+                        results_br.append( rmesecc_orig == rmesecc_post ) # check if correct by comparing to the original message (always correct)
+                        if debugg and not rs_check(rmesecc_post, n-k, fcr=fcr, generator=generator) or not (rmesecc_orig == rmesecc_post): raise ReedSolomonError("False!!!!!")
                     except ReedSolomonError as exc:
                         results_br.append(False)
                         results_br.append(False)
@@ -411,15 +412,16 @@ else:
                             print(erase_pos)
                             print("original_msg", rmesecc_orig)
                             print("tampered_msg", rmesecc)
-                            print("decoded_msg", rmes+recc)
-                            print("checks: ", rs_check(rmes + recc, n-k, fcr=fcr, generator=generator), rmesecc_orig == (rmes+recc))
+                            print("decoded_msg", rmesecc_post)
+                            print("checks: ", rs_check(rmesecc_post, n-k, fcr=fcr, generator=generator), rmesecc_orig == rmesecc_post)
                             print("====")
                             raise exc
                     # -- Without Forney syndrome method
                     try:
-                        mes, ecc, errata_pos = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
-                        results_br.append( rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) )
-                        results_br.append( rmesecc_orig == (rmes+recc) )
+                        rmes, recc, errata_pos = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=bytearray(erase_pos), only_erasures=only_erasures)
+                        rmesecc_post = bytearray(rmes) + bytearray(recc)
+                        results_br.append( rs_check(rmesecc_post, n-k, fcr=fcr, generator=generator) )
+                        results_br.append( rmesecc_orig == rmesecc_post )
                     except ReedSolomonError as exc:
                         results_br.append(False)
                         results_br.append(False)

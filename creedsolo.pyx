@@ -90,7 +90,8 @@ from cython.parallel import parallel, prange
 from cython.cimports.libc cimport math
 from cython.view cimport array as cvarray
 
-from cython.cimports.cpython cimport array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
+#from cython.cimports.cpython cimport array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
+from cython cimport bytearray  # use cimport instead of import whenever possible in cythonized extensions https://stackoverflow.com/questions/29311207/cython-compilation-import-vs-cimport
 
 
 ################### INIT and stuff ###################
@@ -344,7 +345,7 @@ cpdef gf_poly_add(uint8_t[::1] p, uint8_t[::1] q):
         r[i + len(r) - q_len] ^= q[i]
     return r
 
-cpdef gf_poly_mul(p, q):
+cpdef gf_poly_mul(uint8_t[::1] p, uint8_t[::1] q):
     '''Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.'''
     cdef int i, j, x, y
     cdef uint8_t lq, qj
@@ -371,7 +372,7 @@ cpdef gf_poly_neg(poly):
     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
     return poly
 
-cpdef gf_poly_div(dividend, divisor):
+cpdef gf_poly_div(uint8_t[::1] dividend, uint8_t[::1] divisor):
     '''Fast polynomial division by using Extended Synthetic Division and optimized for GF(2^p) computations (doesn't work with standard polynomials outside of this galois field).'''
     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
 
@@ -433,9 +434,9 @@ cpdef uint8_t gf_poly_eval(poly, uint8_t x):
 cpdef rs_generator_poly(int nsym, int fcr=0, int generator=2):
     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
     cdef int i
-    cdef uint8_t[:] g = bytearray([1])
+    cdef uint8_t[::1] g = bytearray([1])
     for i in xrange(0, nsym):
-        g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
+        g = gf_poly_mul(g, bytearray([1, gf_pow(generator, i+fcr)]))
     return bytearray(g)
 
 cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
@@ -547,14 +548,14 @@ cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint
 
 ################### REED-SOLOMON DECODING ###################
 
-cpdef rs_calc_syndromes(msg, int nsym, int fcr=0, int generator=2):
+cpdef rs_calc_syndromes(uint8_t[::1] msg, int nsym, int fcr=0, int generator=2):
     '''Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.
     Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).
     '''
     # Note the "[0] +" : we add a 0 coefficient for the lowest degree (the constant). This effectively shifts the syndrome, and will shift every computations depending on the syndromes (such as the errors locator polynomial, errors evaluator polynomial, etc. but not the errors positions).
     # This is not necessary as anyway syndromes are defined such as there are only non-zero coefficients (the only 0 is the shift of the constant here) and subsequent computations will/must account for the shift by skipping the first iteration (eg, the often seen range(1, n-k+1)), but you can also avoid prepending the 0 coeff and adapt every subsequent computations to start from 0 instead of 1.
     cdef int i
-    return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
+    return bytearray([0]) + bytearray([gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)])
 
 cpdef rs_correct_errata(uint8_t[::1] msg_in, synd, err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
@@ -613,7 +614,7 @@ cpdef rs_correct_errata(uint8_t[::1] msg_in, synd, err_pos, int fcr=0, int gener
     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
     return msg
 
-cpdef rs_find_error_locator(synd, int nsym, erase_loc=None, int erase_count=0) except *:
+cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, erase_loc=None, int erase_count=0) except *:
     '''Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm'''
     # The idea is that BM will iteratively estimate the error locator polynomial.
     # To do this, it will compute a Discrepancy term called Delta, which will tell us if the error locator polynomial needs an update or not
@@ -693,7 +694,7 @@ cpdef rs_find_errata_locator(e_pos, int generator=2):
 cpdef rs_find_error_evaluator(synd, err_loc, int nsym):
     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
-    _, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), ([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length
+    _, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), bytearray([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length
 
     # Faster way that is equivalent
     #remainder = gf_poly_mul(synd, err_loc) # first multiply the syndromes with the errata locator polynomial
@@ -701,7 +702,7 @@ cpdef rs_find_error_evaluator(synd, err_loc, int nsym):
 
     return remainder
 
-cpdef rs_find_errors(err_loc, int nmess, int generator=2) except *:
+cpdef rs_find_errors(uint8_t[:] err_loc, int nmess, int generator=2) except *:
     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
     # nmess = length of whole codeword (message + ecc symbols)
     cdef int i
@@ -715,16 +716,16 @@ cpdef rs_find_errors(err_loc, int nmess, int generator=2) except *:
     if len(err_pos) != errs:
         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")
-    return err_pos
+    return bytearray(err_pos)
 
-cpdef rs_forney_syndromes(synd, pos, int nmess, int generator=2):
+cpdef rs_forney_syndromes(uint8_t[::1] synd, uint8_t[::1] pos, int nmess, int generator=2):
     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
     cdef int i, x, j
 
     erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)
 
     # Optimized method, all operations are inlined
-    fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
+    fsynd = bytearray(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
     for i in xrange(len(pos)):
         x = gf_pow(generator, erase_pos_reversed[i])
         for j in xrange(len(fsynd) - 1):
@@ -739,17 +740,17 @@ cpdef rs_forney_syndromes(synd, pos, int nmess, int generator=2):
 
     return fsynd
 
-cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False) except *:
+cpdef rs_correct_msg(uint8_t[::1] msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] erase_pos=None, bint only_erasures=False) except *:
     '''Reed-Solomon main decoding function'''
     global field_charac
     if len(msg_in) > field_charac:
         # Note that it is in fact possible to encode/decode messages that are longer than field_charac, but because this will be above the field, this will generate more error positions during Chien Search than it should, because this will generate duplicate values, which should normally be prevented thank's to the prime polynomial reduction (eg, because it can't discriminate between error at position 1 or 256, both being exactly equal under galois field 2^8). So it's really not advised to do it, but it's possible (but then you're not guaranted to be able to correct any error/erasure on symbols with a position above the length of field_charac -- if you really need a bigger message without chunking, then you should better enlarge c_exp so that you get a bigger field).
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
-    msg_out = bytearray(msg_in)     # copy of message
+    cdef uint8_t[::1] msg_out = bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
-        erase_pos = []
+        erase_pos = bytearray([])
     else:
         for e_pos in erase_pos:
             msg_out[e_pos] = 0
@@ -762,8 +763,9 @@ cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=Non
         return msg_out[:-nsym], msg_out[-nsym:], erase_pos  # no errors
     
     # Find errors locations
+    cdef uint8_t[::1] err_pos
     if only_erasures:
-        err_pos = []
+        err_pos = bytearray([])
     else:
         # compute the Forney syndromes, which hide the erasures from the original syndrome (so that BM will just have to deal with errors, not erasures)
         fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out), generator)
@@ -776,13 +778,14 @@ cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=Non
 
     # Find errors values and apply them to correct the message
     # compute errata evaluator and errata magnitude polynomials, then correct errors and erasures
-    msg_out = rs_correct_errata(msg_out, synd, (erase_pos + err_pos), fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)
+    cdef uint8_t[::1] errata_pos = (bytearray(erase_pos) + bytearray(err_pos))
+    msg_out = rs_correct_errata(msg_out, synd, errata_pos, fcr, generator) # note that we here use the original syndrome, not the forney syndrome (because we will correct both errors and erasures, so we need the full syndrome)
     # check if the final message is fully repaired
     synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     if max(synd) > 0:
         raise ReedSolomonError("Could not correct message")
     # return the successfully decoded message
-    return msg_out[:-nsym], msg_out[-nsym:], erase_pos + err_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
+    return msg_out[:-nsym], msg_out[-nsym:], errata_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
 cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False) except *:
     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
@@ -917,6 +920,7 @@ cdef class RSCodec(object):
         '''Repair a message, whatever its size is, by using chunking'''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
         cdef int i
+        cdef uint8_t x
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
         dec = bytearray()
@@ -926,16 +930,18 @@ cdef class RSCodec(object):
             # Split the long message in a chunk
             chunk = data[i:i+self.nsize]
             # Extract the erasures for this chunk
-            e_pos = []
             if erase_pos:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
-                e_pos = [x for x in erase_pos if x < self.nsize]
+                e_pos = bytearray([x for x in erase_pos if x < self.nsize])
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
-                erase_pos = [x - self.nsize for x in erase_pos if x >= self.nsize]
+                erase_pos = bytearray([x - self.nsize for x in erase_pos if x >= self.nsize])
+            else:
+                e_pos = bytearray()
             # Decode/repair this chunk!
             rmes, recc, errata_pos = rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)
-            dec_full.extend(rmes+recc)
+            dec_full.extend(rmes)
+            dec_full.extend(recc)
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 

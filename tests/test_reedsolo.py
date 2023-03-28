@@ -477,7 +477,7 @@ class TestRSCodecUniversalCrossValidation(unittest.TestCase):
                         raise exc
                 # -- Without Forney syndrome method
                 try:
-                    mes, ecc, errata_pos = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
+                    rmes, recc, errata_pos = rs_correct_msg_nofsynd(rmesecc, n-k, fcr=fcr, generator=generator, erase_pos=erase_pos, only_erasures=only_erasures)
                     results_br.append( rs_check(rmes + recc, n-k, fcr=fcr, generator=generator) )
                     results_br.append( rmesecc_orig == (rmes+recc) )
                 except ReedSolomonError as exc:

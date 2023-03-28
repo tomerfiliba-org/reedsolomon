@@ -989,10 +989,11 @@ cdef class RSCodec(object):
             # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
             self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
-    cpdef encode(self, uint8_t[::1] data, int nsym=-1):
+    cpdef uint8_t[::1] encode(self, uint8_t[::1] data, int nsym=-1):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking.
         Note that data needs to be a bytearray (mutable), NOT a bytes object (immutable), otherwise memoryviews do not work for some reason and an exception will be raised!
-        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.'''
+        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.
+        Returns: a memoryview, so beware if you need to save the encoded output, you need to save it or instanciate into a `bytearray(encode(x))`.'''
         # TODO: fix issue with memoryviews and bytes (it seems to work with other functions but not here for some strange reason)
         cdef int i, data_len, nsize, chunk_size, fcr, generator
         cdef uint8_t[::1] chunk
@@ -1023,14 +1024,14 @@ cdef class RSCodec(object):
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
 
-    cpdef decode(self, data, int nsym=-1, erase_pos=None, bint only_erasures=False):
+    cpdef decode(self, uint8_t[::1] data, int nsym=-1, uint8_t[::1] erase_pos=None, bint only_erasures=False):
         '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
         Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
         Usage: rmes, rmesecc = RSCodec.decode(data).
         Optionally: can specify nsym to decode messages of different parameters, erase_pos with a list of erasures positions to double the number of erasures that can be corrected compared to unlocalized errors, only_erasures boolean to specify if we should only look for erasures, which speeds up and doubles the total correction power.
         '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
-        cdef int i
+        cdef int i, data_len, nsize, chunk_size, fcr, generator
         cdef uint8_t x
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
@@ -1042,24 +1043,26 @@ cdef class RSCodec(object):
         fcr = self.fcr
         generator = self.generator
 
+        # Calculate chunksize
+        data_len = data.shape[0]
+
         # Initialize output arrays
         dec = bytearray()
         dec_full = bytearray()
         errata_pos_all = bytearray()
         # Main loop
-        for i in xrange(0, len(data), nsize):
-            # Split the long message in a chunk
-            chunk = data[i:i+nsize]
+        for i in xrange(0, data_len, nsize):
             # Extract the erasures for this chunk
-            if erase_pos:
+            if erase_pos is not None:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
                 e_pos = bytearray([x for x in erase_pos if x < nsize])
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
+                # TODO: optimize, we should be able to do much better with reslicing memoryviews
                 erase_pos = bytearray([x - nsize for x in erase_pos if x >= nsize])
             else:
                 e_pos = bytearray()
             # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+            rmes, recc, errata_pos = rs_correct_msg(data[i:i+nsize], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)
             dec_full.extend(rmes)
             dec_full.extend(recc)

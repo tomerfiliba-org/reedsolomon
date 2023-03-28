@@ -273,9 +273,9 @@ else:
             codec_240 = RSCodec(240, single_gen=True)
             codec_all = RSCodec(250, single_gen=False)  # this is the multi-nsym encoder, single_gen=False is required
             msgorig = bytearray("hello world!", "latin1")
-            self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig))
-            self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig, nsym=250))
-            self.assertEqual(codec_240.encode(msgorig), codec_all.encode(msgorig, nsym=240))
+            self.assertEqual(bytearray(codec_250.encode(msgorig)), bytearray(codec_all.encode(msgorig)))
+            self.assertEqual(bytearray(codec_250.encode(msgorig)), bytearray(codec_all.encode(msgorig, nsym=250)))
+            self.assertEqual(bytearray(codec_240.encode(msgorig)), bytearray(codec_all.encode(msgorig, nsym=240)))
 
         def test_different_nsym_at_decode(self):
             '''Test decoding with various ECC symbols length using the same decoder.'''

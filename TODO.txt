@@ -21,4 +21,8 @@
     * define return ctype value for each function, otherwise "You don’t need to (and shouldn’t) declare exception values for functions which return Python objects. Remember that a function with no declared return type implicitly returns a Python object. (Exceptions on such functions are implicitly propagated by returning NULL.)".
     * add nogil (and noexcept) to most cpdef functions https://stackoverflow.com/questions/54759483/how-to-return-two-values-in-cython-cdef-without-gil-nogil
     * https://stackoverflow.com/questions/41764244/obtaining-pointer-to-python-memoryview-on-bytes-object
-
+    * Memoryviews:
+        * Const memoryview to accept immutable bytes https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#read-only-views
+        * Memoryviews do not require the GIL except for copying: https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryviews-and-the-gil
+        * Memoryviews and Cython Arrays https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryview-objects-and-cython-arrays
+        * CPython Array module: https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#cpython-array-module

@@ -258,14 +258,43 @@ else:
         def test_erasures_chunking(self):
             # Test whether providing positions for erasures in the 2nd chunk or later is working
             rs = RSCodec(30)
-            encoded = rs.encode(b'0' * 226)
+            encoded = rs.encode(bytearray("0" * 226, "latin1"))
             _, _, _ = rs.decode(encoded, erase_pos=bytearray([255]), only_erasures=True)
             # If it works, no exception should be raised
 
         def test_too_many_ecc_symbols(self):
-            RSCodec(254).encode(b'a')
+            RSCodec(254).encode(bytearray("a", "latin1"))
             self.assertRaises(ValueError, RSCodec, 255) # nsym=255
             self.assertRaises(ValueError, RSCodec, 2000) # nsym=2000
+
+        def test_generate_all_poly_and_different_nsym_at_encode(self):
+            '''Test encoding with various ECC symbols length using the same encoder.'''
+            codec_250 = RSCodec(250, single_gen=True)
+            codec_240 = RSCodec(240, single_gen=True)
+            codec_all = RSCodec(250, single_gen=False)  # this is the multi-nsym encoder, single_gen=False is required
+            msgorig = bytearray("hello world!", "latin1")
+            self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig))
+            self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig, nsym=250))
+            self.assertEqual(codec_240.encode(msgorig), codec_all.encode(msgorig, nsym=240))
+
+        def test_different_nsym_at_decode(self):
+            '''Test decoding with various ECC symbols length using the same decoder.'''
+            codec_250 = RSCodec(250, single_gen=True)  # note that single_gen=False is not necessary here for multi-nsym decoding, it's only for multi-nsym encoding
+            codec_240 = RSCodec(240, single_gen=True)
+            msgorig = bytearray("hello world!"*10, "latin1")
+            enc_250 = codec_250.encode(msgorig)
+            enc_240 = codec_240.encode(msgorig)
+            for i in [27, -3, -9, 7, 0]:
+                enc_250[i] = 99
+                enc_240[i] = 99
+                rmsg_250_250, _, _ = codec_250.decode(enc_250, 250)
+                rmsg_250_240, _, _ = codec_250.decode(enc_240, 240)  # this is the tricky one
+                rmsg_240_250, _, _ = codec_240.decode(enc_250, 250)  # this is the other tricky one
+                rmsg_240_240, _, _ = codec_240.decode(enc_240, 240)
+                self.assertEqual(rmsg_250_250, msgorig)
+                self.assertEqual(rmsg_250_240, msgorig)
+                self.assertEqual(rmsg_240_250, msgorig)
+                self.assertEqual(rmsg_240_240, msgorig)
 
     class cTestGFArithmetics(unittest.TestCase):
         '''Test Galois Field arithmetics'''

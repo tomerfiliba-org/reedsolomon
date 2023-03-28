@@ -857,7 +857,7 @@ class RSCodec(object):
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).
         nsym : number of ecc symbols (you can repair nsym/2 errors and nsym erasures.
         nsize : maximum length of each chunk. If higher than 255, will use a higher Galois Field, but the algorithm's complexity and computational cost will raise quadratically...
-        single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen = False.
+        single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen=False. This is only required for encoding with various number of ecc symbols, as for decoding this is always possible even if single_gen=True.
         '''
 
         # Auto-setup if galois field or message length is different than default (exponent 8)
@@ -896,25 +896,38 @@ class RSCodec(object):
             yield chunk
 
     def encode(self, data, nsym=None):
-        '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
+        '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking
+        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.'''
         # Restore precomputed tables (allow to use multiple RSCodec in one script)
         global gf_log, gf_exp, field_charac
         gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
+        nsize, fcr, generator = self.nsize, self.fcr, self.generator
 
         if not nsym:
             nsym = self.nsym
+        gen = self.gen[nsym]
 
         if isinstance(data, str):
             data = _bytearray(data)
+
+        # Preallocate
         enc = _bytearray()
-        for chunk in self.chunk(data, self.nsize - self.nsym):
-            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.gen[nsym]))
+        chunk_size = nsize - nsym
+        total_chunks = int(len(data) / chunk_size)+1
+        #enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
+        # Main loop
+        for chunk in self.chunk(data, chunk_size):
+        #for i in xrange(0, total_chunks):
+            # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
+            enc.extend(rs_encode_msg(chunk, nsym, fcr=fcr, generator=generator, gen=gen))
+            #enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
 
     def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):
-        '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym.
+        '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
         Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
         Usage: rmes, rmesecc = RSCodec.decode(data).
+        Optionally: can specify nsym to decode messages of different parameters, erase_pos with a list of erasures positions to double the number of erasures that can be corrected compared to unlocalized errors, only_erasures boolean to specify if we should only look for erasures, which speeds up and doubles the total correction power.
         '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
 
@@ -922,11 +935,17 @@ class RSCodec(object):
         global gf_log, gf_exp, field_charac
         gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
 
-        if not nsym:
-            nsym = self.nsym
-
         if isinstance(data, str):
             data = _bytearray(data)
+
+        # Precache class attributes into local variables
+        if not nsym:
+            nsym = self.nsym
+        nsize = self.nsize
+        fcr = self.fcr
+        generator = self.generator
+
+        # Initialize output array
         dec = _bytearray()
         dec_full = _bytearray()
         errata_pos_all = _bytearray()
@@ -935,11 +954,11 @@ class RSCodec(object):
             e_pos = []
             if erase_pos:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
-                e_pos = [x for x in erase_pos if x < self.nsize]
+                e_pos = [x for x in erase_pos if x < nsize]
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
-                erase_pos = [x - self.nsize for x in erase_pos if x >= self.nsize]
+                erase_pos = [x - nsize for x in erase_pos if x >= nsize]
             # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
+            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)
             dec_full.extend(rmes+recc)
             errata_pos_all.extend(errata_pos)
@@ -951,9 +970,17 @@ class RSCodec(object):
             nsym = self.nsym
         if isinstance(data, str):
             data = _bytearray(data)
+
+        # Precache class attributes into local variables
+        nsize = self.nsize
+        fcr = self.fcr
+        generator = self.generator
+
+        # Initialize output array
         check = []
-        for chunk in self.chunk(data, self.nsize):
-            check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
+        # Main loop
+        for chunk in self.chunk(data, nsize):
+            check.append(rs_check(chunk, nsym, fcr=fcr, generator=generator))
         return check
 
     def maxerrata(self, errors=None, erasures=None, verbose=False):

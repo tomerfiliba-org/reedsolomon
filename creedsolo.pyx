@@ -949,10 +949,16 @@ cdef class RSCodec(object):
     prim = cython.declare(cython.int, visibility='readonly')
     generator = cython.declare(cython.int, visibility='readonly')
     c_exp = cython.declare(cython.int, visibility='readonly')
+    gen = cython.declare(uint8_t[::1], visibility='readonly')
     g_all = cython.declare(cython.list, visibility='readonly')
+    single_gen = cython.declare(cython.bint, visibility='readonly')
 
-    def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8):  # no `except? 0` here because special methods need to stay uncythonized
-        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.'''
+    def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8, bint single_gen=True):  # no `except? 0` here because special methods need to stay uncythonized
+        '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.
+        nsym : number of ecc symbols (you can repair nsym/2 errors and nsym erasures.
+        nsize : maximum length of each chunk. If higher than 255, will use a higher Galois Field, but the algorithm's complexity and computational cost will raise quadratically...
+        single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen=False. This is only required for encoding with various number of ecc symbols, as for decoding this is always possible even if single_gen=True.
+        '''
 
         # Auto-setup if galois field or message length is different than default (exponent 8)
         if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
@@ -972,47 +978,88 @@ cdef class RSCodec(object):
         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
         self.generator = generator # generator integer, must be prime
         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.
+        self.single_gen = single_gen
 
         # Initialize the look-up tables for easy and quick multiplication/division
         init_tables(prim, generator, c_exp)
-        # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
-        self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
+        # Precompute the generator polynomials
+        if single_gen:
+            self.gen = rs_generator_poly(nsym, fcr=fcr, generator=generator)
+        else:
+            # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
+            self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
-    cpdef encode(self, data):
-        '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
-        cdef int i
+    cpdef encode(self, uint8_t[::1] data, int nsym=-1):
+        '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking.
+        Note that data needs to be a bytearray (mutable), NOT a bytes object (immutable), otherwise memoryviews do not work for some reason and an exception will be raised!
+        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.'''
+        # TODO: fix issue with memoryviews and bytes (it seems to work with other functions but not here for some strange reason)
+        cdef int i, data_len, nsize, chunk_size, fcr, generator
+        cdef uint8_t[::1] chunk
+        # Convert input to bytearray if not the case
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
-        chunk_size = self.nsize - self.nsym
-        enc = bytearray()
-        for i in xrange(0, len(data), chunk_size):
-            chunk = data[i:i+chunk_size]
-            enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
+        #if not isinstance(data, bytearray):
+            #raise ValueError("encode needs a bytearray as input! Not bytes nor str!")  # DEPRECATED: cannot distinguish bytes from bytearray in Python 3
+        # Preload locally class variables
+        if nsym < 0:
+            nsym = self.nsym
+        nsize = self.nsize
+        fcr = self.fcr
+        generator = self.generator
+        if self.single_gen:
+            gen = self.gen
+        else:
+            gen = self.g_all[nsym]
+        # Calculate chunksize
+        chunk_size = nsize - nsym
+        data_len = data.shape[0]
+        cdef int total_chunks = <int>(data_len / chunk_size)+1
+        # Preallocate
+        enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
+        # Main loop
+        for i in xrange(0, total_chunks):
+            # Encode this chunk and update the memoryview
+            enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
 
-    cpdef decode(self, data, erase_pos=None, bint only_erasures=False):
-        '''Repair a message, whatever its size is, by using chunking'''
+    cpdef decode(self, data, int nsym=-1, erase_pos=None, bint only_erasures=False):
+        '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
+        Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
+        Usage: rmes, rmesecc = RSCodec.decode(data).
+        Optionally: can specify nsym to decode messages of different parameters, erase_pos with a list of erasures positions to double the number of erasures that can be corrected compared to unlocalized errors, only_erasures boolean to specify if we should only look for erasures, which speeds up and doubles the total correction power.
+        '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
         cdef int i
         cdef uint8_t x
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
+
+        # Precache class attributes into local variables
+        if nsym < 0:
+            nsym = self.nsym
+        nsize = self.nsize
+        fcr = self.fcr
+        generator = self.generator
+
+        # Initialize output arrays
         dec = bytearray()
         dec_full = bytearray()
         errata_pos_all = bytearray()
-        for i in xrange(0, len(data), self.nsize):
+        # Main loop
+        for i in xrange(0, len(data), nsize):
             # Split the long message in a chunk
-            chunk = data[i:i+self.nsize]
+            chunk = data[i:i+nsize]
             # Extract the erasures for this chunk
             if erase_pos:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
-                e_pos = bytearray([x for x in erase_pos if x < self.nsize])
+                e_pos = bytearray([x for x in erase_pos if x < nsize])
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
-                erase_pos = bytearray([x - self.nsize for x in erase_pos if x >= self.nsize])
+                erase_pos = bytearray([x - nsize for x in erase_pos if x >= nsize])
             else:
                 e_pos = bytearray()
             # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, erase_pos=e_pos, only_erasures=only_erasures)
+            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec.extend(rmes)
             dec_full.extend(rmes)
             dec_full.extend(recc)
@@ -1022,16 +1069,24 @@ cdef class RSCodec(object):
     cpdef check(self, data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
         cdef int i
-        if nsym < 0:
-            nsym = self.nsym
         if isinstance(data, str):
             data = bytearray(data)
-        check = []
-        for i in xrange(0, len(data), self.nsize):
+
+        # Precache class attributes into local variables
+        if nsym < 0:
+            nsym = self.nsym
+        nsize = self.nsize
+        fcr = self.fcr
+        generator = self.generator
+
+        # Initialize output array
+        cdef list check = []
+        # Main loop
+        for i in xrange(0, len(data), nsize):
             # Split the long message in a chunk
-            chunk = data[i:i+self.nsize]
+            chunk = data[i:i+nsize]
             # Check and add the result in the list, we concatenate all results since we are chunking
-            check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
+            check.append(rs_check(chunk, nsym, fcr=fcr, generator=generator))
         return check
 
     cpdef (int, int) maxerrata(self, errors=None, erasures=None, bint verbose=False) except *:

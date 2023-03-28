@@ -335,13 +335,14 @@ cpdef gf_poly_scale(uint8_t[::1] p, int x):
 
 cpdef gf_poly_add(p, q):
     cdef int i, q_len
-    q_len = len(q)
+    cdef uint8_t[::1] q_t = bytearray(q)
+    q_len = len(q_t)
     r = bytearray( max(len(p), q_len) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
         #r[i + len(r) - len(p)] = p[i]
     for i in xrange(q_len):
-        r[i + len(r) - q_len] ^= q[i]
+        r[i + len(r) - q_len] ^= q_t[i]
     return r
 
 cpdef gf_poly_mul(p, q):

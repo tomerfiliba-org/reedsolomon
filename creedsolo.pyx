@@ -358,7 +358,7 @@ cpdef gf_poly_add(uint8_t[::1] p, uint8_t[::1] q):
         r[i + len(r) - q_len] ^= q[i]
     return r
 
-cpdef gf_poly_mul(uint8_t[::1] p, uint8_t[::1] q):
+cpdef gf_poly_mul(uint8_t[:] p, uint8_t[:] q):
     '''Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.'''
     cdef int i, j, x, y
     cdef uint8_t lq, qj
@@ -570,26 +570,31 @@ cpdef rs_calc_syndromes(uint8_t[::1] msg, int nsym, int fcr=0, int generator=2):
     cdef int i
     return bytearray([0]) + bytearray([gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)])
 
-cpdef rs_correct_errata(uint8_t[::1] msg_in, synd, err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
+cpdef rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uint8_t[::1] err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
     global field_charac
-    cdef int i, Xi, j, Xi_inv
+    cdef int i, Xi, j, Xi_inv, p
 
     msg = bytearray(msg_in)
+    msg_len = len(msg)
     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
-    coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
+    cdef uint8_t[::1] coef_pos = bytearray(len(err_pos))
+    for i in xrange(len(err_pos)):
+        p = err_pos[i]
+        # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
+        coef_pos[i] = msg_len - 1 - p
     err_loc = rs_find_errata_locator(coef_pos, generator)
     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]
 
     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
-    X = [] # will store the position of the errors
+    cdef list X = [] # will store the position of the errors
     for i in xrange(len(coef_pos)):
         l = field_charac - coef_pos[i]
         X.append( gf_pow(generator, -l) )
 
     # Forney algorithm: compute the magnitudes
-    E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
+    cdef uint8_t[::1] E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
     cdef int Xlength = len(X)
     for i, Xi in enumerate(X):
 
@@ -627,7 +632,7 @@ cpdef rs_correct_errata(uint8_t[::1] msg_in, synd, err_pos, int fcr=0, int gener
     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
     return msg
 
-cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, erase_loc=None, int erase_count=0) except *:
+cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, uint8_t[::1] erase_loc=None, int erase_count=0) except *:
     '''Find error/errata locator and evaluator polynomials with Berlekamp-Massey algorithm'''
     # The idea is that BM will iteratively estimate the error locator polynomial.
     # To do this, it will compute a Discrepancy term called Delta, which will tell us if the error locator polynomial needs an update or not
@@ -635,7 +640,7 @@ cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, erase_loc=None, int era
     cdef int i, j, synd_shift, K, delta, x
 
     # Init the polynomials
-    if erase_loc: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
+    if erase_loc.shape[0] > 0: # if the erasure locator polynomial is supplied, we init with its value, so that we include erasures in the final locator polynomial
         err_loc = bytearray(erase_loc)
         old_loc = bytearray(erase_loc)
     else:
@@ -649,7 +654,7 @@ cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, erase_loc=None, int era
     if len(synd) > nsym: synd_shift = len(synd) - nsym
 
     for i in xrange(nsym-erase_count): # generally: nsym-erase_count == len(synd), except when you input a partial erase_loc and using the full syndrome instead of the Forney syndrome, in which case nsym-erase_count is more correct (len(synd) will fail badly with IndexError).
-        if erase_loc: # if an erasures locator polynomial was provided to init the errors locator polynomial, then we must skip the FIRST erase_count iterations (not the last iterations, this is very important!)
+        if erase_loc.shape[0] > 0: # if an erasures locator polynomial was provided to init the errors locator polynomial, then we must skip the FIRST erase_count iterations (not the last iterations, this is very important!)
             K = erase_count+i+synd_shift
         else: # if erasures locator is not provided, then either there's no erasures to account or we use the Forney syndromes, so we don't need to use erase_count nor erase_loc (the erasures have been trimmed out of the Forney syndromes).
             K = i+synd_shift
@@ -693,7 +698,7 @@ cpdef rs_find_error_locator(uint8_t[::1] synd, int nsym, erase_loc=None, int era
     # Return result
     return err_loc
 
-cpdef rs_find_errata_locator(e_pos, int generator=2):
+cpdef rs_find_errata_locator(uint8_t[::1] e_pos, int generator=2):
     '''Compute the erasures/errors/errata locator polynomial from the erasures/errors/errata positions (the positions must be relative to the x coefficient, eg: "hello worldxxxxxxxxx" is tampered to "h_ll_ worldxxxxxxxxx" with xxxxxxxxx being the ecc of length n-k=9, here the string positions are [1, 4], but the coefficients are reversed since the ecc characters are placed as the first coefficients of the polynomial, thus the coefficients of the erased characters are n-1 - [1, 4] = [18, 15] = erasures_loc to be specified as an argument.'''
     # See: http://ocw.usu.edu/Electrical_and_Computer_Engineering/Error_Control_Coding/lecture7.pdf and Blahut, Richard E. "Transform techniques for error control codes." IBM Journal of Research and development 23.3 (1979): 299-315. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.600&rep=rep1&type=pdf and also a MatLab implementation here: http://www.mathworks.com/matlabcentral/fileexchange/23567-reed-solomon-errors-and-erasures-decoder/content//RS_E_E_DEC.m
     cdef int i
@@ -704,8 +709,9 @@ cpdef rs_find_errata_locator(e_pos, int generator=2):
         e_loc = gf_poly_mul( e_loc, gf_poly_add(bytearray([1]), bytearray([gf_pow(generator, i), 0])) )
     return e_loc
 
-cpdef rs_find_error_evaluator(synd, err_loc, int nsym):
+cpdef rs_find_error_evaluator(uint8_t[:] synd, uint8_t[::1] err_loc, int nsym):
     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
+    cdef uint8_t[::1] remainder
     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
     _, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), bytearray([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length
 
@@ -733,9 +739,12 @@ cpdef rs_find_errors(uint8_t[:] err_loc, int nmess, int generator=2) except *:
 
 cpdef rs_forney_syndromes(uint8_t[::1] synd, uint8_t[::1] pos, int nmess, int generator=2):
     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
-    cdef int i, x, j
+    cdef int i, x, j, p
 
-    erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)
+    erase_pos_reversed = bytearray(len(pos))
+    for i in xrange(len(pos)):
+        p = pos[i]
+        erase_pos_reversed[i] = nmess-1-p  # prepare the coefficient degree positions (instead of the erasures positions)
 
     # Optimized method, all operations are inlined
     fsynd = bytearray(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
@@ -803,21 +812,21 @@ cpdef rs_correct_msg(uint8_t[::1] msg_in, int nsym, int fcr=0, int generator=2, 
 cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False) except *:
     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
     global field_charac
-    cdef int eras, msg_out_len
+    cdef int eras, msg_out_len, erase_count, e_pos
     if len(msg_in) > field_charac:
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
-    msg_out = bytearray(msg_in)     # copy of message
+    cdef uint8_t[::1] msg_out = bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
-        erase_pos = []
+        erase_pos = bytearray()
     else:
         for e_pos in erase_pos:
             msg_out[e_pos] = 0
     # check if there are too many erasures
     if len(erase_pos) > nsym: raise ReedSolomonError("Too many erasures to correct")
     # prepare the syndrome polynomial using only errors (ie: errors = characters that were either replaced by null byte or changed to another character, but we don't know their positions)
-    synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
+    cdef uint8_t[::1] synd = rs_calc_syndromes(msg_out, nsym, fcr, generator)
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
         return msg_out[:-nsym], msg_out[-nsym:], []  # no errors
@@ -829,7 +838,10 @@ cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase
     if erase_pos:
         erase_count = len(erase_pos)
         msg_out_len = len(msg_out)  # cache to avoid recalculations inside loop
-        erase_pos_reversed = [msg_out_len-1-eras for eras in erase_pos]
+        erase_pos_reversed = bytearray(len(erase_pos))
+        for i in xrange(len(erase_pos)):
+            eras = erase_pos[i]
+            erase_pos_reversed[i] = msg_out_len-1-eras
         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
         #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
 

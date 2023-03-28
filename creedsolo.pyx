@@ -90,7 +90,7 @@ from cython.parallel import parallel, prange
 from cython.cimports.libc cimport math
 from cython.view cimport array as cvarray
 
-#from cython.cimports.cpython cimport array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
+from cython.cimports.cpython cimport array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
 from cython cimport bytearray  # use cimport instead of import whenever possible in cythonized extensions https://stackoverflow.com/questions/29311207/cython-compilation-import-vs-cimport
 
 
@@ -118,22 +118,31 @@ ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compi
 #    cdef int[:] arrview = arr
 #    return arrview
 
+cdef bytearray_setval(uint8_t[::1] a, int val):
+    '''Set the same value across a whole bytearray, it's the same as [x] * y, but the latter is not supported by Cython.'''
+    for i in range(len(a)):
+        a[i] = val
+
 #gf_exp2 = _bytearray(512, 1) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
-cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
-cdef uint8_t[::1] gf_log = bytearray([0] * 256)
-cdef int field_charac = int(2**8 - 1)
+cdef uint8_t[::1] gf_exp = bytearray(512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
+bytearray_setval(gf_exp, 1)
+cdef uint8_t[::1] gf_log = bytearray(256)
+bytearray_setval(gf_log, 0)
+cdef int field_charac = <int>(2**8 - 1)
 
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
 
-def rwh_primes1(n):
+cdef rwh_primes1(int n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     ''' Returns  a list of primes < n '''
-    sieve = [True] * (n/2)
-    for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i/2]:
-            sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
+    cdef int i
+    n_half = <int>(n/2)
+    sieve = [True] * n_half
+    for i in xrange(3,<int>(math.pow(n,0.5))+1,2):
+        if sieve[<int>(i/2)]:
+            sieve[<int>((i*i)/2)::i] = [False] * <int>((n-i*i-1)/(2*i)+1)
+    return array.array('i', [2] + [2*i+1 for i in xrange(1,n_half) if sieve[i]])
 
 cpdef find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False, bint single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
@@ -149,25 +158,29 @@ cpdef find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False, bin
     # Note that this algorithm is slow if the field is too big (above 12), because it's an exhaustive search algorithm. There are probabilistic approaches, and almost surely prime approaches, but there is no determistic polynomial time algorithm to find irreducible monic polynomials. More info can be found at: http://people.mpi-inf.mpg.de/~csaha/lectures/lec9.pdf
     # Another faster algorithm may be found at Adleman, Leonard M., and Hendrik W. Lenstra. "Finding irreducible polynomials over finite fields." Proceedings of the eighteenth annual ACM symposium on Theory of computing. ACM, 1986.
     
-    cdef int x
+    cdef int i, i_prim, prim, x
 
     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
     cdef uint8_t root_charac = 2 # we're in GF(2)
-    cdef int field_charac = int(root_charac**c_exp - 1)
-    cdef int field_charac_next = int(root_charac**(c_exp+1) - 1)
+    cdef int field_charac = <int>(root_charac**c_exp - 1)
+    cdef int field_charac_next = <int>(root_charac**(c_exp+1) - 1)
 
-    prim_candidates = []
+    cdef array.array prim_candidates
     if fast_primes:
-        prim_candidates = rwh_primes1(field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible
-        prim_candidates = [x for x in prim_candidates if x > field_charac] # filter out too small primes
+        prim_candidates = rwh_primes1(<int>field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible
+        prim_candidates = array.array('i', [x for x in prim_candidates if x > field_charac]) # filter out too small primes
     else:
-        prim_candidates = xrange(field_charac+2, field_charac_next, root_charac) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
+        prim_candidates = array.array('i', xrange(field_charac+2, field_charac_next, root_charac)) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
+    cdef int[:] prim_candidates_view = prim_candidates
 
     # Start of the main loop
     cdef list correct_primes = []
-    for prim in prim_candidates: # try potential candidates primitive irreducible polys
+    cdef uint8_t[:] seen
+    cdef bint conflict
+    for i_prim in xrange(len(prim_candidates)): # try potential candidates primitive irreducible polys
         seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
+        prim = prim_candidates[i_prim]
 
         # Second loop, build the whole Galois Field
         x = 1
@@ -204,7 +217,7 @@ cpdef init_tables(int prim=0x11d, int generator=2, int c_exp=8):
     # c_exp is the exponent for the field's characteristic GF(2^c_exp)
 
     global gf_exp, gf_log, field_charac
-    field_charac = int(2**c_exp - 1)
+    field_charac = <int>(2**c_exp - 1)
     gf_exp = bytearray(field_charac * 2) # anti-log (exponential) table. The first two elements will always be [GF256int(1), generator]
     gf_log = bytearray(field_charac+1) # log table, log[0] is impossible and thus unused
 
@@ -368,7 +381,7 @@ cpdef gf_poly_mul(uint8_t[::1] p, uint8_t[::1] q):
                     r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
     return bytearray(r)
 
-cpdef gf_poly_neg(poly):
+cpdef gf_poly_neg(uint8_t[::1] poly):
     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
     return poly
 
@@ -398,7 +411,7 @@ cpdef gf_poly_div(uint8_t[::1] dividend, uint8_t[::1] divisor):
     separator = -(len(divisor)-1)
     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
 
-cpdef gf_poly_square(poly):
+cpdef gf_poly_square(uint8_t[::1] poly):
     '''Linear time implementation of polynomial squaring. For details, see paper: "A fast software implementation for arithmetic operations in GF (2n)". De Win, E., Bosselaers, A., Vandenberghe, S., De Gersem, P., & Vandewalle, J. (1996, January). In Advances in Cryptology - Asiacrypt'96 (pp. 65-76). Springer Berlin Heidelberg.'''
     cdef int i, k, p, length
     length = len(poly)
@@ -420,7 +433,7 @@ cpdef gf_poly_square(poly):
     if out[0] == 0: out[0] = 2*poly[1] - 1
     return out
 
-cpdef uint8_t gf_poly_eval(poly, uint8_t x):
+cpdef uint8_t gf_poly_eval(uint8_t[:] poly, uint8_t x):
     '''Evaluates a polynomial in GF(2^p) given the value for x. This is based on Horner's scheme for maximum efficiency.'''
     cdef int i
     cdef uint8_t y = poly[0]
@@ -883,11 +896,11 @@ cdef class RSCodec(object):
         # Auto-setup if galois field or message length is different than default (exponent 8)
         if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
             # Get the next closest power of two
-            c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1)))
+            c_exp = <int>(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1)))
         if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
             prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
             if nsize == 255:  # resize chunk size if not set
-                nsize = int(2**c_exp - 1)
+                nsize = <int>(2**c_exp - 1)
         if nsym >= nsize:
             raise ValueError('ECC symbols must be strictly less than the total message length (nsym < nsize).')
 
@@ -969,14 +982,14 @@ cdef class RSCodec(object):
         Set verbose to True to get print a report.'''
         nsym = self.nsym
         # Compute the maximum number of errors OR erasures
-        maxerrors = int(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
+        maxerrors = <int>(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
         maxerasures = nsym
         # Compute the maximum of simultaneous errors AND erasures
         if erasures is not None and erasures >= 0:
             # We know the erasures count, we want to know how many errors we can correct simultaneously
             if erasures > maxerasures:
                 raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")
-            maxerrors = int((nsym-erasures)/2)
+            maxerrors = <int>((nsym-erasures)/2)
             if verbose:
                 print('This codec can correct up to %i errors and %i erasures simultaneously' % (maxerrors, erasures))
             # Return a tuple with the maximum number of simultaneously corrected errors and erasures
@@ -985,7 +998,7 @@ cdef class RSCodec(object):
             # We know the errors count, we want to know how many erasures we can correct simultaneously
             if errors > maxerrors:
                 raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")
-            maxerasures = int(nsym-(errors*2))
+            maxerasures = <int>(nsym-(errors*2))
             if verbose:
                 print('This codec can correct up to %i errors and %i erasures simultaneously' % (errors, maxerasures))
             # Return a tuple with the maximum number of simultaneously corrected errors and erasures

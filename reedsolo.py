@@ -184,11 +184,12 @@ field_charac = int(2**8 - 1)
 def rwh_primes1(n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     ''' Returns  a list of primes < n '''
-    sieve = [True] * int(n/2)
-    for i in xrange(3,int(n**0.5)+1,2):
+    n_half = int(n/2)
+    sieve = [True] * n_half
+    for i in xrange(3,int(math.pow(n,0.5))+1,2):
         if sieve[int(i/2)]:
             sieve[int((i*i)/2)::i] = [False] * int((n-i*i-1)/(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,int(n/2)) if sieve[i]]
+    return [2] + [2*i+1 for i in xrange(1,n_half) if sieve[i]]
 
 def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
@@ -214,7 +215,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
         prim_candidates = rwh_primes1(field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible
         prim_candidates = [x for x in prim_candidates if x > field_charac] # filter out too small primes
     else:
-        prim_candidates = xrange(field_charac+2, field_charac_next, root_charac) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
+        prim_candidates = list(xrange(field_charac+2, field_charac_next, root_charac)) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
 
     # Start of the main loop
     correct_primes = []

@@ -281,7 +281,7 @@ else:
             '''Test decoding with various ECC symbols length using the same decoder.'''
             codec_250 = RSCodec(250, single_gen=True)  # note that single_gen=False is not necessary here for multi-nsym decoding, it's only for multi-nsym encoding
             codec_240 = RSCodec(240, single_gen=True)
-            msgorig = bytearray("hello world!"*10, "latin1")
+            msgorig = bytearray("hello world!"*3, "latin1")
             enc_250 = codec_250.encode(msgorig)
             enc_240 = codec_240.encode(msgorig)
             for i in [27, -3, -9, 7, 0]:

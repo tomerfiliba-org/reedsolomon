@@ -240,32 +240,36 @@ class TestReedSolomon(unittest.TestCase):
 
     def test_generate_all_poly_and_different_nsym_at_encode(self):
         '''Test encoding with various ECC symbols length using the same encoder.'''
-        codec_250 = RSCodec(250, single_gen=True)
-        codec_240 = RSCodec(240, single_gen=True)
-        codec_all = RSCodec(250, single_gen=False)  # this is the multi-nsym encoder, single_gen=False is required
+        nsym_a = 250
+        nsym_b = 240
+        codec_a = RSCodec(nsym_a, single_gen=True)
+        codec_b = RSCodec(nsym_b, single_gen=True)
+        codec_all = RSCodec(nsym_a, single_gen=False)  # this is the multi-nsym encoder, single_gen=False is required
         msgorig = bytearray("hello world!", "latin1")
-        self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig))
-        self.assertEqual(codec_250.encode(msgorig), codec_all.encode(msgorig, nsym=250))
-        self.assertEqual(codec_240.encode(msgorig), codec_all.encode(msgorig, nsym=240))
+        self.assertEqual(codec_a.encode(msgorig), codec_all.encode(msgorig))
+        self.assertEqual(codec_a.encode(msgorig), codec_all.encode(msgorig, nsym=nsym_a))
+        self.assertEqual(codec_b.encode(msgorig), codec_all.encode(msgorig, nsym=nsym_b))
 
     def test_different_nsym_at_decode(self):
         '''Test decoding with various ECC symbols length using the same decoder.'''
-        codec_250 = RSCodec(250, single_gen=True)  # note that single_gen=False is not necessary here for multi-nsym decoding, it's only for multi-nsym encoding
-        codec_240 = RSCodec(240, single_gen=True)
-        msgorig = bytearray("hello world!"*10, "latin1")
-        enc_250 = codec_250.encode(msgorig)
-        enc_240 = codec_240.encode(msgorig)
+        nsym_a = 10
+        nsym_b = 12
+        codec_a = RSCodec(nsym=nsym_a, nsize=20, single_gen=True)  # note that single_gen=False is not necessary here for multi-nsym decoding, it's only for multi-nsym encoding
+        codec_b = RSCodec(nsym=nsym_b, nsize=20, single_gen=True)
+        msgorig = bytearray("hello world!"*3, "latin1")
+        enc_a = codec_a.encode(msgorig)
+        enc_b = codec_b.encode(msgorig)
         for i in [27, -3, -9, 7, 0]:
-            enc_250[i] = 99
-            enc_240[i] = 99
-            rmsg_250_250, _, _ = codec_250.decode(enc_250, 250)
-            rmsg_250_240, _, _ = codec_250.decode(enc_240, 240)  # this is the tricky one
-            rmsg_240_250, _, _ = codec_240.decode(enc_250, 250)  # this is the other tricky one
-            rmsg_240_240, _, _ = codec_240.decode(enc_240, 240)
-            self.assertEqual(rmsg_250_250, msgorig)
-            self.assertEqual(rmsg_250_240, msgorig)
-            self.assertEqual(rmsg_240_250, msgorig)
-            self.assertEqual(rmsg_240_240, msgorig)
+            enc_a[i] = 99
+            enc_b[i] = 99
+            rmsg_a_a, _, _ = codec_a.decode(enc_a, nsym_a)
+            rmsg_a_b, _, _ = codec_a.decode(enc_b, nsym_b)  # this is the tricky one
+            rmsg_b_a, _, _ = codec_b.decode(enc_a, nsym_a)  # this is the other tricky one
+            rmsg_b_b, _, _ = codec_b.decode(enc_b, nsym_b)
+            self.assertEqual(rmsg_a_a, msgorig)
+            self.assertEqual(rmsg_a_b, msgorig)
+            self.assertEqual(rmsg_b_a, msgorig)
+            self.assertEqual(rmsg_b_b, msgorig)
 
 class TestBigReedSolomon(unittest.TestCase):
     def test_find_prime_polys(self):

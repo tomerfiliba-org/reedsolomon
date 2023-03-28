@@ -43,7 +43,7 @@ jobs:
     - name: Compile the Cython extension (only on Python 3.10)
       if: ${{ matrix.python-version == 3.10 }}
       run: |
-        pip install --install-option='--no-cython-compile' cython
+        pip install --install-option='--no-cython-compile' cython==3.0.0b2
         python setup.py develop --cythonize
     - name: Test with pytest
       run: |

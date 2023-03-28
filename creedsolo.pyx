@@ -424,7 +424,7 @@ cpdef uint8_t gf_poly_eval(poly, uint8_t x):
 
 ################### REED-SOLOMON ENCODING ###################
 
-cpdef rs_generator_poly(nsym, int fcr=0, int generator=2):
+cpdef rs_generator_poly(int nsym, int fcr=0, int generator=2):
     '''Generate an irreducible generator polynomial (necessary to encode a message into Reed-Solomon)'''
     cdef int i
     cdef uint8_t[:] g = bytearray([1])
@@ -894,6 +894,7 @@ cdef class RSCodec(object):
 
     cpdef encode(self, data):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
+        cdef int i
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
         chunk_size = self.nsize - self.nsym
@@ -906,6 +907,7 @@ cdef class RSCodec(object):
     cpdef decode(self, data, erase_pos=None, bint only_erasures=False):
         '''Repair a message, whatever its size is, by using chunking'''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
+        cdef int i
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
         dec = bytearray()
@@ -928,9 +930,10 @@ cdef class RSCodec(object):
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
-    cpdef check(self, data, nsym=None):
+    cpdef check(self, data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
-        if not nsym:
+        cdef int i
+        if nsym < 0:
             nsym = self.nsym
         if isinstance(data, str):
             data = bytearray(data)

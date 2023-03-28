@@ -158,7 +158,7 @@ try:  # pragma: no cover
 except NameError:  # pragma: no cover
     from array import array
     def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
-        '''Simple bytearray replacement'''
+        '''Simple pure-python bytearray replacement if not implemented'''
         # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
         if isinstance(obj, str):
             obj = [ord(ch) for ch in obj.encode(encoding)]
@@ -489,8 +489,9 @@ def rs_generator_poly(nsym, fcr=0, generator=2):
 
 def rs_generator_poly_all(max_nsym, fcr=0, generator=2):
     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
-    g_all = {}
-    g_all[0] = g_all[1] = _bytearray([1])
+    #g_all = {}  # old approach using a dict
+    #g_all[0] = g_all[1] = _bytearray([1])
+    g_all = [[1]] * max_nsym  # a list of list is potentially faster than using a dict, since it is pre-allocated and a list has less overhead than a dict
     for nsym in xrange(max_nsym):
         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)
     return g_all

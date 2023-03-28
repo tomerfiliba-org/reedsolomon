@@ -88,7 +88,7 @@ cimport cython
 from cython.parallel import parallel, prange
 
 import itertools
-import math
+from cython.cimports.libc cimport math
 from cython.view cimport array as cvarray
 
 from cython.cimports.cpython import array  # only for Cython >= 3, before it was from cython import array, see https://cython.readthedocs.io/en/latest/src/tutorial/array.html
@@ -100,12 +100,14 @@ import array
 try:
     bytearray
 except NameError:
-    def bytearray(obj = 0, encoding = "latin-1"):
-        if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.encode("latin-1")]
-        elif isinstance(obj, int):
-            obj = [0] * obj
-        return cvarray("B", obj)
+    #def bytearray(obj = 0, encoding = "latin-1"):
+    #    # Pure python fallback if bytearray is not implemented
+    #    if isinstance(obj, str):
+    #        obj = [ord(ch) for ch in obj.encode("latin-1")]
+    #    elif isinstance(obj, int):
+    #        obj = [0] * obj
+    #    return cvarray("B", obj)
+    raise NameError("For some reason, bytearray is not available, this cythonized extension cannot be used.")
 
 class ReedSolomonError(Exception):
     pass
@@ -421,10 +423,9 @@ cpdef rs_generator_poly(nsym, int fcr=0, int generator=2):
         g = gf_poly_mul(g, [1, gf_pow(generator, i+fcr)])
     return bytearray(g)
 
-cpdef rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
+cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
     '''Generate all irreducible generator polynomials up to max_nsym (usually you can use n, the length of the message+ecc). Very useful to reduce processing time if you want to encode using variable schemes and nsym rates.'''
-    g_all = {}
-    g_all[0] = g_all[1] = [1]
+    g_all = [[1]] * max_nsym  # pre-allocate the list of lists
     for nsym in xrange(max_nsym):
         g_all[nsym] = rs_generator_poly(nsym, fcr, generator)
     return g_all
@@ -820,7 +821,7 @@ cpdef rs_check(msg, int nsym, int fcr=0, int generator=2):
 #===================================================================================================
 # API
 #===================================================================================================
-class RSCodec(object):
+cdef class RSCodec(object):
     '''
     A Reed Solomon encoder/decoder. After initializing the object, use ``encode`` to encode a
     (byte)string to include the RS correction code, and pass such an encoded (byte)string to
@@ -837,13 +838,22 @@ class RSCodec(object):
     0x11d)
     '''
 
+    # Declare attributes, necessary in Cython, and make them visible in Python space
+    nsym = cython.declare(cython.int, visibility='readonly')
+    nsize = cython.declare(cython.int, visibility='readonly')
+    fcr = cython.declare(cython.int, visibility='readonly')
+    prim = cython.declare(cython.int, visibility='readonly')
+    generator = cython.declare(cython.int, visibility='readonly')
+    c_exp = cython.declare(cython.int, visibility='readonly')
+    g_all = cython.declare(cython.list, visibility='readonly')
+
     def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8):
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.'''
 
         # Auto-setup if galois field or message length is different than default (exponent 8)
         if nsize > 255 and c_exp <= 8:  # nsize (chunksize) is larger than the galois field, we resize the galois field
             # Get the next closest power of two
-            c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1), 2))
+            c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1)))
         if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
             prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
             if nsize == 255:  # resize chunk size if not set
@@ -864,7 +874,7 @@ class RSCodec(object):
         # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
         self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
-    def encode(self, data):
+    cpdef encode(self, data):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking'''
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
@@ -875,7 +885,7 @@ class RSCodec(object):
             enc.extend(rs_encode_msg(chunk, self.nsym, fcr=self.fcr, generator=self.generator, gen=self.g_all[self.nsym]))
         return enc
 
-    def decode(self, data, erase_pos=None, only_erasures=False):
+    cpdef decode(self, data, erase_pos=None, only_erasures=False):
         '''Repair a message, whatever its size is, by using chunking'''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
         if isinstance(data, str):
@@ -900,7 +910,7 @@ class RSCodec(object):
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
-    def check(self, data, nsym=None):
+    cpdef check(self, data, nsym=None):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
         if not nsym:
             nsym = self.nsym
@@ -914,7 +924,7 @@ class RSCodec(object):
             check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
         return check
 
-    def maxerrata(self, errors=None, erasures=None, verbose=False):
+    cpdef maxerrata(self, errors=None, erasures=None, verbose=False):
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.

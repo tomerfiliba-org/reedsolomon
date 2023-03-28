@@ -2,3 +2,11 @@
     * https://www.peterbaumgartner.com/blog/intro-to-just-enough-cython-to-be-useful/
     * https://members.loria.fr/LMendoza/link/Cython_speedup_notes.html
     * chunking should be moved to functions outside of RSCodec python object, so that we can make a cpdef and use memoryviews. Essentially, all looping functions should be done in cythonized functions, outside of Python objects (we can't cythonize Python objects methods).
+    * remove all PyObject calls, especially in bytearrays
+        * maybe replace all bytearrays by array 'i' and check if no more python calls
+        * or maybe try to create an array with nogil, no PyObject call
+        * or another way to make a pure C array? Or any kind of chained list? Something to store an array of items? We just need a basic array, nothing fancy, but with no Python call.
+    * return types for each functions, especially those returning an array, maybe I can retry returning memoryviews now?
+    * replace all len() with array.shape[0]:
+    regex search: len\(([^\)]+)\)
+    replace: \1.shape[0]

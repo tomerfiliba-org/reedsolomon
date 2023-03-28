@@ -505,7 +505,7 @@ cpdef (uint8_t, uint8_t) gf_precomp_tables(uint8_t[::1] gf_exp=gf_exp, uint8_t[:
 #@cython.exceptval([], check=True)
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint8_t generator=2, uint8_t[::1] gen=None):
+cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint8_t generator=2, uint8_t[::1] gen=None) except *:
     '''Reed-Solomon encoding using polynomial division, better explained at http://research.swtch.com/field'''
     cdef int i, j, coef, msg_in_len, gen_len
 
@@ -522,7 +522,7 @@ cpdef rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_t fcr=0, uint
     #for i in xrange(msg_in.size):
         #msg_out[i+1:i+len(gen)] = gf_add_arr[msg_out[i+1:i+len(gen)], gf_mul_arr[gen[1:], msg_out[i]]]
 
-    # Cache lengths
+    # Cache lengths for faster access inside loops
     msg_in_len = len(msg_in)
     gen_len = len(gen)
 
@@ -555,7 +555,7 @@ cpdef rs_calc_syndromes(msg, int nsym, int fcr=0, int generator=2):
     cdef int i
     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
 
-cpdef rs_correct_errata(msg_in, synd, err_pos, int fcr=0, int generator=2): # err_pos is a list of the positions of the errors/erasures/errata
+cpdef rs_correct_errata(msg_in, synd, err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
     global field_charac
     cdef int i, Xi, j, Xi_inv
@@ -699,7 +699,7 @@ cpdef rs_find_error_evaluator(synd, err_loc, int nsym):
 
     return remainder
 
-cpdef rs_find_errors(err_loc, int nmess, int generator=2):
+cpdef rs_find_errors(err_loc, int nmess, int generator=2) except *:
     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
     # nmess = length of whole codeword (message + ecc symbols)
     cdef int i
@@ -737,7 +737,7 @@ cpdef rs_forney_syndromes(synd, pos, int nmess, int generator=2):
 
     return fsynd
 
-cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False):
+cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False) except *:
     '''Reed-Solomon main decoding function'''
     global field_charac
     if len(msg_in) > field_charac:
@@ -782,9 +782,10 @@ cpdef rs_correct_msg(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=Non
     # return the successfully decoded message
     return msg_out[:-nsym], msg_out[-nsym:], erase_pos + err_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
-cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False):
+cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase_pos=None, bint only_erasures=False) except *:
     '''Reed-Solomon main decoding function, without using the modified Forney syndromes'''
     global field_charac
+    cdef int eras, msg_out_len
     if len(msg_in) > field_charac:
         raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in), field_charac))
 
@@ -809,7 +810,8 @@ cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase
     erase_count = 0
     if erase_pos:
         erase_count = len(erase_pos)
-        erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]
+        msg_out_len = len(msg_out)  # cache to avoid recalculations inside loop
+        erase_pos_reversed = [msg_out_len-1-eras for eras in erase_pos]
         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
         #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
 
@@ -870,7 +872,7 @@ cdef class RSCodec(object):
     c_exp = cython.declare(cython.int, visibility='readonly')
     g_all = cython.declare(cython.list, visibility='readonly')
 
-    def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8):
+    def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8):  # no `except *` here because special methods need to stay uncythonized
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.'''
 
         # Auto-setup if galois field or message length is different than default (exponent 8)
@@ -950,7 +952,7 @@ cdef class RSCodec(object):
             check.append(rs_check(chunk, nsym, fcr=self.fcr, generator=self.generator))
         return check
 
-    cpdef maxerrata(self, errors=None, erasures=None, bint verbose=False):
+    cpdef maxerrata(self, errors=None, erasures=None, bint verbose=False) except *:
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.

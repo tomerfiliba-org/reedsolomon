@@ -440,17 +440,19 @@ def gf_poly_div(dividend, divisor):
     # CAUTION: this function expects polynomials to follow the opposite convention at decoding: the terms must go from the biggest to lowest degree (while most other functions here expect a list from lowest to biggest degree). eg: 1 + 2x + 5x^2 = [5, 2, 1], NOT [1, 2, 5]
 
     msg_out = _bytearray(dividend) # Copy the dividend list and pad with 0 where the ecc bytes will be computed
+    # Cache lengths for faster access inside loops
+    divisor_len = len(divisor)
     #normalizer = divisor[0] # precomputing for performance
-    for i in xrange(len(dividend) - (len(divisor)-1)):
+    for i in xrange(len(dividend) - (divisor_len-1)):
         #msg_out[i] /= normalizer # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]. For more infos, see http://en.wikipedia.org/wiki/Synthetic_division
         coef = msg_out[i] # precaching
         if coef != 0: # log(0) is undefined, so we need to avoid that case explicitly (and it's also a good optimization). In fact if you remove it, it should still work because gf_mul() will take care of the condition. But it's still a good practice to put the condition here.
-            for j in xrange(1, len(divisor)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
+            for j in xrange(1, divisor_len): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient
                 if divisor[j] != 0: # log(0) is undefined
                     msg_out[i + j] ^= gf_mul(divisor[j], coef) # equivalent to the more mathematically correct (but xoring directly is faster): msg_out[i + j] += -divisor[j] * coef
 
     # The resulting msg_out contains both the quotient and the remainder, the remainder being the size of the divisor (the remainder has necessarily the same degree as the divisor -- not length but degree == length-1 -- since it's what we couldn't divide from the dividend), so we compute the index where this separation is, and return the quotient and remainder.
-    separator = -(len(divisor)-1)
+    separator = -(divisor_len-1)
     return msg_out[:separator], msg_out[separator:] # return quotient, remainder.
 
 def gf_poly_square(poly):  # pragma: no cover
@@ -520,20 +522,24 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     # Precompute the logarithm of every items in the generator
     lgen = _bytearray([gf_log[gen[j]] for j in xrange(len(gen))])
 
+    # Cache lengths for faster access inside loops
+    msg_in_len = len(msg_in)
+    gen_len = len(gen)
+
     # Extended synthetic division main loop
     # Fastest implementation with PyPy (but the Cython version in creedsolo.pyx is about 2x faster)
-    for i in xrange(len(msg_in)):
+    for i in xrange(msg_in_len):
         coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works: instead of storing in a temporary register the intermediate values, we directly commit them to the output).
         # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
         if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
             lcoef = gf_log[coef] # precaching
 
-            for j in xrange(1, len(gen)): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
+            for j in xrange(1, gen_len): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
                 #if gen[j] != 0: # log(0) is undefined so we need to check that, but it slow things down in fact and it's useless in our case (reed-solomon encoding) since we know that all coefficients in the generator are not 0
                 msg_out[i + j] ^= gf_exp[lcoef + lgen[j]] # optimization, equivalent to gf_mul(gen[j], msg_out[i]) and we just substract it to msg_out[i+j] (but since we are in GF256, it's equivalent to an addition and to an XOR). In other words, this is simply a "multiply-accumulate operation"
 
     # Recopy the original message bytes (overwrites the part where the quotient was computed)
-    msg_out[:len(msg_in)] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
+    msg_out[:msg_in_len] = msg_in # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
     return msg_out
 
 
@@ -792,7 +798,8 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
     erase_count = 0
     if erase_pos:
         erase_count = len(erase_pos)
-        erase_pos_reversed = [len(msg_out)-1-eras for eras in erase_pos]
+        msg_out_len = len(msg_out)  # cache to avoid recalculations inside loop
+        erase_pos_reversed = [msg_out_len-1-eras for eras in erase_pos]
         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
         #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
 

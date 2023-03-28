@@ -87,7 +87,6 @@ import cython
 cimport cython
 from cython.parallel import parallel, prange
 
-import itertools  # beware of this bug: https://stackoverflow.com/questions/66892748/itertools-chain-behaves-differently-in-cython
 from cython.cimports.libc cimport math
 from cython.view cimport array as cvarray
 
@@ -662,8 +661,7 @@ cpdef rs_find_error_locator(synd, int nsym, erase_loc=None, int erase_count=0) e
             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))
 
     # Check if the result is correct, that there's not too many errors to correct
-    #err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))  # drop leading 0s, else errs will not be of the correct size
-    for i, x in enumerate(err_loc):  # equivalent way to drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython does not yet support in cdef functions.
+    for i, x in enumerate(err_loc):  #drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython and JIT compilers cannot optimize, such as `err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))`
         if x != 0:
             err_loc = err_loc[i:]
             break
@@ -671,6 +669,7 @@ cpdef rs_find_error_locator(synd, int nsym, erase_loc=None, int erase_count=0) e
     if (errs-erase_count) * 2 + erase_count > nsym:
         raise ReedSolomonError("Too many errors to correct")
 
+    # Return result
     return err_loc
 
 cpdef rs_find_errata_locator(e_pos, int generator=2):

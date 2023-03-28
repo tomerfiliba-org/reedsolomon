@@ -146,7 +146,6 @@ but I'm only testing on 2.7 - 3.4.
 
 # TODO IMPORTANT: try to keep the same convention for the ordering of polynomials inside lists throughout the code and functions (because for now there are a lot of list reversing in order to make it work, you never know the order of a polynomial, ie, if the first coefficient is the major degree or the constant term...).
 
-import itertools
 import math
 
 
@@ -656,11 +655,15 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
             err_loc = gf_poly_add(err_loc, gf_poly_scale(old_loc, delta))
 
     # Check if the result is correct, that there's not too many errors to correct
-    err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc)) # drop leading 0s, else errs will not be of the correct size
+    for i, x in enumerate(err_loc):  #drop leading 0s, else errs will not be of the correct size. This does not use functional closures (ie, lambdas), which Cython and JIT compilers cannot optimize, such as `err_loc = list(itertools.dropwhile(lambda x: x == 0, err_loc))`
+        if x != 0:
+            err_loc = err_loc[i:]
+            break
     errs = len(err_loc) - 1
     if (errs-erase_count) * 2 + erase_count > nsym:
         raise ReedSolomonError("Too many errors to correct")
 
+    # Return result
     return err_loc
 
 def rs_find_errata_locator(e_pos, generator=2):

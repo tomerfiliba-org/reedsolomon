@@ -333,16 +333,15 @@ cpdef gf_poly_scale(uint8_t[::1] p, int x):
     plen = len(p)
     return bytearray([gf_mul(p[i], x) for i in xrange(plen)])
 
-cpdef gf_poly_add(p, q):
+cpdef gf_poly_add(uint8_t[::1] p, uint8_t[::1] q):
     cdef int i, q_len
-    cdef uint8_t[::1] q_t = bytearray(q)
-    q_len = len(q_t)
+    q_len = len(q)
     r = bytearray( max(len(p), q_len) )
     r[len(r)-len(p):len(r)] = p
     #for i in xrange(len(p)):
         #r[i + len(r) - len(p)] = p[i]
     for i in xrange(q_len):
-        r[i + len(r) - q_len] ^= q_t[i]
+        r[i + len(r) - q_len] ^= q[i]
     return r
 
 cpdef gf_poly_mul(p, q):
@@ -557,7 +556,7 @@ cpdef rs_calc_syndromes(msg, int nsym, int fcr=0, int generator=2):
     cdef int i
     return [0] + [gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)]
 
-cpdef rs_correct_errata(msg_in, synd, err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
+cpdef rs_correct_errata(uint8_t[::1] msg_in, synd, err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''
     global field_charac
     cdef int i, Xi, j, Xi_inv
@@ -610,6 +609,7 @@ cpdef rs_correct_errata(msg_in, synd, err_pos, int fcr=0, int generator=2) excep
 
     # Apply the correction of values to get our message corrected! (note that the ecc bytes also gets corrected!)
     # (this isn't the Forney algorithm, we just apply the result of decoding here)
+    cdef uint8_t[::1] E_t = bytearray(E)
     msg = gf_poly_add(msg, E) # equivalent to Ci = Ri - Ei where Ci is the correct message, Ri the received (senseword) message, and Ei the errata magnitudes (minus is replaced by XOR since it's equivalent in GF(2^p)). So in fact here we substract from the received message the errors magnitude, which logically corrects the value to what it should be.
     return msg
 
@@ -684,10 +684,10 @@ cpdef rs_find_errata_locator(e_pos, int generator=2):
     # See: http://ocw.usu.edu/Electrical_and_Computer_Engineering/Error_Control_Coding/lecture7.pdf and Blahut, Richard E. "Transform techniques for error control codes." IBM Journal of Research and development 23.3 (1979): 299-315. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.92.600&rep=rep1&type=pdf and also a MatLab implementation here: http://www.mathworks.com/matlabcentral/fileexchange/23567-reed-solomon-errors-and-erasures-decoder/content//RS_E_E_DEC.m
     cdef int i
 
-    e_loc = [1] # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term
+    cdef uint8_t[::1] e_loc = bytearray([1]) # just to init because we will multiply, so it must be 1 so that the multiplication starts correctly without nulling any term
     # erasures_loc is very simple to compute: erasures_loc = prod(1 - x*alpha**i) for i in erasures_pos and where alpha is the alpha chosen to evaluate polynomials (here in this library it's gf(3)). To generate c*x where c is a constant, we simply generate a Polynomial([c, 0]) where 0 is the constant and c is positionned to be the coefficient for x^1.
     for i in e_pos:
-        e_loc = gf_poly_mul( e_loc, gf_poly_add([1], [gf_pow(generator, i), 0]) )
+        e_loc = gf_poly_mul( e_loc, gf_poly_add(bytearray([1]), bytearray([gf_pow(generator, i), 0])) )
     return e_loc
 
 cpdef rs_find_error_evaluator(synd, err_loc, int nsym):

@@ -409,7 +409,12 @@ cpdef gf_poly_square(poly):
             out[k] = gf_exp[2*gf_log[p]]
         #else: # not necessary since the output is already initialized to an array of 0
             #out[k] = 0
-    out[2*length-2] = gf_exp[2*gf_log[poly[length-1]]]
+    # ctyping indices for more efficient access
+    cdef int i_poly = poly[length-1]
+    cdef int i_gf_log = 2*gf_log[i_poly]
+    cdef int i_out = 2*length-2
+    # fetch from table
+    out[i_out] = gf_exp[i_gf_log]
     if out[0] == 0: out[0] = 2*poly[1] - 1
     return out
 

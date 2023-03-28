@@ -254,7 +254,7 @@ cpdef uint8_t gf_neg(uint8_t x) noexcept nogil:
     return x
 
 @cython.boundscheck(False)
-cpdef uint8_t gf_inverse(uint8_t x) noexcept:
+cpdef uint8_t gf_inverse(uint8_t x) noexcept nogil:
     global gf_exp, gf_log, field_charac
     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
 
@@ -281,7 +281,7 @@ cpdef uint8_t gf_div(uint8_t x, uint8_t y) except? 0 nogil:
     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
 
 @cython.boundscheck(False)
-cpdef uint8_t gf_pow(uint8_t x, int power) nogil:
+cpdef uint8_t gf_pow(uint8_t x, int power) noexcept nogil:
     global gf_exp, gf_log, field_charac
     cdef uint8_t x1 = gf_log[x]
     cdef uint8_t x2 = (x1 * power) % field_charac
@@ -335,7 +335,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
     return result
 
 @cython.boundscheck(False)
-cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, bint carryless=True) nogil:
+cpdef int gf_mult_noLUT(int x, int y, int prim=0, int field_charac_full=256, bint carryless=True) noexcept nogil:
     '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     cdef int r = 0
@@ -375,7 +375,7 @@ cpdef uint8_t[::1] gf_poly_add(uint8_t[::1] p, uint8_t[::1] q):
 @cython.boundscheck(False)
 cpdef uint8_t[::1] gf_poly_mul(uint8_t[:] p, uint8_t[:] q):
     '''Multiply two polynomials, inside Galois Field (but the procedure is generic). Optimized function by precomputation of log.'''
-    cdef int i, j, x, y
+    cdef int i, j, x, y, p_t_len
     cdef uint8_t lq, qj
 
     cdef uint8_t[::1] p_t = bytearray(p)
@@ -384,14 +384,15 @@ cpdef uint8_t[::1] gf_poly_mul(uint8_t[:] p, uint8_t[:] q):
     cdef uint8_t[::1] r = bytearray(p_t.shape[0] + q_t.shape[0] - 1)
     # Precompute the logarithm of p
     cdef uint8_t[::1] lp = bytearray(p_t.shape[0])
-    for i in prange(p_t.shape[0], nogil=True):
+    p_t_len = p_t.shape[0]
+    for i in prange(p_t_len, nogil=True):
         lp[i] = gf_log[p_t[i]]
     # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
     for j in prange(q_t.shape[0], nogil=True):
         qj = q_t[j] # optimization: load the coefficient once
         if qj != 0: # log(0) is undefined, we need to check that
-            lq = gf_log[q_t[j]] # Precache the logarithm of the current coefficient of q
-            for i in prange(p_t.shape[0]):
+            lq = gf_log[qj] # Precache the logarithm of the current coefficient of q
+            for i in prange(p_t_len):
                 if p_t[i] != 0: # log(0) is undefined, need to check that...
                     r[i + j] ^= gf_exp[lp[i] + lq] # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j]))
     return r

@@ -204,6 +204,8 @@ By default, most Reed-Solomon codecs are limited to characters that can be encod
 Note that the ``RSCodec`` class supports transparent chunking, so you don't need to increase the Galois Field to support longer messages, but characters will still be limited to 256 bits (or
 whatever field you set with ``c_exp``).
 
+If you need to use a variable number of error correction symbols (i.e., akin to variable bitrate in videos encoding), this is possible always possible using `RSCodec.decode(nsym=x)` and at encoding by setting `RSCodec(nsym=y, single_gen=False)` and then `RSCodec.encode(nsym=x)`.
+
 Low-level usage via direct access to math functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

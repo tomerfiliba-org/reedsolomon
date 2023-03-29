@@ -888,11 +888,13 @@ class RSCodec(object):
         else:
             self.gen = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
-    def chunk(self, data, chunksize):
-        '''Split a long message into chunks'''
-        for i in xrange(0, len(data), chunksize):
+    def chunk(self, data, chunk_size):
+        '''Split a long message into chunks
+        DEPRECATED: inlined alternate form so that we can preallocate arrays and hence get faster results with JIT compilers such as PyPy.'''
+        for i in xrange(0, len(data), chunk_size):
+            # alternative chunking form: j = i*chunk_size; chunk = data[j:j+chunk_size]
             # Split the long message in a chunk
-            chunk = data[i:i+chunksize]
+            chunk = data[i:i+chunk_size]
             yield chunk
 
     def encode(self, data, nsym=None):
@@ -910,17 +912,16 @@ class RSCodec(object):
         if isinstance(data, str):
             data = _bytearray(data)
 
-        # Preallocate
-        enc = _bytearray()
-        chunk_size = nsize - nsym
-        total_chunks = int(len(data) / chunk_size)+1
-        #enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
-        # Main loop
-        for chunk in self.chunk(data, chunk_size):
-        #for i in xrange(0, total_chunks):
+        # Calculate chunk size and total number of chunks for looping
+        chunk_size = int(nsize - nsym)
+        total_chunks = int(math.ceil(len(data) / chunk_size))
+
+        # Preallocate output array
+        enc = _bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
+        # Chunking loop
+        for i in xrange(0, total_chunks):
             # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
-            enc.extend(rs_encode_msg(chunk, nsym, fcr=fcr, generator=generator, gen=gen))
-            #enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
+            enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
 
     def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):

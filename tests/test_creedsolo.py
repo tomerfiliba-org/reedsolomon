@@ -273,7 +273,7 @@ else:
             codec_240 = RSCodec(240, single_gen=True)
             codec_all = RSCodec(250, single_gen=False)  # this is the multi-nsym encoder, single_gen=False is required
             msgorig = bytearray("hello world!", "latin1")
-            self.assertEqual(bytearray(codec_250.encode(msgorig)), bytearray(codec_all.encode(msgorig)))
+            self.assertEqual(bytearray(codec_250.encode(msgorig)), bytearray(codec_all.encode(msgorig)))  # need to instanciate the memoryviews into bytearrays to be comparable
             self.assertEqual(bytearray(codec_250.encode(msgorig)), bytearray(codec_all.encode(msgorig, nsym=250)))
             self.assertEqual(bytearray(codec_240.encode(msgorig)), bytearray(codec_all.encode(msgorig, nsym=240)))
 

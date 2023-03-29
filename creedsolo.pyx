@@ -1019,7 +1019,7 @@ cdef class RSCodec(object):
         # Preallocate
         enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
         # Main loop
-        for i in xrange(0, total_chunks):
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Encode this chunk and update the memoryview
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
@@ -1031,7 +1031,7 @@ cdef class RSCodec(object):
         Optionally: can specify nsym to decode messages of different parameters, erase_pos with a list of erasures positions to double the number of erasures that can be corrected compared to unlocalized errors, only_erasures boolean to specify if we should only look for erasures, which speeds up and doubles the total correction power.
         '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
-        cdef int i, data_len, nsize, chunk_size, fcr, generator
+        cdef int i, data_len, nsize, chunk_size, fcr, generator, nmes
         cdef uint8_t x
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
@@ -1046,12 +1046,22 @@ cdef class RSCodec(object):
         # Calculate chunksize
         data_len = data.shape[0]
 
-        # Initialize output arrays
-        dec = bytearray()
-        dec_full = bytearray()
-        errata_pos_all = bytearray()
+        # Calculate chunksize
+        chunk_size = nsize
+        data_len = data.shape[0]
+        cdef int total_chunks = <int>(data_len / chunk_size)+1
+
+        # Preallocate output arrays
+        nmes = <int>(nsize-nsym)
+        dec = bytearray(total_chunks * nmes)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: maybe try to define as a memoryview cdef uint8_t[::1] -- but this makes unittests fail
+        dec_full = bytearray(total_chunks * nsize)
+        #dec = bytearray()
+        #dec_full = bytearray()
+        errata_pos_all = bytearray()  # cannot pre-allocate because we don't know what errors we will find
+        cdef uint8_t[::1] rmes, recc, errata_pos
         # Main loop
-        for i in xrange(0, data_len, nsize):
+        #for i in xrange(0, data_len, nsize):
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Extract the erasures for this chunk
             if erase_pos is not None:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
@@ -1062,14 +1072,18 @@ cdef class RSCodec(object):
             else:
                 e_pos = bytearray()
             # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(data[i:i+nsize], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
-            dec.extend(rmes)
-            dec_full.extend(rmes)
-            dec_full.extend(recc)
+            #rmes, recc, errata_pos = rs_correct_msg(data[i:i+chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+            rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+            dec[i*nmes:(i+1)*nmes] = rmes
+            dec_full[i*nsize:(i+1)*nsize] = rmes
+            dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here it works on memoryviews which can't be concatenated.
+            #dec.extend(rmes)
+            #dec_full.extend(rmes)
+            #dec_full.extend(recc)
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
-    cpdef check(self, data, int nsym=-1):
+    cpdef uint8_t[::1] check(self, uint8_t[::1] data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
         cdef int i
         if isinstance(data, str):
@@ -1082,14 +1096,20 @@ cdef class RSCodec(object):
         fcr = self.fcr
         generator = self.generator
 
-        # Initialize output array
-        cdef list check = []
+        # Calculate chunksize
+        data_len = data.shape[0]
+
+        # Calculate chunksize
+        chunk_size = nsize
+        data_len = data.shape[0]
+        cdef int total_chunks = <int>(data_len / chunk_size)+1
+
+        # Initialize output array, a list of bints
+        cdef list check = []  # TODO: convert to an array of bint
         # Main loop
-        for i in xrange(0, len(data), nsize):
-            # Split the long message in a chunk
-            chunk = data[i:i+nsize]
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Check and add the result in the list, we concatenate all results since we are chunking
-            check.append(rs_check(chunk, nsym, fcr=fcr, generator=generator))
+            check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
         return check
 
     cpdef (int, int) maxerrata(self, errors=None, erasures=None, bint verbose=False) except *:

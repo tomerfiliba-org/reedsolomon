@@ -897,9 +897,11 @@ class RSCodec(object):
             chunk = data[i:i+chunk_size]
             yield chunk
 
-    def encode(self, data, nsym=None):
+    def encode(self, data, nsym=None, slice_assign=False):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking
-        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.'''
+        Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.
+        slice_assign=True allows to speed up the loop quite significantly in JIT compilers such as PyPy by preallocating the output bytearray and slice assigning into it, instead of constantly extending an empty bytearray, but this only works in Python 3, not Python 2, hence is disabled by default for retrocompatibility.
+        '''
         # Restore precomputed tables (allow to use multiple RSCodec in one script)
         global gf_log, gf_exp, field_charac
         gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
@@ -916,15 +918,23 @@ class RSCodec(object):
         chunk_size = int(nsize - nsym)
         total_chunks = int(math.ceil(len(data) / chunk_size))
 
-        # Preallocate output array
-        enc = _bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
-        # Chunking loop
-        for i in xrange(0, total_chunks):
-            # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
-            enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
+        if slice_assign:
+            # Preallocate output array
+            enc = _bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending
+            # Chunking loop
+            for i in xrange(0, total_chunks):
+                # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
+                enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
+        else:
+            # Preallocate output array
+            enc = _bytearray()
+            # Chunking loop
+            for i in xrange(0, total_chunks):
+                # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
+                enc.extend(rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen))
         return enc
 
-    def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):
+    def decode(self, data, nsym=None, erase_pos=None, only_erasures=False, slice_assign=False):
         '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
         Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
         Usage: rmes, rmesecc = RSCodec.decode(data).
@@ -951,26 +961,48 @@ class RSCodec(object):
         total_chunks = int(math.ceil(len(data) / chunk_size))
         nmes = int(nsize-nsym)
 
-        # Initialize output array
-        dec = _bytearray(total_chunks * nmes)  # pre-allocate array and we will overwrite data in it, much faster than extending
-        dec_full = _bytearray(total_chunks * nsize)
-        errata_pos_all = _bytearray()
-        # Chunking loop
-        for i in xrange(0, total_chunks):  # Split the long message in a chunk
-            # Extract the erasures for this chunk
-            if erase_pos is not None:
-                # First extract the erasures for this chunk (all erasures below the maximum chunk length)
-                e_pos = [x for x in erase_pos if x < nsize]
-                # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
-                erase_pos = [x - nsize for x in erase_pos if x >= nsize]
-            else:
-                e_pos = []
-            # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
-            dec[i*nmes:(i+1)*nmes] = rmes
-            dec_full[i*nsize:(i+1)*nsize] = rmes
-            dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
-            errata_pos_all.extend(errata_pos)
+        if slice_assign:
+            # Initialize output array
+            dec = _bytearray(total_chunks * nmes)  # pre-allocate array and we will overwrite data in it, much faster than extending
+            dec_full = _bytearray(total_chunks * nsize)
+            errata_pos_all = _bytearray()
+            # Chunking loop
+            for i in xrange(0, total_chunks):  # Split the long message in a chunk
+                # Extract the erasures for this chunk
+                if erase_pos is not None:
+                    # First extract the erasures for this chunk (all erasures below the maximum chunk length)
+                    e_pos = [x for x in erase_pos if x < nsize]
+                    # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
+                    erase_pos = [x - nsize for x in erase_pos if x >= nsize]
+                else:
+                    e_pos = []
+                # Decode/repair this chunk!
+                rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+                dec[i*nmes:(i+1)*nmes] = rmes
+                dec_full[i*nsize:(i+1)*nsize] = rmes
+                dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
+                errata_pos_all.extend(errata_pos)
+        else:
+            # Initialize output array
+            dec = _bytearray()
+            dec_full = _bytearray()
+            errata_pos_all = _bytearray()
+            # Chunking loop
+            for i in xrange(0, total_chunks):  # Split the long message in a chunk
+                # Extract the erasures for this chunk
+                if erase_pos is not None:
+                    # First extract the erasures for this chunk (all erasures below the maximum chunk length)
+                    e_pos = [x for x in erase_pos if x < nsize]
+                    # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
+                    erase_pos = [x - nsize for x in erase_pos if x >= nsize]
+                else:
+                    e_pos = []
+                # Decode/repair this chunk!
+                rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+                dec.extend(rmes)
+                dec_full.extend(rmes)
+                dec_full.extend(recc)  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
+                errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
     def check(self, data, nsym=None):

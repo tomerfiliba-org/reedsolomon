@@ -30,7 +30,7 @@ if '--cythonize' in sys.argv:
         from Cython.Build import cythonize, build_ext  # this acts as a check whether Cython is installed, otherwise this will fail
         print("Cython is installed, building creedsolo module")
         extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], annotate=True, force=True,  # this may fail hard if Cython is installed but there is no C compiler for current Python version, and we have no way to know. Alternatively, we could supply exclude_failures=True , but then for those who really want the cythonized compiled extension, it would be much harder to debug
-                        compiler_directives={'embedsignature': True, 'binding': False, 'cdivision': False})  # TODO: try to rewrite cythonized extension code where there are divisions to be in C-style (different behavior to Python when both operands are of different signs, may use cdivision_warnings: True to help debug)
+                        compiler_directives={'embedsignature': True, 'binding': False, 'cdivision': False, 'initializedcheck': True})  # TODO: try to rewrite cythonized extension code where there are divisions to be in C-style (different behavior to Python when both operands are of different signs, may use cdivision_warnings: True to help debug)
         cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
     except ImportError:
         # Else Cython is not installed (or user explicitly wanted to skip)
@@ -50,7 +50,7 @@ else:
     cmdclass = {}
 
 setup(name = "reedsolo",
-    version = "1.7.22",
+    version = "1.7.23",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

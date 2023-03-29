@@ -1019,7 +1019,7 @@ cdef class RSCodec(object):
         # Preallocate output array
         enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
         # Chunking loop
-        for i in xrange(0, total_chunks):  # Split the long message in a chunk
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk # TODO: optimize with a prange(nogil=True) once we do not use a Python object anymore (ie, cpython array)
             # Encode this chunk and update the memoryview
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
@@ -1044,15 +1044,12 @@ cdef class RSCodec(object):
         generator = self.generator
 
         # Calculate chunksize
-        data_len = data.shape[0]
-
-        # Calculate chunksize
         chunk_size = nsize
         data_len = data.shape[0]
         cdef int total_chunks = <int>math.ceil(data_len / chunk_size)
+        nmes = <int>(nsize-nsym)
 
         # Preallocate output arrays
-        nmes = <int>(nsize-nsym)
         dec = bytearray(total_chunks * nmes)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: maybe try to define as a memoryview cdef uint8_t[::1] -- but this makes unittests fail
         dec_full = bytearray(total_chunks * nsize)
         #dec = bytearray()
@@ -1109,14 +1106,16 @@ cdef class RSCodec(object):
             check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
         return check
 
-    cpdef (int, int) maxerrata(self, errors=None, erasures=None, bint verbose=False) except *:
+    cpdef (int, int) maxerrata(self, int nsym=-1, errors=None, erasures=None, bint verbose=False) except *:
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.
         By default, return a tuple wth the maximum number of errors (2nd output) OR erasures (2nd output) that can be corrected.
         If errors or erasures (not both) is specified as argument, computes the remaining **simultaneous** correction capacity (eg, if errors specified, compute the number of erasures that can be simultaneously corrected).
         Set verbose to True to get print a report.'''
-        nsym = self.nsym
+        # Fetch nsym from class attributes if not overriden by a function call
+        if nsym < 0:
+            nsym = self.nsym
         # Compute the maximum number of errors OR erasures
         maxerrors = <int>(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
         maxerasures = nsym

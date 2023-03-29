@@ -946,22 +946,30 @@ class RSCodec(object):
         fcr = self.fcr
         generator = self.generator
 
+        # Calculate chunk size and total number of chunks for looping
+        chunk_size = nsize
+        total_chunks = int(math.ceil(len(data) / chunk_size))
+        nmes = int(nsize-nsym)
+
         # Initialize output array
-        dec = _bytearray()
-        dec_full = _bytearray()
+        dec = _bytearray(total_chunks * nmes)  # pre-allocate array and we will overwrite data in it, much faster than extending
+        dec_full = _bytearray(total_chunks * nsize)
         errata_pos_all = _bytearray()
-        for chunk in self.chunk(data, self.nsize):
+        # Chunking loop
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Extract the erasures for this chunk
-            e_pos = []
-            if erase_pos:
+            if erase_pos is not None:
                 # First extract the erasures for this chunk (all erasures below the maximum chunk length)
                 e_pos = [x for x in erase_pos if x < nsize]
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
                 erase_pos = [x - nsize for x in erase_pos if x >= nsize]
+            else:
+                e_pos = []
             # Decode/repair this chunk!
-            rmes, recc, errata_pos = rs_correct_msg(chunk, nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
-            dec.extend(rmes)
-            dec_full.extend(rmes+recc)
+            rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
+            dec[i*nmes:(i+1)*nmes] = rmes
+            dec_full[i*nsize:(i+1)*nsize] = rmes
+            dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
@@ -977,21 +985,27 @@ class RSCodec(object):
         fcr = self.fcr
         generator = self.generator
 
+        # Calculate chunksize
+        chunk_size = nsize
+        total_chunks = int(math.ceil(len(data) / chunk_size))
+
         # Initialize output array
         check = []
-        # Main loop
-        for chunk in self.chunk(data, nsize):
-            check.append(rs_check(chunk, nsym, fcr=fcr, generator=generator))
+        # Chunking loop
+        for i in xrange(0, total_chunks):  # Split the long message in a chunk
+            check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
         return check
 
-    def maxerrata(self, errors=None, erasures=None, verbose=False):
+    def maxerrata(self, nsym=None, errors=None, erasures=None, verbose=False):
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.
         By default, return a tuple wth the maximum number of errors (2nd output) OR erasures (2nd output) that can be corrected.
         If errors or erasures (not both) is specified as argument, computes the remaining **simultaneous** correction capacity (eg, if errors specified, compute the number of erasures that can be simultaneously corrected).
         Set verbose to True to get print a report.'''
-        nsym = self.nsym
+        # Fetch nsym from class attributes if not overriden by a function call
+        if not nsym:
+            nsym = self.nsym
         # Compute the maximum number of errors OR erasures
         maxerrors = int(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
         maxerasures = nsym

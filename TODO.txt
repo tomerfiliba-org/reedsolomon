@@ -27,4 +27,10 @@
         * Memoryviews and Cython Arrays https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryview-objects-and-cython-arrays
         * CPython Array module: https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#cpython-array-module
         * to access parent array: a.base https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryview-objects-and-cython-arrays
-    * cdivison = False has a 35% speed penalty! But we are reliant on Python division style... We would have to rewrite a LOT of the maths! https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#compiler-directives and https://github.com/cython/cython/wiki/enhancements-division
+        * can coerce memoryviews without copying content? Does it work for other types of arrays than numpy arrays? https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#coercion-to-numpy
+    * cdivision = False has a 35% speed penalty! But we are reliant on Python division style... We would have to rewrite a LOT of the maths! https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#compiler-directives and https://github.com/cython/cython/wiki/enhancements-division
+
+* Best resources on memoryviews and arrays speed:
+    * https://stackoverflow.com/questions/18462785/what-is-the-recommended-way-of-allocating-memory-for-a-typed-memory-view
+    * https://groups.google.com/g/cython-users/c/CwtU_jYADgM
+    * https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#cpython-array-module

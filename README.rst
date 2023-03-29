@@ -309,13 +309,15 @@ This is called the Singleton Bound, and is the maximum/optimal theoretical numbe
 of erasures and errors any error correction algorithm can correct (although there
 are experimental approaches to go a bit further, named list decoding, not implemented
 here, but feel free to do pull request!).
-The code should work on pretty much any reasonable version of python (2.4-3.7),
-but I'm only testing on 2.7 and 3.7. Python 3.8 should work except for Cython which is
-currently incompatible with this version.
+The code should work on pretty much any reasonable version of python (3.7+),
+but I'm only testing on the latest Python version available on Anaconda at the moment (currently 3.10),
+although there is a unit test on various Python versions to ensure retrocompatibility.
+The unit test includes Cython and PyPy too.
 
-The codec has quite reasonable performances if you either use PyPy on the pure-python
+The codec has quite reasonable performances if you either use PyPy JIT Compiler on the pure-python
 implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.pyx
-(which is about 2x faster than PyPy). You can expect encoding rates of several MB/s.
+(which is about 2x faster than PyPy). You can expect encoding rates of several MB/s with PyPy,
+and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity <https://github.com/lrq3000/pyFileFixity>`_).
 
 This library is also thoroughly unit tested so that nearly any encoding/decoding case should be covered.
 
@@ -335,9 +337,9 @@ length 255. However, you can "chunk" longer messages to fit them into the messag
 The ``RSCodec`` class will automatically apply chunking, by splitting longer messages into chunks and
 encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
-To use the Cython implementation, you need to ``pip install cython`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the `.pyx` cython source code will be included, but the binary won't be in the wheel.
+To use the Cython implementation, you need to ``pip install cython==3.0.0b2`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the `.pyx` cython source code will be included, but the binary won't be in the wheel.
 
-Then, use `import RSCodec from creedsolo` instead of importing from the `reedsolo` module, and finally only feed `bytearray()` objects to the `RSCodec` object. Exclusively using bytearrays is one of the reasons creedsolo is faster than reedsolo. You can convert any string by specifying the encoding: `bytearray("Hello World", "UTF-8")`.
+Then, use `from creedsolo import RSCodec` instead of importing from the `reedsolo` module, and finally only feed `bytearray()` objects to the `RSCodec` object. Exclusively using bytearrays is one of the reasons creedsolo is faster than reedsolo. You can convert any string by specifying the encoding: `bytearray("Hello World", "UTF-8")`.
 
 Note that there is an inherent limitation of the C implementation which cannot work with higher galois fields than 8 (= characters of max 255 value) because the C implementation only works with bytearrays, and bytearrays only support characters up to 255. If you want to use higher galois fields, you need to use the pure python version, which includes a fake `_bytearray` function that overloads the standard bytearray in case galois fields higher than 8 are used to `init_tables()`, or rewrite the C implementation to use lists instead of bytearrays (which will be MUCH slower so this defeats the purpose and you are better off simply using the pure python version under PyPy - an older version of the C implementation was doing just that, and without bytearrays, all performance gains were lost, hence why the bytearrays were kept despite the limitations).
 

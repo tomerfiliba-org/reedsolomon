@@ -133,6 +133,8 @@ cdef int field_charac = <int>(2**8 - 1)
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
 
+@cython.cdivision(True)  # divisions and modulos in C-style are 30-40% faster! But different behavior to Python when both operands are of different signs, may use cdivision_warnings: True to help debug, and also see: https://github.com/cython/cython/wiki/enhancements-division
+@cython.cdivision_warnings(False)
 cdef array.array rwh_primes1(int n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     ''' Returns  a list of primes < n '''
@@ -259,6 +261,8 @@ cpdef uint8_t gf_inverse(uint8_t x) noexcept nogil:
     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
 
 @cython.boundscheck(False)
+@cython.cdivision(True)
+@cython.cdivision_warnings(False)
 cpdef uint8_t gf_mul(uint8_t x, uint8_t y) noexcept nogil:
     global gf_exp, gf_log, field_charac
     if x == 0 or y == 0:
@@ -272,6 +276,8 @@ cpdef uint8_t gf_mul(uint8_t x, uint8_t y) noexcept nogil:
 @cython.cfunc
 @cython.boundscheck(False)
 @cython.exceptval(0, check=True)  # alternative in Cython >= 3 to adding `except? 0` in cpdef line, with `check=True` being the equivalent of `except?` or `except *` or `except +` which signal that the chosen exception return value is not reserved, it can be a legal value, so Cython should do additional checks. UPDATE: Never use except * or except +, prefer to use except <int> because otherwise Cython v3 needs to acquire GIL after each call!
+@cython.cdivision(True)
+@cython.cdivision_warnings(False)
 cpdef uint8_t gf_div(uint8_t x, uint8_t y) except? 0 nogil:
     global gf_exp, gf_log, field_charac
     if y == 0:
@@ -281,6 +287,8 @@ cpdef uint8_t gf_div(uint8_t x, uint8_t y) except? 0 nogil:
     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
 
 @cython.boundscheck(False)
+@cython.cdivision(False)  # TODO: debug modulo line and turn to True to gain 30-40% speedup
+@cython.cdivision_warnings(False)
 cpdef uint8_t gf_pow(uint8_t x, int power) noexcept nogil:
     global gf_exp, gf_log, field_charac
     cdef uint8_t x1 = gf_log[x]
@@ -288,6 +296,7 @@ cpdef uint8_t gf_pow(uint8_t x, int power) noexcept nogil:
     cdef uint8_t ret = gf_exp[x2]
     return ret
 
+@cython.cdivision(False)
 def gf_mult_noLUT_slow(x, y, prim=0):
     '''Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
 
@@ -953,6 +962,7 @@ cdef class RSCodec(object):
     g_all = cython.declare(cython.list, visibility='readonly')
     single_gen = cython.declare(cython.bint, visibility='readonly')
 
+    @cython.cdivision(False)
     def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8, bint single_gen=True):  # no `except? 0` here because special methods need to stay uncythonized
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.
         nsym : number of ecc symbols (you can repair nsym/2 errors and nsym erasures.
@@ -989,6 +999,7 @@ cdef class RSCodec(object):
             # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
             self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
+    @cython.cdivision(False)
     cpdef uint8_t[::1] encode(self, uint8_t[::1] data, int nsym=-1):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking.
         Note that data needs to be a bytearray (mutable), NOT a bytes object (immutable), otherwise memoryviews do not work for some reason and an exception will be raised!
@@ -1024,6 +1035,7 @@ cdef class RSCodec(object):
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
         return enc
 
+    @cython.cdivision(False)
     cpdef decode(self, uint8_t[::1] data, int nsym=-1, uint8_t[::1] erase_pos=None, bint only_erasures=False):
         '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
         Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
@@ -1080,6 +1092,7 @@ cdef class RSCodec(object):
             errata_pos_all.extend(errata_pos)
         return dec, dec_full, errata_pos_all
 
+    @cython.cdivision(False)
     cpdef uint8_t[::1] check(self, uint8_t[::1] data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
         cdef int i
@@ -1106,6 +1119,7 @@ cdef class RSCodec(object):
             check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
         return check
 
+    @cython.cdivision(False)
     cpdef (int, int) maxerrata(self, int nsym=-1, errors=None, erasures=None, bint verbose=False) except *:
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.

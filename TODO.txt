@@ -26,3 +26,5 @@
         * Memoryviews do not require the GIL except for copying: https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryviews-and-the-gil
         * Memoryviews and Cython Arrays https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryview-objects-and-cython-arrays
         * CPython Array module: https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#cpython-array-module
+        * to access parent array: a.base https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#memoryview-objects-and-cython-arrays
+    * cdivison = False has a 35% speed penalty! But we are reliant on Python division style... We would have to rewrite a LOT of the maths! https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#compiler-directives

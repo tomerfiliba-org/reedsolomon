@@ -1015,10 +1015,10 @@ cdef class RSCodec(object):
         # Calculate chunksize
         chunk_size = nsize - nsym
         data_len = data.shape[0]
-        cdef int total_chunks = <int>(data_len / chunk_size)+1
-        # Preallocate
+        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)  # note that this is the correct way to calculate chunking, if we want to avoid any unnecessary padding, which would be induced by the incorrect form <int>(data_len / chunk_size)+1 , because it will always round up even when the number is already an integer, eg, 4/2 = 2 but it will be rounded to 3 with this latter form, instead of 2.
+        # Preallocate output array
         enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
-        # Main loop
+        # Chunking loop
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Encode this chunk and update the memoryview
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
@@ -1049,7 +1049,7 @@ cdef class RSCodec(object):
         # Calculate chunksize
         chunk_size = nsize
         data_len = data.shape[0]
-        cdef int total_chunks = <int>(data_len / chunk_size)+1
+        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)
 
         # Preallocate output arrays
         nmes = <int>(nsize-nsym)
@@ -1059,7 +1059,7 @@ cdef class RSCodec(object):
         #dec_full = bytearray()
         errata_pos_all = bytearray()  # cannot pre-allocate because we don't know what errors we will find
         cdef uint8_t[::1] rmes, recc, errata_pos
-        # Main loop
+        # Chunking loop
         #for i in xrange(0, data_len, nsize):
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Extract the erasures for this chunk
@@ -1097,16 +1097,13 @@ cdef class RSCodec(object):
         generator = self.generator
 
         # Calculate chunksize
-        data_len = data.shape[0]
-
-        # Calculate chunksize
         chunk_size = nsize
         data_len = data.shape[0]
-        cdef int total_chunks = <int>(data_len / chunk_size)+1
+        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)
 
         # Initialize output array, a list of bints
         cdef list check = []  # TODO: convert to an array of bint
-        # Main loop
+        # Chunking loop
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Check and add the result in the list, we concatenate all results since we are chunking
             check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))

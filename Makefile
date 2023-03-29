@@ -82,6 +82,17 @@ testcoverage:
     coverage run --branch -m pytest . -v
     coverage report -m
 
+testcoveragenocython:
+     # This is the preferred way to run the tests since Python 3.10
+	@+make coverclean
+     # Run the tests
+	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
+     # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
+     #python setup.py develop
+     #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
+     #python setup.py develop --uninstall
+    coverage run --branch -m pytest . -v
+    coverage report -m
 
 distclean:
 	@+make coverclean

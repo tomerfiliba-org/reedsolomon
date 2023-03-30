@@ -926,9 +926,9 @@ cpdef rs_correct_msg_nofsynd(msg_in, int nsym, int fcr=0, int generator=2, erase
     # return the successfully decoded message
     return msg_out[:-nsym], msg_out[-nsym:], errata_pos # also return the corrected ecc block so that the user can check(), and the position of errors to allow for adaptive bitrate algorithm to check how the number of errors vary
 
-cpdef rs_check(msg, int nsym, int fcr=0, int generator=2):
+cpdef bint rs_check(uint8_t[::1] msg, int nsym, int fcr=0, int generator=2):
     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
-    return ( max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0 )
+    return max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0
 
 
 #===================================================================================================
@@ -1093,7 +1093,7 @@ cdef class RSCodec(object):
         return dec, dec_full, errata_pos_all
 
     @cython.cdivision(False)
-    cpdef uint8_t[::1] check(self, uint8_t[::1] data, int nsym=-1):
+    cpdef check(self, uint8_t[::1] data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
         cdef int i
         if isinstance(data, str):
@@ -1111,12 +1111,13 @@ cdef class RSCodec(object):
         data_len = data.shape[0]
         cdef int total_chunks = <int>math.ceil(<float>data_len / <float>chunk_size)
 
-        # Initialize output array, a list of bints
-        cdef list check = []  # TODO: convert to an array of bint
+        # Pre-allocate output array, an array of booleans (but there is no array of bints, only in numpy!)
+        cdef list check = [False] * total_chunks
+        #cdef cvarray check = cvarray(shape=(total_chunks,), itemsize=sizeof(bint), format="?")  # cython array of bints
         # Chunking loop
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Check and add the result in the list, we concatenate all results since we are chunking
-            check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
+            check[i] = rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator)
         return check
 
     @cython.cdivision(False)

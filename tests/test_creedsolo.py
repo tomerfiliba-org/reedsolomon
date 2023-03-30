@@ -114,7 +114,20 @@ else:
                     self.assertEqual(rs.decode(enc)[0], msg)
                 enc[82] = 99
                 self.assertRaises(ReedSolomonError, rs.decode, enc)
-            
+
+            def test_check(self):
+                rs = RSCodec(10)
+                msg = bytearray("hello world " * 10, "latin1")
+                enc = rs.encode(msg)
+                rmsg, renc, errata_pos = rs.decode(enc)
+                self.assertEqual(rs.check(enc), [True])
+                self.assertEqual(rs.check(renc), [True])
+                for i in [27, -3, -9, 7, 0]:
+                    enc[i] = 99
+                    rmsg, renc, errata_pos = rs.decode(enc)
+                    self.assertEqual(rs.check(enc), [False])
+                    self.assertEqual(rs.check(renc), [True])
+
             def test_long(self):
                 rs = RSCodec(10)
                 msg = bytearray("a" * 10000, "latin1")

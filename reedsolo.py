@@ -991,11 +991,11 @@ class RSCodec(object):
         chunk_size = nsize
         total_chunks = int(math.ceil(float(len(data)) / float(chunk_size)))  # need to convert to floats first to get an accurate floating division, or else we assume implicit conversion and it will cause an error on Python 2
 
-        # Initialize output array
-        check = []
+        # Pre-allocate output array
+        check = [False] * total_chunks  # TODO: could use a bitarray but this creates an external dependency and it's not compatible with cython https://pypi.org/project/bitarray/ and https://www.noveltech.dev/booleans-python-numpy/
         # Chunking loop
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
-            check.append(rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator))
+            check[i] = rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator)
         return check
 
     def maxerrata(self, nsym=None, errors=None, erasures=None, verbose=False):

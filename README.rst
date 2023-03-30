@@ -317,6 +317,10 @@ although there is a unit test on various Python versions to ensure retrocompatib
 This library is also thoroughly unit tested with branch coverage,
 so that nearly any encoding/decoding case should be covered.
 The unit test includes Cython and PyPy too.
+On top of the unit testing covering mathematical correctedness in this repo here, the code is in practice even more
+thoroughly covered than shown, via the `pyFileFixity` <https://github.com/lrq3000/pyFileFixity/>`_ unit test, which is
+another project using reedsolo for the practical application of on-storage data protection, and which includes
+a more pragmatic oriented unit test that creates and tamper files to ensure that reedsolo does work in practice to protect and restore data.
 
 The codec is universal, meaning that it should be able to decode any message encoded by any other RS encoder
 as long as you provide the correct parameters. Beware that often, other RS encoders use internal constant sometimes

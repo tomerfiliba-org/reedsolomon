@@ -112,6 +112,10 @@ cdef class ReedSolomonError(Exception):
     pass
 
 ctypedef unsigned char uint8_t  # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
+ctypedef const unsigned char cuint8_t  # to support immutable (bytes/strings) inputs, we need to set type as constant. 
+ctypedef fused buint8_t:  # to support both immutable (bytes/strings) and mutable (bytearray) inputs, we accept both unsigned and const unsigned char using a fused type (aka multiple dispatch)
+    uint8_t
+    cuint8_t
 
 #cdef int[:] _bytearray(int size, int val):
 #    cdef int[size] arr #array.array('i', input)
@@ -534,26 +538,30 @@ cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] g
     #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
     cdef uint8_t[::1] gen_t = gen
 
-    cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
+    cdef int msg_in_len = msg_in_t.shape[0]
+    cdef int gen_len = gen_t.shape[0]
+
+    cdef uint8_t[::1] msg_out = bytearray(msg_in_len + gen_len-1)  # pre-allocate
+    msg_out[0:msg_in_len] = msg_in_t  # copy reference to memoryview
 
     cdef int i, j
-    cdef uint8_t[::1] lgen = bytearray(gen_t.shape[0])
+    cdef uint8_t[::1] lgen = bytearray(gen_len)
 
     cdef uint8_t coef, lcoef
 
     with nogil:
         # Precompute the logarithm of every items in the generator
-        for j in prange(gen_t.shape[0]):
+        for j in prange(gen_len):
             lgen[j] = gf_log[gen_t[j]]
 
         # Extended synthetic division main loop
-        for i in xrange(msg_in_t.shape[0]):
+        for i in xrange(msg_in_len):
             coef = msg_out[i] # Note that it's msg_out here, not msg_in. Thus, we reuse the updated value at each iteration (this is how Synthetic Division works, but instead of storing in a temporary register the intermediate values, we directly commit them to the output).
             # coef = gf_mul(msg_out[i], gf_inverse(gen[0]))  # for general polynomial division (when polynomials are non-monic), the usual way of using synthetic division is to divide the divisor g(x) with its leading coefficient (call it a). In this implementation, this means:we need to compute: coef = msg_out[i] / gen[0]
             if coef != 0: # log(0) is undefined, so we need to manually check for this case. There's no need to check the divisor here because we know it can't be 0 since we generated it.
                 lcoef = gf_log[coef] # precaching
 
-                for j in prange(1, gen_t.shape[0]): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
+                for j in prange(1, gen_len): # in synthetic division, we always skip the first coefficient of the divisior, because it's only used to normalize the dividend coefficient (which is here useless since the divisor, the generator polynomial, is always monic)
                     msg_out[i + j] ^= gf_exp[lcoef + lgen[j]] # optimization, equivalent to gf_mul(gen[j], msg_out[i]) and we just substract it to msg_out[i+j] (but since we are in GF256, it's equivalent to an addition and to an XOR). In other words, this is simply a "multiply-accumulate operation"
 
     # Recopy the original message bytes (overwrites the part where the quotient was computed)

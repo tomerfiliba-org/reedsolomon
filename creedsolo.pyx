@@ -530,19 +530,18 @@ cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
 cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] gen=None) noexcept:
     '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/
     IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
-    >> cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
+    >> cdef uint8_t[::1] msg_out = bytearray(msg_in_len + gen_len-1)
     >> ValueError : negative count
     '''
 
     cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object - yes we CAN! By using a constant unsigned char, instead of non constant!
     #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
-    cdef uint8_t[::1] gen_t = gen
 
     cdef int msg_in_len = msg_in_t.shape[0]
-    cdef int gen_len = gen_t.shape[0]
+    cdef int gen_len = gen.shape[0]
 
     cdef uint8_t[::1] msg_out = bytearray(msg_in_len + gen_len-1)  # pre-allocate
-    msg_out[0:msg_in_len] = msg_in_t  # copy reference to memoryview
+    msg_out[0:msg_in_len] = msg_in_t  # copy reference to memoryview - do NOT use .copy(), it slows down things a LOT! It's much better to just reference the original memoryview with slices, and then create a new bytearray() in one go at the very end out of the multiple slices
 
     cdef int i, j
     cdef uint8_t[::1] lgen = bytearray(gen_len)
@@ -552,7 +551,7 @@ cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] g
     with nogil:
         # Precompute the logarithm of every items in the generator
         for j in prange(gen_len):
-            lgen[j] = gf_log[gen_t[j]]
+            lgen[j] = gf_log[gen[j]]
 
         # Extended synthetic division main loop
         for i in xrange(msg_in_len):
@@ -566,7 +565,7 @@ cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] g
 
     # Recopy the original message bytes (overwrites the part where the quotient was computed)
     msg_out[:msg_in_t.shape[0]] = msg_in_t # equivalent to c = mprime - b, where mprime is msg_in padded with [0]*nsym
-    return bytearray(msg_out)
+    return bytearray(msg_out)  # For some reason, creating a new bytearray(msg_out) is MUCH faster than requesting the parent msg_out.base, several MB/s faster for the former!
 
 ####### Attempt at precomputing multiplication and addition table to speedup encoding even more, but it's actually a bit slower... ###########
 gf_mul_arr = [bytearray(256) for _ in xrange(256)]

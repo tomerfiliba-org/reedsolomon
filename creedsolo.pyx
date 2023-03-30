@@ -672,28 +672,29 @@ cpdef uint8_t[::1] rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uin
     # Forney algorithm: compute the magnitudes
     cdef uint8_t[::1] E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
     cdef int X_len = len(X)
-    cdef bytearray err_loc_prime_tmp
+    #cdef bytearray err_loc_prime_tmp
+    cdef uint8_t err_loc_prime
     for i in xrange(X_len):
         Xi = X[i]
         Xi_inv = gf_inverse(Xi)
 
         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-        err_loc_prime_tmp = bytearray()
-        for j in xrange(X_len):
-            if j != i:
-                err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
+        #err_loc_prime_tmp = bytearray()
+        #for j in xrange(X_len):
+        #    if j != i:
+        #        err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
-        err_loc_prime = 1
-        for coef in err_loc_prime_tmp:
-            err_loc_prime = gf_mul(err_loc_prime, coef)
+        #err_loc_prime = 1
+        #for coef in err_loc_prime_tmp:
+        #    err_loc_prime = gf_mul(err_loc_prime, coef)
         # equivalent to: err_loc_prime = functools.reduce(gf_mul, err_loc_prime_tmp, 1)
 
-        # TODO: finish the following optimization, should replace the above and remove err_loc_prime_tmp entirely with no loss of generality
-        #err_loc_prime = 1
-        #for j in xrange(X_len):
-            #if j != i:
-                #err_loc_prime = gf_mul(err_loc_prime, gf_sub(1, gf_mul(Xi_inv, X[j])))
+        # Alternative but faster way to compute the formal derivative of the error locator polynomial
+        err_loc_prime = 1
+        for j in xrange(X_len):
+            if j != i:
+                err_loc_prime = gf_mul(err_loc_prime, gf_sub(1, gf_mul(Xi_inv, X[j])))
 
         # Test if we could find the errata locator, else we raise an Exception (because else since we divide y by err_loc_prime to compute the magnitude, we will get a ZeroDivisionError exception otherwise)
         if err_loc_prime == 0:

@@ -45,7 +45,7 @@ flake8:
 
 test:
      # Build the Cython extension
-	@+python setup.py build_ext --inplace
+	python setup.py build_ext --inplace
      # Run the tests
 	@+python -m unittest discover tests
 
@@ -66,7 +66,7 @@ testtox:
 	tox --skip-missing-interpreters -p all
 
 testsetup:
-	@+python setup.py check --metadata --restructuredtext --strict
+	python setup.py check --metadata --restructuredtext --strict
 
 testsetuppost:
 	twine check "dist/*"
@@ -76,7 +76,7 @@ testcoverage:
 	@+make coverclean
      # Build the Cython extension
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
-    @+python setup.py develop --cythonize
+    python setup.py develop --cythonize
      # Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
      # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)

@@ -111,7 +111,7 @@ except NameError:
 cdef class ReedSolomonError(Exception):
     pass
 
-ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
+ctypedef unsigned char uint8_t  # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
 
 #cdef int[:] _bytearray(int size, int val):
 #    cdef int[size] arr #array.array('i', input)
@@ -138,9 +138,9 @@ cdef int field_charac = <int>(2**8 - 1)
 cdef array.array rwh_primes1(int n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     ''' Returns  a list of primes < n '''
-    cdef int i
+    cdef int i, n_half
     n_half = <int>(n/2)
-    sieve = [True] * n_half
+    cdef list sieve = [True] * n_half
     for i in xrange(3,<int>(math.pow(n,0.5))+1,2):
         if sieve[<int>(i/2)]:
             sieve[<int>((i*i)/2)::i] = [False] * <int>((n-i*i-1)/(2*i)+1)
@@ -163,9 +163,10 @@ cpdef list find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False
     cdef int i, i_prim, prim, x
 
     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
-    cdef uint8_t root_charac = 2 # we're in GF(2)
-    cdef int field_charac = <int>(root_charac**c_exp - 1)
-    cdef int field_charac_next = <int>(root_charac**(c_exp+1) - 1)
+    cdef:
+        uint8_t root_charac = 2 # we're in GF(2)
+        int field_charac = <int>(root_charac**c_exp - 1)
+        int field_charac_next = <int>(root_charac**(c_exp+1) - 1)
 
     cdef array.array prim_candidates
     if fast_primes:
@@ -176,9 +177,10 @@ cpdef list find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False
     cdef int[:] prim_candidates_view = prim_candidates
 
     # Start of the main loop
-    cdef list correct_primes = []
-    cdef uint8_t[:] seen
-    cdef bint conflict
+    cdef:
+        list correct_primes = []
+        uint8_t[:] seen
+        bint conflict
     for i_prim in xrange(len(prim_candidates)): # try potential candidates primitive irreducible polys
         seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
@@ -267,10 +269,11 @@ cpdef uint8_t gf_mul(uint8_t x, uint8_t y) noexcept nogil:
     global gf_exp, gf_log, field_charac
     if x == 0 or y == 0:
         return 0
-    cdef uint8_t lx = gf_log[x]
-    cdef uint8_t ly = gf_log[y]
-    cdef uint8_t z = (lx + ly) % field_charac
-    cdef uint8_t ret = gf_exp[z]
+    cdef:
+        uint8_t lx = gf_log[x]
+        uint8_t ly = gf_log[y]
+        uint8_t z = (lx + ly) % field_charac
+        uint8_t ret = gf_exp[z]
     return ret
 
 @cython.cfunc
@@ -291,9 +294,10 @@ cpdef uint8_t gf_div(uint8_t x, uint8_t y) except? 0 nogil:
 @cython.cdivision_warnings(False)
 cpdef uint8_t gf_pow(uint8_t x, int power) noexcept nogil:
     global gf_exp, gf_log, field_charac
-    cdef uint8_t x1 = gf_log[x]
-    cdef uint8_t x2 = (x1 * power) % field_charac
-    cdef uint8_t ret = gf_exp[x2]
+    cdef:
+        uint8_t x1 = gf_log[x]
+        uint8_t x2 = (x1 * power) % field_charac
+        uint8_t ret = gf_exp[x2]
     return ret
 
 @cython.cdivision(False)
@@ -526,7 +530,7 @@ cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] g
     >> ValueError : negative count
     '''
 
-    cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object
+    cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object - yes we CAN! By using a constant unsigned char, instead of non constant!
     #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
     cdef uint8_t[::1] gen_t = gen
 
@@ -619,14 +623,21 @@ cpdef uint8_t[::1] rs_encode_msg_precomp(uint8_t[:] msg_in, uint8_t nsym, uint8_
 
 ################### REED-SOLOMON DECODING ###################
 
-cpdef uint8_t[::1] rs_calc_syndromes(uint8_t[::1] msg, int nsym, int fcr=0, int generator=2):
+cpdef uint8_t[::1] rs_calc_syndromes(uint8_t[::1] msg_in, int nsym, int fcr=0, int generator=2):
     '''Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.
     Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).
     '''
     # Note the "[0] +" : we add a 0 coefficient for the lowest degree (the constant). This effectively shifts the syndrome, and will shift every computations depending on the syndromes (such as the errors locator polynomial, errors evaluator polynomial, etc. but not the errors positions).
     # This is not necessary as anyway syndromes are defined such as there are only non-zero coefficients (the only 0 is the shift of the constant here) and subsequent computations will/must account for the shift by skipping the first iteration (eg, the often seen range(1, n-k+1)), but you can also avoid prepending the 0 coeff and adapt every subsequent computations to start from 0 instead of 1.
     cdef int i
-    return bytearray([0]) + bytearray([gf_poly_eval(msg, gf_pow(generator, i+fcr)) for i in xrange(nsym)])
+    # Pre-allocate syndrome
+    cdef uint8_t[::1] synd = bytearray(nsym+1)
+    # First syndrome is always zero
+    synd[0] = 0
+    # Compute other syndromes
+    for i in xrange(nsym):
+        synd[i+1] = gf_poly_eval(msg_in, gf_pow(generator, i+fcr))
+    return synd
 
 cpdef uint8_t[::1] rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uint8_t[::1] err_pos, int fcr=0, int generator=2) except *: # err_pos is a list of the positions of the errors/erasures/errata
     '''Forney algorithm, computes the values (error magnitude) to correct the input message.'''

@@ -719,7 +719,7 @@ def rs_find_errors(err_loc, nmess, generator=2):
     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
     # nmess = length of whole codeword (message + ecc symbols)
     errs = len(err_loc) - 1
-    err_pos = _bytearray()
+    err_pos = []
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
             err_pos.append(nmess - 1 - i)
@@ -727,7 +727,7 @@ def rs_find_errors(err_loc, nmess, generator=2):
     if len(err_pos) != errs:
         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")
-    return err_pos
+    return _bytearray(err_pos)
 
 def rs_forney_syndromes(synd, pos, nmess, generator=2):
     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.

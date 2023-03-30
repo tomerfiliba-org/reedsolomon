@@ -810,7 +810,7 @@ cpdef uint8_t[::1] rs_find_errors(uint8_t[:] err_loc, int nmess, int generator=2
     cdef int i
 
     cdef uint8_t errs = len(err_loc) - 1
-    cdef bytearray err_pos = bytearray()
+    cdef list err_pos = []  # for some strange reason, this needs to be a list, and then converted to a bytearray at the very end, otherwise if we set it a bytearray here, and append to it, it will be MUCH slower (we lose several MB/s at encoding!)
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
             err_pos.append(nmess - 1 - i)

@@ -317,7 +317,7 @@ The unit test includes Cython and PyPy too.
 The codec has quite reasonable performances if you either use PyPy JIT Compiler on the pure-python
 implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.pyx
 (which is about 2x faster than PyPy). You can expect encoding rates of several MB/s with PyPy,
-and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity <https://github.com/lrq3000/pyFileFixity>`_).
+and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
 
 This library is also thoroughly unit tested so that nearly any encoding/decoding case should be covered.
 

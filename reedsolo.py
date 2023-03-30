@@ -701,11 +701,11 @@ def rs_find_errata_locator(e_pos, generator=2):
 def rs_find_error_evaluator(synd, err_loc, nsym):
     '''Compute the error (or erasures if you supply sigma=erasures locator polynomial, or errata) evaluator polynomial Omega from the syndrome and the error/erasures/errata locator Sigma. Omega is already computed at the same time as Sigma inside the Berlekamp-Massey implemented above, but in case you modify Sigma, you can recompute Omega afterwards using this method, or just ensure that Omega computed by BM is correct given Sigma.'''
     # Omega(x) = [ Synd(x) * Error_loc(x) ] mod x^(n-k+1)
-    _, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), ([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length
+    #_, remainder = gf_poly_div( gf_poly_mul(synd, err_loc), ([1] + [0]*(nsym+1)) ) # first multiply syndromes * errata_locator, then do a polynomial division to truncate the polynomial to the required length
 
     # Faster way that is equivalent
-    #remainder = gf_poly_mul(synd, err_loc) # first multiply the syndromes with the errata locator polynomial
-    #remainder = remainder[len(remainder)-(nsym+1):] # then divide by a polynomial of the length we want, which is equivalent to slicing the list (which represents the polynomial)
+    remainder = gf_poly_mul(synd, err_loc) # first multiply the syndromes with the errata locator polynomial
+    remainder = remainder[len(remainder)-(nsym+1):] # then divide by a polynomial of the length we want, which is equivalent to slicing the list (which represents the polynomial)
 
     return remainder
 

@@ -180,10 +180,14 @@ gf_log = _bytearray(256)
 field_charac = int(2**8 - 1)
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
+# General note: Galois Field maths essentially are all the standard math operations everybody learn in primary school,
+# but with only integer AND they can wraparound (ie, we use a modulo), so that in practice this means that
+# Galois Field math operations are bounded in a very specific range of values. This changes a lot how the maths are done,
+# but not that much, so you can still wrap your head around if you are willing to spend some time.
 
 def rwh_primes1(n):
     # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
-    ''' Returns  a list of primes < n '''
+    ''' Returns a list of primes < n '''
     n_half = int(n/2)
     sieve = [True] * n_half
     for i in xrange(3,int(math.pow(n,0.5))+1,2):
@@ -305,23 +309,29 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     return gf_log, gf_exp, field_charac
 
 def gf_add(x, y):
+    '''Add two galois field integers'''
     return x ^ y
 
 def gf_sub(x, y):
+    '''Subtract two galois field integers'''
     return x ^ y # in binary galois field, substraction is just the same as addition (since we mod 2)
 
 def gf_neg(x):
+    '''Negate one galois field integer (does nothing)'''
     return x
 
 def gf_inverse(x):
+    '''Inverse of a galois field integer'''
     return gf_exp[field_charac - gf_log[x]] # gf_inverse(x) == gf_div(1, x)
 
 def gf_mul(x, y):
+    '''Multiply two galois field integers'''
     if x == 0 or y == 0:
         return 0
     return gf_exp[(gf_log[x] + gf_log[y]) % field_charac]
 
 def gf_div(x, y):
+    '''Divide x by y galois field integers'''
     if y == 0:
         raise ZeroDivisionError()
     if x == 0:
@@ -329,10 +339,11 @@ def gf_div(x, y):
     return gf_exp[(gf_log[x] + field_charac - gf_log[y]) % field_charac]
 
 def gf_pow(x, power):
+    '''Power of x galois field integer'''
     return gf_exp[(gf_log[x] * power) % field_charac]
 
 def gf_mult_noLUT_slow(x, y, prim=0):
-    '''Multiplication in Galois Fields without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
+    '''Multiplication in Galois Fields on-the-fly without using a precomputed look-up table (and thus it's slower) by using the standard carry-less multiplication + modular reduction using an irreducible prime polynomial.'''
 
     ### Define bitwise carry-less operations as inner functions ###
     def cl_mult(x,y):
@@ -378,7 +389,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
     return result
 
 def gf_mult_noLUT(x, y, prim=0, field_charac_full=256, carryless=True):
-    '''Galois Field integer multiplication using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction).
+    '''Galois Field integer multiplication on-the-fly without using a look-up table, using Russian Peasant Multiplication algorithm (faster than the standard multiplication + modular reduction). This is still slower than using a look-up table, but is the fastest alternative, and is often used in embedded circuits where storage space is limited (ie, no space for a look-up table).
     If prim is 0 and carryless=False, then the function produces the result for a standard integers multiplication (no carry-less arithmetics nor modular reduction).'''
     r = 0
     while y: # while y is above 0
@@ -393,9 +404,15 @@ def gf_mult_noLUT(x, y, prim=0, field_charac_full=256, carryless=True):
 ################### GALOIS FIELD POLYNOMIALS MATHS ###################
 
 def gf_poly_scale(p, x):
-    return _bytearray([gf_mul(p[i], x) for i in xrange(len(p))])
+    '''Scale a galois field polynomial with a factor x (an integer)'''
+    #return _bytearray([gf_mul(p[i], x) for i in xrange(len(p))])  # unoptimized one-liner
+    out = _bytearray(len(p))
+    for i in range(len(p)):
+        out[i] = gf_mul(p[i], x)
+    return out
 
 def gf_poly_add(p, q):
+    '''Add two galois field polynomials'''
     q_len = len(q)
     r = _bytearray( max(len(p), q_len) )
     r[len(r)-len(p):len(r)] = p

@@ -50,7 +50,7 @@ else:
     cmdclass = {}
 
 setup(name = "reedsolo",
-    version = "2.0.0",
+    version = "2.0.1",
     description = "Pure-Python Reed Solomon encoder/decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

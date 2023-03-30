@@ -19,6 +19,8 @@ try:
 except NameError:
     from reedsolo import _bytearray as bytearray
 
+import array
+
 try: # compatibility with Python 3+
     xrange
 except NameError:
@@ -182,7 +184,7 @@ class TestReedSolomon(unittest.TestCase):
                  }
 
         for i in xrange(params['count']):
-            self.assertEqual( find_prime_polys(generator=params['generator'][i], c_exp=params['c_exp'][i]) , params["expected"][i] )
+            self.assertEqual( find_prime_polys(generator=params['generator'][i], c_exp=params['c_exp'][i]) , array.array('i', params["expected"][i]) )
 
     def test_init_tables(self):
         '''Try if the look up table generator (galois field generator) works correctly for different parameters'''
@@ -230,11 +232,11 @@ class TestReedSolomon(unittest.TestCase):
         # Ensure we always at least return the erasures we used as input
         _ = init_tables()
         msg = rs_encode_msg(bytearray(range(10)), nsym=4)
-        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
-        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], bytearray([1]))
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], bytearray([1]))
         msg[1] = 0xFF
-        self.assertEqual(rs_correct_msg(msg, nsym=4)[2], [1])
-        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
+        self.assertEqual(rs_correct_msg(msg, nsym=4)[2], bytearray([1]))
+        self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], bytearray([1]))
 
     def test_erasures_chunking(self):
         # Test whether providing positions for erasures in the 2nd chunk or later is working
@@ -283,10 +285,10 @@ class TestReedSolomon(unittest.TestCase):
 
 class TestBigReedSolomon(unittest.TestCase):
     def test_find_prime_polys(self):
-        self.assertEqual(find_prime_polys(c_exp=4), [19, 25])
-        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=False), [285, 299, 301, 333, 351, 355, 357, 361, 369, 391, 397, 425, 451, 463, 487, 501])
-        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=True), [397, 463, 487])
-        self.assertEqual(find_prime_polys(c_exp=9, fast_primes=True, single=True), 557)
+        self.assertEqual(find_prime_polys(c_exp=4), array.array('i', [19, 25]))
+        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=False), array.array('i', [285, 299, 301, 333, 351, 355, 357, 361, 369, 391, 397, 425, 451, 463, 487, 501]))
+        self.assertEqual(find_prime_polys(c_exp=8, fast_primes=True), array.array('i', [397, 463, 487]))
+        self.assertEqual(find_prime_polys(c_exp=9, fast_primes=True, single=True), array.array('i', [557]))
 
     def test_c_exp_9(self):
         rsc = RSCodec(12, c_exp=9)

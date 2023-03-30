@@ -102,7 +102,7 @@ but I'm only testing on 2.7 - 3.4.
     Pro tip: if you get the error: ValueError: byte must be in range(0, 256), please check that your prime polynomial is correct for your field.
     Pro tip2: by default, you can only encode messages of max length and max symbol value = 256. If you want to encode bigger messages,
     please use the following (where c_exp is the exponent of your Galois Field, eg, 12 = max length 2^12 = 4096):
-    >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)
+    >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)[0]
     >> rs.init_tables(c_exp=12, prim=prim)
     
     Let's define our RS message and ecc size:
@@ -146,6 +146,7 @@ but I'm only testing on 2.7 - 3.4.
 
 # TODO IMPORTANT: try to keep the same convention for the ordering of polynomials inside lists throughout the code and functions (because for now there are a lot of list reversing in order to make it work, you never know the order of a polynomial, ie, if the first coefficient is the major degree or the constant term...).
 
+import array
 import math
 
 
@@ -155,7 +156,6 @@ try:  # pragma: no cover
     bytearray
     _bytearray = bytearray
 except NameError:  # pragma: no cover
-    from array import array
     def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
         '''Simple pure-python bytearray replacement if not implemented'''
         # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
@@ -163,7 +163,7 @@ except NameError:  # pragma: no cover
             obj = [ord(ch) for ch in obj.encode(encoding)]
         elif isinstance(obj, int):
             obj = [0] * obj
-        return array("B", obj)
+        return array.array("B", obj)
 
 try:  # pragma: no cover
     # compatibility with Python 2.7
@@ -189,7 +189,7 @@ def rwh_primes1(n):
     for i in xrange(3,int(math.pow(n,0.5))+1,2):
         if sieve[int(i/2)]:
             sieve[int((i*i)/2)::i] = [False] * int((n-i*i-1)/(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n_half) if sieve[i]]
+    return array.array('i', [2] + [2*i+1 for i in xrange(1,n_half) if sieve[i]])
 
 def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
@@ -210,15 +210,14 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     field_charac = int(root_charac**c_exp - 1)
     field_charac_next = int(root_charac**(c_exp+1) - 1)
 
-    prim_candidates = []
     if fast_primes:
         prim_candidates = rwh_primes1(field_charac_next) # generate maybe prime polynomials and check later if they really are irreducible
-        prim_candidates = [x for x in prim_candidates if x > field_charac] # filter out too small primes
+        prim_candidates = array.array('i', [x for x in prim_candidates if x > field_charac]) # filter out too small primes
     else:
-        prim_candidates = list(xrange(field_charac+2, field_charac_next, root_charac)) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
+        prim_candidates = array.array('i', xrange(field_charac+2, field_charac_next, root_charac)) # try each possible prime polynomial, but skip even numbers (because divisible by 2 so necessarily not irreducible)
 
     # Start of the main loop
-    correct_primes = []
+    correct_primes = array.array('i', [])
     for prim in prim_candidates: # try potential candidates primitive irreducible polys
         seen = _bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
@@ -240,7 +239,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
         # End of the second loop: if there's no conflict (no overflow nor duplicated value), this is a prime polynomial!
         if not conflict: 
             correct_primes.append(prim)
-            if single: return prim
+            if single: return array.array('i', [prim])  # for API consistency, we always return an array, but here with a single value
 
     # Return the list of all prime polynomials
     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
@@ -262,7 +261,6 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
     if c_exp <= 8:
         _bytearray = bytearray
     else:
-        from array import array
         def _bytearray(obj = 0, encoding = "latin-1"):
             '''Fake bytearray replacement, supporting int values above 255'''
             # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
@@ -279,7 +277,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
             elif isinstance(obj, bytes):
                 obj = [int(b) for b in obj]
             # Else obj is a list of int, it's ok
-            return array("i", obj)
+            return array.array("i", obj)
 
     # Init global tables
     global gf_exp, gf_log, field_charac
@@ -566,22 +564,22 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]
 
     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
-    X = [] # will store the position of the errors
+    X = _bytearray(len(coef_pos)) # will store the position of the errors
     for i in xrange(len(coef_pos)):
         l = field_charac - coef_pos[i]
-        X.append( gf_pow(generator, -l) )
+        X[i] = gf_pow(generator, -l)
 
     # Forney algorithm: compute the magnitudes
     E = _bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
-    Xlength = len(X)
+    X_len = len(X)
     for i, Xi in enumerate(X):
 
         Xi_inv = gf_inverse(Xi)
 
         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-        err_loc_prime_tmp = []
-        for j in xrange(Xlength):
+        err_loc_prime_tmp = _bytearray()
+        for j in xrange(X_len):
             if j != i:
                 err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
@@ -698,7 +696,7 @@ def rs_find_errors(err_loc, nmess, generator=2):
     '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
     # nmess = length of whole codeword (message + ecc symbols)
     errs = len(err_loc) - 1
-    err_pos = []
+    err_pos = _bytearray()
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
             err_pos.append(nmess - 1 - i)
@@ -738,8 +736,10 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
     msg_out = _bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
-        erase_pos = []
+        erase_pos = _bytearray()
     else:
+        if isinstance(erase_pos, list):  # ensure we use a bytearray, not a list
+            erase_pos = _bytearray(erase_pos)
         for e_pos in erase_pos:
             msg_out[e_pos] = 0
     # check if there are too many erasures to correct (beyond the Singleton bound)
@@ -752,7 +752,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
 
     # Find errors locations
     if only_erasures:
-        err_pos = []
+        err_pos = _bytearray()
     else:
         # compute the Forney syndromes, which hide the erasures from the original syndrome (so that BM will just have to deal with errors, not erasures)
         fsynd = rs_forney_syndromes(synd, erase_pos, len(msg_out), generator)
@@ -782,8 +782,10 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
     msg_out = _bytearray(msg_in)     # copy of message
     # erasures: set them to null bytes for easier decoding (but this is not necessary, they will be corrected anyway, but debugging will be easier with null bytes because the error locator polynomial values will only depend on the errors locations, not their values)
     if erase_pos is None:
-        erase_pos = []
+        erase_pos = _bytearray()
     else:
+        if isinstance(erase_pos, list):  # ensure we use a bytearray, not a list
+            erase_pos = _bytearray(erase_pos)
         for e_pos in erase_pos:
             msg_out[e_pos] = 0
     # check if there are too many erasures
@@ -866,7 +868,7 @@ class RSCodec(object):
             # Get the next closest power of two
             c_exp = int(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1), 2))
         if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
-            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
+            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)[0]
             if nsize == 255:  # resize chunk size if not set
                 nsize = int(2**c_exp - 1)
         if nsym >= nsize:
@@ -941,6 +943,8 @@ class RSCodec(object):
 
         if isinstance(data, str):
             data = _bytearray(data)
+        if isinstance(erase_pos, list):
+            erase_pos = _bytearray(erase_pos)
 
         # Precache class attributes into local variables
         if not nsym:
@@ -967,7 +971,7 @@ class RSCodec(object):
                 # Then remove the extract erasures from the big list and also decrement all subsequent positions values by nsize (the current chunk's size) so as to prepare the correct alignment for the next iteration
                 erase_pos = [x - nsize for x in erase_pos if x >= nsize]
             else:
-                e_pos = []
+                e_pos = _bytearray()
             # Decode/repair this chunk!
             rmes, recc, errata_pos = rs_correct_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, erase_pos=e_pos, only_erasures=only_erasures)
             dec[i*nmes:(i+1)*nmes] = rmes

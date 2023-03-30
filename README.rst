@@ -224,7 +224,7 @@ please use the following (where c_exp is the exponent of your Galois Field, eg, 
 
 .. code:: python
 
-    >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)
+    >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)[0]
     >> rs.init_tables(c_exp=12, prim=prim)
     
 Let's define our RS message and ecc size:

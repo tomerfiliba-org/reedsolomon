@@ -150,7 +150,7 @@ cdef array.array rwh_primes1(int n):
             sieve[<int>((i*i)/2)::i] = [False] * <int>((n-i*i-1)/(2*i)+1)
     return array.array('i', [2] + [2*i+1 for i in xrange(1,n_half) if sieve[i]])
 
-cpdef list find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False, bint single=False):
+cpdef array.array find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False, bint single=False):
     '''Compute the list of prime polynomials for the given generator and galois field characteristic exponent.'''
     # fast_primes will output less results but will be significantly faster.
     # single will output the first prime polynomial found, so if all you want is to just find one prime polynomial to generate the LUT for Reed-Solomon to work, then just use that.
@@ -182,7 +182,7 @@ cpdef list find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False
 
     # Start of the main loop
     cdef:
-        list correct_primes = []
+        cdef array.array correct_primes = array.array('i', [])
         uint8_t[:] seen
         bint conflict
     for i_prim in xrange(len(prim_candidates)): # try potential candidates primitive irreducible polys
@@ -207,7 +207,7 @@ cpdef list find_prime_polys(int generator=2, int c_exp=8, bint fast_primes=False
         # End of the second loop: if there's no conflict (no overflow nor duplicated value), this is a prime polynomial!
         if not conflict: 
             correct_primes.append(prim)
-            if single: return prim
+            if single: return array.array('i', [prim])  # for API consistency, we always return an array, but here with a single value
 
     # Return the list of all prime polynomials
     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
@@ -664,22 +664,23 @@ cpdef uint8_t[::1] rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uin
     err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]
 
     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
-    cdef list X = [] # will store the position of the errors
+    cdef uint8_t[::1] X = bytearray(len(coef_pos)) # will store the position of the errors (and we pre-allocate the bytearray)
     for i in xrange(len(coef_pos)):
         l = field_charac - coef_pos[i]
-        X.append( gf_pow(generator, -l) )
+        X[i] = gf_pow(generator, -l)
 
     # Forney algorithm: compute the magnitudes
     cdef uint8_t[::1] E = bytearray(len(msg)) # will store the values that need to be corrected (substracted) to the message containing errors. This is sometimes called the error magnitude polynomial.
-    cdef int Xlength = len(X)
-    for i in xrange(len(X)):
+    cdef int X_len = len(X)
+    cdef bytearray err_loc_prime_tmp
+    for i in xrange(X_len):
         Xi = X[i]
         Xi_inv = gf_inverse(Xi)
 
         # Compute the formal derivative of the error locator polynomial (see Blahut, Algebraic codes for data transmission, pp 196-197).
         # the formal derivative of the errata locator is used as the denominator of the Forney Algorithm, which simply says that the ith error value is given by error_evaluator(gf_inverse(Xi)) / error_locator_derivative(gf_inverse(Xi)). See Blahut, Algebraic codes for data transmission, pp 196-197.
-        err_loc_prime_tmp = []
-        for j in xrange(Xlength):
+        err_loc_prime_tmp = bytearray()
+        for j in xrange(X_len):
             if j != i:
                 err_loc_prime_tmp.append( gf_sub(1, gf_mul(Xi_inv, X[j])) )
         # compute the product, which is the denominator of the Forney algorithm (errata locator derivative)
@@ -687,6 +688,12 @@ cpdef uint8_t[::1] rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uin
         for coef in err_loc_prime_tmp:
             err_loc_prime = gf_mul(err_loc_prime, coef)
         # equivalent to: err_loc_prime = functools.reduce(gf_mul, err_loc_prime_tmp, 1)
+
+        # TODO: finish the following optimization, should replace the above and remove err_loc_prime_tmp entirely with no loss of generality
+        #err_loc_prime = 1
+        #for j in xrange(X_len):
+            #if j != i:
+                #err_loc_prime = gf_mul(err_loc_prime, gf_sub(1, gf_mul(Xi_inv, X[j])))
 
         # Test if we could find the errata locator, else we raise an Exception (because else since we divide y by err_loc_prime to compute the magnitude, we will get a ZeroDivisionError exception otherwise)
         if err_loc_prime == 0:
@@ -802,7 +809,7 @@ cpdef uint8_t[::1] rs_find_errors(uint8_t[:] err_loc, int nmess, int generator=2
     cdef int i
 
     cdef uint8_t errs = len(err_loc) - 1
-    err_pos = []
+    cdef bytearray err_pos = bytearray()
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
             err_pos.append(nmess - 1 - i)
@@ -1024,7 +1031,7 @@ cdef class RSCodec(object):
             # Get the next closest power of two
             c_exp = <int>(math.log(2 ** (math.floor(math.log(nsize) / math.log(2)) + 1)))
         if c_exp != 8 and prim == 0x11d:  # prim was not correctly defined, find one
-            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)
+            prim = find_prime_polys(generator=generator, c_exp=c_exp, fast_primes=True, single=True)[0]
             if nsize == 255:  # resize chunk size if not set
                 nsize = <int>(2**c_exp - 1)
         if nsym >= nsize:

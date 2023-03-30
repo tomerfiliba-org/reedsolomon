@@ -84,6 +84,8 @@ else:
         except NameError:
             from creedsolo import bytearray
 
+        import array
+
         try: # compatibility with Python 3+
             xrange
         except NameError:
@@ -247,7 +249,7 @@ else:
                          }
 
                 for i in xrange(params['count']):
-                    self.assertEqual( find_prime_polys(generator=params['generator'][i], c_exp=params['c_exp'][i]) , params["expected"][i] )
+                    self.assertEqual( find_prime_polys(generator=params['generator'][i], c_exp=params['c_exp'][i]) , array.array('i', params["expected"][i]) )
 
             def test_init_tables(self):
                 '''Try if the look up table generator (galois field generator) works correctly for different parameters'''
@@ -290,6 +292,21 @@ else:
                 msg[1] = 0xFF
                 self.assertEqual(rs.decode(msg)[2], bytearray([1]))
                 self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
+
+            def test_consistent_erasures_report_2(self):
+                # Ensure we always at least return the erasures we used as input
+                _ = init_tables()
+                # parameters
+                nsym = 4
+                # generate the polynomials before calling rs_*_encode_msg(), as otherwise we will get an error saying that gen is not set with Cython)
+                gen = rs_generator_poly(nsym)
+                # Encode the messages
+                msg = rs_encode_msg(bytearray(range(10)), nsym=nsym, gen=gen)
+                self.assertEqual(rs_correct_msg(msg, nsym=nsym, erase_pos=bytearray([1]))[2], bytearray([1]))
+                self.assertEqual(rs_correct_msg(msg, nsym=nsym, erase_pos=bytearray([1]))[2], bytearray([1]))
+                msg[1] = 0xFF
+                self.assertEqual(rs_correct_msg(msg, nsym=nsym)[2], bytearray([1]))
+                self.assertEqual(rs_correct_msg(msg, nsym=nsym, erase_pos=bytearray([1]))[2], bytearray([1]))
 
             def test_erasures_chunking(self):
                 # Test whether providing positions for erasures in the 2nd chunk or later is working

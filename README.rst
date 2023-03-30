@@ -347,7 +347,8 @@ In particular, good speed performance at encoding can be obtained by using eithe
 implementation (reedsolo.py) or either by compiling the Cython extension creedsolo.pyx (which is much more optimized and hence much faster than PyPy).
 
 From our speed tests, encoding rates of several MB/s can be expected with PyPy JIT,
-and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
+and 14.3 MB/s using the Cython extension creedsolo on an Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
+(benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
 
 To use the Cython implementation, it is necessary to ``pip install cython==3.0.0b2`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then simply ``cd`` to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, it is possible to generate just the C++ code by typing ``cython -3 creedsolo.pyx``. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the ``.pyx`` cython source code will be included, but the binary won't be in the wheel.
 

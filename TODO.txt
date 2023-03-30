@@ -34,3 +34,10 @@
     * https://stackoverflow.com/questions/18462785/what-is-the-recommended-way-of-allocating-memory-for-a-typed-memory-view
     * https://groups.google.com/g/cython-users/c/CwtU_jYADgM
     * https://cython.readthedocs.io/en/latest/src/userguide/memoryviews.html#cpython-array-module
+
+------
+
+Other TODO apart from Cython:
+* Optimize pure python implementation by using _bytearray() instead of [] whenever possible (compare with changes done on the cython implementation)
+* Pre-allocate bytearrays whenever possible in the pure-python implementation (like the cython implementation)
+* Test and fix issues with galois fields smaller than 2^8.

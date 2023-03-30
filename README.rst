@@ -369,6 +369,21 @@ Although sanity checks are implemented whenever possible and when they are not t
 
 * Reed-Solomon algorithm is limited by the Singleton Bound, which limits not only its capacity to correct errors and erasures relatively to the number of error correction symbols, but also its ability to check if the message can be decoded or not. Indeed, if the number of errors and erasures are greater than the Singleton Bound, the decoder has no way to mathematically know for sure whether there is an error at all, it may very well be a valid message (although not the message you expect, but mathematically valid nevertheless). Hence, when the message is tampered beyond the Singleton Bound, the decoder may raise an exception, but it may also return a mathematically valid but still tampered message. Using the check() method cannot fix that either. To work around this issue, a solution is to use parity or hashing functions in parallel to the Reed-Solomon codec: use the Reed-Solomon codec to repair messages, use the parity or hashing function to check if there is any error. Due to how parity and hashing functions work, they are much less likely to produce a false negative than the Reed-Solomon algorithm. This is a general rule: error correction codes are efficient at correcting messages but not at detecting errors, hashing and parity functions are the adequate tool for this purpose.
 
+Migration from v1.x to v2.x
+---------------------------
+
+If you used ``reedsolo`` v1.x, then to upgrade to v2.x, a few changes in the API must be considered.
+
+We will not list everything here, but the biggest breaking change is that now internally, everything is either a ``bytearray``, or a CPython ``array('i', ...)``.
+
+For the pure python implementation ``reedsolo``, this should not change much, it should be retrocompatible with lists (there are a few checks in place to autodetect and convert lists into bytearrays whenever necessary - but only in RSCodec, not in lower level functions if that's what you used!).
+
+However, for the cythonized extension ``creedsolo``, these changes are breaking compatibility with v1.x: if you used ``bytearray`` everywhere whenever supplying a list of values into ``creedsolo`` (both for the ``data`` and ``erasures_pos``), then all is well, you are good to go! On the other hand, if you used ``list`` objects or other types in some places, you are in for some errors.
+
+The good news is that, thanks to these changes, both implementations are much faster, but especially ``creedsolo``, which now encodes at a rate of ``15-20 MB/s`` (yes that's BYTES, not bits!). This however requires Cython >= 3.0.0b2, and is incompatible with Python 2 (the pure python ``reedsolo`` is still compatible, but not the cythonized extension ``creedsolo``).
+
+In practice, there is likely very little you need to change, just add a few ``bytearray()`` calls here and there. For a practical example of what was required to migrate, see `the commits for pyFileFixity migration <https://github.com/lrq3000/pyFileFixity/compare/47407b73dfbcfe34970055524655e21ccf2979aa..23b8f6f6c6f252fb9a641f419a6bfa5a1e6c3343>_`.
+
 Recommended reading
 -------------------
 

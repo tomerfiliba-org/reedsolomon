@@ -102,16 +102,19 @@ else:
                 enc = rs.encode(msg)
                 dec, dec_enc, errata_pos = rs.decode(enc)
                 self.assertEqual(dec, msg)
-            
+                self.assertEqual(dec_enc, enc)
+
             def test_correction(self):
                 rs = RSCodec(10)
                 msg = bytearray("hello world " * 10, "latin1")
                 enc = rs.encode(msg)
-                dec, _, _ = rs.decode(enc)
-                self.assertEqual(dec, msg)
+                rmsg, renc, errata_pos = rs.decode(enc)
+                self.assertEqual(rmsg, msg)
+                self.assertEqual(renc, enc)
                 for i in [27, -3, -9, 7, 0]:
                     enc[i] = 99
-                    self.assertEqual(rs.decode(enc)[0], msg)
+                    rmsg, renc, errata_pos = rs.decode(enc)
+                    self.assertEqual(rmsg, msg)
                 enc[82] = 99
                 self.assertRaises(ReedSolomonError, rs.decode, enc)
 
@@ -132,13 +135,16 @@ else:
                 rs = RSCodec(10)
                 msg = bytearray("a" * 10000, "latin1")
                 enc = rs.encode(msg)
-                dec, _, _ = rs.decode(enc)
+                dec, dec_enc, errata_pos = rs.decode(enc)
                 self.assertEqual(dec, msg)
-                enc[177] = 99
-                enc[2212] = 88
-                dec2, _, _ = rs.decode(enc)
+                self.assertEqual(dec_enc, enc)
+                enc2 = bytearray(enc)  # make a copy
+                enc2[177] = 99
+                enc2[2212] = 88
+                dec2, dec_enc2, errata_pos = rs.decode(enc2)
                 self.assertEqual(dec2, msg)
-                
+                self.assertEqual(dec_enc2, enc)
+
             def test_prim_fcr_basic(self):
                 nn = 30
                 kk = 18
@@ -151,8 +157,9 @@ else:
                 decmsg = encmsg[:kk]
                 tem = rs.encode(decmsg)
                 self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-                tdm, _, _ = rs.decode(tem)
+                tdm, rtem, errata_pos = rs.decode(tem)
                 self.assertEqual(tdm, decmsg, msg="decoded does not match original")
+                self.assertEqual(rtem, tem, msg="decoded mesecc does not match original")
                 tem1 = bytearray(tem) # clone a copy
                 # encoding and decoding intact message seem OK, so test errors
                 numerrs = tt >> 1 # inject tt/2 errors (expected to recover fully)
@@ -180,16 +187,20 @@ else:
                 decmsg = encmsg[:kk]
                 tem = rs.encode(decmsg)
                 self.assertEqual(encmsg, tem, msg="encoded does not match expected")
-                tdm, _, _ = rs.decode(tem)
+                tdm, rtem, errata_pos = rs.decode(tem)
                 self.assertEqual(tdm, decmsg, 
                     msg="decoded does not match original")
+                self.assertEqual(rtem, tem, 
+                    msg="decoded mesecc does not match original")
                 tem1 = bytearray(tem)
                 numerrs = tt >> 1
                 for i in sample(range(nn), numerrs):
                     tem1[i] ^= 0xff
-                tdm, _, _ = rs.decode(tem1)
+                tdm, rtem, errata_pos = rs.decode(tem1)
                 self.assertEqual(tdm, decmsg,
                     msg="decoded with errors does not match original")
+                self.assertEqual(rtem, tem,
+                    msg="decoded mesecc with errors does not match original")
                 tem1 = bytearray(tem)
                 numerrs += 1
                 for i in sample(range(nn), numerrs):
@@ -200,7 +211,7 @@ else:
                 '''Test if generator poly finder is working correctly and if the all generators poly finder does output the same result'''
                 n = 11
                 k = 3
-                
+
                 # Base 2 test
                 fcr = 120
                 generator = 2
@@ -386,6 +397,30 @@ else:
                 self.assertEqual(gf_div(b, a), 25)
                 self.assertEqual(gf_div(0, a), 0)
                 self.assertRaises(ZeroDivisionError, gf_div, *[a, 0])
+
+        class cTestSimpleFuncs(unittest.TestCase):
+            '''Test simple functions and see if the results are equivalent with optimized functions'''
+
+            def test_gf_poly_mul_simple(self):
+                a = bytearray([1, 12, 14, 9])
+                b = bytearray([0, 23, 2, 15])
+                self.assertEqual(gf_poly_mul(a, b), gf_poly_mul_simple(a, b))
+
+            def test_gf_poly_neg(self):
+                a = bytearray([1, 12, 14, 9])
+                self.assertEqual(gf_poly_neg(a), a)
+
+            def test_rs_simple_encode_msg(self):
+                a = bytearray("hello world", "latin1")
+                nsym = 10
+                fcr = 120
+                generator = 2
+                prim = 0x11d
+                # Init the RS codec
+                init_tables(generator=generator, prim=prim)
+                gen = rs_generator_poly(nsym, fcr=fcr, generator=generator)
+                # Encode the message (note that we need to use rs_generator_poly() before calling rs_*_encode_msg(), as otherwise we will get an error saying that gen is not set)
+                self.assertEqual(rs_simple_encode_msg(a, nsym, gen=gen), rs_encode_msg(a, nsym, gen=gen))
 
         class cTestRSCodecUniversalCrossValidation(unittest.TestCase):
             '''Ultimate set of tests of a full set of different parameters for encoding and decoding. If this passes, the codec is universal and can correctly interface with any other RS codec!'''

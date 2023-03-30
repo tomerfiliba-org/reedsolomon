@@ -520,10 +520,11 @@ cpdef list rs_generator_poly_all(int max_nsym, int fcr=0, int generator=2):
 @cython.wraparound(False)
 @cython.initializedcheck(False)
 cpdef rs_encode_msg(msg_in, int nsym, int fcr=0, int generator=2, uint8_t[::1] gen=None) noexcept:
-    '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/'''
-    # IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
-    # >> cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
-    # >> ValueError : negative count
+    '''Reed-Solomon encoding using polynomial division, optimized in Cython. Kudos to DavidW: http://stackoverflow.com/questions/30363903/optimizing-a-reed-solomon-encoder-polynomial-division/
+    IMPORTANT: there's no checking of gen's value, and there's no auto generation either as to maximize speed. Thus you need to always provide it. If you fail to provide it, you will be greeted with the following error, which is NOT a bug:
+    >> cdef uint8_t[::1] msg_out = bytearray(msg_in_t) + bytearray(gen_t.shape[0]-1)
+    >> ValueError : negative count
+    '''
 
     cdef uint8_t[::1] msg_in_t = bytearray(msg_in) # have to copy, unfortunately - can't make a memory view from a read only object
     #cdef uint8_t[::1] gen_t = array.array('i',gen) # convert list to array
@@ -930,6 +931,36 @@ cpdef bint rs_check(uint8_t[::1] msg, int nsym, int fcr=0, int generator=2):
     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
     return max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0
 
+######################## end of REED SOLOMON DECODING ###############
+
+######################## Simple functions ######################
+# These functions are only kept here to compare for unit tests, to ensure the optimized functions still give the mathematically accurate results.
+
+cpdef gf_poly_mul_simple(p, q): # simple equivalent way of multiplying two polynomials without precomputation, but thus it's slower
+    '''Multiply two polynomials, inside Galois Field'''
+    # Pre-allocate the result array
+    r = bytearray(len(p) + len(q) - 1)
+    # Compute the polynomial multiplication (just like the outer product of two vectors, we multiply each coefficients of p with all coefficients of q)
+    for j in xrange(len(q)):
+        for i in xrange(len(p)):
+            r[i + j] ^= gf_mul(p[i], q[j]) # equivalent to: r[i + j] = gf_add(r[i+j], gf_mul(p[i], q[j])) -- you can see it's your usual polynomial multiplication
+    return r
+
+cpdef rs_simple_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
+    '''Simple Reed-Solomon encoding (mainly an example for you to understand how it works, because it's slower than the inlined function below)'''
+    global field_charac
+    if (len(msg_in) + nsym) > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
+    if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
+
+    msg_in_copy = bytearray(msg_in)
+    # Pad the message, then divide it by the irreducible generator polynomial
+    _, remainder = gf_poly_div(msg_in_copy + bytearray(len(gen)-1), gen)
+    # The remainder is our RS code! Just append it to our original message to get our full codeword (this represents a polynomial of max 256 terms)
+    msg_out = msg_in_copy + bytearray(remainder)
+    # Return the codeword
+    return msg_out
+
+####################### End of simple functions ###################
 
 #===================================================================================================
 # API

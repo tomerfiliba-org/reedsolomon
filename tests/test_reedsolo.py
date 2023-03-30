@@ -73,7 +73,7 @@ class TestReedSolomon(unittest.TestCase):
         dec, dec_enc, errata_pos = rs.decode(enc)
         self.assertEqual(dec, msg)
         self.assertEqual(dec_enc, enc)
-        enc2 = list(enc)
+        enc2 = bytearray(enc)  # make a copy
         enc2[177] = 99
         enc2[2212] = 88
         dec2, dec_enc2, errata_pos = rs.decode(enc2)
@@ -218,8 +218,18 @@ class TestReedSolomon(unittest.TestCase):
 
     def test_consistent_erasures_report(self):
         # Ensure we always at least return the erasures we used as input
+        rs = RSCodec(10)
+        msg = rs.encode(bytearray("hello world ", "latin1"))
+        self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
+        self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
+        msg[1] = 0xFF
+        self.assertEqual(rs.decode(msg)[2], bytearray([1]))
+        self.assertEqual(rs.decode(msg, erase_pos=bytearray([1]))[2], bytearray([1]))
+
+    def test_consistent_erasures_report_2(self):
+        # Ensure we always at least return the erasures we used as input
         _ = init_tables()
-        msg = rs_encode_msg(bytes(range(10)), nsym=4)
+        msg = rs_encode_msg(bytearray(range(10)), nsym=4)
         self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
         self.assertEqual(rs_correct_msg(msg, nsym=4, erase_pos=[1])[2], [1])
         msg[1] = 0xFF

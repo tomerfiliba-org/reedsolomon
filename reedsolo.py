@@ -832,6 +832,7 @@ def rs_check(msg, nsym, fcr=0, generator=2):
     '''Returns true if the message + ecc has no error of false otherwise (may not always catch a wrong decoding or a wrong message, particularly if there are too many errors -- above the Singleton bound --, but it usually does)'''
     return ( max(rs_calc_syndromes(msg, nsym, fcr, generator)) == 0 )
 
+######################## end of REED SOLOMON DECODING ###############
 
 #===================================================================================================
 # API

@@ -1026,7 +1026,7 @@ cdef class RSCodec(object):
         # Calculate chunksize
         chunk_size = nsize - nsym
         data_len = data.shape[0]
-        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)  # note that this is the correct way to calculate chunking, if we want to avoid any unnecessary padding, which would be induced by the incorrect form <int>(data_len / chunk_size)+1 , because it will always round up even when the number is already an integer, eg, 4/2 = 2 but it will be rounded to 3 with this latter form, instead of 2.
+        cdef int total_chunks = <int>math.ceil(<float>data_len / <float>chunk_size)  # note that this is the correct way to calculate chunking, if we want to avoid any unnecessary padding, which would be induced by the incorrect form <int>(data_len / chunk_size)+1 , because it will always round up even when the number is already an integer, eg, 4/2 = 2 but it will be rounded to 3 with this latter form, instead of 2.
         # Preallocate output array
         enc = bytearray(total_chunks * nsize)  # pre-allocate array and we will overwrite data in it, much faster than extending  # TODO: define as a memoryview cdef uint8_t[::1]
         # Chunking loop
@@ -1058,7 +1058,7 @@ cdef class RSCodec(object):
         # Calculate chunksize
         chunk_size = nsize
         data_len = data.shape[0]
-        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)
+        cdef int total_chunks = <int>math.ceil(<float>data_len / <float>chunk_size)
         nmes = <int>(nsize-nsym)
 
         # Preallocate output arrays
@@ -1109,7 +1109,7 @@ cdef class RSCodec(object):
         # Calculate chunksize
         chunk_size = nsize
         data_len = data.shape[0]
-        cdef int total_chunks = <int>math.ceil(data_len / chunk_size)
+        cdef int total_chunks = <int>math.ceil(<float>data_len / <float>chunk_size)
 
         # Initialize output array, a list of bints
         cdef list check = []  # TODO: convert to an array of bint

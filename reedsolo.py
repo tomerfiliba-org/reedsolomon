@@ -916,7 +916,7 @@ class RSCodec(object):
 
         # Calculate chunk size and total number of chunks for looping
         chunk_size = int(nsize - nsym)
-        total_chunks = int(math.ceil(len(data) / chunk_size))
+        total_chunks = int(math.ceil(float(len(data)) / float(chunk_size)))  # need to convert to floats first to get an accurate floating division, or else we assume implicit conversion and it will cause an error on Python 2
 
         if slice_assign:
             # Preallocate output array
@@ -958,7 +958,7 @@ class RSCodec(object):
 
         # Calculate chunk size and total number of chunks for looping
         chunk_size = nsize
-        total_chunks = int(math.ceil(len(data) / chunk_size))
+        total_chunks = int(math.ceil(float(len(data)) / float(chunk_size)))  # need to convert to floats first to get an accurate floating division, or else we assume implicit conversion and it will cause an error on Python 2
         nmes = int(nsize-nsym)
 
         if slice_assign:
@@ -1019,7 +1019,7 @@ class RSCodec(object):
 
         # Calculate chunksize
         chunk_size = nsize
-        total_chunks = int(math.ceil(len(data) / chunk_size))
+        total_chunks = int(math.ceil(float(len(data)) / float(chunk_size)))  # need to convert to floats first to get an accurate floating division, or else we assume implicit conversion and it will cause an error on Python 2
 
         # Initialize output array
         check = []

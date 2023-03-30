@@ -1093,9 +1093,9 @@ cdef class RSCodec(object):
         return dec, dec_full, errata_pos_all
 
     @cython.cdivision(False)
-    cpdef check(self, uint8_t[::1] data, int nsym=-1):
+    cpdef list check(self, uint8_t[::1] data, int nsym=-1):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
-        cdef int i
+        cdef int i, nsize, fcr, generator, chunk_size, data_len
         if isinstance(data, str):
             data = bytearray(data)
 
@@ -1113,21 +1113,23 @@ cdef class RSCodec(object):
 
         # Pre-allocate output array, an array of booleans (but there is no array of bints, only in numpy!)
         cdef list check = [False] * total_chunks
+        #cdef uint8_t[::1] check = bytearray(total_chunks)
         #cdef cvarray check = cvarray(shape=(total_chunks,), itemsize=sizeof(bint), format="?")  # cython array of bints
         # Chunking loop
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Check and add the result in the list, we concatenate all results since we are chunking
             check[i] = rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator)
-        return check
+        return check #check.base
 
     @cython.cdivision(False)
-    cpdef (int, int) maxerrata(self, int nsym=-1, errors=None, erasures=None, bint verbose=False) except *:
+    cpdef (int, int) maxerrata(self, int nsym=-1, int errors=-1, int erasures=-1, bint verbose=False) except *:
         '''Return the Singleton Bound for the current codec, which is the max number of errata (errors and erasures) that the codec can decode/correct.
         Beyond the Singleton Bound (too many errors/erasures), the algorithm will try to raise an exception, but it may also not detect any problem with the message and return 0 errors.
         Hence why you should use checksums if your goal is to detect errors (as opposed to correcting them), as checksums have no bounds on the number of errors, the only limitation being the probability of collisions.
         By default, return a tuple wth the maximum number of errors (2nd output) OR erasures (2nd output) that can be corrected.
         If errors or erasures (not both) is specified as argument, computes the remaining **simultaneous** correction capacity (eg, if errors specified, compute the number of erasures that can be simultaneously corrected).
         Set verbose to True to get print a report.'''
+        cdef int maxerrors, maxerasures
         # Fetch nsym from class attributes if not overriden by a function call
         if nsym < 0:
             nsym = self.nsym
@@ -1135,7 +1137,7 @@ cdef class RSCodec(object):
         maxerrors = <int>(nsym/2)  # always floor the number, we can't correct half a symbol, it's all or nothing
         maxerasures = nsym
         # Compute the maximum of simultaneous errors AND erasures
-        if erasures is not None and erasures >= 0:
+        if erasures >= 0:
             # We know the erasures count, we want to know how many errors we can correct simultaneously
             if erasures > maxerasures:
                 raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")
@@ -1144,7 +1146,7 @@ cdef class RSCodec(object):
                 print('This codec can correct up to %i errors and %i erasures simultaneously' % (maxerrors, erasures))
             # Return a tuple with the maximum number of simultaneously corrected errors and erasures
             return maxerrors, erasures
-        if errors is not None and errors >= 0:
+        if errors >= 0:
             # We know the errors count, we want to know how many erasures we can correct simultaneously
             if errors > maxerrors:
                 raise ReedSolomonError("Specified number of errors or erasures exceeding the Singleton Bound!")

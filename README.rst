@@ -301,9 +301,9 @@ you need to interface with other RS codecs.
 Extended description
 --------------------
 The code of wikiversity is here consolidated into a nice API with exceptions handling.
-The algorithm can correct up to 2*e+v <= nsym, where e is the number of errors,
-v the number of erasures and nsym = n-k = the number of ECC (error correction code) symbols.
-This means that you can either correct exactly floor(nsym/2) errors, or nsym erasures
+The algorithm can correct up to ``2*e+v <= nsym``, where ``e`` is the number of errors,
+``v`` the number of erasures and ``nsym = n-k`` = the number of ECC (error correction code) symbols.
+This means that you can either correct exactly ``floor(nsym/2)`` errors, or ``nsym`` erasures
 (errors where you know the position), and a combination of both errors and erasures.
 This is called the Singleton Bound, and is the maximum/optimal theoretical number
 of erasures and errors any error correction algorithm can correct (although there
@@ -322,14 +322,14 @@ The codec is universal, meaning that it should be able to decode any message enc
 as long as you provide the correct parameters. Beware that often, other RS encoders use internal constant sometimes
 hardcoded inside the algorithms, such as fcr, which are then hard to find, but if you do, you can supply them to reedsolo.
 
-Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
-we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
+Note however that if you use higher fields (ie, bigger ``c_exp``), the algorithms will be slower, first because
+we cannot then use the optimized bytearray() structure but only ``array.array('i', ...)``, and also because
 Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
 your messages, the quadratically longer it will take to encode/decode!
 
-The algorithm itself can handle messages of a length up to (2^c_exp)-1 symbols per message (or chunk), including the ECC symbols,
-and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
-value for one character is constrained by the same mathematical reason). By default, we use the field GF(2^8),
+The algorithm itself can handle messages of a length up to ``(2^c_exp)-1`` symbols per message (or chunk), including the ECC symbols,
+and each symbol can have a value of up to ``(2^c_exp)-1`` (indeed, both the message length and the maximum
+value for one character is constrained by the same mathematical reason). By default, we use the field ``GF(2^8)``,
 which means that you are limited to values between 0 and 255 (perfect to represent a single hexadecimal
 symbol on computers, so you can encode any binary stream) and limited to messages+ecc of maximum
 length 255. However, you can "chunk" longer messages to fit them into the message length limit.

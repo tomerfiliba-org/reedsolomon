@@ -309,24 +309,23 @@ This is called the Singleton Bound, and is the maximum/optimal theoretical numbe
 of erasures and errors any error correction algorithm can correct (although there
 are experimental approaches to go a bit further, named list decoding, not implemented
 here, but feel free to do pull request!).
+
 The code should work on pretty much any reasonable version of python (3.7+),
 but I'm only testing on the latest Python version available on Anaconda at the moment (currently 3.10),
 although there is a unit test on various Python versions to ensure retrocompatibility.
+
+This library is also thoroughly unit tested with branch coverage,
+so that nearly any encoding/decoding case should be covered.
 The unit test includes Cython and PyPy too.
 
-The codec has quite reasonable performances if you either use PyPy JIT Compiler on the pure-python
-implementation (reedsolo.py) or either if you compile the Cython extension creedsolo.pyx
-(which is about 2x faster than PyPy). You can expect encoding rates of several MB/s with PyPy,
-and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
+The codec is universal, meaning that it should be able to decode any message encoded by any other RS encoder
+as long as you provide the correct parameters. Beware that often, other RS encoders use internal constant sometimes
+hardcoded inside the algorithms, such as fcr, which are then hard to find, but if you do, you can supply them to reedsolo.
 
-This library is also thoroughly unit tested so that nearly any encoding/decoding case should be covered.
-
-The codec is universal, meaning that it can decode any message encoded by another RS encoder
-as long as you provide the correct parameters.
 Note however that if you use higher fields (ie, bigger c_exp), the algorithms will be slower, first because
 we cannot then use the optimized bytearray() structure but only array.array('i', ...), and also because
 Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
-your messages, the longer it will take to encode/decode (quadratically!).
+your messages, the quadratically longer it will take to encode/decode!
 
 The algorithm itself can handle messages of a length up to (2^c_exp)-1 symbols per message (or chunk), including the ECC symbols,
 and each symbol can have a value of up to (2^c_exp)-1 (indeed, both the message length and the maximum
@@ -337,7 +336,20 @@ length 255. However, you can "chunk" longer messages to fit them into the messag
 The ``RSCodec`` class will automatically apply chunking, by splitting longer messages into chunks and
 encode/decode them separately; it shouldn't make a difference from an API perspective (ie, from your POV).
 
-To use the Cython implementation, you need to ``pip install cython==3.0.0b2`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then you can simply cd to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, you can generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the `.pyx` cython source code will be included, but the binary won't be in the wheel.
+Speed optimizations
+-------------------
+
+Thanks to using `bytearray` and a functional approach (contrary to unireedsolomon, a sibling implementation), the codec
+has quite reasonable performances despite avoiding hardcoding constants and specific instruction sets optimizations that
+are not mathematically generalizable (and so we avoid them, as we want to try to remain as close to the mathematical formulations as possible).
+
+In particular, good speed performance at encoding can be obtained by using either PyPy JIT Compiler on the pure-python
+implementation (reedsolo.py) or either by compiling the Cython extension creedsolo.pyx (which is much more optimized and hence much faster than PyPy).
+
+From our speed tests, encoding rates of several MB/s can be expected with PyPy JIT,
+and 12.5 MB/s using the Cython extension creedsolo (benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
+
+To use the Cython implementation, it is necessary to ``pip install cython==3.0.0b2`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then simply `cd` to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, it is possible to generate just the C++ code by typing `cython -3 creedsolo.pyx`. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the `.pyx` cython source code will be included, but the binary won't be in the wheel.
 
 Then, use `from creedsolo import RSCodec` instead of importing from the `reedsolo` module, and finally only feed `bytearray()` objects to the `RSCodec` object. Exclusively using bytearrays is one of the reasons creedsolo is faster than reedsolo. You can convert any string by specifying the encoding: `bytearray("Hello World", "UTF-8")`.
 

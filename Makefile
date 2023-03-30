@@ -1,5 +1,7 @@
 # This Makefile runs tests and builds the package to upload to pypi
 # To use this Makefile, pip install py-make
+# then do: pymake <command>
+# or: python.exe -m pymake <command>
 # You also need to pip install also other required modules: `pip install flake8 nose coverage twine pytest pytest-cov`
 # Up to Python 3.9 included, nosetests was used, but from 3.10 onward, support for it was dropped since it is not maintained anymore, so that pytest and pytest-cov are used instead.
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
@@ -59,7 +61,7 @@ testnobinary:
      #pytest --cov-branch
 
 testnose:
-    nosetests -vv --with-coverage
+    python -m nose -vv --with-coverage
 
 testtox:
     # Test for multiple Python versions

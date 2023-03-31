@@ -50,16 +50,27 @@ else:
     cmdclass = {}
 
 setup(name = "reedsolo",
-    version = "2.0.6",
-    description = "Pure-Python Reed Solomon encoder/decoder",
+    version = "2.0.7",
+    description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",
     maintainer = "Stephen Karl Larroque",
     maintainer_email = "lrq3000@gmail.com",
     license = "Public Domain",  # the license field can only store one license, use classifiers below to declare multiple licenses https://github.com/pypi/warehouse/issues/8960
-    url = "https://github.com/tomerfiliba/reedsolomon",
+    project_urls = {  # https://stackoverflow.com/questions/61156290/how-to-set-project-links-in-pypi and https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
+        "Homepage": "https://github.com/tomerfiliba/reedsolomon",
+        "Documentation": "https://github.com/tomerfiliba/reedsolomon/blob/master/README.rst",
+        "Source": "https://github.com/tomerfiliba/reedsolomon",
+        "Tracker": "https://github.com/tomerfiliba/reedsolomon/issues",
+        "Download": "https://github.com/tomerfiliba/reedsolomon/releases",
+        "Conda-Forge": "https://anaconda.org/conda-forge/reedsolo",
+        "Gentoo": "https://packages.gentoo.org/packages/dev-python/reedsolomon",
+        }
     py_modules = ["reedsolo"],
     platforms = ["any"],
+    extras_require={
+        "cythonize": ["cython>=3.0.0b2"],  # see: https://hynek.me/articles/python-recursive-optional-dependencies/ and https://copyprogramming.com/howto/optional-dependencies-in-a-pip-requirements-file
+        },
     long_description = open("README.rst", "r").read(),
     long_description_content_type = 'text/x-rst',
     license_files = ('LICENSE',),  # force include LICENSE file, requires setuptools >= 42.0.0. Note that this field only support one line text, do not input the full license content here. The full LICENSE file is currently forcefully included via MANIFEST.in, but other methods exist, see: https://stackoverflow.com/a/66443941/1121352
@@ -87,6 +98,7 @@ setup(name = "reedsolo",
         "Topic :: System :: Archiving :: Backup",
         "Topic :: System :: Recovery Tools",
     ],
+    keywords = ["data", "protection", "correction", "recovery", "restore", "save", "data-recovery", "reed-solomon", "error-correction-code", "qr", "qr-codes", "barcodes"],
     ext_modules = extensions,
     cmdclass = cmdclass,
 )

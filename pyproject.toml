@@ -7,7 +7,7 @@ build-backend = ["flit_core.buildapi", "setuptools.build_meta:__legacy__"]
 
 [project]
 name = "reedsolo"
-version = "2.0.7"
+version = "2.0.8"
 description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},

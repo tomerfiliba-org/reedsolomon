@@ -1,5 +1,4 @@
 [run]
-parallel = True
 relative_files = True
 branch = True
 include =

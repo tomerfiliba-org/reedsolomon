@@ -50,7 +50,7 @@ else:
     cmdclass = {}
 
 setup(name = "reedsolo",
-    version = "2.0.8",
+    version = "2.0.9",
     description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

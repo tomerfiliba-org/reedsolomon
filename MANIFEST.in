@@ -2,3 +2,4 @@ include LICENSE
 include README.rst
 include changelog.txt
 include *.pyx # include the cython implementation sourcecode in the wheel, so that the user can compile later
+recursive-include tests *.py

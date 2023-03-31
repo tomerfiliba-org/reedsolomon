@@ -2,7 +2,7 @@
 # To use this Makefile, pip install py-make
 # then do: pymake <command>
 # or: python.exe -m pymake <command>
-# You also need to pip install also other required modules: `pip install flake8 nose coverage twine pytest pytest-cov`
+# You also need to pip install also other required modules: `pip install flake8 coverage twine pytest pytest-cov validate-pyproject[all]`
 # Up to Python 3.9 included, nosetests was used, but from 3.10 onward, support for it was dropped since it is not maintained anymore, so that pytest and pytest-cov are used instead.
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
@@ -70,6 +70,9 @@ testtox:
 testsetup:
 	python setup.py check --metadata --restructuredtext --strict
 
+testpyproject:
+    validate-pyproject pyproject.toml -v
+
 testsetuppost:
 	twine check "dist/*"
 
@@ -119,10 +122,13 @@ clean:
 toxclean:
 	@+python -c "import shutil; shutil.rmtree('.tox', True)"
 
-
 installdev:
 	@+python setup.py develop --uninstall
 	@+python setup.py develop
+
+installdevpep517:
+    @+python -m pip uninstall reedsolo
+	@+python -m pip install -e .
 
 install:
 	@+python setup.py install
@@ -134,6 +140,7 @@ installpep517:
 build:
 	@+make prebuildclean
 	@+make testsetup
+    @+make testpyproject
 	@+python setup.py sdist bdist_wheel
 	# @+python setup.py bdist_wininst
     pymake testsetuppost  # @+make does not work here, dunno why

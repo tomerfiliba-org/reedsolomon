@@ -1,5 +1,6 @@
 Build instructions to make a new release:
 
 * ensure ci-build and coverage are OK
+* test pyproject.toml validity using https://pypi.org/project/validate-pyproject/
 * pymake buildupload (requires pip install py-make)
 * make a new release and tag on GitHub (tags are necessary for Gentoo builds)

@@ -2,12 +2,12 @@
 # Inspired by: https://hynek.me/articles/python-recursive-optional-dependencies/
 
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel", "flit_core >=3.2,<4"]
-build-backend = ["flit_core.buildapi", "setuptools.build_meta:__legacy__"]
+requires = ["flit_core >=3.2,<4", "wheel"]
+build-backend = "flit_core.buildapi"
 
 [project]
 name = "reedsolo"
-version = "2.0.9"
+version = "2.0.11"
 description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},

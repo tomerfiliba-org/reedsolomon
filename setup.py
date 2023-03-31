@@ -57,7 +57,7 @@ setup(name = "reedsolo",
     maintainer = "Stephen Karl Larroque",
     maintainer_email = "lrq3000@gmail.com",
     license = "Public Domain",  # the license field can only store one license, use classifiers below to declare multiple licenses https://github.com/pypi/warehouse/issues/8960
-    project_urls = {  # https://stackoverflow.com/questions/61156290/how-to-set-project-links-in-pypi and https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
+    project_urls = {
         "Homepage": "https://github.com/tomerfiliba/reedsolomon",
         "Documentation": "https://github.com/tomerfiliba/reedsolomon/blob/master/README.rst",
         "Source": "https://github.com/tomerfiliba/reedsolomon",
@@ -65,7 +65,7 @@ setup(name = "reedsolo",
         "Download": "https://github.com/tomerfiliba/reedsolomon/releases",
         "Conda-Forge": "https://anaconda.org/conda-forge/reedsolo",
         "Gentoo": "https://packages.gentoo.org/packages/dev-python/reedsolomon",
-        }
+        },  # see: https://stackoverflow.com/questions/61156290/how-to-set-project-links-in-pypi and https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
     py_modules = ["reedsolo"],
     platforms = ["any"],
     extras_require={

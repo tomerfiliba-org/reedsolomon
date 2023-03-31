@@ -1,0 +1,130 @@
+# SPDX-License-Identifier: Unlicense OR MIT-0
+# Inspired by: https://hynek.me/articles/python-recursive-optional-dependencies/
+
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel", "flit_core >=3.2,<4"]
+build-backend = ["flit_core.buildapi", "setuptools.build_meta:__legacy__"]
+
+[project]
+name = "reedsolo"
+version = "2.0.7"
+description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
+authors = [
+    {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
+    {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
+    ]
+maintainers = [
+    {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
+    ]
+requires-python = ">=2.7"
+license = { file = "LICENSE" }
+keywords = ["data", "protection", "correction", "recovery", "restore", "save", "data-recovery", "reed-solomon", "error-correction-code", "qr", "qr-codes", "barcodes"]
+classifiers = [
+    "Development Status :: 6 - Mature",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: The Unlicense (Unlicense)",  # Unlicense OR MIT-0 at the user preference
+    "License :: OSI Approved :: MIT No Attribution License (MIT-0)",
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: POSIX :: Linux',
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Cython",
+    "Topic :: Communications",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: System :: Archiving :: Backup",
+    "Topic :: System :: Recovery Tools",
+]
+dependencies = [
+    #"typing-extensions; python_version<'3.8'",
+    #"importlib_metadata;python_version<'3.8'",
+]
+
+[project.urls]
+Homepage = "https://github.com/tomerfiliba/reedsolomon"
+Documentation = "https://github.com/tomerfiliba/reedsolomon/blob/master/README.rst"
+"Source" = "https://github.com/tomerfiliba/reedsolomon"
+Tracker = "https://github.com/tomerfiliba/reedsolomon/issues"
+Download = "https://github.com/tomerfiliba/reedsolomon/releases"
+"Conda-Forge" = "https://anaconda.org/conda-forge/reedsolo"
+"Gentoo" = "https://packages.gentoo.org/packages/dev-python/reedsolomon"
+#Changelog = "https://url/changelog"
+
+[tool.flit.sdist]
+include = [
+    "*.rst",
+    "LICENSE*",
+    "README*",
+    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can compile later
+    "tests",
+]
+exclude = [
+    "docs/_build",
+    "tests/__pycache__",
+    "tests/.mypy_cache",
+]
+
+[project.optional-dependencies]
+cythonize = [
+    "cython>=3.0.0b2"
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+xfail_strict = true
+testpaths = "tests"
+filterwarnings = [
+    "once::Warning",
+]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+parallel = true
+branch = true
+relative_files = true
+include = [
+    "reedsolo.py",
+    ]
+
+[tool.coverage.paths]
+source = ["."]
+
+[tool.coverage.report]
+show_missing = true
+include = [
+    "reedsolo.py",
+]
+omit = [
+    "*/python?.?/*",
+    "*/site-packages/nose/*",
+    "*/opt/python/pypy*",
+    "*/tests/*",
+]
+exclude_lines = [
+    # a more strict default pragma
+    "\\# pragma: no cover\\b",
+
+    # allow defensive code
+    "^\\s*raise AssertionError\\b",
+    "^\\s*raise NotImplementedError\\b",
+    "^\\s*return NotImplemented\\b",
+    "^\\s*raise$",
+
+    # typing-related code
+    "^if (False|TYPE_CHECKING):",
+    ": \\.\\.\\.(\\s*#.*)?$",
+    "^ +\\.\\.\\.$",
+    "-> ['\"]?NoReturn['\"]?:",
+]
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"

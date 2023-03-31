@@ -54,8 +54,10 @@ or locally with:
 
 .. code:: sh
 
-    python setup.py install --cythonize  # if cython >= 3.0.0b2 is already installed
-    pip install --editable .[cythonize] --install-option="--cythonize" --verbose  # if cython is not installed
+    # if cython >= 3.0.0b2 is already installed:
+    python setup.py install --cythonize
+    # or if cython is not installed:
+    pip install --upgrade --editable .[cythonize] --install-option="--cythonize" --verbose
 
 or with pep517 ``build`` tool:
 

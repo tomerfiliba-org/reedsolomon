@@ -2,8 +2,8 @@
 # Inspired by: https://hynek.me/articles/python-recursive-optional-dependencies/
 
 [build-system]
-requires = ["flit_core >=3.2,<4", "wheel"]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools>65", "wheel>=0.40.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "reedsolo"
@@ -58,15 +58,20 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 "Gentoo" = "https://packages.gentoo.org/packages/dev-python/reedsolomon"
 #Changelog = "https://url/changelog"
 
-[tool.flit.sdist]
-include = [
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+"*" = [
     "*.rst",
     "LICENSE*",
     "README*",
     "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can compile later
     "tests",
 ]
-exclude = [
+
+[tool.setuptools.exclude-package-data]
+"*" = [
     "docs/_build",
     "tests/__pycache__",
     "tests/.mypy_cache",

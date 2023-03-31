@@ -42,3 +42,5 @@ Other TODO apart from Cython:
 * Optimize pure python implementation by using _bytearray() instead of [] whenever possible (compare with changes done on the cython implementation)
 * Pre-allocate bytearrays whenever possible in the pure-python implementation (like the cython implementation)
 * Test and fix issues with galois fields smaller than 2^8.
+
+* Try to reproduce encoding and decoding using an external library, potentially faster and supporting both polynomials and matrices modulo n, such as flint: https://fredrikj.net/python-flint/nmod_poly.html and https://pypi.org/project/flint-py/#description

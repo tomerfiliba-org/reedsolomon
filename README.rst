@@ -354,6 +354,10 @@ From our speed tests, encoding rates of several MB/s can be expected with PyPy J
 and 14.3 MB/s using the Cython extension creedsolo on an Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz
 (benchmarked with `pyFileFixity's ecc_speedtest.py <https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py>`_).
 
+Decoding remains much slower, and less optimized, but more complicated to do so. However, the rationale to focus optimization efforts primarily on encoding and not decoding
+is that users are more likely to spend most of their processing time encoding data, and much less decoding, as encoding needs to be done indiscriminately apriori to protect data,
+whereas decoding happens only aposteriori on data that the user knows is tampered, so this is a much reduced subset of all the protected data (hopefully).
+
 To use the Cython implementation, it is necessary to ``pip install cython==3.0.0b2`` and to install a C++ compiler (Microsoft Visual C++ 14.x for Windows and Python 3.10+), read the up-to-date instructions in the `official wiki <https://wiki.python.org/moin/WindowsCompilers>`_. Then simply ``cd`` to the root of the folder where creedsolo.pyx is, and type ``python setup.py build_ext --inplace --cythonize``. Alternatively, it is possible to generate just the C++ code by typing ``cython -3 creedsolo.pyx``. When building a distributable egg or installing the module from source, the Cython module can be transpiled and compiled if both Cython and a C compiler are installed and the ``--cythonize`` flag is supplied to the setup.py, otherwise by default only the pure-python implementation and the ``.pyx`` cython source code will be included, but the binary won't be in the wheel.
 
 Then, use ``from creedsolo import RSCodec`` instead of importing from the ``reedsolo`` module, and finally only feed ``bytearray()`` objects to the `RSCodec` object. Exclusively using bytearrays is one of the reasons creedsolo is faster than reedsolo. You can convert any string by specifying the encoding: ``bytearray("Hello World", "UTF-8")``.

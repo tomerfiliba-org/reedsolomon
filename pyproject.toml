@@ -84,7 +84,6 @@ testpaths = "tests"
 filterwarnings = [
     "once::Warning",
 ]
-asyncio_mode = "auto"
 
 [tool.coverage.run]
 parallel = true

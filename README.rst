@@ -382,7 +382,7 @@ However, for the cythonized extension ``creedsolo``, these changes are breaking 
 
 The good news is that, thanks to these changes, both implementations are much faster, but especially ``creedsolo``, which now encodes at a rate of ``15-20 MB/s`` (yes that's BYTES, not bits!). This however requires Cython >= 3.0.0b2, and is incompatible with Python 2 (the pure python ``reedsolo`` is still compatible, but not the cythonized extension ``creedsolo``).
 
-In practice, there is likely very little you need to change, just add a few ``bytearray()`` calls here and there. For a practical example of what was required to migrate, see `the commits for pyFileFixity migration <https://github.com/lrq3000/pyFileFixity/compare/47407b73dfbcfe34970055524655e21ccf2979aa..23b8f6f6c6f252fb9a641f419a6bfa5a1e6c3343>_`.
+In practice, there is likely very little you need to change, just add a few ``bytearray()`` calls here and there. For a practical example of what was required to migrate, see `the commits for pyFileFixity migration <https://github.com/lrq3000/pyFileFixity/compare/47407b73dfbcfe34970055524655e21ccf2979aa..23b8f6f6c6f252fb9a641f419a6bfa5a1e6c3343>`_.
 
 Recommended reading
 -------------------

@@ -48,7 +48,7 @@ By default, only a pure-python implementation is installed. If you have a C comp
     # For the latest stable release:
     pip install --upgrade reedsolo[cythonize] --config-setting=--cythonize=True --verbose
     # For the latest development release, which may be unstable:
-    pip install --upgrade git+https://github.com/tomerfiliba/reedsolomon#egg=reedsolo[cythonize] --config-setting=--cythonize=True --verbose
+    pip install --upgrade "reedsolo[cythonize] @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting=--cythonize=True --verbose
 
 The ``reedsolo[cythonize]`` will automatically install the adequate ``cython`` extra requirement, and ``--config-setting=--cythonize=True``
 signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.

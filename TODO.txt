@@ -44,3 +44,5 @@ Other TODO apart from Cython:
 * Test and fix issues with galois fields smaller than 2^8.
 
 * Try to reproduce encoding and decoding using an external library, potentially faster and supporting both polynomials and matrices modulo n, such as flint: https://fredrikj.net/python-flint/nmod_poly.html and https://pypi.org/project/flint-py/#description
+
+* move creedsolo to its own repo so that cythonization and c build is not optional and we can use cibuildwheel to build several different wheels for various platforms

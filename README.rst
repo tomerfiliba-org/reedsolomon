@@ -45,10 +45,13 @@ By default, only a pure-python implementation is installed. If you have a C comp
     
 .. code:: sh
 
-    pip install --upgrade reedsolo[cythonize] --install-option="--cythonize" --verbose
+    # For the latest stable release:
+    pip install --upgrade reedsolo[cythonize] --config-setting=--cythonize=True --verbose
+    # For the latest development release, which may be unstable:
+    pip install --upgrade git+https://github.com/tomerfiliba/reedsolomon#egg=reedsolo[cythonize] --config-setting=--cythonize=True --verbose
 
-The ``reedsolo[cythonize]`` will automatically install the adequate ``cython`` extra requirement, and ``--install-option="--cythonize"``
-signals to ``pip`` which propagates to ``reedsolo's setup.py`` to build the cythonized extension.
+The ``reedsolo[cythonize]`` will automatically install the adequate ``cython`` extra requirement, and ``--config-setting=--cythonize=True``
+signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.
     
 or locally with:
 
@@ -57,16 +60,16 @@ or locally with:
     # if cython >= 3.0.0b2 is already installed:
     python setup.py install --cythonize
     # or if cython is not installed:
-    pip install --upgrade --editable .[cythonize] --install-option="--cythonize" --verbose
+    pip install --upgrade --editable .[cythonize] --config-setting=--cythonize=True --verbose
 
 or with pep517 ``build`` tool:
 
 .. code:: sh
 
     pip install build
-    python -sBm build -w --no-isolation -C=--build-option=--cythonize
+    python -sBm build -w --no-isolation --config-setting=--cythonize=True
     # or
-    pip install --upgrade reedsolo[cythonize] --install-option="--cythonize" --verbose --use-pip517
+    pip install --upgrade reedsolo[cythonize] --config-setting=--cythonize=True --verbose --use-pep517
 
 The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
 

@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Unlicense OR MIT-0
 # Inspired by: https://hynek.me/articles/python-recursive-optional-dependencies/
+# We here use a single-module distribution style https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#single-module-distribution
 
 [build-system]
 requires = ["setuptools>65", "wheel>=0.40.0"]

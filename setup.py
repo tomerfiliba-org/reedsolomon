@@ -69,9 +69,6 @@ setup(name = "reedsolo",
         },  # see: https://stackoverflow.com/questions/61156290/how-to-set-project-links-in-pypi and https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
     py_modules = ["reedsolo"],
     platforms = ["any"],
-    #extras_require={
-        #"cythonize": ["cython>=3.0.0b2"],  # see: https://hynek.me/articles/python-recursive-optional-dependencies/ and https://copyprogramming.com/howto/optional-dependencies-in-a-pip-requirements-file
-        #},
     long_description = open("README.rst", "r").read(),
     long_description_content_type = 'text/x-rst',
     license_files = ('LICENSE',),  # force include LICENSE file, requires setuptools >= 42.0.0. Note that this field only support one line text, do not input the full license content here. The full LICENSE file is currently forcefully included via MANIFEST.in, but other methods exist, see: https://stackoverflow.com/a/66443941/1121352

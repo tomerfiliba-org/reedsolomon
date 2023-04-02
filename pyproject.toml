@@ -62,7 +62,7 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 #Changelog = "https://url/changelog"
 
 #[project.optional-dependencies]
-#cythonize = [
+#cythonize = [  # cython and other build time dependencies can NOT be defined as optional-dependencies nor extras, they are installed only after build! They need to be defined as build-system requirements
 #    "cython>=3.0.0b2"
 #]
 

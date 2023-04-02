@@ -46,30 +46,24 @@ By default, only a pure-python implementation is installed. If you have a C comp
 .. code:: sh
 
     # For the latest stable release:
-    pip install --upgrade reedsolo[cythonize] --config-setting=--cythonize=True --verbose
+    pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --use-pep517 --verbose
     # For the latest development release, which may be unstable:
-    pip install --upgrade "reedsolo[cythonize] @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting=--cythonize=True --verbose
+    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --verbose
 
-The ``reedsolo[cythonize]`` will automatically install the adequate ``cython`` extra requirement, and ``--config-setting=--cythonize=True``
-signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.
+The ``--config-setting="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.
     
 or locally with:
 
 .. code:: sh
 
-    # if cython >= 3.0.0b2 is already installed:
-    python setup.py install --cythonize
-    # or if cython is not installed:
-    pip install --upgrade --editable .[cythonize] --config-setting=--cythonize=True --verbose
+    pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 or with pep517 ``build`` tool:
 
 .. code:: sh
 
     pip install build
-    python -sBm build -w --no-isolation --config-setting=--cythonize=True
-    # or
-    pip install --upgrade reedsolo[cythonize] --config-setting=--cythonize=True --verbose --use-pep517
+    python -sBm build -w --config-setting="--build-option=--cythonize"
 
 The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
 

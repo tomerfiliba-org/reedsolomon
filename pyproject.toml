@@ -3,12 +3,12 @@
 # We here use a single-module distribution style https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#single-module-distribution
 
 [build-system]
-requires = ["setuptools>65", "wheel>=0.40.0"]
+requires = ["setuptools>65", "wheel>=0.40.0", "cython>=3.0.0b2"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "reedsolo"
-version = "2.0.11"
+version = "2.0.12"
 description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -78,10 +78,10 @@ where = ["."]
     "tests/.mypy_cache",
 ]
 
-[project.optional-dependencies]
-cythonize = [
-    "cython>=3.0.0b2"
-]
+#[project.optional-dependencies]
+#cythonize = [
+#    "cython>=3.0.0b2"
+#]
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"

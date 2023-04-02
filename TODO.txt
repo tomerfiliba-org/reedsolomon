@@ -46,3 +46,14 @@ Other TODO apart from Cython:
 * Try to reproduce encoding and decoding using an external library, potentially faster and supporting both polynomials and matrices modulo n, such as flint: https://fredrikj.net/python-flint/nmod_poly.html and https://pypi.org/project/flint-py/#description
 
 * move creedsolo to its own repo so that cythonization and c build is not optional and we can use cibuildwheel to build several different wheels for various platforms
+
+* [x] Fix optional cythonization post pep517 and with isolated builds:
+    * Main issue is that although pep517 standardizes pure python packages building, extensions building is not standardized at all and mainly locked in setuptools, although a few other tools with their own custom process exist such as hatch, meson, enscons https://hackmd.io/@gaborbernat/py-packaging-summit-2022#Building-C-Extensions-without-Setuptools---Henry-Schreiner-III-and-Ofek-Lev
+    * setup.py is not deprecated, only calling it as a cli tool is deprecated: https://discuss.python.org/t/custom-build-steps-moving-bokeh-off-setup-py/16128/11 + see also conditional hooks in hatch https://hatch.pypa.io/dev/config/build/#conditional-execution
+    * can't access extras from setup.py, so that's not a solution: https://stackoverflow.com/questions/66083971/setup-py-how-to-find-user-specified-bracketed-extras
+    * poetry supports optional cythonization, readily usable examples: https://github.com/python-poetry/poetry/issues/2330
+    * the old setup.py and setuptools system is usually ancient on a lot of linux distribs, so we end up with an ancient python ecosystem, pyproject.toml fixes that https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html
+    * update conda building process? "Conda 3.22 was just released, adding load_file_data function that can read toml files, so we can template the conda recipe dependencies directly from pyproject.toml . The conda recipe also now just builds from the wheel, which is simpler." https://discuss.python.org/t/custom-build-steps-moving-bokeh-off-setup-py/16128/17 - but beware, conda-build globally sets --no-isolation for pip https://discuss.python.org/t/how-to-use-pip-install-to-build-some-scientific-packages-from-sources-with-custom-build-arguments/24717/6
+    * --install-option is deprecated: https://discuss.python.org/t/passing-command-line-arguments-to-pip-install-after-install-options-deprecation/22981
+    
+

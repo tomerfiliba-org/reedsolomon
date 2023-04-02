@@ -5,7 +5,7 @@
 # Rotorgit
 # Angus Gratton
 #
-# Licensed under the Public Domain or MIT License at your convenience.
+# Licensed under the Unlicense or MIT-0 License at your convenience (essentially equivalent to Public Domain).
 
 # See:
 # https://docs.python.org/2/distutils/setupscript.html
@@ -22,9 +22,10 @@ except ImportError:
 
 import os, sys
 
-if '--cythonize' in sys.argv:
+if '--cythonize' in sys.argv or os.getenv('REEDSOLO_CYTHONIZE'):
     # Remove the special argument, otherwise setuptools will raise an exception
-    sys.argv.remove('--cythonize')
+    if '--cythonize' in sys.argv:
+        sys.argv.remove('--cythonize')
     try:
         # If Cython is installed, transpile the optimized Cython module to C and compile as a .pyd to be distributed
         from Cython.Build import cythonize, build_ext  # this acts as a check whether Cython is installed, otherwise this will fail

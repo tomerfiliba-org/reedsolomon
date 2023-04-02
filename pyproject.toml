@@ -3,7 +3,7 @@
 # We here use a single-module distribution style https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#single-module-distribution
 
 [build-system]
-requires = ["setuptools>65", "wheel>=0.40.0", "cython>=3.0.0b2"]
+requires = ["setuptools>59", "wheel>=0.37.0", "cython>=3.0.0b2"]
 build-backend = "setuptools.build_meta"
 
 [project]

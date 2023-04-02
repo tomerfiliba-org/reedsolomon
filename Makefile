@@ -147,6 +147,9 @@ build:
 	# @+python setup.py bdist_wininst
     pymake testsetuppost  # @+make does not work here, dunno why
 
+buildwheelhouse:
+    cibuildwheel --platform auto
+
 pypi:
 	twine upload dist/*
 

@@ -55,5 +55,9 @@ Other TODO apart from Cython:
     * the old setup.py and setuptools system is usually ancient on a lot of linux distribs, so we end up with an ancient python ecosystem, pyproject.toml fixes that https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html
     * update conda building process? "Conda 3.22 was just released, adding load_file_data function that can read toml files, so we can template the conda recipe dependencies directly from pyproject.toml . The conda recipe also now just builds from the wheel, which is simpler." https://discuss.python.org/t/custom-build-steps-moving-bokeh-off-setup-py/16128/17 - but beware, conda-build globally sets --no-isolation for pip https://discuss.python.org/t/how-to-use-pip-install-to-build-some-scientific-packages-from-sources-with-custom-build-arguments/24717/6
     * --install-option is deprecated: https://discuss.python.org/t/passing-command-line-arguments-to-pip-install-after-install-options-deprecation/22981
+    * https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/25379
     
+* cibuildwheel github actions only on release
+* upload new release
+* finish array optimizations
 

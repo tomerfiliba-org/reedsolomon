@@ -136,13 +136,13 @@ install:
 
 installpep517:
     # requires `pip install build`
-    @+python -sBm build -w --config-setting="--build-option=--cythonize"
+    @+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 
 build:
 	@+make prebuildclean
 	#@+make testsetup
     pymake testpyproject
-    python -sBm build -w --config-setting="--build-option=--cythonize"
+    python -sBm build --config-setting="--build-option=--cythonize"
 	#@+python setup.py sdist bdist_wheel  # deprecated with pep517
 	# @+python setup.py bdist_wininst
     pymake testsetuppost  # @+make does not work here, dunno why

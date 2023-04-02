@@ -44,9 +44,8 @@ elif '--native-compile' in sys.argv:
     # Compile pyd from pre-transpiled creedsolo.c
     # Here we use an explicit flag to compile, whereas implicit fallback is recommended by Cython, but in practice it's too difficult to maintain, because some people on Windows have Cython installed but no C compiler https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
     print("Notice: Compiling the creedsolo module from the pre-transpiled creedsolo.c file using the locally installed C compiler...")
-    from Cython.Build import build_ext
     extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
-    cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
+    cmdclass = {}
 else:
     extensions = None
     cmdclass = {}

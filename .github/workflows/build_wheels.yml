@@ -1,6 +1,6 @@
 name: Build_wheelhouse
 # Cross-platform wheel and sdist builder and pypi uploader for Python modules
-# From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml
+# From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml and https://github.com/dnicolodi/python-siphash24/blob/master/.github/workflows/wheels.yml
 
 # Build only on creation of new releases
 on:
@@ -16,11 +16,31 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        #os: [ubuntu-20.04, windows-2019, macos-11]
-        os: [ubuntu-20.04]
+        include:
+          - os: ubuntu-20.04
+          #- os: macos-11
+          #- os: windows-2019
+          #  architecture: x86
+          #- os: windows-2019
+          #  architecture: AMD64
 
     steps:
       - uses: actions/checkout@v3
+
+      # - uses: docker/setup-qemu-action@v2
+      #   with:
+      #     platforms: arm64
+      #   if: runner.os == 'Linux'
+      # - name: Prepare MSVC for Meson on Windows AMD64, see https://dvdhrm.github.io/2021/04/21/meson-msvc-github-actions/
+      #   uses: bus1/cabuild/action/msdevshell@v1
+      #   with:
+      #     architecture: x64
+      #   if: runner.os == 'Windows' && matrix.architecture == 'AMD64'
+      # - name: Prepare MSVC for Meson on Windows x86, see https://dvdhrm.github.io/2021/04/21/meson-msvc-github-actions/
+      #   uses: bus1/cabuild/action/msdevshell@v1
+      #   with:
+      #     architecture: x86
+      #   if: runner.os == 'Windows' && matrix.architecture == 'x86'
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.12.1
@@ -43,8 +63,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build sdist
-        run: pipx run build --sdist
+      - run: python -m pip install build
+      - run: python -m build --sdist
 
       - uses: actions/upload-artifact@v3
         with:

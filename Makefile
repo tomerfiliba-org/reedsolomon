@@ -15,6 +15,7 @@
 	flake8
 	test
 	testsetup
+    testpyproject
     testsetuppost
 	testcoverage
     testtox
@@ -135,13 +136,14 @@ install:
 
 installpep517:
     # requires `pip install build`
-    @+python -sBm build -w --no-isolation -C=--build-option=--cythonize
+    @+python -sBm build -w --config-setting="--build-option=--cythonize"
 
 build:
 	@+make prebuildclean
-	@+make testsetup
-    @+make testpyproject
-	@+python setup.py sdist bdist_wheel
+	#@+make testsetup
+    pymake testpyproject
+    python -sBm build -w --config-setting="--build-option=--cythonize"
+	#@+python setup.py sdist bdist_wheel  # deprecated with pep517
 	# @+python setup.py bdist_wininst
     pymake testsetuppost  # @+make does not work here, dunno why
 

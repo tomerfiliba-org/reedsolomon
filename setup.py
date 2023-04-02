@@ -32,7 +32,7 @@ if '--cythonize' in sys.argv or os.getenv('REEDSOLO_CYTHONIZE'):
         print("Cython is installed, building creedsolo module")
         extensions = cythonize([ Extension('creedsolo', ['creedsolo.pyx']) ], annotate=True, force=True,  # this may fail hard if Cython is installed but there is no C compiler for current Python version, and we have no way to know. Alternatively, we could supply exclude_failures=True , but then for those who really want the cythonized compiled extension, it would be much harder to debug
                         compiler_directives={'embedsignature': True, 'binding': False, 'initializedcheck': True})
-        cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
+        cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace # TODO: this is likely unnecessary with modern python packaging since using python setup.py as a clip was deprecated
     except ImportError:
         # Else Cython is not installed (or user explicitly wanted to skip)
         # Else run in pure python mode (no compilation)

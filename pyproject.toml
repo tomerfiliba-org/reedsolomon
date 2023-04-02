@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reedsolo"
-version = "2.0.12"
+version = "2.0.13"
 description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},

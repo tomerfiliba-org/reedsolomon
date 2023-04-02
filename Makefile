@@ -138,6 +138,9 @@ installpep517:
     # requires `pip install build`
     @+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 
+bandit:
+    bandit reedsolo.py
+
 build:
 	@+make prebuildclean
 	#@+make testsetup

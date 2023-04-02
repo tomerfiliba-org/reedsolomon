@@ -61,6 +61,15 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 "Gentoo" = "https://packages.gentoo.org/packages/dev-python/reedsolomon"
 #Changelog = "https://url/changelog"
 
+#[project.optional-dependencies]
+#cythonize = [
+#    "cython>=3.0.0b2"
+#]
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"
+
 [tool.setuptools.packages.find]
 where = ["."]
 
@@ -79,11 +88,6 @@ where = ["."]
     "tests/__pycache__",
     "tests/.mypy_cache",
 ]
-
-#[project.optional-dependencies]
-#cythonize = [
-#    "cython>=3.0.0b2"
-#]
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"
@@ -131,6 +135,20 @@ exclude_lines = [
     "-> ['\"]?NoReturn['\"]?:",
 ]
 
-[project.readme]
-file = "README.rst"
-content-type = "text/x-rst"
+# NOTE: you have to use single-quoted strings in TOML for regular expressions.
+# It's the equivalent of r-strings in Python.  Multiline strings are treated as
+# verbose regular expressions by Black.  Use [ ] to denote a significant space
+# character.
+
+# While black is awesome, it does not support cython, so we avoid for the moment
+# to keep a similar formatting between the pure python and the cython implementations.
+# see: https://github.com/psf/black/issues/359
+
+#[tool.black]
+#line-length = 88
+#target-version = ['py39', 'py310', 'py311']
+#include = '\.pyi?$'
+# We use preview style for formatting Black itself. If you
+# want stable formatting across releases, you should keep
+# this off.
+#preview = false

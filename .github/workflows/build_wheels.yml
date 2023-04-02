@@ -1,6 +1,6 @@
 name: Build_wheelhouse
 # Cross-platform wheel and sdist builder and pypi uploader for Python modules
-# From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml and https://github.com/dnicolodi/python-siphash24/blob/master/.github/workflows/wheels.yml
+# From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml and https://github.com/dnicolodi/python-siphash24/blob/0027da083e104af2a8216a51bed7650977fb2c43/.github/workflows/wheels.yml
 
 # Build only on creation of new releases
 on:

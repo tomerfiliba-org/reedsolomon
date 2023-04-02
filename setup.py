@@ -35,17 +35,18 @@ if '--cythonize' in sys.argv or os.getenv('REEDSOLO_CYTHONIZE'):
         cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
     except ImportError:
         # Else Cython is not installed (or user explicitly wanted to skip)
-        #if '--native-compile' in sys.argv:
-            # Compile pyd from pre-transpiled creedsolo.c
-            # This is recommended by Cython, but in practice it's too difficult to maintain https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
-            #print("Cython is not installed, but the creedsolo module will be built from the pre-transpiled creedsolo.c file using the locally installed C compiler")
-            #sys.argv.remove('--native-compile')
-            #extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
-        #else:
         # Else run in pure python mode (no compilation)
         print("WARNING: Cython is not installed despite specifying --cythonize, creedsolo module will NOT be built.")
         extensions = None
         cmdclass = {}
+elif '--native-compile' in sys.argv:
+    sys.argv.remove('--native-compile')
+    # Compile pyd from pre-transpiled creedsolo.c
+    # Here we use an explicit flag to compile, whereas implicit fallback is recommended by Cython, but in practice it's too difficult to maintain, because some people on Windows have Cython installed but no C compiler https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
+    print("Notice: Compiling the creedsolo module from the pre-transpiled creedsolo.c file using the locally installed C compiler...")
+    from Cython.Build import build_ext
+    extensions = [ Extension('creedsolo', ['creedsolo.c']) ]
+    cmdclass = {'build_ext': build_ext}  # avoids the need to call python setup.py build_ext --inplace
 else:
     extensions = None
     cmdclass = {}

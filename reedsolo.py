@@ -662,7 +662,7 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
         # But this can be optimized: since we only need the Kth element, we don't need to compute the polynomial multiplication for any other element but the Kth. Thus to optimize, we compute the polymul only at the item we need, skipping the rest (avoiding a nested loop, thus we are linear time instead of quadratic).
         # This optimization is actually described in several figures of the book "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press.
         delta = synd[K]
-        for j in xrange(1, len(err_loc)):
+        for j in xrange(1, len(err_loc)):  # range 1:256 is important: if you use range 0:255, if the last byte of the ecc symbols is corrupted, it won't be correctable! You need to use the range 1,256 to include this last byte.
             delta ^= gf_mul(err_loc[-(j+1)], synd[K - j]) # delta is also called discrepancy. Here we do a partial polynomial multiplication (ie, we compute the polynomial multiplication only for the term of degree K). Should be equivalent to brownanrs.polynomial.mul_at().
         #print "delta", K, delta, list(gf_poly_mul(err_loc[::-1], synd)) # debugline
 
@@ -688,8 +688,8 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
         if x != 0:
             err_loc = err_loc[i:]
             break
-    errs = len(err_loc) - 1
-    if (errs-erase_count) * 2 + erase_count > nsym:
+    errs = len(err_loc) - 1  # -1 because range is 1:256, it's offset by 1, it's not 0:255, hence the length would be overestimated without -1
+    if (errs-erase_count) * 2 + erase_count > nsym:  # failure if we have too many erratas for the Singleton Bound.
         raise ReedSolomonError("Too many errors to correct")
 
     # Return result
@@ -716,14 +716,14 @@ def rs_find_error_evaluator(synd, err_loc, nsym):
     return remainder
 
 def rs_find_errors(err_loc, nmess, generator=2):
-    '''Find the roots (ie, where evaluation = zero) of error polynomial by bruteforce trial, this is a sort of Chien's search (but less efficient, Chien's search is a way to evaluate the polynomial such that each evaluation only takes constant time).'''
+    '''Find the roots (ie, where evaluation = zero) of error polynomial by smart bruteforce trial. This is a faster form of chien search, processing only useful coefficients (the ones in the messages) instead of the whole 2^8 range. Besides the speed boost, this also allows to fix a number of issue: correctly decoding when the last ecc byte is corrupted, and accepting messages of length n > 2^8.'''
     # nmess = length of whole codeword (message + ecc symbols)
-    errs = len(err_loc) - 1
     err_pos = []
     for i in xrange(nmess): # normally we should try all 2^8 possible values, but here we optimize to just check the interesting symbols
         if gf_poly_eval(err_loc, gf_pow(generator, i)) == 0: # It's a 0? Bingo, it's a root of the error locator polynomial, in other terms this is the location of an error
             err_pos.append(nmess - 1 - i)
     # Sanity check: the number of errors/errata positions found should be exactly the same as the length of the errata locator polynomial
+    errs = len(err_loc) - 1  # compute the exact number of errors/errata that this error locator should find
     if len(err_pos) != errs:
         # TODO: to decode messages+ecc with length n > 255, we may try to use a bruteforce approach: the correct positions ARE in the final array j, but the problem is because we are above the Galois Field's range, there is a wraparound so that for example if j should be [0, 1, 2, 3], we will also get [255, 256, 257, 258] (because 258 % 255 == 3, same for the other values), so we can't discriminate. The issue is that fixing any errs_nb errors among those will always give a correct output message (in the sense that the syndrome will be all 0), so we may not even be able to check if that's correct or not, so I'm not sure the bruteforce approach may even be possible.
         raise ReedSolomonError("Too many (or few) errors found by Chien Search for the errata locator polynomial!")

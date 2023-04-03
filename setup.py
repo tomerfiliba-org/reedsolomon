@@ -51,7 +51,7 @@ else:
     cmdclass = {}
 
 setup(name = "reedsolo",
-    version = "2.0.15",
+    version = "2.0.16b1",
     description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension.",
     author = "Tomer Filiba",
     author_email = "tomerfiliba@gmail.com",

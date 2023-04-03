@@ -29,7 +29,13 @@ For the latest stable release, install with:
 
     pip install --upgrade reedsolo
 
-For the latest development release (do not use in production!), use:
+For the latest development release, use:
+
+.. code:: sh
+
+    pip install --upgrade reedsolo --pre
+
+For the latest unstable code (do not use in production!), use:
 
 .. code:: sh
 
@@ -41,14 +47,16 @@ If you have some issues installing through pip, maybe this command may help:
 
     pip install reedsolo --no-binary={reedsolo}
 
-By default, only a pure-python implementation is installed. If you have a C compiler, a faster cythonized binary can be optionally built with:
+By default, only a pure-python implementation is installed. If you have a C compiler, a faster cythonized binary ``creedsolo`` can be optionally built with:
     
 .. code:: sh
 
     # For the latest stable release:
-    pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --use-pep517 --verbose
-    # For the latest development release, which may be unstable:
-    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --verbose
+    pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --verbose
+    # For the latest development release:
+    pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
+    # For the cutting edge code:
+    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --isolated --verbose
 
 The ``--config-setting="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.
     
@@ -56,16 +64,18 @@ or locally with:
 
 .. code:: sh
 
-    pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose --use-pep517
+    pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose
 
-or locally with the pep517 compliant ``build`` tool:
+Note: for development, it's possible to add the ``--editable`` flag to use the local folder without installing in ``site-packages``.
+
+The package for the development or cutting-edge releases can also be built locally with the pep517 compliant ``build`` tool:
 
 .. code:: sh
 
     pip install build
     # With cythonization (from *.pyx to *.c to *.pyd)
     python -sBm build --config-setting="--build-option=--cythonize"
-    # or skip cythonization and only compile from the c extension (from *.c to *.pyd)
+    # or skip cythonization and only compile from the already transpiled c extension (from *.c to *.pyd)
     python -sBm build --config-setting="--build-option=--native-compile"
 
 The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.

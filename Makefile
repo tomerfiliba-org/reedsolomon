@@ -107,7 +107,7 @@ testcoveragexdist:
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
     coverage run --branch -m pytest . -n auto -v
-    coverage report -m
+     #coverage report -m  # cannot send a report from parallelized xdist
 
 testcoveragenocython:
      # This is the preferred way to run the tests since Python 3.10

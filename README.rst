@@ -76,6 +76,22 @@ As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a 
 
     conda install -c conda-forge reedsolo
 
+Various Linux distributions builds are also available, thanks to a network of amazing maintainers:
+
+.. list-table:: Title
+   :widths: 25 25 50
+   :header-rows: 0
+
+   * - |dl-gentoo|
+     - |dl-debian|
+     - |dl-fedora|
+   * - |dl-archlinux|
+     - |dl-alpine|
+     - |dl-altlinux|
+   * - |dl-linux-others|
+     - 
+     - 
+
 Usage
 -----
 
@@ -98,7 +114,13 @@ Basic usage with high-level RSCodec class
     # encoding a byte string is as easy:
     >>> rsc.encode(b'hello world')
     b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa'
-    # Note: strings of any length, even if longer than the Galois field, will be encoded as well using transparent chunking.
+
+Note: strings of any length, even if longer than the Galois field, will be encoded as well using transparent chunking.
+
+Note2: it is strongly recommended to always use bytearrays. Using encoded strings is accepted by the RSCodec API, as
+a convenient facility for neophytes, but encodings such as ``UTF-8`` have variable lengths, so internally the module has
+to convert to a bytearray. If you just want to protect a string, you do not need to use a ``bytearray``, but if you need
+to store or send the protected data in a fixed size field, such as in a binary file or a data stream, use a ``bytearray``.
 
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]  # original
@@ -381,9 +403,13 @@ Although sanity checks are implemented whenever possible and when they are not t
 Migration from v1.x to v2.x
 ---------------------------
 
-If you used ``reedsolo`` v1.x, then to upgrade to v2.x, a few changes in the API must be considered.
+If you used ``reedsolo`` v1.x, then to upgrade to v2.x, a few changes in the build requirements, the build system and API must be considered.
 
-We will not list everything here, but the biggest breaking change is that now internally, everything is either a ``bytearray``, or a CPython ``array('i', ...)``.
+One major change is that Cython>=v3.0.0b2 is required to cythonize `creedsolo.pyx`. To ease migration for operating systems where python packages pre-releases are not available, the intermediary `creedsolo.c` is also shipped in the standard distribution (the `tar.gz` file) to allow compilation with any C compiler, without requiring Cython.
+
+Furthermore, the packaging system was overhauled to be PEP 517 standard compliant, so that it now supports build isolation by default. Furthermore, wheels with a precompiled `creedsolo.pyd` extension are built for multiple platforms and Python releases thanks to `cibuildwheel`, the process is automated with a GitHub Action. In future releases, we will try to improve on build reproducibility, such as by implementing a lockfile (but not there yet, there is no standard for that) and moving away from `setuptools` (potentially to `meson`).
+
+About API changes, a few bugfixes were implemented in the pure python implementation, but breaking changes were limited as much as possible (if there is any, it is unintended). For the `creedsolo` extension, there are LOTS of changes, hence why the major version change (we try to follow SemVer). We will not list everything here, but the biggest breaking change is that now internally, everything is either a ``bytearray``, or a CPython ``array('i', ...)``. So this means that when interacting with `creedsolo`, you want to **always** supply a `bytearray` object, you can't just provide a list or a string anymore. For `reedsolo`, this is still supported, since it transparently converts to a bytearray internally, for ease of use.
 
 For the pure python implementation ``reedsolo``, this should not change much, it should be retrocompatible with lists (there are a few checks in place to autodetect and convert lists into bytearrays whenever necessary - but only in RSCodec, not in lower level functions if that's what you used!).
 
@@ -392,6 +418,31 @@ However, for the cythonized extension ``creedsolo``, these changes are breaking 
 The good news is that, thanks to these changes, both implementations are much faster, but especially ``creedsolo``, which now encodes at a rate of ``15-20 MB/s`` (yes that's BYTES, not bits!). This however requires Cython >= 3.0.0b2, and is incompatible with Python 2 (the pure python ``reedsolo`` is still compatible, but not the cythonized extension ``creedsolo``).
 
 In practice, there is likely very little you need to change, just add a few ``bytearray()`` calls here and there. For a practical example of what was required to migrate, see `the commits for pyFileFixity migration <https://github.com/lrq3000/pyFileFixity/compare/47407b73dfbcfe34970055524655e21ccf2979aa..23b8f6f6c6f252fb9a641f419a6bfa5a1e6c3343>`_.
+
+Projects using reedsolo
+-----------------------
+
+Here is a non exhaustive list of a few projects that are depending on `reedsolo`:
+
+* `Matter (ex-Project CHIP) <https://github.com/project-chip/connectedhomeip>`_ - The new standard for the Internet of Things (IoT): Matter (formerly Project CHIP) creates more connections between more objects, simplifying development for manufacturers and increasing compatibility for consumers, guided by the Connectivity Standards Alliance.
+* `esp-idf <https://github.com/espressif/esp-idf>`_ - Espressif IoT Development Framework. Official development framework for Espressif SoCs, such as ESP32, which are very widespread reprogrammable electronic cheaps for scientific, prototype and DIY projects, especially with Arduino and MicroPython.
+* `esptool <https://github.com/espressif/esptool>`_ - A Python-based, open-source, platform-independent utility to communicate with the ROM bootloader in Espressif chips.
+* `pyFileFixity <https://github.com/lrq3000/pyFileFixity>`_  - A suite of tools for long term archival of files.
+* `amodem <https://github.com/romanz/amodem>`_ - Audio MODEM Communication Library in Python, allowing true air-gapped communication (via a speaker and a microphone), or an audio cable (for higher transmission speed).
+* `SteganoGAN <https://github.com/DAI-Lab/SteganoGAN>`_ - SteganoGAN is a tool for creating steganographic images using adversarial training.
+* `galacteek <https://github.com/pinnaculum/galacteek>`_ - Multi-platform browser for the distributed web.
+* `ofrak <https://github.com/redballoonsecurity/ofrak>`_ - OFRAK (Open Firmware Reverse Analysis Konsole) is a binary analysis and modification platform.
+* `HoloCubic AIO <https://github.com/ClimbSnail/HoloCubic_AIO>`_ - All-in-One open-source firmware for the HoloCubic device with a wide features set.
+* `MicroPython-Stubber <https://github.com/Josverl/micropython-stubber>`_ - Boost MicroPython productivity in VSCode: Generate and use stubs for different micropython firmwares to use with vscode and pylance or pylint.
+* `qr-backup <https://github.com/za3k/qr-backup>`_ - Paper backup of files using QR codes.
+* `Jade <https://github.com/Blockstream/Jade>`_ - Jade Hardware Wallet.
+* `pied-piper <https://github.com/rraval/pied-piper>`_ - Defunct popular module for data transfer over sound waves.
+* `qreader <https://github.com/ewino/qreader>`_ - A defunct pure python QR code reader.
+* `sonicky <https://github.com/egglang/sonicky>`_ - Proof-of-concept Python and Android modules for connectionless ultrasonic message transfer.
+* `neighborhood-connectivity <https://github.com/shayyzhakov/neighborhood-connectivity>`_ - An example app that implements a noisy communication between clique of thread group with very high error correction handling ability and O(1) rounds of messages sending.
+* `audiotagger <https://github.com/NERVEUML/audiotagger>`_ - Clever use of error correction codes to wirelessly synchronize multiple concurrent video feeds of amateur video filmmakers by injecting AFSK packets with timestamp and location metadata in the audio channel communicated via radios.
+
+And many, many `more <https://github.com/tomerfiliba-org/reedsolomon/network/dependents>`_!
 
 Recommended reading
 -------------------
@@ -407,7 +458,7 @@ This module was conceived and developed by Tomer Filiba in 2012.
 
 It was further extended and is currently maintained by Stephen Karl Larroque since 2015.
 
-And several other contributors helped improve and make it more robust:
+And several other contributors helped improve and make it more robust, thanks a lot to them!
 
 |Contributors|
 
@@ -437,3 +488,25 @@ This software is released under your choice of the Unlicense or the MIT-0 (MIT N
    :target: https://anaconda.org/conda-forge/reedsolo
 .. |Contributors| image:: https://contrib.rocks/image?repo=tomerfiliba/reedsolomon
    :target: https://github.com/tomerfiliba/reedsolomon/graphs/contributors
+
+.. |dl-gentoo| image:: https://img.shields.io/badge/Gentoo-54487A?logo=gentoo&logoColor=white
+   :target: https://packages.gentoo.org/packages/dev-python/reedsolomon
+   :alt: Package for Gentoo Linux, thanks to maintainer Michał Górny!
+.. |dl-debian| image:: https://img.shields.io/badge/Debian-D70A53?logo=debian&logoColor=white
+   :target: https://salsa.debian.org/python-team/packages/python-reedsolo/tree/debian/latest
+   :alt: Package for Debian Linux, thanks to maintainer Faidon Liambotis!
+.. |dl-archlinux| image:: https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff
+   :target: https://archlinux.org/packages/community/x86_64/python-reedsolo/
+   :alt: Package for Arch Linux, thanks to maintainer Jelle van der Waa!
+.. |dl-fedora| image:: https://img.shields.io/badge/Fedora-294172?logo=fedora&logoColor=white
+   :target: https://packages.fedoraproject.org/pkgs/python-reedsolo/python3-reedsolo/
+   :alt: Package for Fedora Linux, thanks to maintainer belegdol!
+.. |dl-alpine| image:: https://img.shields.io/badge/Alpine_Linux-%230D597F.svg?logo=alpine-linux&logoColor=white
+   :target: https://pkgs.alpinelinux.org/package/edge/community/x86/py3-reedsolo
+   :alt: Package for Alpine Linux, thanks to maintainer Michał Polański!
+.. |dl-altlinux| image:: https://img.shields.io/badge/Altlinux-yellow.svg
+   :target: https://packages.altlinux.org/en/sisyphus/srpms/python3-module-reedsolo/2902045385933595548
+   :alt: Package for ALT Linux, thanks to maintainer Sergey Bolshakov!
+.. |dl-linux-others| image:: https://img.shields.io/badge/Others-000000?logo=linux&logoColor=white
+   :target: https://pkgs.org/search/?q=reedsolo
+   :alt: List of packages for other Linux distributions

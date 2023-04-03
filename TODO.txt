@@ -65,3 +65,32 @@ Other TODO apart from Cython:
 * upload new release
 * finish array optimizations
 
+To support bit arrays:
+* Surprisingly, there is no bitarray in cython nor standard Python library. We need to use 3rd party modules, but they don't seem to have a cython/C interface, so they are likely slow. Still, it could be nice to support them for those who work on bit arrays.
+* https://pypi.org/project/bitarray/
+* https://bitstring.readthedocs.io/en/stable/bitarray.html
+* alternative using bitshift operators: https://stackoverflow.com/a/53419563/1121352
+preallocation: x = 1<<10 # or x = 0 # int in Python 3 or long in Python 2 can be arbitrarily large https://stackoverflow.com/a/43458926/1121352
+assigning 1 at bit 19: x = x | 1<<19 # or x |= 1<<19
+accessing bit 19: x = x & 1<<19 # or x &= 1<<19
+More operators: https://stackoverflow.com/a/43458926/1121352
+x &= ~(1<<19) # clear bit 19
+x ^= 1<<19 # toggle bit 19
+x = ~x # invert *all* bits, all the way to infinity
+mask = ((1<<20)-1) # define a 20 bit wide mask
+x &= mask # ensure bits 20 and higher are 0
+x ^= mask # invert only bits 0 through 19
+
+(x >> 19) & 1 # test bit 19
+(x >> 16) & 0xf # get bits 16 through 20.
+* bitshifting: https://stackoverflow.com/questions/12461361/bits-list-to-integer-in-python?rq=3
+def shifting(bitlist):
+     out = 0
+     for bit in bitlist:
+         out = (out << 1) | bit
+     return out
+* ctypes https://stackoverflow.com/a/40364970/1121352
+* to convert user input (strings) into binary data: https://pymotw.com/3/struct/
+
+Linux packaging:
+* Checklist: https://bugzilla.redhat.com/show_bug.cgi?id=1925761

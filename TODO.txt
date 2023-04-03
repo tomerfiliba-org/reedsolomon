@@ -60,11 +60,13 @@ Other TODO apart from Cython:
     * --install-option is deprecated: https://discuss.python.org/t/passing-command-line-arguments-to-pip-install-after-install-options-deprecation/22981
 
 * [] Overhaul again the build process, maybe change backend to switch to Meson, or build Cython extension separately but under the same namespace: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/25379
-    
-* cibuildwheel github actions only on release
-* upload new release
-* finish array optimizations
-* make tests against unireedsolomon to future proof (max errors, max erasures, max mix, non max scenarios)
+* [] cibuildwheel github actions only on release
+    * [x] set pypi secret for auto upload
+    * [] configure unit testing of builds
+    * [] upload new release to test
+    * [] add macos and windows oses
+* [] finish array optimizations
+* [] make tests against unireedsolomon to future proof (max errors, max erasures, max mix, non max scenarios)
 
 To support bit arrays:
 * Surprisingly, there is no bitarray in cython nor standard Python library. We need to use 3rd party modules, but they don't seem to have a cython/C interface, so they are likely slow. Still, it could be nice to support them for those who work on bit arrays.

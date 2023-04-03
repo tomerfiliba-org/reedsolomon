@@ -76,21 +76,17 @@ As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a 
 
     conda install -c conda-forge reedsolo
 
-Various Linux distributions builds are also available, thanks to a network of amazing maintainers:
-
-.. list-table:: Title
+.. list-table:: Various Linux distributions builds are also available, thanks to a network of amazing maintainers:
    :widths: 25 25 50
    :header-rows: 0
 
    * - |dl-gentoo|
      - |dl-debian|
      - |dl-fedora|
-   * - |dl-archlinux|
+     - |dl-archlinux|
      - |dl-alpine|
      - |dl-altlinux|
-   * - |dl-linux-others|
-     - 
-     - 
+     - |dl-linux-others|
 
 Usage
 -----

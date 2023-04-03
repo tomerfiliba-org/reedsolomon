@@ -419,6 +419,7 @@ class TestSimpleFuncs(unittest.TestCase):
     def test_rs_simple_encode_msg(self):
         a = bytearray("hello world", "latin1")
         nsym = 10
+        init_tables(prim=0x11d, generator=2, c_exp=8)  # otherwise rs_simple_encode_msg() will fail randomly when using pytest-xdist)
         self.assertEqual(rs_simple_encode_msg(a, nsym), rs_encode_msg(a, nsym))
 
 class TestRSCodecUniversalCrossValidation(unittest.TestCase):

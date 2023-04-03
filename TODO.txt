@@ -64,6 +64,7 @@ Other TODO apart from Cython:
 * cibuildwheel github actions only on release
 * upload new release
 * finish array optimizations
+* make tests against unireedsolomon to future proof (max errors, max erasures, max mix, non max scenarios)
 
 To support bit arrays:
 * Surprisingly, there is no bitarray in cython nor standard Python library. We need to use 3rd party modules, but they don't seem to have a cython/C interface, so they are likely slow. Still, it could be nice to support them for those who work on bit arrays.

@@ -7,7 +7,7 @@ Reed Solomon
 
 |Conda-Forge-Status| |Conda-Forge-Platforms| |Conda-Forge-Downloads|
 
-A pythonic `universal errors-and-erasures Reed-Solomon Codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_ to protect your data from errors and bitrot. It includes a zero-dependencies pure-python implementation as well as an optional speed-optimized Cython/C extension.
+A pythonic universal errors-and-erasures `Reed-Solomon encoder/decoder codec <http://en.wikipedia.org/wiki/Reed%E2%80%93Solomon_error_correction>`_ to protect your data from errors and bitrot. Includes a future-proof zero-dependencies pure-python implementation as well as an optional speed-optimized Cython/C extension.
 
 This is a burst-type implementation, so that it supports any Galois field higher than 2^3, but not binary streams. Burst errors are non-random errors that more often happen on data storage mediums such as hard drives, hence this library is better suited for data storage protection, and less for streams noise correction, although it also works for this purpose but with a bit of overhead (since it works with bytes only, instead of bits).
 

@@ -10,8 +10,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reedsolo"
-version = "2.0.13"
-description = "Pure-Python Universal Errors And Erasures Reed-Solomon Encoder and Decoder"
+version = "2.0.15"
+description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
     {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
@@ -58,7 +58,6 @@ Documentation = "https://github.com/tomerfiliba/reedsolomon/blob/master/README.r
 Tracker = "https://github.com/tomerfiliba/reedsolomon/issues"
 Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 "Conda-Forge" = "https://anaconda.org/conda-forge/reedsolo"
-"Gentoo" = "https://packages.gentoo.org/packages/dev-python/reedsolomon"
 #Changelog = "https://url/changelog"
 
 #[project.optional-dependencies]

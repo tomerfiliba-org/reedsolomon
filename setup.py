@@ -49,6 +49,9 @@ elif '--native-compile' in sys.argv:
 else:
     extensions = None
     cmdclass = {}
+    
+with open("README.rst", encoding="utf-8") as f:
+    long_description = f.read()    
 
 setup(name = "reedsolo",
     version = "2.0.16b1",
@@ -69,7 +72,7 @@ setup(name = "reedsolo",
         },  # see: https://stackoverflow.com/questions/61156290/how-to-set-project-links-in-pypi and https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
     py_modules = ["reedsolo"],
     platforms = ["any"],
-    long_description = open("README.rst", "r", encoding="utf-8").read(),
+    long_description = long_description,
     long_description_content_type = 'text/x-rst',
     license_files = ('LICENSE',),  # force include LICENSE file, requires setuptools >= 42.0.0. Note that this field only support one line text, do not input the full license content here. The full LICENSE file is currently forcefully included via MANIFEST.in, but other methods exist, see: https://stackoverflow.com/a/66443941/1121352
     classifiers = [

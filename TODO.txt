@@ -61,12 +61,13 @@ Other TODO apart from Cython:
 
 * [x] Rollback to v1.7.0 on PyPi and change all releases in v2.x branch as pre-releases.
 * [] Overhaul again the build process, maybe change backend to switch to Meson, or build Cython extension separately but under the same namespace: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/25379
+    * [] Avoid packaging of tests/* folder inside the sdist, maybe impossible with single-module layout, may need to switch to src-layout (use __init__ to make reedsolo and creedsolo importable directly with same API, and place creedsolo in its own package)
 * [] cibuildwheel github actions only on release
     * [x] set pypi secret for auto upload
     * [] configure unit testing of builds
     * [] upload new release to test
     * [] add macos and windows oses
-* [] finish array optimizations
+* [] finish array optimizations (see jupyter notebook)
 * [] make tests against unireedsolomon to future proof (max errors, max erasures, max mix, non max scenarios)
 
 To support bit arrays:

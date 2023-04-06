@@ -19,7 +19,7 @@ authors = [
 maintainers = [
     {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
     ]
-requires-python = ">=3.6"
+requires-python = ">=3.7"
 license = { file = "LICENSE" }
 keywords = ["data", "protection", "correction", "recovery", "restore", "save", "data-recovery", "reed-solomon", "error-correction-code", "qr", "qr-codes", "barcodes"]
 classifiers = [

@@ -65,7 +65,7 @@ Other TODO apart from Cython:
 * [] Overhaul again the build process, maybe change backend to switch to Meson: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/25379
 * [] cibuildwheel github actions only on release
     * [x] set pypi secret for auto upload
-    * [] configure unit testing of builds
+    * [x] configure unit testing of builds
     * [] upload new release to test
     * [] add macos and windows oses
 * [] make tests against unireedsolomon and pyfilefixity to future proof (max errors, max erasures, max mix, non max scenarios) - but only for one single python version in the continuous integration, otherwise will be too time consuming

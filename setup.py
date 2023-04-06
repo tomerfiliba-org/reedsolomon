@@ -22,7 +22,7 @@ except ImportError:
 
 import os, sys
 
-if '--cythonize' in sys.argv or os.getenv('REEDSOLO_CYTHONIZE'):
+if '--cythonize' in sys.argv or os.getenv('REEDSOLO_CYTHONIZE'):  # --cythonize is usable through PEP517 by supplying --config-setting="--build-option=--cythonize" in PEP517-compliant tools (pip, build, setuptools, pytest, cibuildwheel). REEDSOLO_CYTHONIZE env variable was necessary before for cibuildwheel but not anymore, it is only kept as an alternative option, but is not used.
     # Remove the special argument, otherwise setuptools will raise an exception
     if '--cythonize' in sys.argv:
         sys.argv.remove('--cythonize')

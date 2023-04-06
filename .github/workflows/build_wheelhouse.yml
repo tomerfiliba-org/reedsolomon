@@ -44,8 +44,8 @@ jobs:
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.12.1
-        env:
-            REEDSOLO_CYTHONIZE: 1
+        #env:
+        #    REEDSOLO_CYTHONIZE: 1  # unneeded now that cibuildwheel config is in pyproject.toml, we can use --config-settings instead
         #   CIBW_SOME_OPTION: value
         #    ...
         # with:
@@ -89,4 +89,5 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.pypi_password }}
+          repository_url: https://test.pypi.org/legacy/
           # To test: repository_url: https://test.pypi.org/legacy/

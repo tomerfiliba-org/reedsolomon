@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
 name = "reedsolo"
-version = "2.0.23b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
+version = "2.0.24b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
 description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -153,6 +153,30 @@ exclude_lines = [
     "^ +\\.\\.\\.$",
     "-> ['\"]?NoReturn['\"]?:",
 ]
+
+[tool.cibuildwheel]
+#build = "*"
+#skip = ""
+#test-skip = ""
+
+archs = ["auto"]
+#build-frontend = "pip"
+#dependency-versions = "pinned"
+#environment = {"REEDSOLO_CYTHONIZE: 1"}
+#environment-pass = []
+build-verbosity = "1"
+
+#before-all = ""
+#before-build = ""
+#repair-wheel-command = ""
+
+test-command = "pytest {package}/tests"
+#before-test = ""
+#test-requires = []
+test-extras = ["test"]  # reuse the [test] extras optional dependencies to install test dependencies, instead of redefining in test-requires
+
+[tool.cibuildwheel.config-settings]
+--build-option = "--cythonize"
 
 # NOTE: you have to use single-quoted strings in TOML for regular expressions.
 # It's the equivalent of r-strings in Python.  Multiline strings are treated as

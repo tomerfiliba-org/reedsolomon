@@ -63,6 +63,7 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 [project.optional-dependencies]
 # tests_require was deprecated in setup.py by setuptools, because anyway downstream the user wants to test in their own environment, not an isolated env, so the only practical replacement is to have test requirements defined as an extras/optional-dependency [test] so that they can be installed in the user's environment if they want to: https://discuss.python.org/t/providing-a-way-to-specify-how-to-run-tests-and-docs/15016
 test = [
+    "build",
     "pytest",
     "pytest-cov",
     "coveralls",

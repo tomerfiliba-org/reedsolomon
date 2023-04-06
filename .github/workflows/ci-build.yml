@@ -46,7 +46,7 @@ jobs:
         pip install --install-option='--no-cython-compile' cython==3.0.0b2
     - name: Install the current package (necessary for src-layout) with cythonize
       if: ${{ matrix.python-version == 3.10 }}
-      # to test locally, add --editable to the pip install command below
+      # necessaryto add --editable to install locally to be able to run the tests/ scripts, otherwise we can still run them but coverage will not detect the reedsolo files since they will be in site-packages, hence with a very different path
       run: |
         pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose
     - name: Install the current package (necessary for src-layout)

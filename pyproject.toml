@@ -51,11 +51,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tomerfiliba/reedsolomon"
-Documentation = "https://github.com/tomerfiliba/reedsolomon/blob/master/README.rst"
-"Source" = "https://github.com/tomerfiliba/reedsolomon"
-Tracker = "https://github.com/tomerfiliba/reedsolomon/issues"
-Download = "https://github.com/tomerfiliba/reedsolomon/releases"
+Homepage = "https://github.com/tomerfiliba-org/reedsolomon"
+Documentation = "https://github.com/tomerfiliba-org/reedsolomon/blob/master/README.rst"
+"Source" = "https://github.com/tomerfiliba-org/reedsolomon"
+Tracker = "https://github.com/tomerfiliba-org/reedsolomon/issues"
+Download = "https://github.com/tomerfiliba-org/reedsolomon/releases"
 "Conda-Forge" = "https://anaconda.org/conda-forge/reedsolo"
 #Changelog = "https://url/changelog"
 

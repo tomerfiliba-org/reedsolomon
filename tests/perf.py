@@ -1,7 +1,7 @@
 # Speed performance test of Reed-Solomon encoding speed
 # Copyright FranzForstmayr 2021
 # Copyright Stephen Karl Larroque lrq3000 2021
-# THIS IS ALPHA, for some reason the results aren't coherent (the cythonized extension runs at the same speed as the pure python with CPython, not even under PyPy JIT...), see https://github.com/tomerfiliba/reedsolomon/issues/35
+# THIS IS ALPHA, for some reason the results aren't coherent (the cythonized extension runs at the same speed as the pure python with CPython, not even under PyPy JIT...), see https://github.com/tomerfiliba-org/reedsolomon/issues/35
 # Instead, to test speed, please use this alternative script: https://github.com/lrq3000/pyFileFixity/blob/master/pyFileFixity/ecc_speedtest.py
 
 import sys

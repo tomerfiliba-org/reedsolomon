@@ -39,7 +39,7 @@ For the cutting-edge code (likely unstable, do not use in production!), use:
 
 .. code:: sh
 
-    pip install --upgrade git+https://github.com/tomerfiliba/reedsolomon
+    pip install --upgrade git+https://github.com/tomerfiliba-org/reedsolomon
 
 If you have some issues installing through pip, maybe this command may help:
 
@@ -62,7 +62,7 @@ Through wheels/pip, a pure-python implementation called ``reedsolo`` is installe
     # To compile from the latest development release:
     pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
     # To compile from the cutting edge code:
-    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --isolated --verbose
+    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba-org/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --isolated --verbose
 
 The ``--config-setting="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.
     
@@ -462,7 +462,7 @@ And several other contributors helped improve and make it more robust, thanks a 
 
 |Contributors|
 
-For a list of all contributors, please see `the GitHub Contributors graph <https://github.com/tomerfiliba/reedsolomon/graphs/contributors>`_ and the `commits history <https://github.com/tomerfiliba/reedsolomon/commits/master>`_.
+For a list of all contributors, please see `the GitHub Contributors graph <https://github.com/tomerfiliba-org/reedsolomon/graphs/contributors>`_ and the `commits history <https://github.com/tomerfiliba-org/reedsolomon/commits/master>`_.
 
 License
 -------
@@ -476,18 +476,18 @@ This software is released under your choice of the Unlicense or the MIT-0 (MIT N
    :target: https://pypi.org/project/reedsolo
 .. |PyPI-Downloads| image:: https://img.shields.io/pypi/dm/reedsolo.svg?label=pypi%20downloads&logo=python&logoColor=white
    :target: https://pypi.org/project/reedsolo
-.. |Build-Status| image:: https://github.com/tomerfiliba/reedsolomon/actions/workflows/ci-build.yml/badge.svg?event=push
-    :target: https://github.com/tomerfiliba/reedsolomon/actions/workflows/ci-build.yml
-.. |Coverage| image:: https://coveralls.io/repos/tomerfiliba/reedsolomon/badge.svg?branch=master&service=github
-  :target: https://coveralls.io/github/tomerfiliba/reedsolomon?branch=master
+.. |Build-Status| image:: https://github.com/tomerfiliba-org/reedsolomon/actions/workflows/ci-build.yml/badge.svg?event=push
+    :target: https://github.com/tomerfiliba-org/reedsolomon/actions/workflows/ci-build.yml
+.. |Coverage| image:: https://coveralls.io/repos/tomerfiliba-org/reedsolomon/badge.svg?branch=master&service=github
+  :target: https://coveralls.io/github/tomerfiliba-org/reedsolomon?branch=master
 .. |Conda-Forge-Status| image:: https://img.shields.io/conda/vn/conda-forge/reedsolo.svg
    :target: https://anaconda.org/conda-forge/reedsolo
 .. |Conda-Forge-Platforms| image:: https://anaconda.org/conda-forge/reedsolo/badges/platforms.svg
    :target: https://anaconda.org/conda-forge/reedsolo
 .. |Conda-Forge-Downloads| image:: https://anaconda.org/conda-forge/reedsolo/badges/downloads.svg
    :target: https://anaconda.org/conda-forge/reedsolo
-.. |Contributors| image:: https://contrib.rocks/image?repo=tomerfiliba/reedsolomon
-   :target: https://github.com/tomerfiliba/reedsolomon/graphs/contributors
+.. |Contributors| image:: https://contrib.rocks/image?repo=tomerfiliba-org/reedsolomon
+   :target: https://github.com/tomerfiliba-org/reedsolomon/graphs/contributors
 
 .. |dl-gentoo| image:: https://img.shields.io/badge/Gentoo-54487A?logo=gentoo&logoColor=white
    :target: https://packages.gentoo.org/packages/dev-python/reedsolomon

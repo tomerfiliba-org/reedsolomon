@@ -66,8 +66,8 @@ Other TODO apart from Cython:
 * [] cibuildwheel github actions only on release
     * [x] set pypi secret for auto upload
     * [x] configure unit testing of builds
-    * [] fix RST issues, and then convert to Markdown using pandoc
-    * [] upload new release to test
+    * [x] fix RST issues
+    * [x] upload new release to test
     * [] add macos and windows oses
 * [] make tests against unireedsolomon and pyfilefixity to future proof (max errors, max erasures, max mix, non max scenarios) - but only for one single python version in the continuous integration, otherwise will be too time consuming
     * [] Repackage pyFileFixity to PEP517 with a pyproject.toml so it can be installed in --editable mode with pip. Then just add to ci (not local test).

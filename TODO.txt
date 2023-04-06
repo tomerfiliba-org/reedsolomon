@@ -60,7 +60,7 @@ Other TODO apart from Cython:
     * --install-option is deprecated: https://discuss.python.org/t/passing-command-line-arguments-to-pip-install-after-install-options-deprecation/22981
 
 * [x] Rollback to v1.7.0 on PyPi and change all releases in v2.x branch as pre-releases.
-* [] Avoid packaging of tests/* folder inside the sdist
+* [x] Avoid packaging of tests/* folder inside the sdist
     * [x] maybe impossible with single-module layout, may need to switch to src-layout (use __init__ to make reedsolo and creedsolo importable directly with same API, and place creedsolo in its own package)
 * [] Overhaul again the build process, maybe change backend to switch to Meson: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/25379
 * [] cibuildwheel github actions only on release

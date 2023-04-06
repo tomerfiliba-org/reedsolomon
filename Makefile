@@ -8,6 +8,7 @@
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
 # To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
 # for Python 3.10, read the updated instructions at: https://wiki.python.org/moin/WindowsCompilers
+# CRITICAL NOTE: if you get a "FileNotFoundError" exception when trying to call @+python or @+make, then it is because you used spaces instead of a hard TAB character to indent! TODO: bugfix this. It happens only for @+ commands and for those after the first command (if the @+ command with spaces as indentation is the first and only statement in a command, it works!)
 
 .PHONY:
 	alltests
@@ -47,22 +48,21 @@ flake8:
 	@+flake8 -j 8 --count --statistics --exit-zero .
 
 test:
+    # Only for Py2
      # Build the Cython extension
 	python setup.py build_ext --inplace
      # Run the tests
 	@+python -m unittest discover tests
 
-testnocython:
-     # Run the tests
-	@+python -m unittest discover tests
-
 testnobinary:
+    # Only for Py2
      # Run the tests
 	@+python -m unittest discover tests
      #pytest --cov-branch
 
 testnose:
-    python -m nose -vv --with-coverage
+    # Only for Py2
+	@+python -m nose -vv --with-coverage
 
 testtox:
     # Test for multiple Python versions
@@ -72,9 +72,11 @@ testsetup:
 	python setup.py check --metadata --restructuredtext --strict
 
 testpyproject:
-    validate-pyproject pyproject.toml -v
+    # Only for Py2
+	validate-pyproject pyproject.toml -v
 
 testsetuppost:
+    # Only for Py2
 	twine check "dist/*"
 
 testcoverage:
@@ -83,15 +85,15 @@ testcoverage:
      # Build the Cython extension and install module in editable mode
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
      #python -m pip install -e . --config-setting="--build-option=--cythonize"
-    python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
+	python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
      # Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
      # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest -v
-    coverage report -m
+	coverage run --branch -m pytest -v
+	coverage report -m
 
 testcoveragexdist:
      # This parallelizes tests to make them run faster, thanks to pytest-xdist
@@ -99,14 +101,14 @@ testcoveragexdist:
      # Build the Cython extension and install module in editable mode
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
      #python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
-    pymake installdevpep517
+	@+make installdevpep517
      # Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
      # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest -n auto -v
+	coverage run --branch -m pytest -n auto -v
      #coverage report -m  # cannot send a report from parallelized xdist
 
 testcoveragenocython:
@@ -118,18 +120,20 @@ testcoveragenocython:
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest -v
-    coverage report -m
+	coverage run --branch -m pytest -v
+	coverage report -m
 
 distclean:
 	@+make coverclean
 	@+make prebuildclean
 	@+make clean
-    @+make toxclean
+	@+make toxclean
 prebuildclean:
 	@+python -c "import shutil; shutil.rmtree('build', True)"
 	@+python -c "import shutil; shutil.rmtree('dist', True)"
 	@+python -c "import shutil; shutil.rmtree('reedsolo.egg-info', True)"
+    # IMPORTANT: systematically delete `src/<project.name>.egg-info` folder before rebuilding, otherwise the list of included files will not get updated (it's in `SOURCES.txt` file in this folder)
+	@+python -c "import shutil; shutil.rmtree('src/reedsolo.egg-info', True)"
 coverclean:
 	@+python -c "import os; os.remove('.coverage') if os.path.exists('.coverage') else None"
 	@+python -c "import shutil; shutil.rmtree('__pycache__', True)"
@@ -151,11 +155,11 @@ install:
 	@+python setup.py install
 
 installpep517:
-    @+python -m pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose --use-pep517
+	@+python -m pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 buildpep517:
     # requires `pip install build`
-    @+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
+	@+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 
 bandit:
     bandit reedsolo.py
@@ -163,14 +167,13 @@ bandit:
 build:
 	@+make prebuildclean
 	#@+make testsetup
-    pymake testpyproject
-    python -sBm build --config-setting="--build-option=--cythonize"
+	@+make testpyproject
+	@+python -sBm build --config-setting="--build-option=--cythonize"
 	#@+python setup.py sdist bdist_wheel  # deprecated with pep517
-	# @+python setup.py bdist_wininst
-    pymake testsetuppost  # @+make does not work here, dunno why
+	#@+python setup.py bdist_wininst
 
 buildwheelhouse:
-    cibuildwheel --platform auto
+	cibuildwheel --platform auto
 
 pypi:
 	twine upload dist/*

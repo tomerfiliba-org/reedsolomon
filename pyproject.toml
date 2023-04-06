@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
 name = "reedsolo"
-version = "2.0.21b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
+version = "2.0.22b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
 description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -72,20 +72,21 @@ content-type = "text/x-rst"
 #[tool.setuptools]
 #package-dir = {"" = "src"}
 
-#[tool.setuptools.packages.find]
-#where = ["src"]
+[tool.setuptools.packages.find]
+# IMPORTANT: systematically delete `src/<project.name>.egg-info` folder before rebuilding, otherwise the list of included files will not get updated (it's in `SOURCES.txt` file in this folder)
+where = ["src"]
 #exclude = ["test*"]
 #namespaces = false
 
-#[tool.setuptools.package-data]
-#"*" = [
-#    "*.rst",
-#    "LICENSE*",
-#    "README*",
-#    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can compile later
-#    "*.c",
-#    #"tests",  # to help linux distros package builders, they may want to run the unit test to check their package is working OK
-#]
+[tool.setuptools.package-data]
+"*" = [
+    "*.rst",
+    "LICENSE*",
+    "README*",
+    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can cythonize later, this is necessary, it's not included by default even with extensions in setup.py
+    "*.c",  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3 - no need since we use src-layout, it's automatically included
+    #"tests",  # to help linux distros package builders, they may want to run the unit test to check their package is working OK - no need, tests folder is packaged by default in sdist nowadays
+]
 
 #[tool.setuptools.exclude-package-data]
 #"*" = [

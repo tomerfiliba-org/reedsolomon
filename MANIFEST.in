@@ -1,5 +1,6 @@
-#include LICENSE
-#include README.rst
-#include *.pyx  # include the cython implementation sourcecode in the wheel, so that the user can compile later - no need since we use src-layout
-#include creedsolo.c  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3 - no need since we use src-layout
+# UNUSED now that we use pyproject.toml
+#include LICENSE  # done automagically nowadays
+#include README.rst  # done automagically nowadays
+#include *.pyx  # include the cython implementation sourcecode in the wheel, so that the user can cythonize later, this is necessary, it's not included by default even with extensions in setup.py
+#include creedsolo.c  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3 - no need since we use src-layout, it's automatically included
 #recursive-include tests *.py  # to help linux distros package builders, they may want to run the unit test to check their package is working OK

@@ -98,8 +98,6 @@ Usage
 Basic usage with high-level RSCodec class
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: python
-
     # Initialization
     >>> from reedsolo import RSCodec, ReedSolomonError
     >>> rsc = RSCodec(10)  # 10 ecc symbols
@@ -122,8 +120,6 @@ a convenient facility for neophytes, but encodings such as ``UTF-8`` have variab
 to convert to a bytearray. If you just want to protect a string, you do not need to use a ``bytearray``, but if you need
 to store or send the protected data in a fixed size field, such as in a binary file or a data stream, use a ``bytearray``.
 
-.. code:: python
-
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]  # original
     b'hello world'
@@ -133,7 +129,7 @@ to store or send the protected data in a fixed size field, such as in a binary f
     b'hello world'
     >>> rsc.decode(b'hXXXo worXd\xed%T\xc4\xfdXX\xf3\xa8\xaa')[0]        # 6 errors - fail
     Traceback (most recent call last):
-      ...
+    ...
     reedsolo.ReedSolomonError: Too many (or few) errors found by Chien Search for the errata locator polynomial!
 
 **Important upgrade notice for pre-1.0 users:** Note that ``RSCodec.decode()`` returns 3 variables:
@@ -143,8 +139,6 @@ to store or send the protected data in a fixed size field, such as in a binary f
     3. and the list of positions of the errata (errors and erasures)
 
 Here is how to use these outputs:
-
-.. code:: python
 
     >>> tampered_msg = b'heXlo worXd\xed%T\xc4\xfdX\x89\xf3\xa8\xaa'
     >>> decoded_msg, decoded_msgecc, errata_pos = rsc.decode(tampered_msg)
@@ -159,8 +153,6 @@ Here is how to use these outputs:
 
 Since we failed to decode with 6 errors with a codec set with 10 error correction code (ecc) symbols, let's try to use a bigger codec, with 12 ecc symbols.
 
-.. code:: python
-
     >>> rsc = RSCodec(12)  # using 2 more ecc symbols (to correct max 6 errors or 12 erasures)
     >>> rsc.encode(b'hello world')
     b'hello world?Ay\xb2\xbc\xdc\x01q\xb9\xe3\xe2='
@@ -173,16 +165,12 @@ This shows that we can decode twice as many erasures (where we provide the locat
 
 To get the maximum number of errors *or* erasures that can be independently corrected (ie, not simultaneously):
 
-.. code:: python
-
     >>> maxerrors, maxerasures = rsc.maxerrata(verbose=True)
     This codec can correct up to 6 errors and 12 erasures independently
     >>> print(maxerrors, maxerasures)
     6 12
 
 To get the maximum number of errors *and* erasures that can be simultaneously corrected, you need to specify the number of errors or erasures you expect:
-
-.. code:: python
 
     >>> maxerrors, maxerasures = rsc.maxerrata(erasures=6, verbose=True)  # we know the number of erasures, will calculate how many errors we can afford
     This codec can correct up to 3 errors and 6 erasures simultaneously
@@ -202,8 +190,6 @@ Note: to catch a ``ReedSolomonError`` exception, do not forget to import it firs
 
 To check if a message is tampered given its error correction symbols, without decoding, use the ``check()`` method:
 
-.. code:: python
-
     # Checking
     >> rsc.check(b'hello worXXXXy\xb2XX\x01q\xb9\xe3\xe2=')  # Tampered message will return False
     [False]
@@ -214,8 +200,6 @@ To check if a message is tampered given its error correction symbols, without de
     Number of detected errors and erasures: 6, their positions: [16, 15, 12, 11, 10, 9]
 
 By default, most Reed-Solomon codecs are limited to characters that can be encoded in 256 bits and with a length of maximum 256 characters. But this codec is universal, you can reduce or increase the length and maximum character value by increasing the Galois Field:
-
-.. code:: python
 
     # To use longer chunks or bigger values than 255 (may be very slow)
     >> rsc = RSCodec(12, nsize=4095)  # always use a power of 2 minus 1
@@ -242,8 +226,6 @@ If you want full control, you can skip the API and directly use the library as-i
 
 First you need to init the precomputed tables:
 
-.. code:: python
-
     >> import reedsolo as rs
     >> rs.init_tables(0x11d)
 
@@ -251,22 +233,16 @@ Pro tip: if you get the error: ValueError: byte must be in range(0, 256), please
 Pro tip2: by default, you can only encode messages of max length and max symbol value = 256. If you want to encode bigger messages,
 please use the following (where c_exp is the exponent of your Galois Field, eg, 12 = max length 2^12 = 4096):
 
-.. code:: python
-
     >> prim = rs.find_prime_polys(c_exp=12, fast_primes=True, single=True)[0]
     >> rs.init_tables(c_exp=12, prim=prim)
     
 Let's define our RS message and ecc size:
-
-.. code:: python
 
     >> n = 255  # length of total message+ecc
     >> nsym = 12  # length of ecc
     >> mes = "a" * (n-nsym)  # generate a sample message
 
 To optimize, you can precompute the generator polynomial:
-
-.. code:: python
 
     >> gen = rs.rs_generator_poly_all(n)
 
@@ -275,19 +251,13 @@ so this can easily be used for variable encoding rate.
 
 Then to encode:
 
-.. code:: python
-
     >> mesecc = rs.rs_encode_msg(mes, nsym, gen=gen[nsym])
 
 Let's tamper our message:
 
-.. code:: python
-
     >> mesecc[1] = 0
 
 To decode:
-
-.. code:: python
 
     >> rmes, recc, errata_pos = rs.rs_correct_msg(mesecc, nsym, erase_pos=erase_pos)
 
@@ -296,20 +266,14 @@ Pro tip: if you know a few erasures positions, you can specify them in a list ``
 
 You can check how many errors and/or erasures were corrected, which can be useful to design adaptive bitrate algorithms:
 
-.. code:: python
-
     >> print('A total of %i errata were corrected over all chunks of this message.' % len(errata_pos))
 
 If the decoding fails, it will normally automatically check and raise a ReedSolomonError exception that you can handle.
 However if you want to manually check if the repaired message is correct, you can do so:
 
-.. code:: python
-
     >> rs.rs_check(rmes + recc, nsym)
 
 Note: if you want to use multiple reedsolomon with different parameters, you need to backup the globals and restore them before calling reedsolo functions:
-
-.. code:: python
 
     >> rs.init_tables()
     >> global gf_log, gf_exp, field_charac
@@ -317,8 +281,6 @@ Note: if you want to use multiple reedsolomon with different parameters, you nee
 
 
 Then at anytime, you can do:
-
-.. code:: python
 
     >> global gf_log, gf_exp, field_charac
     >> gf_log, gf_exp, field_charac = bak_gf_log, bak_gf_exp, bak_field_charac
@@ -329,14 +291,10 @@ The globals backup is not necessary if you use RSCodec, it will be automatically
 
 The speed-optimized C extension ``creedsolo`` can be used similarly once compiled or cythonized:
 
-.. code:: python
-
     >> import creedsolo as crs
     >> codec = crs.RSCodec(10)
 
 If you want to ``cimport`` the module, you will need to directly access the full package path:
-
-.. code:: python
 
     >> import cython
     >> cimport cython

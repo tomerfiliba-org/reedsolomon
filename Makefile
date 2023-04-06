@@ -77,6 +77,7 @@ testpyproject:
 
 testsetuppost:
 	twine check "dist/*"
+	rstcheck README.rst
 
 testcoverage:
      # This is the preferred way to run the tests since Python 3.10

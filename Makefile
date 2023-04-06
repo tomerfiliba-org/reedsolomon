@@ -170,7 +170,7 @@ build:
 	@+python -sBm build --config-setting="--build-option=--cythonize"
 	#@+python setup.py sdist bdist_wheel  # deprecated with pep517
 	#@+python setup.py bdist_wininst
-    @+make testsetuppost
+	@+make testsetuppost
 
 buildwheelhouse:
 	cibuildwheel --platform auto

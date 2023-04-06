@@ -18,11 +18,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-          #- os: macos-11
-          #- os: windows-2019
-          #  architecture: x86
-          #- os: windows-2019
-          #  architecture: AMD64
+          - os: macos-11
+          - os: windows-2019
+            architecture: x86
+          - os: windows-2019
+            architecture: AMD64
 
     steps:
       - uses: actions/checkout@v3

@@ -53,7 +53,7 @@ Note: for Python 2.7 and Python <= 3.6, please use v1.7.0:
 
     pip install --upgrade reedsolo==1.7.0
 
-By default, a pure-python implementation called ``reedsolo`` is installed, and for platforms supported by ``cibuildwheel``, a faster cythonized binary ``creedsolo`` is included in wheels. For other platforms or to compile from source (this requires a C compiler), a build option can be specified:
+Through wheels/pip, a pure-python implementation called ``reedsolo`` is installed, and for platforms supported by ``cibuildwheel``, a precompiled speed-optimized ``creedsolo`` module is included. For other platforms or to compile from source (this requires ``cython>=3.0.0b2`` and a C compiler), a build option can be specified:
 
 .. code:: sh
 

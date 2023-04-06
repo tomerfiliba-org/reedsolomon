@@ -90,7 +90,7 @@ testcoverage:
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest . -v
+    coverage run --branch -m pytest -v
     coverage report -m
 
 testcoveragexdist:
@@ -106,7 +106,7 @@ testcoveragexdist:
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest . -n auto -v
+    coverage run --branch -m pytest -n auto -v
      #coverage report -m  # cannot send a report from parallelized xdist
 
 testcoveragenocython:
@@ -118,7 +118,7 @@ testcoveragenocython:
      #python setup.py develop
      #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
      #python setup.py develop --uninstall
-    coverage run --branch -m pytest . -v
+    coverage run --branch -m pytest -v
     coverage report -m
 
 distclean:

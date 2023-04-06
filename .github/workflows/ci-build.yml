@@ -44,10 +44,12 @@ jobs:
       if: ${{ matrix.python-version == 3.10 }}
       run: |
         pip install --install-option='--no-cython-compile' cython==3.0.0b2
-        python setup.py develop --cythonize
+    - name: Install the current package (necessary for src-layout)
+      run: |
+        pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose
     - name: Test with pytest
       run: |
-        coverage run --branch -m pytest . -v
+        coverage run --branch -m pytest -v
         coverage report -m
     - name: Send coverage to Coveralls
       env:

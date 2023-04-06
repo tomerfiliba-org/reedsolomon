@@ -68,7 +68,7 @@ Other TODO apart from Cython:
     * [] upload new release to test
     * [] add macos and windows oses
 * [] finish array optimizations (see jupyter notebook)
-* [] make tests against unireedsolomon to future proof (max errors, max erasures, max mix, non max scenarios)
+* [] make tests against unireedsolomon and pyfilefixity to future proof (max errors, max erasures, max mix, non max scenarios) - but only for one single python version in the continuous integration, otherwise will be too time consuming
 
 To support bit arrays:
 * Surprisingly, there is no bitarray in cython nor standard Python library. We need to use 3rd party modules, but they don't seem to have a cython/C interface, so they are likely slow. Still, it could be nice to support them for those who work on bit arrays.

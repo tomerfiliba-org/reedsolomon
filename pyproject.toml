@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
 name = "reedsolo"
-version = "2.0.22b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
+version = "2.0.23b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
 description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -60,7 +60,16 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 "Conda-Forge" = "https://anaconda.org/conda-forge/reedsolo"
 #Changelog = "https://url/changelog"
 
-#[project.optional-dependencies]
+[project.optional-dependencies]
+# tests_require was deprecated in setup.py by setuptools, because anyway downstream the user wants to test in their own environment, not an isolated env, so the only practical replacement is to have test requirements defined as an extras/optional-dependency [test] so that they can be installed in the user's environment if they want to: https://discuss.python.org/t/providing-a-way-to-specify-how-to-run-tests-and-docs/15016
+test = [
+    "pytest",
+    "pytest-cov",
+    "coveralls",
+    "cython>=3.0.0b2",
+    #"unireedsolomon",
+    #"pyfilefixity"
+]
 #cythonize = [  # cython and other build time dependencies can NOT be defined as optional-dependencies nor extras, they are installed only after build! They need to be defined as build-system requirements. But it's possible to make it installable as an option given a config-setting arg, see: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/
 #    "cython>=3.0.0b2"
 #]

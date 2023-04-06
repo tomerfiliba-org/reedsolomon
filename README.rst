@@ -66,7 +66,8 @@ or locally with:
 
     pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose
 
-Note: for development, it's possible to add the ``--editable`` flag to use the local folder without installing in ``site-packages``.
+Note: for development, it's possible to add the ``--editable`` flag to use the local folder without installing in ``site-packages``,
+and use ``.[test]`` instead of ``.`` to install all required packages to test this module locally.
 
 The package for the development or cutting-edge releases can also be built locally with the pep517 compliant ``build`` tool:
 
@@ -430,7 +431,7 @@ Furthermore, the packaging system was overhauled to be PEP 517 standard complian
 
 While we tried to keep the import API the same (you can still do ``import reedsolo as rs; codec = rs.RSCodec(10)`` and similarly ``import creedsolo as crs``. However, if you used to ``cimport creedsolo as crs`` using the fast c-import system provided by Cython, now you will need to ``cimport creedsolo.creedsolo as crs``.
 
-Indeed, for Linux distributions package maintainers, it's important to note the module is now using a "src-layout", instead of the "single-module-layout" before, so this may require some adjustments in packages building processes.
+Indeed, for Linux distributions package maintainers, it's important to note the module is now using a `"src-layout" <https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure>`_, instead of the `"single-module-layout" <https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#single-module-distribution>`_ before, so this may require some adjustments in packages building processes.
 
 Furthermore, wheels with a precompiled ``creedsolo.pyd`` extension are now built for multiple platforms and Python releases and uploaded to PyPi, thanks to ``cibuildwheel``, and the process is automated with a GitHub Action. In future releases, we will try to improve on build reproducibility, such as by implementing a lockfile (but not there yet, there is no standard for that) and moving away from ``setuptools`` (potentially to ``meson``).
 

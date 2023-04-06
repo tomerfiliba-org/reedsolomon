@@ -34,26 +34,27 @@ jobs:
       run: |
         python -c "import sys; print(sys.version)"
     - name: Install dependencies
+      # TODO: move to pyproject.toml
       run: |
         python -m pip install --upgrade pip
-        python -m pip install pytest pytest-cov
-        if [ ${{ matrix.python-version }} <= 3.7 ]; then python -m pip install 'coverage<4'; else python -m pip install coverage; fi
-        python -m pip install coveralls
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        #python -m pip install pytest pytest-cov
+        #if [ ${{ matrix.python-version }} <= 3.7 ]; then python -m pip install 'coverage<4'; else python -m pip install coverage; fi
+        #python -m pip install coveralls
+        #if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Compile the Cython extension (only on Python 3.10)
       if: ${{ matrix.python-version == 3.10 }}
       run: |
-        pip install --install-option='--no-cython-compile' cython==3.0.0b2
+        pip install --upgrade --config-setting="--install-option=--no-cython-compile" cython==3.0.0b2
     - name: Install the current package (necessary for src-layout) with cythonize
       if: ${{ matrix.python-version == 3.10 }}
       # necessary to add --editable to install locally to be able to run the tests/* scripts, otherwise we can still run them but coverage will not detect the reedsolo files since they will be in site-packages, hence with a very different path, this is because without an editable install, with a src-layout there is no implicitly set PYTHONPATH, as described in https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#src-layout
       run: |
-        pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose
+        pip install --upgrade --editable .[test] --config-setting="--build-option=--cythonize" --verbose
     - name: Install the current package (necessary for src-layout)
       if: ${{ matrix.python-version != 3.10 }}
       # to test locally, add --editable to the pip install command below
       run: |
-        pip install --upgrade --editable . --verbose
+        pip install --upgrade --editable .[test] --verbose
     - name: Test with pytest
       run: |
         coverage run --branch -m pytest -v

@@ -88,6 +88,6 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
           user: __token__
-          password: ${{ secrets.pypi_password }}
+          password: ${{ secrets.test_pypi_password }}
           repository_url: https://test.pypi.org/legacy/
-          # To test: repository_url: https://test.pypi.org/legacy/
+          # To test: repository_url: https://test.pypi.org/legacy/  # and also change password: ${{ secrets.pypi_password }} to secrets.test_pypi_password # for more infos on registering and using TestPyPi, read: https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi

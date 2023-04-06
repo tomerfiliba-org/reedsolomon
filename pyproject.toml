@@ -8,9 +8,9 @@
 requires = ["setuptools>59", "wheel>=0.37.0", "cython>=3.0.0b2"]
 build-backend = "setuptools.build_meta"
 
-[project]
+[project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
 name = "reedsolo"
-version = "2.0.18b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
+version = "2.0.19b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
 description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -101,16 +101,16 @@ filterwarnings = [
 branch = true
 relative_files = true
 include = [
-    "reedsolo.py",
+    "*/reedsolo.py",
     ]
 
 [tool.coverage.paths]
-source = ["."]
+source = ["src"]
 
-[tool.coverage.report]
+[tool.coverage.report]  # Beware: you need to delete .coveragerc if you have one, otherwise .coveragerc will take precedence!
 show_missing = true
 include = [
-    "reedsolo.py",
+    "*/reedsolo.py",
 ]
 omit = [
     "*/python?.?/*",

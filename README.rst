@@ -339,7 +339,13 @@ The codec is universal, meaning that it should be able to decode any message enc
 as long as you provide the correct parameters. Beware that often, other RS encoders use internal constant sometimes
 hardcoded inside the algorithms, such as fcr, which are then hard to find, but if you do, you can supply them to reedsolo.
 
-Note however that if you use higher fields (ie, bigger ``c_exp``), the algorithms will be slower, first because
+The work on this module is motivated by the aim to offer a solution for long-term archival of data, although this can and is also
+used for communication streams. For this purpose, this module is an ideal choice: Reed-Solomon is an optimal (non-quantic) algorithm,
+it corrects up to the Singleton Bound which is the absolute limit of how much erratas an error-correction algorithm can correct, RS
+is hence future-proof. The universality of this implementation further ensures that other future implementations of Reed-Solomon
+should be able to decode data encoded with this universal codec.
+
+Note that if you use higher fields (ie, bigger ``c_exp``), the algorithms will be slower, first because
 we cannot then use the optimized bytearray() structure but only ``array.array('i', ...)``, and also because
 Reed-Solomon's complexity is quadratic (both in encoding and decoding), so this means that the longer
 your messages, the quadratically longer it will take to encode/decode!

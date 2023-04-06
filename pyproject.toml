@@ -90,7 +90,11 @@ where = ["src"]
 #]
 
 [tool.pytest.ini_options]
-addopts = "-ra --strict-markers"
+addopts = [
+    "--import-mode=importlib",
+    "-ra",
+    "--strict-markers",
+]
 xfail_strict = true
 testpaths = "tests"
 filterwarnings = [

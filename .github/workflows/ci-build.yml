@@ -67,8 +67,8 @@ jobs:
     - name: Twine check
       if: ${{ matrix.python-version == 3.10 }}
       run: |
-      twine check dist/*
-      rstcheck README.rst
+        twine check "dist/*"
+        rstcheck README.rst
     - name: pyproject.toml validity
       if: ${{ matrix.python-version == 3.10 }}
       run: validate-pyproject pyproject.toml -v

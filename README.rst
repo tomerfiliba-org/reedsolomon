@@ -23,7 +23,7 @@ Based on the wonderful tutorial at `Wikiversity <http://en.wikiversity.org/wiki/
 Installation
 ------------
 
-For the latest stable release, install with:
+For the latest stable release (compatible with Python >= 3.7), install with:
 
 .. code:: sh
 
@@ -35,7 +35,7 @@ For the latest development release, use:
 
     pip install --upgrade reedsolo --pre
 
-For the latest unstable code (do not use in production!), use:
+For the cutting-edge code (likely unstable, do not use in production!), use:
 
 .. code:: sh
 
@@ -47,15 +47,21 @@ If you have some issues installing through pip, maybe this command may help:
 
     pip install reedsolo --no-binary={reedsolo}
 
-By default, only a pure-python implementation is installed. If you have a C compiler, a faster cythonized binary ``creedsolo`` can be optionally built with:
-    
+Note: for Python 2.7 and Python <= 3.6, please use v1.7.0:
+
 .. code:: sh
 
-    # For the latest stable release:
+    pip install --upgrade reedsolo==1.7.0
+
+By default, a pure-python implementation called ``reedsolo`` is installed, and for platforms supported by ``cibuildwheel``, a faster cythonized binary ``creedsolo`` is included in wheels. For other platforms or to compile from source (this requires a C compiler), a build option can be specified:
+
+.. code:: sh
+
+    # To compile from the latest stable release:
     pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --verbose
-    # For the latest development release:
+    # To compile from the latest development release:
     pip install --upgrade reedsolo --config-setting="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
-    # For the cutting edge code:
+    # To compile from the cutting edge code:
     pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba/reedsolomon" --config-setting="--build-option=--cythonize" --use-pep517 --isolated --verbose
 
 The ``--config-setting="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension.

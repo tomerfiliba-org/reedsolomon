@@ -267,6 +267,9 @@ To optimize, you can precompute the generator polynomial:
 
     >> gen = rs.rs_generator_poly_all(n)
 
+Note: this generates the generator polynomial for all possible `nsym`,
+so this can easily be used for variable encoding rate.
+
 Then to encode:
 
 .. code:: python
@@ -321,8 +324,25 @@ Then at anytime, you can do:
 
 The globals backup is not necessary if you use RSCodec, it will be automatically managed.
 
-Read the sourcecode's comments for more info about how it works, and for the various parameters you can setup if
-you need to interface with other RS codecs.
+The speed-optimized C extension ``creedsolo`` can be used similarly once compiled or cythonized:
+
+.. code:: python
+
+    >> import creedsolo as crs
+    >> codec = crs.RSCodec(10)
+
+If you want to ``cimport`` the module, you will need to directly access the full package path:
+
+.. code:: python
+
+    >> import cython
+    >> cimport cython
+    >> cimport creedsolo.creedsolo as crs
+
+If you want to learn more about which internal functions to use and for what purposes,
+read the sourcecode's comments (we follow literate programming principles)
+for more info about how it works and the various parameters
+you can setup if you need to interface with other RS codecs.
 
 Extended description
 --------------------
@@ -404,9 +424,15 @@ Migration from v1.x to v2.x
 
 If you used ``reedsolo`` v1.x, then to upgrade to v2.x, a few changes in the build requirements, the build system and API must be considered.
 
-One major change is that Cython>=v3.0.0b2 is required to cythonize `creedsolo.pyx`. To ease migration for operating systems where python packages pre-releases are not available, the intermediary `creedsolo.c` is also shipped in the standard distribution (the `tar.gz` file) to allow compilation with any C compiler, without requiring Cython.
+One major change is that Cython>=v3.0.0b2 is required to cythonize ``creedsolo.pyx``. To ease migration for operating systems where python packages pre-releases are not available, the intermediary `creedsolo.c` is also shipped in the standard distribution (the `tar.gz` file) to allow compilation with any C compiler, without requiring Cython.
 
-Furthermore, the packaging system was overhauled to be PEP 517 standard compliant, so that it now supports build isolation by default. Furthermore, wheels with a precompiled `creedsolo.pyd` extension are built for multiple platforms and Python releases thanks to `cibuildwheel`, the process is automated with a GitHub Action. In future releases, we will try to improve on build reproducibility, such as by implementing a lockfile (but not there yet, there is no standard for that) and moving away from `setuptools` (potentially to `meson`).
+Furthermore, the packaging system was overhauled to be PEP 517 standard compliant, so that it now supports build isolation by default, and it uses a src-layout.
+
+While we tried to keep the import API the same (you can still do ``import reedsolo as rs; codec = rs.RSCodec(10)`` and similarly ``import creedsolo as crs``. However, if you used to ``cimport creedsolo as crs`` using the fast c-import system provided by Cython, now you will need to ``cimport creedsolo.creedsolo as crs``.
+
+Furthermore, wheels with a precompiled ``creedsolo.pyd`` extension are built for multiple platforms and Python releases thanks to ``cibuildwheel``, the process is automated with a GitHub Action. In future releases, we will try to improve on build reproducibility, such as by implementing a lockfile (but not there yet, there is no standard for that) and moving away from ``setuptools`` (potentially to ``meson``).
+
+Python 2.7 was dropped as advised elsewhere, as only the pure python implementation remained retrocompatible, but not the cython extension, so that it is better for older Py2.7 users to simply stick to the fully functional reedsolo v1.7.0.
 
 About API changes, a few bugfixes were implemented in the pure python implementation, but breaking changes were limited as much as possible (if there is any, it is unintended). For the `creedsolo` extension, there are LOTS of changes, hence why the major version change (we try to follow SemVer). We will not list everything here, but the biggest breaking change is that now internally, everything is either a ``bytearray``, or a CPython ``array('i', ...)``. So this means that when interacting with `creedsolo`, you want to **always** supply a `bytearray` object, you can't just provide a list or a string anymore. For `reedsolo`, this is still supported, since it transparently converts to a bytearray internally, for ease of use.
 

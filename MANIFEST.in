@@ -1,5 +1,5 @@
-include LICENSE
-include README.rst
-include *.pyx  # include the cython implementation sourcecode in the wheel, so that the user can compile later
-include creedsolo.c  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3
-recursive-include tests *.py
+#include LICENSE
+#include README.rst
+#include *.pyx  # include the cython implementation sourcecode in the wheel, so that the user can compile later - no need since we use src-layout
+#include creedsolo.c  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3 - no need since we use src-layout
+#recursive-include tests *.py  # to help linux distros package builders, they may want to run the unit test to check their package is working OK

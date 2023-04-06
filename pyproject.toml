@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reedsolo"
-version = "2.0.16b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
+version = "2.0.17b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
 description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
@@ -61,7 +61,7 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 #Changelog = "https://url/changelog"
 
 #[project.optional-dependencies]
-#cythonize = [  # cython and other build time dependencies can NOT be defined as optional-dependencies nor extras, they are installed only after build! They need to be defined as build-system requirements
+#cythonize = [  # cython and other build time dependencies can NOT be defined as optional-dependencies nor extras, they are installed only after build! They need to be defined as build-system requirements. But it's possible to make it installable as an option given a config-setting arg, see: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/
 #    "cython>=3.0.0b2"
 #]
 
@@ -70,23 +70,24 @@ file = "README.rst"
 content-type = "text/x-rst"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 
-[tool.setuptools.package-data]
-"*" = [
-    "*.rst",
-    "LICENSE*",
-    "README*",
-    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can compile later
-    "tests",
-]
+#[tool.setuptools.package-data]
+#"*" = [
+#    "*.rst",
+#    "LICENSE*",
+#    "README*",
+#    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can compile later
+#    "*.c",
+#    #"tests",  # to help linux distros package builders, they may want to run the unit test to check their package is working OK
+#]
 
-[tool.setuptools.exclude-package-data]
-"*" = [
-    "docs/_build",
-    "tests/__pycache__",
-    "tests/.mypy_cache",
-]
+#[tool.setuptools.exclude-package-data]
+#"*" = [
+#    "docs/_build",
+#    "tests/__pycache__",
+#    "tests/.mypy_cache",
+#]
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"

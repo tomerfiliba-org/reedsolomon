@@ -69,10 +69,10 @@ testtox:
 	tox --skip-missing-interpreters -p all
 
 testsetup:
+    # Only for Py2
 	python setup.py check --metadata --restructuredtext --strict
 
 testpyproject:
-    # Only for Py2
 	validate-pyproject pyproject.toml -v
 
 testsetuppost:

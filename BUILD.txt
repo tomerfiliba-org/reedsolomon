@@ -1,9 +1,16 @@
 Build instructions to make a new release:
 
-* ensure ci-build and coverage are OK
-* pymake bandit to test for vulnerabilities
-* test pyproject.toml validity using https://pypi.org/project/validate-pyproject/
-* make a new release and tag on GitHub (tags are necessary for Gentoo builds)
-* pymake build (requires pip install py-make)
-* wait for cibuildwheel to finish on GitHub Actions, then manually download all builds and place them in the dist folder
-* pymake upload
+* Local tests:
+    * run `pymake build` locally, it includes several checks such as `twine check` that will check formatting of README.rst and other things. Make sure to fix any issue.
+        * this should also include a test of pyproject.toml validity using https://pypi.org/project/validate-pyproject/
+        * check that the cythonized extension is compiled OK when there is the flag --cythonized flag.
+    * ensure coverage (`pymake testcoverage`) are OK. If any error, even if just at uploading coverage, fix it before release.
+    * optional: can use cibuildwheel or tox to test in multiple environments and Python versions.
+    * optional: `pymake bandit` to test for vulnerabilities.
+* Online tests:
+    * push a commit, and wait to see if continuous integration in GitHub Actions terminate with success.
+    * same for other things such as coverage (no regression) and code quality.
+* Online release:
+    * make a new release and tag on GitHub (tags are necessary for Gentoo builds)
+    * before: locally: `pymake build` (requires pip install py-make), then `pymake upload`, then attach the sdist and wheel builds to the GitHub release.
+    * nowadays: cibuildwheel builds the sdist and wheels for each platform and supported Python version online on GitHub Actions directly as soon as there is a release (stable or prerelease). Wait for it to finish, it also tests each wheel build the the whole unit test, and it will also automatically upload to PyPi.

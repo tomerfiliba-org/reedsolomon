@@ -69,8 +69,13 @@ Download = "https://github.com/tomerfiliba/reedsolomon/releases"
 file = "README.rst"
 content-type = "text/x-rst"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+#[tool.setuptools]
+#package-dir = {"" = "src"}
+
+#[tool.setuptools.packages.find]
+#where = ["src"]
+#exclude = ["test*"]
+#namespaces = false
 
 #[tool.setuptools.package-data]
 #"*" = [

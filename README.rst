@@ -122,6 +122,8 @@ a convenient facility for neophytes, but encodings such as ``UTF-8`` have variab
 to convert to a bytearray. If you just want to protect a string, you do not need to use a ``bytearray``, but if you need
 to store or send the protected data in a fixed size field, such as in a binary file or a data stream, use a ``bytearray``.
 
+.. code:: python
+
     # Decoding (repairing)
     >>> rsc.decode(b'hello world\xed%T\xc4\xfd\xfd\x89\xf3\xa8\xaa')[0]  # original
     b'hello world'

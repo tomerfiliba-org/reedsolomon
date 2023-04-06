@@ -105,7 +105,7 @@ filterwarnings = [
 branch = true
 relative_files = true
 include = [
-    "src/reedsolo/reedsolo.py",  # in Python <= 3.9, */reedsolo.py cannot be used, the fullpath needs to be specified
+    "*/reedsolo.py",
     ]
 
 [tool.coverage.paths]
@@ -114,7 +114,7 @@ source = ["src"]
 [tool.coverage.report]  # Beware: you need to delete .coveragerc if you have one, otherwise .coveragerc will take precedence!
 show_missing = true
 include = [
-    "src/reedsolo/reedsolo.py",
+    "*/reedsolo.py",
 ]
 omit = [
     "*/python?.?/*",

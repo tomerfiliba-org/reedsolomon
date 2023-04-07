@@ -145,38 +145,26 @@ toxclean:
 	@+python -c "import shutil; shutil.rmtree('.tox', True)"
 
 installdev:
-	@+python setup.py develop --uninstall
-	@+python setup.py develop
-
-installdevpep517:
 	@+python -m pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 install:
-	@+python setup.py install
-
-installpep517:
 	@+python -m pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose --use-pep517
-
-buildpep517:
-    # requires `pip install build`
-	@+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 
 bandit:
     bandit reedsolo.py
 
 build:
+    # requires `pip install build`
 	@+make prebuildclean
 	#@+make testsetup
 	@+make testpyproject
-	@+python -sBm build --config-setting="--build-option=--cythonize"
-	#@+python setup.py sdist bdist_wheel  # deprecated with pep517
-	#@+python setup.py bdist_wininst
+	@+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 	@+make testsetuppost
 
 buildwheelhouse:
 	cibuildwheel --platform auto
 
-pypi:
+upload:
 	twine upload dist/*
 
 buildupload:

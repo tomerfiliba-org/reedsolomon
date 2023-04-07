@@ -306,6 +306,10 @@ If you want to ``cimport`` the module, you will need to directly access the full
     >> cimport cython
     >> cimport creedsolo.creedsolo as crs
 
+Low-level functions allow to construct new APIs on top of this codec, such as
+`an automatic Reed-Solomon decoder <https://github.com/lrq3000/pyFileFixity/blob/0b18728608f2bceac9eafe5356e0abc573af2768/pyFileFixity/lib/eccman.py#L63>`_
+that can search for any viable set of codec parameters if they are apriori unknown.
+
 If you want to learn more about which internal functions to use and for what purposes,
 read the sourcecode's comments (we follow literate programming principles)
 for more info about how it works and the various parameters

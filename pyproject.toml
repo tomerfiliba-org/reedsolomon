@@ -104,6 +104,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 # Check the <mypkg>.egg-info/SOURCES.txt file generated after a `build` or `pip install` to check if the following files are correctly included in the sdist.
+# Check also the list of files included by default: https://packaging.python.org/en/latest/guides/using-manifest-in/
 "*" = [
     "*.rst",
     "LICENSE*",

@@ -96,6 +96,7 @@ where = ["src"]
 #namespaces = false
 
 [tool.setuptools.package-data]
+# Check the <mypkg>.egg-info/SOURCES.txt file generated after a `build` or `pip install` to check if the following files are correctly included in the sdist.
 "*" = [
     "*.rst",
     "LICENSE*",

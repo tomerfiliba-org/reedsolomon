@@ -441,6 +441,7 @@ Here is a non exhaustive list of a few projects that are depending on `reedsolo`
 * `sonicky <https://github.com/egglang/sonicky>`_ - Proof-of-concept Python and Android modules for connectionless ultrasonic message transfer.
 * `neighborhood-connectivity <https://github.com/shayyzhakov/neighborhood-connectivity>`_ - An example app that implements a noisy communication between clique of thread group with very high error correction handling ability and O(1) rounds of messages sending.
 * `audiotagger <https://github.com/NERVEUML/audiotagger>`_ - Clever use of error correction codes to wirelessly synchronize multiple concurrent video feeds of amateur video filmmakers by injecting AFSK packets with timestamp and location metadata in the audio channel communicated via radios.
+* Several research papers used reedsolo, see a list `here <https://scholar.google.com/scholar?q=%22reedsolo%22>`_.
 
 And many, many `more <https://github.com/tomerfiliba-org/reedsolomon/network/dependents>`_!
 

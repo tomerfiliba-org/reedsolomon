@@ -422,7 +422,7 @@ In practice, there is likely very little you need to change, just add a few ``by
 Projects using reedsolo
 -----------------------
 
-Here is a non exhaustive list of a few projects that are depending on `reedsolo`:
+Reedsolo is a critical component of numerous solutions, such as:
 
 * `Matter (ex-Project CHIP) <https://github.com/project-chip/connectedhomeip>`_ - The new standard for the Internet of Things (IoT): Matter (formerly Project CHIP) creates more connections between more objects, simplifying development for manufacturers and increasing compatibility for consumers, guided by the Connectivity Standards Alliance.
 * `esp-idf <https://github.com/espressif/esp-idf>`_ - Espressif IoT Development Framework. Official development framework for Espressif SoCs, such as ESP32, which are very widespread reprogrammable electronic cheaps for scientific, prototype and DIY projects, especially with Arduino and MicroPython.

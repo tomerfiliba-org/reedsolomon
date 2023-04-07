@@ -133,6 +133,7 @@ prebuildclean:
 	@+python -c "import shutil; shutil.rmtree('dist', True)"
 	@+python -c "import shutil; shutil.rmtree('reedsolo.egg-info', True)"
     # IMPORTANT: systematically delete `src/<project.name>.egg-info` folder before rebuilding, otherwise the list of included files will not get updated (it's in `SOURCES.txt` file in this folder)
+    # also very important to delete egg-info before any new build or pip install, otherwise may cause an error that multiple egg-info folders are present
 	@+python -c "import shutil; shutil.rmtree('src/reedsolo.egg-info', True)"
 coverclean:
 	@+python -c "import os; os.remove('.coverage') if os.path.exists('.coverage') else None"
@@ -145,9 +146,11 @@ toxclean:
 	@+python -c "import shutil; shutil.rmtree('.tox', True)"
 
 installdev:
+	@+make prebuildclean
 	@+python -m pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 install:
+	@+make prebuildclean
 	@+python -m pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 bandit:

@@ -42,8 +42,15 @@ classifiers = [
     "Programming Language :: Cython",
     "Topic :: Communications",
     "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Archiving",
     "Topic :: System :: Archiving :: Backup",
     "Topic :: System :: Recovery Tools",
+    "Topic :: Utilities",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
 ]
 dependencies = [
     #"typing-extensions; python_version<'3.8'",

@@ -73,8 +73,7 @@ jobs:
         with:
           path: dist/*.tar.gz
 
-  upload_test_pypi:
-    # Upload to TestPyPi first to ensure that the release is OK (we will try to download it and install it afterwards), as recommended in https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi
+  upload_test_pypi:  # Upload to TestPyPi first to ensure that the release is OK (we will try to download it and install it afterwards), as recommended in https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi
     name: Upload to TestPyPi
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
@@ -103,8 +102,7 @@ jobs:
           --extra-index-url https://pypi.org/simple \
           reedsolo
 
-  upload_pypi:
-    # Upload to the real PyPi if everything else worked before, as suggested in: https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi
+  upload_pypi:  # Upload to the real PyPi if everything else worked before, as suggested in: https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi
     name: Upload to the real PyPi
     needs: [build_wheels, build_sdist, upload_test_pypi]
     runs-on: ubuntu-latest

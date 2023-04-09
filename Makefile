@@ -77,6 +77,8 @@ testpyproject:
 
 testsetuppost:
 	twine check "dist/*"
+
+testrst:
 	rstcheck README.rst
 
 testcoverage:
@@ -157,11 +159,13 @@ bandit:
     bandit reedsolo.py
 
 build:
-    # requires `pip install build`
+	# requires `pip install build`
+	@+make testrst
 	@+make prebuildclean
 	#@+make testsetup
 	@+make testpyproject
-	@+python -sBm build --config-setting="--build-option=--cythonize"  # do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
+    # For build, do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
+	@+python -sBm build --config-setting="--build-option=--cythonize"
 	@+make testsetuppost
 
 buildwheelhouse:

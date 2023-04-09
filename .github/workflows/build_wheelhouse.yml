@@ -1,6 +1,7 @@
 name: Build_wheelhouse
 # Cross-platform wheel and sdist builder and pypi uploader for Python modules
 # From: https://github.com/pypa/cibuildwheel/blob/main/examples/github-deploy.yml and https://github.com/dnicolodi/python-siphash24/blob/0027da083e104af2a8216a51bed7650977fb2c43/.github/workflows/wheels.yml
+# NOTE: if you get a syntax error on a line and it's the start of a job block, then it means that there may be an indentation error anywhere inside the block (hence on a line that is much further than the shown one for the error!). This often happens when copy/pasting from a different config files with a different nesting.
 
 # Build only on creation of new releases
 on:
@@ -94,7 +95,7 @@ jobs:
           repository_url: https://test.pypi.org/legacy/
           # To test: repository_url: https://test.pypi.org/legacy/  # and also change password: ${{ secrets.PYPI_PASSWORD }} to secrets.TEST_PYPI_PASSWORD # for more infos on registering and using TestPyPi, read: https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi -- remove the repository_url to upload to the real PyPi
 
-    - name: Test install from TestPyPI
+      - name: Test install from TestPyPI
       run: |
           python -m pip install --upgrade pip
           pip install \

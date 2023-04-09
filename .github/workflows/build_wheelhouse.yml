@@ -96,7 +96,7 @@ jobs:
           # To test: repository_url: https://test.pypi.org/legacy/  # and also change password: ${{ secrets.PYPI_PASSWORD }} to secrets.TEST_PYPI_PASSWORD # for more infos on registering and using TestPyPi, read: https://py-pkgs.org/08-ci-cd#uploading-to-testpypi-and-pypi -- remove the repository_url to upload to the real PyPi
 
       - name: Test install from TestPyPI
-      run: |
+        run: |
           python -m pip install --upgrade pip
           pip install \
           --index-url https://test.pypi.org/simple/ \

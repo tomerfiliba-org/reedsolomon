@@ -38,16 +38,16 @@ jobs:
         python -m pip install --upgrade pip
         # The rest is managed by the pyproject.toml
     - name: Compile the Cython extension (only on latest stable Python version)
-      if: ${{ matrix.python-version == "*" }}
+      if: ${{ matrix.python-version == '*' }}  # need to use single quotes for literal strings, otherwise with double quotes GitHub expression will fail: https://docs.github.com/en/actions/learn-github-actions/expressions
       run: |
         pip install --upgrade --config-setting="--install-option=--no-cython-compile" cython>=3.0.0b2
     - name: Install the current package (necessary for src-layout) with cythonize
-      if: ${{ matrix.python-version == "*" }}
+      if: ${{ matrix.python-version == '*' }}
       # necessary to add --editable to install locally to be able to run the tests/* scripts, otherwise we can still run them but coverage will not detect the reedsolo files since they will be in site-packages, hence with a very different path, this is because without an editable install, with a src-layout there is no implicitly set PYTHONPATH, as described in https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#src-layout
       run: |
         pip install --upgrade --editable .[test,testmeta] --config-setting="--build-option=--cythonize" --verbose
     - name: Install the current package (necessary for src-layout)
-      if: ${{ matrix.python-version != "*" }}
+      if: ${{ matrix.python-version != '*' }}
       # to test locally, add --editable to the pip install command below
       run: |
         pip install --upgrade --editable .[test,testmeta] --verbose
@@ -98,16 +98,16 @@ jobs:
     - name: Echo current Python version
       run: echo "${{ matrix.python-version }}"
     - name: Compile the Cython extension
-      if: ${{ matrix.python-version != "pypy-3.9" }}  # ${{}} is sh shell syntax, need to place python-version in double quotes so that it does not stop parsing the literal at dots, otherwise dots will truncate the string
+      if: ${{ matrix.python-version != 'pypy-3.9' }}  # ${{}} GitHub expression syntax, need to place the target python-version in single quotes (not double quotes!) so that it does not stop parsing the literal at dots, otherwise dots will truncate the string https://docs.github.com/en/actions/learn-github-actions/expressions
       run: |
         pip install --upgrade --config-setting="--install-option=--no-cython-compile" cython>=3.0.0b2
     - name: Install the current package (necessary for src-layout) with cythonize
-      if: ${{ matrix.python-version != "pypy-3.9" }}
+      if: ${{ matrix.python-version != 'pypy-3.9' }}
       # necessary to add --editable to install locally to be able to run the tests/* scripts, otherwise we can still run them but coverage will not detect the reedsolo files since they will be in site-packages, hence with a very different path, this is because without an editable install, with a src-layout there is no implicitly set PYTHONPATH, as described in https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#src-layout
       run: |
         pip install --upgrade --editable .[test] --config-setting="--build-option=--cythonize" --verbose
     - name: Install the current package (necessary for src-layout) without cythonize (under PyPy)
-      if: ${{ matrix.python-version == "pypy-3.9" }}
+      if: ${{ matrix.python-version == 'pypy-3.9' }}
       run: |
         pip install --upgrade --editable .[test] --verbose
     - name: Test downstream package depending on reedsolo (pyFileFixity) as complementary functional unit test

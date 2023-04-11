@@ -1,9 +1,9 @@
-# This workflow will install Python dependencies and run tests with a variety of Python versions
+# This workflow will test a downstream dependency to functionally test current (Python) package
 # It uses the Python Package GitHub Actions workflow.
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 # and https://www.youtube.com/watch?v=l6fV09z5XHk
 
-name: ci-build
+name: ci-build-dowstream
 
 on:
   push:
@@ -14,13 +14,13 @@ on:
       - master
 
 jobs:
-  unittests:
-    name: Unit tests on a matrix of Python versions and OSes
+  testdownstream:
+    name: Unit test downstream package depending on our package
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "*", "3.12-dev", pypy-3.8, pypy-3.9]  # check the list of versions: https://github.com/actions/python-versions/releases and https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md -- note that "*" represents the latest stable version of Python
+        python-version: ["*", "pypy-3.9"]  # check the list of versions: https://github.com/actions/python-versions/releases and https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md -- note that "*" represents the latest stable version of Python
         os: [ ubuntu-latest, windows-latest, macos-latest ] # jobs that run on Windows and macOS runners that GitHub hosts consume minutes at 2 and 10 times the rate that jobs on Linux runners consume respectively. But it's free for public OSS repositories.
     steps:
     - uses: actions/checkout@v3
@@ -37,37 +37,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         # The rest is managed by the pyproject.toml
-    - name: Compile the Cython extension (only on latest stable Python version)
-      if: ${{ matrix.python-version == '*' }}  # need to use single quotes for literal strings, otherwise with double quotes GitHub expression will fail: https://docs.github.com/en/actions/learn-github-actions/expressions
+    - name: Echo current Python version
+      run: echo "${{ matrix.python-version }}"
+    - name: Compile the Cython extension
+      if: ${{ matrix.python-version != 'pypy-3.9' }}  # ${{}} GitHub expression syntax, need to place the target python-version in single quotes (not double quotes!) so that it does not stop parsing the literal at dots, otherwise dots will truncate the string https://docs.github.com/en/actions/learn-github-actions/expressions
       run: |
         pip install --upgrade --config-setting="--install-option=--no-cython-compile" cython>=3.0.0b2
     - name: Install the current package (necessary for src-layout) with cythonize
-      if: ${{ matrix.python-version == '*' }}
+      if: ${{ matrix.python-version != 'pypy-3.9' }}
       # necessary to add --editable to install locally to be able to run the tests/* scripts, otherwise we can still run them but coverage will not detect the reedsolo files since they will be in site-packages, hence with a very different path, this is because without an editable install, with a src-layout there is no implicitly set PYTHONPATH, as described in https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#src-layout
       run: |
-        pip install --upgrade --editable .[test,testmeta] --config-setting="--build-option=--cythonize" --verbose
-    - name: Install the current package (necessary for src-layout)
-      if: ${{ matrix.python-version != '*' }}
-      # to test locally, add --editable to the pip install command below
+        pip install --upgrade --editable .[test] --config-setting="--build-option=--cythonize" --verbose
+    - name: Install the current package (necessary for src-layout) without cythonize (under PyPy)
+      if: ${{ matrix.python-version == 'pypy-3.9' }}
       run: |
-        pip install --upgrade --editable .[test,testmeta] --verbose
-    - name: Test with pytest
+        pip install --upgrade --editable .[test] --verbose
+    - name: Test downstream package depending on reedsolo (pyFileFixity) as complementary functional unit test
       run: |
-        coverage run --branch -m pytest -v
-        coverage report -m
-    - name: Send coverage to Coveralls
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ matrix.python-version >= 3 }}
-      run: coveralls --service=github
-    - name: Build sdist (necessary for the other tests below)
-      if: ${{ matrix.python-version == 3.10 }}
-      run: python -sBm build --config-setting="--build-option=--cythonize"
-    - name: Twine check
-      if: ${{ matrix.python-version == 3.10 }}
-      run: |
-        twine check "dist/*"
-        rstcheck README.rst
-    - name: pyproject.toml validity
-      if: ${{ matrix.python-version == 3.10 }}
-      run: validate-pyproject pyproject.toml -v
+        pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity --verbose
+        pytest src/pyfilefixity

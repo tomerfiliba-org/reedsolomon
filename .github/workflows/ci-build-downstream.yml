@@ -39,6 +39,10 @@ jobs:
         # The rest is managed by the pyproject.toml
     - name: Echo current Python version
       run: echo "${{ matrix.python-version }}"
+    - name: Install downstream package depending on reedsolo (pyFileFixity) as complementary functional unit test
+      # Note: we need to install BEFORE so that we can install our update package reedsolo after (with cutting edge git version), and force pyFileFixity to use it (otherwise we would need to disable isolation build in pip if placed after, but it would be more messy).
+      run: |
+        pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity[test] --verbose
     - name: Compile the Cython extension
       if: ${{ matrix.python-version != 'pypy-3.9' }}  # ${{}} GitHub expression syntax, need to place the target python-version in single quotes (not double quotes!) so that it does not stop parsing the literal at dots, otherwise dots will truncate the string https://docs.github.com/en/actions/learn-github-actions/expressions
       run: |
@@ -54,5 +58,4 @@ jobs:
         pip install --upgrade --editable .[test] --verbose
     - name: Test downstream package depending on reedsolo (pyFileFixity) as complementary functional unit test
       run: |
-        pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity --verbose
         pytest src/pyfilefixity

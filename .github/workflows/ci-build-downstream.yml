@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["*", "pypy-3.9"]  # check the list of versions: https://github.com/actions/python-versions/releases and https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md -- note that "*" represents the latest stable version of Python
-        os: [ ubuntu-latest, windows-latest, macos-latest ] # jobs that run on Windows and macOS runners that GitHub hosts consume minutes at 2 and 10 times the rate that jobs on Linux runners consume respectively. But it's free for public OSS repositories.
+        os: [ ubuntu-latest, macos-latest ] # windows-latest # FIXME: windows runners cause pip to unexpectedly change line returns even in binary files! So the test files are tampered and the jobs on windows will fail. See https://github.com/pypa/pip/issues/11952 - TODO: restore when this gets fixed
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -41,6 +41,7 @@ jobs:
       run: echo "${{ matrix.python-version }}"
     - name: Install downstream package depending on reedsolo (pyFileFixity) as complementary functional unit test
       # Note: we need to install BEFORE so that we can install our update package reedsolo after (with cutting edge git version), and force pyFileFixity to use it (otherwise we would need to disable isolation build in pip if placed after, but it would be more messy).
+      # FIXME: Need to use the @ form once issue https://github.com/pypa/pip/issues/11951 is fixed, as supplying extras to an egg fragment is deprecated and will be removed in pip v25.
       run: |
         pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity[test] --verbose
     - name: Compile the Cython extension

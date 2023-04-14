@@ -1,0 +1,6 @@
+# Simple .gitattributes that disables any text end-of-line normalization/conversion
+# `-text` still allows diffs for text types detected by git heuristics, contrary to `binary`
+# This avoids issues with binary files eof being converted when using `pip install git+...`
+# More templates can be found at: https://github.com/alexkaratarakis/gitattributes
+
+* -text

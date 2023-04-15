@@ -2,7 +2,7 @@
 # To use this Makefile, pip install py-make
 # then do: pymake <command>
 # or: python.exe -m pymake <command>
-# You also need to pip install also other required modules: `pip install flake8 coverage twine pytest pytest-cov validate-pyproject[all] pytest-xdist`
+# You also need to pip install also other required modules: `pip install flake8 coverage twine pytest pytest-cov validate-pyproject[all] pytest-xdist rstcheck` , or simply `pip install --editable .[test,testmeta]`
 # Up to Python 3.9 included, nosetests was used, but from 3.10 onward, support for it was dropped since it is not maintained anymore, so that pytest and pytest-cov are used instead.
 # Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
@@ -149,7 +149,7 @@ toxclean:
 
 installdev:
 	@+make prebuildclean
-	@+python -m pip install --upgrade --editable . --config-setting="--build-option=--cythonize" --verbose --use-pep517
+	@+python -m pip install --upgrade --editable .[test,testmeta] --config-setting="--build-option=--cythonize" --verbose --use-pep517
 
 install:
 	@+make prebuildclean
@@ -164,7 +164,7 @@ build:
 	@+make prebuildclean
 	#@+make testsetup
 	@+make testpyproject
-    # For build, do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
+	# For build, do NOT use the -w flag, otherwise only the wheel will be built, but we need sdist for source distros such as Debian and Gentoo!
 	@+python -sBm build --config-setting="--build-option=--cythonize"
 	@+make testsetuppost
 

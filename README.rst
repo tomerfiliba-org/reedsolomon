@@ -41,11 +41,11 @@ For the cutting-edge code (likely unstable, do not use in production!), use:
 
     pip install --upgrade git+https://github.com/tomerfiliba-org/reedsolomon
 
-If you have some issues installing through pip, maybe this command may help:
+If you have some issues installing through pip, maybe this command may help, by forcing the use of sdist instead of wheels:
 
 .. code:: sh
 
-    pip install reedsolo --no-binary={reedsolo}
+    pip install reedsolo --no-binary="reedsolo" --no-cache
 
 Note: for Python 2.7 and Python <= 3.6, please use v1.7.0:
 

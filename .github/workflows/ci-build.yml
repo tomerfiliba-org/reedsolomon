@@ -62,7 +62,7 @@ jobs:
       run: coveralls --service=github
     - name: Build sdist (necessary for the other tests below)
       if: ${{ matrix.python-version == '*' }}
-      run: python -sBm build --config-settings="--build-option=--cythonize" --verbose
+      run: python -sBm build --config-setting="--build-option=--cythonize" --verbose
     - name: Twine check
       if: ${{ matrix.python-version == '*' }}
       run: |

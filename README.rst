@@ -81,11 +81,11 @@ The package for the development or cutting-edge releases can also be built local
 
     pip install build
     # With cythonization (from *.pyx to *.c to *.pyd)
-    python -sBm build --config-settings="--build-option=--cythonize"
+    python -sBm build --config-setting="--build-option=--cythonize"
     # or skip cythonization and only compile from the already transpiled c extension (from *.c to *.pyd)
-    python -sBm build --config-settings="--build-option=--native-compile"
+    python -sBm build --config-setting="--build-option=--native-compile"
 
-The setup.py will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as `import creedsolo` instead of `import reedsolo`, with the same features between both modules.
+The ``setup.py`` will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as ``import creedsolo`` instead of ``import reedsolo``, with the same features between both modules. Note: Make sure to use ``--config-setting`` singular, because ``build`` does not recognize the plural form contrary to ``pip``.
 
 As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 

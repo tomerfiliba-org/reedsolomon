@@ -58,19 +58,19 @@ Through wheels/pip, a pure-python implementation called ``reedsolo`` is installe
 .. code:: sh
 
     # To compile from the latest stable release:
-    pip install --upgrade reedsolo --no-binary "reedsolo" --no-cache --config-settings="--build-option=--cythonize" --use-pep517 --isolated --verbose
+    pip install --upgrade reedsolo --no-binary "reedsolo" --no-cache --config-setting="--build-option=--cythonize" --use-pep517 --isolated --verbose
     # To compile from the latest development release:
-    pip install --upgrade reedsolo --no-binary "reedsolo" --no-cache --config-settings="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
+    pip install --upgrade reedsolo --no-binary "reedsolo" --no-cache --config-setting="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
     # To compile from the cutting edge code:
-    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba-org/reedsolomon" --no-binary "reedsolo" --no-cache --config-settings="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
+    pip install --upgrade "reedsolo @ git+https://github.com/tomerfiliba-org/reedsolomon" --no-binary "reedsolo" --no-cache --config-setting="--build-option=--cythonize" --use-pep517 --isolated --pre --verbose
 
-The ``--config-settings="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension. The ``--no-binary "reedsolo"`` and ``--no-cache`` options are necessary `since pip 23.1 <https://github.com/pypa/pip/issues/11453#issuecomment-1523964029>`__ to force the use of the sdist instead of wheels.
+The ``--config-setting="--build-option=--cythonize"`` flag signals to the ``setuptools`` backend to propagate to ``reedsolo's setup.py`` to build the optional cythonized extension. The ``--no-binary "reedsolo"`` and ``--no-cache`` options are necessary `since pip 23.1 <https://github.com/pypa/pip/issues/11453#issuecomment-1523964029>`__ to force the use of the sdist instead of wheels.
     
 or locally with:
 
 .. code:: sh
 
-    pip install --upgrade . --config-settings="--build-option=--cythonize" --verbose
+    pip install --upgrade . --config-setting="--build-option=--cythonize" --verbose
 
 Note: for development, it's possible to add the ``--editable`` flag to use the local folder without installing in ``site-packages``,
 and use ``.[test]`` instead of ``.`` to install all required packages to test this module locally.
@@ -85,7 +85,7 @@ The package for the development or cutting-edge releases can also be built local
     # or skip cythonization and only compile from the already transpiled c extension (from *.c to *.pyd)
     python -sBm build --config-setting="--build-option=--native-compile"
 
-The ``setup.py`` will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as ``import creedsolo`` instead of ``import reedsolo``, with the same features between both modules. Note: Make sure to use ``--config-setting`` singular, because ``build`` does not recognize the plural form contrary to ``pip``.
+The ``setup.py`` will then try to build the Cython optimized module ``creedsolo.pyx`` if Cython is installed, which can then be imported as ``import creedsolo`` instead of ``import reedsolo``, with the same features between both modules. Note: Make sure to use ``--config-setting`` singular, because ``build`` does not (`yet <https://github.com/pypa/build/issues/608>`__) recognize the plural form contrary to ``pip``.
 
 As an alternative, use `conda <https://docs.conda.io/en/latest/>`_ to install a compiled version for various platforms:
 

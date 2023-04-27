@@ -25,12 +25,16 @@ keywords = ["data", "protection", "correction", "recovery", "restore", "save", "
 classifiers = [
     "Development Status :: 6 - Mature",
     "Intended Audience :: Developers",
+    "Intended Audience :: Education",
     "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Telecommunications Industry",
     "License :: OSI Approved :: The Unlicense (Unlicense)",  # Unlicense OR MIT-0 at the user preference
     "License :: OSI Approved :: MIT No Attribution License (MIT-0)",
-    'Operating System :: Microsoft :: Windows',
-    'Operating System :: MacOS :: MacOS X',
-    'Operating System :: POSIX :: Linux',
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
@@ -48,9 +52,6 @@ classifiers = [
     "Topic :: System :: Archiving :: Backup",
     "Topic :: System :: Recovery Tools",
     "Topic :: Utilities",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Information Technology",
-    "Intended Audience :: System Administrators",
 ]
 dependencies = [
     #"typing-extensions; python_version<'3.8'",

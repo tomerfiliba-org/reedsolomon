@@ -6,6 +6,10 @@
 # Angus Gratton
 #
 # Licensed under the Unlicense or MIT-0 License at your convenience (essentially equivalent to Public Domain).
+#
+# Purpose: Most of the packaging is done in pyproject.toml, but to compile Cythonized and C extensions with setuptools, a setup.py file is still required.
+# Note: Even if setuptools implement in the future a declarative form for cythonized and C extensions, an empty setup.py is required for retrocompatibility with older versions of pip that do not support pyproject.toml-only projects, especially to install in editable mode, see: https://github.com/pypa/setuptools/issues/2816
+
 
 # See:
 # https://docs.python.org/2/distutils/setupscript.html

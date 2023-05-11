@@ -456,6 +456,12 @@ Recommended reading
 * "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press. `Readable online on Google Books <https://books.google.fr/books?id=eQs2i-R9-oYC&lpg=PR11&ots=atCPQJm3OJ&dq=%22Algebraic%20codes%20for%20data%20transmission%22%2C%20Blahut%2C%20Richard%20E.%2C%202003%2C%20Cambridge%20university%20press.&lr&hl=fr&pg=PA193#v=onepage&q=%22Algebraic%20codes%20for%20data%20transmission%22,%20Blahut,%20Richard%20E.,%202003,%20Cambridge%20university%20press.&f=false>`_. This book was pivotal in helping to understand the intricacies of the universal Berlekamp-Massey algorithm (see figures 7.5 and 7.10).
 * If you want a more mathematically transparent but less optimized implementation, read the sibling open-source project `unireedsolomon <https://github.com/lrq3000/unireedsolomon>`_, also co-authored by the maintainer of reedsolo, so that the codebase is very similar (although reedsolo is more mature and has more bugfixes - unireedsolomon should only be used for learning purposes!).
 
+Similar projects
+----------------
+
+Here is a non-exhaustive list of similar projects (ie, projects implementing a Reed-Solomon codec):
+* [galois](https://github.com/mhostetter/galois), a Numba JIT-optimized extension module for Numpy, which implements a Reed-Solomon codec and NTT transforms.
+
 Authors
 -------
 

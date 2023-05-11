@@ -460,7 +460,7 @@ Similar projects
 ----------------
 
 Here is a non-exhaustive list of similar projects (ie, projects implementing a Reed-Solomon codec):
-* [galois](https://github.com/mhostetter/galois), a Numba JIT-optimized extension module for Numpy, which implements a Reed-Solomon codec and NTT transforms.
+* `galois <https://github.com/mhostetter/galois>`_, a Numba JIT-optimized extension module for Numpy, which implements a Reed-Solomon codec and NTT transforms.
 
 Authors
 -------

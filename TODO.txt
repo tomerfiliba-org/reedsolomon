@@ -1,4 +1,5 @@
 * Test the new [galois](https://github.com/mhostetter/galois) jit-optimized extension module for numpy, which implements a reed-solomon codec and NTT transforms!
+* Implement my own code for probabilistic prime polynomials generator, because for higher fields it is necessary: https://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders/Additional_information#Probabilistic_prime_polynomial_generator
 * Cythonize more, read recent tutorials:
     * https://www.peterbaumgartner.com/blog/intro-to-just-enough-cython-to-be-useful/
     * https://members.loria.fr/LMendoza/link/Cython_speedup_notes.html

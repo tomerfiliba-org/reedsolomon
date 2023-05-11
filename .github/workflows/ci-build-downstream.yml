@@ -43,8 +43,9 @@ jobs:
       # Note: we need to install BEFORE so that we can install our update package reedsolo after (with cutting edge git version), and force pyFileFixity to use it (otherwise we would need to disable isolation build in pip if placed after, but it would be more messy).
       # FIXME: Need to use the @ form once issue https://github.com/pypa/pip/issues/11951 is fixed, as supplying extras to an egg fragment is deprecated and will be removed in pip v25.
       run: |
-        pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity[test] --verbose
-    - name: Compile the Cython extension
+        #pip install --upgrade --editable git+https://github.com/lrq3000/pyFileFixity.git#egg=pyFileFixity[test] --verbose  # for cutting-edge, if we update reedsolomon's API, we will usually also update pyFileFixity's
+        pip install --upgrade --editable pyfilefixity[test] --pre --verbose  # use latest dev release
+    - name: Install Cython module
       if: ${{ matrix.python-version != 'pypy-3.9' }}  # ${{}} GitHub expression syntax, need to place the target python-version in single quotes (not double quotes!) so that it does not stop parsing the literal at dots, otherwise dots will truncate the string https://docs.github.com/en/actions/learn-github-actions/expressions
       run: |
         pip install --upgrade --config-setting="--install-option=--no-cython-compile" cython>=3.0.0b2

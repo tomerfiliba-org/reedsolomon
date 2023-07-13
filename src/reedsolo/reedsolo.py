@@ -562,6 +562,7 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
 ################### REED-SOLOMON DECODING ###################
 
 def inverted(msg):
+    '''Implements msg[::-1] explicitly to make the library compatible with MicroPython which does not support stepped slices.'''
     return list(reversed(msg))
 
 def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):

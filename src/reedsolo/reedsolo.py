@@ -561,6 +561,9 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
 
 ################### REED-SOLOMON DECODING ###################
 
+def inverted(msg):
+    return list(reversed(msg))
+
 def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
     '''Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.
     Mathematically, it's essentially equivalent to a Fourrier Transform (Chien search being the inverse).
@@ -577,7 +580,7 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
     coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
     err_loc = rs_find_errata_locator(coef_pos, generator)
     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
-    err_eval = rs_find_error_evaluator(synd[::-1], err_loc, len(err_loc)-1)[::-1]
+    err_eval = inverted(rs_find_error_evaluator(inverted(synd), err_loc, len(err_loc)-1))
 
     # Second part of Chien search to get the error location polynomial X from the error positions in err_pos (the roots of the error locator polynomial, ie, where it evaluates to 0)
     X = _bytearray(len(coef_pos)) # will store the position of the errors
@@ -617,7 +620,7 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
         # Compute y (evaluation of the errata evaluator polynomial)
         # This is a more faithful translation of the theoretical equation contrary to the old forney method. Here it is exactly copy/pasted from the included presentation decoding_rs.pdf: Yl = omega(Xl.inverse()) / prod(1 - Xj*Xl.inverse()) for j in len(X) (in the paper it's for j in s, but it's useless when len(X) < s because we compute neutral terms 1 for nothing, and wrong when correcting more than s erasures or erasures+errors since it prevents computing all required terms).
         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.
-        y = gf_poly_eval(err_eval[::-1], Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)
+        y = gf_poly_eval(inverted(err_eval), Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)
         y = gf_mul(gf_pow(Xi, 1-fcr), y) # adjust to fcr parameter
         
         # Compute the magnitude
@@ -657,13 +660,13 @@ def rs_find_error_locator(synd, nsym, erase_loc=None, erase_count=0):
 
         # Compute the discrepancy Delta
         # Here is the close-to-the-books operation to compute the discrepancy Delta: it's a simple polynomial multiplication of error locator with the syndromes, and then we get the Kth element.
-        #delta = gf_poly_mul(err_loc[::-1], synd)[K] # theoretically it should be gf_poly_add(synd[::-1], [1])[::-1] instead of just synd, but it seems it's not absolutely necessary to correctly decode.
+        #delta = gf_poly_mul(inverted(err_loc), synd)[K] # theoretically it should be inverted(gf_poly_add(inverted(synd), [1])) instead of just synd, but it seems it's not absolutely necessary to correctly decode.
         # But this can be optimized: since we only need the Kth element, we don't need to compute the polynomial multiplication for any other element but the Kth. Thus to optimize, we compute the polymul only at the item we need, skipping the rest (avoiding a nested loop, thus we are linear time instead of quadratic).
         # This optimization is actually described in several figures of the book "Algebraic codes for data transmission", Blahut, Richard E., 2003, Cambridge university press.
         delta = synd[K]
         for j in xrange(1, len(err_loc)):  # range 1:256 is important: if you use range 0:255, if the last byte of the ecc symbols is corrupted, it won't be correctable! You need to use the range 1,256 to include this last byte.
             delta ^= gf_mul(err_loc[-(j+1)], synd[K - j]) # delta is also called discrepancy. Here we do a partial polynomial multiplication (ie, we compute the polynomial multiplication only for the term of degree K). Should be equivalent to brownanrs.polynomial.mul_at().
-        #print "delta", K, delta, list(gf_poly_mul(err_loc[::-1], synd)) # debugline
+        #print "delta", K, delta, list(gf_poly_mul(inverted(err_loc), synd)) # debugline
 
         # Shift polynomials to compute the next degree
         old_loc = old_loc + _bytearray([0])
@@ -743,7 +746,7 @@ def rs_forney_syndromes(synd, pos, nmess, generator=2):
     # Theoretical way of computing the modified Forney syndromes: fsynd = (erase_loc * synd) % x^(n-k) -- although the trimming by using x^(n-k) is maybe not necessary as many books do not even mention it (and it works without trimming)
     # See Shao, H. M., Truong, T. K., Deutsch, L. J., & Reed, I. S. (1986, April). A single chip VLSI Reed-Solomon decoder. In Acoustics, Speech, and Signal Processing, IEEE International Conference on ICASSP'86. (Vol. 11, pp. 2151-2154). IEEE.ISO 690
     #erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator) # computing the erasures locator polynomial
-    #fsynd = gf_poly_mul(erase_loc[::-1], synd[1:]) # then multiply with the syndrome to get the untrimmed forney syndrome
+    #fsynd = gf_poly_mul(inverted(erase_loc), synd[1:]) # then multiply with the syndrome to get the untrimmed forney syndrome
     #fsynd = fsynd[len(pos):] # then trim the first erase_pos coefficients which are useless. Seems to be not necessary, but this reduces the computation time later in BM (thus it's an optimization).
 
     return fsynd
@@ -781,7 +784,7 @@ def rs_correct_msg(msg_in, nsym, fcr=0, generator=2, erase_pos=None, only_erasur
         # compute the error locator polynomial using Berlekamp-Massey
         err_loc = rs_find_error_locator(fsynd, nsym, erase_count=len(erase_pos))
         # locate the message errors using Chien search (or bruteforce search)
-        err_pos = rs_find_errors(err_loc[::-1], len(msg_out), generator)
+        err_pos = rs_find_errors(inverted(err_loc), len(msg_out), generator)
         if err_pos is None:
             raise ReedSolomonError("Could not locate error")
 
@@ -827,16 +830,16 @@ def rs_correct_msg_nofsynd(msg_in, nsym, fcr=0, generator=2, erase_pos=None, onl
         msg_out_len = len(msg_out)  # cache to avoid recalculations inside loop
         erase_pos_reversed = [msg_out_len-1-eras for eras in erase_pos]
         erase_loc = rs_find_errata_locator(erase_pos_reversed, generator=generator)
-        #erase_eval = rs_find_error_evaluator(synd[::-1], erase_loc, len(erase_loc)-1)
+        #erase_eval = rs_find_error_evaluator(inverted(synd), erase_loc, len(erase_loc)-1)
 
     # prepare errors/errata locator polynomial
     if only_erasures:
-        err_loc = erase_loc[::-1]
-        #err_eval = erase_eval[::-1]
+        err_loc = inverted(erase_loc)
+        #err_eval = inverted(erase_eval)
     else:
         err_loc = rs_find_error_locator(synd, nsym, erase_loc=erase_loc, erase_count=erase_count)
-        err_loc = err_loc[::-1]
-        #err_eval = rs_find_error_evaluator(synd[::-1], err_loc[::-1], len(err_loc)-1)[::-1] # find error/errata evaluator polynomial (not really necessary since we already compute it at the same time as the error locator poly in BM)
+        err_loc = inverted(err_loc)
+        #err_eval = inverted(rs_find_error_evaluator(inverted(synd), inverted(err_loc), len(err_loc)-1)) # find error/errata evaluator polynomial (not really necessary since we already compute it at the same time as the error locator poly in BM)
 
     # locate the message errors
     err_pos = rs_find_errors(err_loc, len(msg_out), generator) # find the roots of the errata locator polynomial (ie: the positions of the errors/errata)

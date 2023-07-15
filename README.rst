@@ -461,6 +461,7 @@ Similar projects
 
 Here is a non-exhaustive list of similar projects (ie, projects implementing a Reed-Solomon codec):
 * `galois <https://github.com/mhostetter/galois>`_, a Numba JIT-optimized extension module for Numpy, which implements a Reed-Solomon codec and NTT transforms.
+* `generalizedReedSolomon <https://github.com/raeudigerRaeffi/generalizedReedSolomon>`__, a variant of an implementation of Reed-Solomon that is more parallelizable and interestingly can encode messages of arbitrary length without chunking (the chunking is kind of integrated in the parallelization). Internally uses numpy’s fft and ifft. Maybe translatable to use `Number Theoretic Transform (NTT) <https://github.com/Bulat-Ziganshin/FastECC>`__ instead of FFT.
 
 Authors
 -------

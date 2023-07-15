@@ -555,6 +555,11 @@ class TestHelperFuncs(unittest.TestCase):
         sys.stdout = sys.__stdout__
         self.assertEqual(output.getvalue(), "This codec can correct up to 5 errors and 10 erasures independently\nThis codec can correct up to 4 errors and 2 erasures simultaneously\nThis codec can correct up to 4 errors and 2 erasures simultaneously\n")
 
+    def test_inverted(self):
+        '''Only for other envs than MicroPython: test if inverted() == inverted stepped slicing'''
+        l = [1, 2, 3, 2, 4]
+        self.assertTrue(inverted(l) == l[::-1])
+
 
 if __name__ == "__main__":
     unittest.main()

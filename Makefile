@@ -82,46 +82,46 @@ testrst:
 	rstcheck README.rst
 
 testcoverage:
-     # This is the preferred way to run the tests since Python 3.10
+	# This is the preferred way to run the tests since Python 3.10
 	@+make coverclean
-     # Build the Cython extension and install module in editable mode
+	# Build the Cython extension and install module in editable mode
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
-     #python -m pip install -e . --config-setting="--build-option=--cythonize"
+	#python -m pip install -e . --config-setting="--build-option=--cythonize"
 	python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
-     # Run the tests
+	# Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
-     # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
-     #python setup.py develop
-     #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
-     #python setup.py develop --uninstall
+	# With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
+	#python setup.py develop
+	#pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
+	#python setup.py develop --uninstall
 	coverage run --branch -m pytest -v
 	coverage report -m
 
 testcoveragexdist:
-     # This parallelizes tests to make them run faster, thanks to pytest-xdist
+	# This parallelizes tests to make them run faster, thanks to pytest-xdist
 	@+make coverclean
-     # Build the Cython extension and install module in editable mode
+	# Build the Cython extension and install module in editable mode
 	#python setup.py build_ext --inplace --cythonize  # unnecessary to call build_ext --inplace now
-     #python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
-	@+make installdevpep517
-     # Run the tests
+	#python setup.py develop --cythonize  # unfortunately much faster than current pep517 options which do not allow to only build the extension
+	@+make installdev
+	# Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
-     # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
-     #python setup.py develop
-     #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
-     #python setup.py develop --uninstall
+	# With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
+	#python setup.py develop
+	#pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
+	#python setup.py develop --uninstall
 	coverage run --branch -m pytest -n auto -v
-     #coverage report -m  # cannot send a report from parallelized xdist
+	#coverage report -m  # cannot send a report from parallelized xdist
 
 testcoveragenocython:
-     # This is the preferred way to run the tests since Python 3.10
+	# This is the preferred way to run the tests since Python 3.10
 	@+make coverclean
-     # Run the tests
+	# Run the tests
 	# nosetests reedsolo --with-coverage --cover-package=reedsolo --cover-erase --cover-min-percentage=80 -d -v
-     # With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
-     #python setup.py develop
-     #pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
-     #python setup.py develop --uninstall
+	# With PyTest, it is now necessary to first install the python module so that it is found (--cov=<module>)
+	#python setup.py develop
+	#pytest --cov-report term-missing --cov-config=.coveragerc --cov=. tests/ --cov-branch
+	#python setup.py develop --uninstall
 	coverage run --branch -m pytest -v
 	coverage report -m
 

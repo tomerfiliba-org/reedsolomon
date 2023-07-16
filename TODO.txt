@@ -47,6 +47,7 @@ Other TODO apart from Cython:
 * Optimize pure python implementation by using _bytearray() instead of [] whenever possible (compare with changes done on the cython implementation)
 * Pre-allocate bytearrays whenever possible in the pure-python implementation (like the cython implementation)
 * Test and fix issues with galois fields smaller than 2^8.
+* Extend preedsolo with new algorithm in O(nlogn) but generalized over any GF field: https://doi.org/10.1109/LCOMM.2020.2965453
 * Try to implement NTT, especially using https://github.com/raeudigerRaeffi/generalizedReedSolomon which uses fft/ifft:
 	* BEST NTT tuto for RS with examples! https://tmo.jpl.nasa.gov/progress_report2/42-35/35K.PDF - The fast decoding of reed-solomon codes with number theoretic transform by Reed et al
 	* Implement a fast algorithm for large data encoding (and decoding), see [https://github.com/catid/leopard leopard-RS] for a FFT approach and compare with https://github.com/raeudigerRaeffi/generalizedReedSolomon or [https://github.com/Bulat-Ziganshin/FastECC FastECC] for a NTT approach and try to translate https://github.com/raeudigerRaeffi/generalizedReedSolomon to use NTT instead.

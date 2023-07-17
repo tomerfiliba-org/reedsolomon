@@ -557,7 +557,7 @@ class TestHelperFuncs(unittest.TestCase):
 
     def test_inverted(self):
         '''Only for other envs than MicroPython: test if inverted() == inverted stepped slicing'''
-        l = [1, 2, 3, 2, 4]
+        l = bytearray([1, 2, 3, 2, 4])
         self.assertTrue(inverted(l) == l[::-1])
 
 

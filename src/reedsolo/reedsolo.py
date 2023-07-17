@@ -563,7 +563,7 @@ def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
 
 def inverted(msg):
     '''Implements msg[::-1] explicitly to make the library compatible with MicroPython which does not support stepped slices.'''
-    return list(reversed(msg))
+    return _bytearray(reversed(msg))
 
 def rs_calc_syndromes(msg, nsym, fcr=0, generator=2):
     '''Given the received codeword msg and the number of error correcting symbols (nsym), computes the syndromes polynomial.
@@ -578,7 +578,7 @@ def rs_correct_errata(msg_in, synd, err_pos, fcr=0, generator=2): # err_pos is a
     global field_charac
     msg = _bytearray(msg_in)
     # calculate errata locator polynomial to correct both errors and erasures (by combining the errors positions given by the error locator polynomial found by BM with the erasures positions given by caller)
-    coef_pos = [len(msg) - 1 - p for p in err_pos] # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3])
+    coef_pos = _bytearray(len(msg) - 1 - p for p in err_pos) # need to convert the positions to coefficients degrees for the errata locator algo to work (eg: instead of [0, 1, 2] it will become [len(msg)-1, len(msg)-2, len(msg) -3]), also can use a _bytearray() because length of message - and hence length of coef_pos - will always be constrained by the Galois Field.
     err_loc = rs_find_errata_locator(coef_pos, generator)
     # calculate errata evaluator polynomial (often called Omega or Gamma in academic papers)
     err_eval = inverted(rs_find_error_evaluator(inverted(synd), err_loc, len(err_loc)-1))
@@ -734,10 +734,10 @@ def rs_find_errors(err_loc, nmess, generator=2):
 
 def rs_forney_syndromes(synd, pos, nmess, generator=2):
     # Compute Forney syndromes, which computes a modified syndromes to compute only errors (erasures are trimmed out). Do not confuse this with Forney algorithm, which allows to correct the message based on the location of errors.
-    erase_pos_reversed = [nmess-1-p for p in pos] # prepare the coefficient degree positions (instead of the erasures positions)
+    erase_pos_reversed = _bytearray(nmess-1-p for p in pos) # prepare the coefficient degree positions (instead of the erasures positions)
 
     # Optimized method, all operations are inlined
-    fsynd = list(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
+    fsynd = _bytearray(synd[1:])      # make a copy and trim the first coefficient which is always 0 by definition
     for i in xrange(len(pos)):
         x = gf_pow(generator, erase_pos_reversed[i])
         for j in xrange(len(fsynd) - 1):

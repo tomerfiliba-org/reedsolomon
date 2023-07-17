@@ -241,6 +241,16 @@ whatever field you set with ``c_exp``).
 
 If you need to use a variable number of error correction symbols (i.e., akin to variable bitrate in videos encoding), this is possible always possible using `RSCodec.decode(nsym=x)` and at encoding by setting `RSCodec(nsym=y, single_gen=False)` and then `RSCodec.encode(nsym=x)`.
 
+If you are trying to decode messages from another Reed-Solomon codec such as MATLAB’s ``rsenc``, make sure you use the same prime number and ``fcr`` parameter. In 1-numbered languages (loops and list indices start at 1 instead of 0), the ``fcr`` parameter is often hardcoded to ``1``, which is the case for MATLAB. For compatibility with MATLAB, use the following parameters:
+
+::
+
+	>> rsc = RSCodec(12, prim=285, fcr=1)
+
+For other third-party Reed-Solomon codecs using unknown parameters,
+`an automatic Reed-Solomon parameters searcher <https://github.com/lrq3000/pyFileFixity/blob/0b18728608f2bceac9eafe5356e0abc573af2768/pyFileFixity/lib/eccman.py#L63>`_
+can be used to search the viable parameters to decode.
+
 Low-level usage via direct access to math functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -313,7 +323,15 @@ However if you want to manually check if the repaired message is correct, you ca
 
     >> rs.rs_check(rmes + recc, nsym)
 
-Note: if you want to use multiple reedsolomon with different parameters, you need to backup the globals and restore them before calling reedsolo functions:
+This should return a True value if the message is correct (ie, all the values in the syndrome are 0), or False if the message is corrupted (ie, there is at least one non-zero value in the syndrome). The syndrome can be displayed with:
+
+::
+
+	>> rs.rs_calc_syndromes(msg, nsym)
+
+Tip: if you know the message is corrupted but the syndrome is inexplicably all zero (no error detected), make sure you initialized the tables beforehand with ``rs.init_tables()``
+
+If you want to use multiple Reed-Solomon codecs with different parameters simultaneously, you need to backup the globals and restore them before calling ``reedsolo`` functions:
 
 ::
 
@@ -349,8 +367,7 @@ If you want to ``cimport`` the module, you will need to directly access the full
     >> cimport creedsolo.creedsolo as crs
 
 Low-level functions allow to construct new APIs on top of this codec, such as
-`an automatic Reed-Solomon decoder <https://github.com/lrq3000/pyFileFixity/blob/0b18728608f2bceac9eafe5356e0abc573af2768/pyFileFixity/lib/eccman.py#L63>`_
-that can search for viable parameters to decode from an unknown Reed-Solomon codec.
+`automated ECC managing functions for file data protection <https://github.com/lrq3000/pyFileFixity>`_.
 
 If you want to learn more about which internal functions to use and for what purposes,
 read the sourcecode's comments (we follow literate programming principles)

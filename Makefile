@@ -1,5 +1,5 @@
 # This Makefile runs tests and builds the package to upload to pypi
-# To use this Makefile, pip install py-make
+# To use this Makefile, pip install py3make
 # then do: pymake <command>
 # or: python.exe -m pymake <command>
 # You also need to pip install also other required modules: `pip install flake8 coverage twine pytest pytest-cov validate-pyproject[all] pytest-xdist rstcheck` , or simply `pip install --editable .[test,testmeta]`

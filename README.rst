@@ -568,7 +568,7 @@ This software is released under your choice of the Unlicense or the MIT-0 (MIT N
    :target: https://salsa.debian.org/python-team/packages/python-reedsolo/tree/debian/latest
    :alt: Package for Debian Linux, thanks to maintainer Faidon Liambotis!
 .. |dl-archlinux| image:: https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff
-   :target: https://archlinux.org/packages/community/x86_64/python-reedsolo/
+   :target: https://archlinux.org/packages/extra/x86_64/python-reedsolo/
    :alt: Package for Arch Linux, thanks to maintainer Jelle van der Waa!
 .. |dl-fedora| image:: https://img.shields.io/badge/Fedora-294172?logo=fedora&logoColor=white
    :target: https://packages.fedoraproject.org/pkgs/python-reedsolo/python3-reedsolo/

@@ -1,10 +1,10 @@
 # This Makefile runs tests and builds the package to upload to pypi
 # To use this Makefile, pip install py3make
-# then do: pymake <command>
-# or: python.exe -m pymake <command>
+# then do: py3make <command>
+# or: python.exe -m py3make <command>
 # You also need to pip install also other required modules: `pip install flake8 coverage twine pytest pytest-cov validate-pyproject[all] pytest-xdist rstcheck` , or simply `pip install --editable .[test,testmeta]`
 # Up to Python 3.9 included, nosetests was used, but from 3.10 onward, support for it was dropped since it is not maintained anymore, so that pytest and pytest-cov are used instead.
-# Then, cd to this folder, and type `pymake -p` to list all commands, then `pymake <command>` to run the related entry.
+# Then, cd to this folder, and type `py3make -p` to list all commands, then `py3make <command>` to run the related entry.
 # To test on multiple Python versions, install them, install also the C++ redistributables for each (so that Cython works), and then type `pymake testtox`.
 # To pymake buildupload (deploy on pypi), you need to `pip install cython` and install a C++ compiler, on Windows and with Python 3.7 you need Microsoft Visual C++ 14.0. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
 # for Python 3.10, read the updated instructions at: https://wiki.python.org/moin/WindowsCompilers

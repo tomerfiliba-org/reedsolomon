@@ -176,4 +176,4 @@ upload:
 
 buildupload:
 	@+make build
-	@+make pypi
+	@+make upload

@@ -910,6 +910,7 @@ class RSCodec(object):
 
         # Initialize the look-up tables for easy and quick multiplication/division
         self.gf_log, self.gf_exp, self.field_charac = init_tables(prim, generator, c_exp)
+        self._bytearray = _bytearray
         # Precompute the generator polynomials
         if single_gen:
             self.gen = {}
@@ -926,14 +927,27 @@ class RSCodec(object):
             chunk = data[i:i+chunk_size]
             yield chunk
 
+    def __save_globals(self):
+        global gf_log, gf_exp, field_charac, _bytearray
+        self.__globals_temp = (gf_log, gf_exp, field_charac, _bytearray)
+    
+    def __set_globals(self):    
+        global gf_log, gf_exp, field_charac, _bytearray
+        gf_log, gf_exp, field_charac, _bytearray = self.gf_log, self.gf_exp, self.field_charac, self._bytearray
+    
+    def __restore_globals(self):
+        global gf_log, gf_exp, field_charac, _bytearray
+        gf_log, gf_exp, field_charac, _bytearray = self.__globals_temp
+
     def encode(self, data, nsym=None):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking
         Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.
         slice_assign=True allows to speed up the loop quite significantly in JIT compilers such as PyPy by preallocating the output bytearray and slice assigning into it, instead of constantly extending an empty bytearray, but this only works in Python 3, not Python 2, hence is disabled by default for retrocompatibility.
         '''
         # Restore precomputed tables (allow to use multiple RSCodec in one script)
-        global gf_log, gf_exp, field_charac
-        gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
+        self.__save_globals()
+        self.__set_globals()
+
         nsize, fcr, generator = self.nsize, self.fcr, self.generator
 
         if not nsym:
@@ -953,6 +967,8 @@ class RSCodec(object):
         for i in xrange(0, total_chunks):
             # Encode this chunk and update a slice of the output bytearray, much more efficient than extending an array constantly
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
+
+        self.__restore_globals() #just incase someone is using the proceedural API at the same time.
         return enc
 
     def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):
@@ -964,8 +980,8 @@ class RSCodec(object):
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
 
         # Restore precomputed tables (allow to use multiple RSCodec in one script)
-        global gf_log, gf_exp, field_charac
-        gf_log, gf_exp, field_charac = self.gf_log, self.gf_exp, self.field_charac
+        self.__save_globals()
+        self.__set_globals()
 
         if isinstance(data, str):
             data = _bytearray(data)
@@ -1004,10 +1020,16 @@ class RSCodec(object):
             dec_full[i*nsize:(i+1)*nsize] = rmes
             dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
             errata_pos_all.extend(errata_pos)
+
+        self.__restore_globals() #just incase someone is using the proceedural API at the same time.
         return dec, dec_full, errata_pos_all
 
     def check(self, data, nsym=None):
         '''Check if a message+ecc stream is not corrupted (or fully repaired). Note: may return a wrong result if number of errors > nsym.'''
+        # Restore precomputed tables (allow to use multiple RSCodec in one script)
+        self.__save_globals()
+        self.__set_globals()
+
         if not nsym:
             nsym = self.nsym
         if isinstance(data, str):

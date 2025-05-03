@@ -322,10 +322,10 @@ class TestBigReedSolomon(unittest.TestCase):
 
     def test_multiple_RSCodec(self):
         '''Test multiple RSCodec instances with different parameters'''
-        mes = 'A' * 30
-        rs_256 = RSCodec(102)
+        mes = bytes('A' * 30, 'latin1')
         rs_1024 = RSCodec(900, c_exp=10)
         bytearray(rs_1024.decode(rs_1024.encode(mes))[0])
+        rs_256 = RSCodec(102)
         rs_256.encode(mes)
         rs_1024.encode(mes)
         bytearray(rs_256.decode(rs_256.encode(mes))[0])

@@ -282,6 +282,23 @@ class TestReedSolomon(unittest.TestCase):
             self.assertEqual(rmsg_a_b, msgorig)
             self.assertEqual(rmsg_b_a, msgorig)
             self.assertEqual(rmsg_b_b, msgorig)
+    
+    def test_string_input(self):
+        message = "hello world!"
+        codec_8 = RSCodec(12, c_exp=8)
+        codec_16 = RSCodec(12, c_exp=16)
+        codec_16_packed = RSCodec(12, c_exp=16, pack=True)
+        result_8 = codec_8.encode(message, encoding='utf-8')
+        self.assertEqual(len(result_8),len(message)+12)
+        with self.assertRaises(ValueError): #pack must be true for str input
+            result_16 = codec_16.encode(message, encoding='utf-8')
+        result_16_packed = codec_16_packed.encode(message, encoding='utf-8')
+        self.assertEqual(len(result_16_packed),len(message)/2+12)
+        with self.assertRaises(ValueError): #doesn't work with odd length strings
+            codec_16_packed.encode(message+"X", encoding='utf-8')
+        decoded = codec_16_packed.decode(result_16_packed, encoding='utf-8')[0]
+        self.assertEqual(decoded, message)
+
 
 class TestBigReedSolomon(unittest.TestCase):
     def test_find_prime_polys(self):
@@ -296,14 +313,14 @@ class TestBigReedSolomon(unittest.TestCase):
         self.assertEqual(rsc.c_exp, rsc2.c_exp)
         self.assertEqual(rsc.nsize, rsc2.nsize)
 
-        mes = 'a'*((511-12)*2)
+        mes = bytes('a'*((511-12)*2),encoding='latin1')
         mesecc = rsc.encode(mes)
         mesecc[2] = 1
         mesecc[-1] = 1
         rmes, rmesecc, errata_pos = rsc.decode(mesecc)
         self.assertEqual(rsc.check(mesecc), [False, False])
         self.assertEqual(rsc.check(rmesecc), [True, True])
-        self.assertEqual([x for x in rmes], [ord(x) for x in mes])
+        self.assertEqual([x for x in rmes], [x for x in mes]) 
 
     def test_c_exp_12(self):
         rsc = RSCodec(12, c_exp=12)
@@ -311,14 +328,14 @@ class TestBigReedSolomon(unittest.TestCase):
         self.assertEqual(rsc.c_exp, rsc2.c_exp)
         self.assertEqual(rsc.nsize, rsc2.nsize)
 
-        mes = 'a'*(4095-12)
+        mes = bytes('a'*(4095-12),encoding='latin1')
         mesecc = rsc.encode(mes)
         mesecc[2] = 1
         mesecc[-1] = 1
         rmes, rmesecc, errata_pos = rsc.decode(mesecc)
         self.assertEqual(rsc.check(mesecc), [False])
         self.assertEqual(rsc.check(rmesecc), [True])
-        self.assertEqual([x for x in rmes], [ord(x) for x in mes])
+        self.assertEqual([x for x in rmes], [x for x in mes])
 
     def test_multiple_RSCodec(self):
         '''Test multiple RSCodec instances with different parameters'''
@@ -333,9 +350,9 @@ class TestBigReedSolomon(unittest.TestCase):
 
     def test_higher_galois_fields_bytes(self):
         rs = RSCodec(12, c_exp=12) # same as nsize=4095
-        str_msg = "This is a message"
+#        str_msg = "This is a message"
         bytes_msg = b"This is a binary message"
-        result = rs.encode(str_msg) # this always worked
+#        result = rs.encode(str_msg) # no longer supported in 2.0 (strings only work with c_exp=8 or 16)
         result_b = rs.encode(bytes_msg) # this is the dege case that used to fail
 
 class TestGFArithmetics(unittest.TestCase):

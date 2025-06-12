@@ -147,22 +147,11 @@ but I'm only testing on 2.7 - 3.4.
 
 import array
 import math
+import numbers
+import types
 
 
 ################### INIT and stuff ###################
-
-try:  # pragma: no cover
-    bytearray
-    _bytearray = bytearray
-except NameError:  # pragma: no cover
-    def _bytearray(obj = 0, encoding = "latin-1"):  # pragma: no cover
-        '''Simple pure-python bytearray replacement if not implemented'''
-        # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
-        if isinstance(obj, str):
-            obj = [ord(ch) for ch in obj.encode(encoding)]
-        elif isinstance(obj, int):
-            obj = [0] * obj
-        return array.array("B", obj)
 
 try:  # pragma: no cover
     # compatibility with Python 2.7
@@ -174,9 +163,6 @@ except NameError:  # pragma: no cover
 class ReedSolomonError(Exception):
     pass
 
-gf_exp = _bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % 255. For more infos on how to generate this extended exponentiation table, see paper: "Fast software implementation of finite field operations", Cheng Huang and Lihao Xu, Washington University in St. Louis, Tech. Rep (2003).
-gf_log = _bytearray(256)
-field_charac = int(2**8 - 1)
 
 ################### GALOIS FIELD ELEMENTS MATHS ###################
 # General note: Galois Field maths essentially are all the standard math operations everybody learn in primary school,
@@ -222,7 +208,7 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     # Start of the main loop
     correct_primes = array.array('i', [])
     for prim in prim_candidates: # try potential candidates primitive irreducible polys
-        seen = _bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
+        seen = bytearray(field_charac+1) # memory variable to indicate if a value was already generated in the field (value at index x is set to 1) or not (set to 0 by default)
         conflict = False # flag to know if there was at least one conflict
 
         # Second loop, build the whole Galois Field
@@ -247,6 +233,58 @@ def find_prime_polys(generator=2, c_exp=8, fast_primes=False, single=False):
     # Return the list of all prime polynomials
     return correct_primes # you can use the following to print the hexadecimal representation of each prime polynomial: print [hex(i) for i in correct_primes]
 
+def make_bytearray(c_exp):
+    if c_exp <= 8:
+        return bytearray #bytearray is a bit faster than array.array("B", _)
+    else:
+        # unsigned array.array types.  char, short, int, long, long long respectively.  minimum 1,2,2,4,8 bytes.
+        # find the smallest type that fits our symbols.  Type sizes are platform dependent, so we need to check at runtime.
+        # picking a 16bit uint over a 32bit uint type was about 4% faster in my tests, and of course saves space.
+        for _T in list("BHILQ"): 
+            if array.array(_T,[0]).itemsize*8 >= c_exp:
+                array_type = _T
+                break
+            elif _T == "Q":
+                #odds are that you have picked an unreasonably large c_exp, unless your compiler/platform doesn't have a 4byte int.
+                raise ValueError("c_exp is too big for this platform.")
+
+        def temp_bytearray(source = 0, encoding = None):
+            '''bytearray replacement, supporting uint values above 255.  
+            _bytearray(source, encoding) -> array like object
+            The following is a list of necessary properties for _bytearray function:
+                - must accept list like objects of integers for initialization
+                - if source is an integer, a zeroed array of size source is created
+                - must accept a mandatory encoding if source is a string
+            The following is a list of necessary properties for the returned object:
+                - support concatenation by + operator.
+                - support for array slicing and slice assignment
+            The following is sufficient for the returned object:
+                - a bytearray object.  bytearray seems to be faster than array.array("B", _).
+                - an array.array object
+            '''
+            if isinstance(source, int):  # obj is an integer, create a new array of size obj
+                return array.array(array_type, [0]* source)
+            
+            if isinstance(source, str):
+                if encoding is None:
+                    raise(ValueError, "encoding must be specified if source is a string")
+                source = source.encode(encoding)
+            if hasattr(source, "__next__"):
+                #no way to test if this is an int generator/iterator so we just have to try...
+                return array.array(array_type, source)
+            try:
+                #double check its an array of ints (this includes bytes and numpy arrays of ints).
+                if isinstance(source[0], numbers.Integral):
+                    #note: array.array() will bufferize bytes and bytearray inputs, which will cause multiple bytes to be 
+                    # packed into a single array element.  This may be what you want if c_exp = 16, but will cause errors otherwise.
+                    # The user should be be responsible for packing bytes into an array.array if this is what they want.
+                    return array.array(array_type, list(source))
+                else:
+                    raise(ValueError, "input must be an array like object of integral types or integer")
+            except AttributeError:
+                raise(ValueError, "input must be an array like object of integral types or integer")
+    return temp_bytearray
+
 def init_tables(prim=0x11d, generator=2, c_exp=8):
     '''Precompute the logarithm and anti-log tables for faster computation later, using the provided primitive polynomial.
     These tables are used for multiplication/division since addition/substraction are simple XOR operations inside GF of characteristic 2.
@@ -261,26 +299,7 @@ def init_tables(prim=0x11d, generator=2, c_exp=8):
 
     # Redefine _bytearray() in case we need to support integers or messages of length > 256
     global _bytearray
-    if c_exp <= 8:
-        _bytearray = bytearray
-    else:
-        def _bytearray(obj = 0, encoding = "latin-1"):
-            '''Fake bytearray replacement, supporting int values above 255'''
-            # always use Latin-1 and not UTF8 because Latin-1 maps the first 256 characters to their bytevalue equivalents. UTF8 may mangle your data (particularly at vale 128)
-            if isinstance(obj, str):  # obj is a string, convert to list of ints
-                obj = obj.encode(encoding)
-                if isinstance(obj, str):  # Py2 str: convert to list of ascii ints
-                    obj = [ord(chr) for chr in obj]
-                elif isinstance(obj, bytes):  # Py3 bytes: characters are bytes, need to convert to int for array.array('i', obj)
-                    obj = [int(chr) for chr in obj]
-                else:
-                    raise(ValueError, "Type of object not recognized!")
-            elif isinstance(obj, int):  # compatibility with list preallocation bytearray(int)
-                obj = [0] * obj
-            elif isinstance(obj, bytes):
-                obj = [int(b) for b in obj]
-            # Else obj is a list of int, it's ok
-            return array.array("i", obj)
+    _bytearray = make_bytearray(c_exp)
 
     # Init global tables
     global gf_exp, gf_log, field_charac
@@ -527,12 +546,21 @@ def rs_simple_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
     return msg_out
 
 def rs_encode_msg(msg_in, nsym, fcr=0, generator=2, gen=None):
-    '''Reed-Solomon main encoding function, using polynomial division (Extended Synthetic Division, the fastest algorithm available to my knowledge), better explained at http://research.swtch.com/field'''
+    '''Reed-Solomon main encoding function, using polynomial division (Extended Synthetic Division, the fastest algorithm available to my knowledge), better explained at http://research.swtch.com/field
+       msg_in must be an array-like object of integers (or bytes) with values < 2**c_exp.
+    '''
     global field_charac
     if (len(msg_in) + nsym) > field_charac: raise ValueError("Message is too long (%i when max is %i)" % (len(msg_in)+nsym, field_charac))
     if gen is None: gen = rs_generator_poly(nsym, fcr, generator)
 
-    msg_in = _bytearray(msg_in)
+    try:
+        #double check its an array of ints (this includes bytes and numpy arrays of ints).
+        if isinstance(msg_in[0], numbers.Integral): 
+            msg_in = _bytearray(msg_in)
+        else:
+            raise(ValueError, "input must be an array like object of integral types or integer")
+    except AttributeError:
+        raise(ValueError, "input must be an array like object of integral types or integer")
     msg_out = _bytearray(msg_in) + _bytearray(len(gen)-1) # init msg_out with the values inside msg_in and pad with len(gen)-1 bytes (which is the number of ecc symbols).
 
     # Precompute the logarithm of every items in the generator
@@ -882,11 +910,12 @@ class RSCodec(object):
     0x11d)
     '''
 
-    def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8, single_gen=True):
+    def __init__(self, nsym=10, nsize=255, fcr=0, prim=0x11d, generator=2, c_exp=8, single_gen=True, pack = False):
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters).
         nsym : number of ecc symbols (you can repair nsym/2 errors and nsym erasures.
         nsize : maximum length of each chunk. If higher than 255, will use a higher Galois Field, but the algorithm's complexity and computational cost will raise quadratically...
         single_gen : if you want to use the same RSCodec for different nsym parameters (but nsize the same), then set single_gen=False. This is only required for encoding with various number of ecc symbols, as for decoding this is always possible even if single_gen=True.
+        pack: When c_exp=16, bytes/bytearrays and strings may be packed to store two bytes per symbol.  Set this to True to pack two bytes per symbol.
         '''
 
         # Auto-setup if galois field or message length is different than default (exponent 8)
@@ -907,6 +936,7 @@ class RSCodec(object):
         self.prim = prim # prime irreducible polynomial, use find_prime_polys() to find a prime poly
         self.generator = generator # generator integer, must be prime
         self.c_exp = c_exp # exponent of the field's characteristic. This both defines the maximum value per symbol and the maximum length of one chunk. By default it's GF(2^8), do not change if you're not sure what it means.
+        self.pack = pack
 
         # Initialize the look-up tables for easy and quick multiplication/division
         self.gf_log, self.gf_exp, self.field_charac = init_tables(prim, generator, c_exp)
@@ -939,10 +969,11 @@ class RSCodec(object):
         global gf_log, gf_exp, field_charac, _bytearray
         gf_log, gf_exp, field_charac, _bytearray = self.__globals_temp
 
-    def encode(self, data, nsym=None):
+    def encode(self, data, nsym=None, encoding=None):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking
         Optionally, can set nsym to encode with a different number of error correction symbols, but RSCodec must be initialized with single_gen=False first.
         slice_assign=True allows to speed up the loop quite significantly in JIT compilers such as PyPy by preallocating the output bytearray and slice assigning into it, instead of constantly extending an empty bytearray, but this only works in Python 3, not Python 2, hence is disabled by default for retrocompatibility.
+        For string inputs encoding must be provided.  see str.encode() for details.
         '''
         # Restore precomputed tables (allow to use multiple RSCodec in one script)
         self.__save_globals()
@@ -950,12 +981,28 @@ class RSCodec(object):
 
         nsize, fcr, generator = self.nsize, self.fcr, self.generator
 
+        #handle string encoding input checking
+        #it only makes sense to encode strings when c_exp=8 or c_exp=16, and only when packing is enabled for c_exp=16.
+        #if you're doing something unusual enough to want 7-bit ascii with c_exp=7, then you should probably handle enconding yourself.
+        if encoding is not None:
+            if not (self.c_exp==8 or self.c_exp==16):
+                raise ValueError("String encoding is only supported for c_exp=8 and c_exp=16")
+            if self.c_exp==16 and (not self.pack):
+                raise ValueError("String encoding is only supported for c_exp=16 when packing is enabled")
+        if isinstance(data, str):
+            data = data.encode(encoding=encoding)
+        #packing for 3 or 4 bytes probably isn't worth it because c_exp=24 or 32 is not performant.
+        if self.pack:
+            if len(data) % 2 != 0:
+                raise ValueError("Packed data must be even length.")
+            if self.c_exp == 16:
+                data = array.array("H",bytes(data))
+            else:
+                raise ValueError("Packing is only supported for c_exp=16, not %i" % self.c_exp)
+
         if not nsym:
             nsym = self.nsym
         gen = self.gen[nsym]
-
-        if isinstance(data, str):
-            data = _bytearray(data)
 
         # Calculate chunk size and total number of chunks for looping
         chunk_size = int(nsize - nsym)
@@ -971,11 +1018,12 @@ class RSCodec(object):
         self.__restore_globals() #just incase someone is using the proceedural API at the same time.
         return enc
 
-    def decode(self, data, nsym=None, erase_pos=None, only_erasures=False):
+    def decode(self, data, nsym=None, erase_pos=None, only_erasures=False, encoding=None):
         '''Repair a message, whatever its size is, by using chunking. May return a wrong result if number of errors > nsym because then too many errors to be corrected.
         Note that it returns a couple of vars: the repaired messages, and the repaired messages+ecc (useful for checking).
         Usage: rmes, rmesecc = RSCodec.decode(data).
         Optionally: can specify nsym to decode messages of different parameters, erase_pos with a list of erasures positions to double the number of erasures that can be corrected compared to unlocalized errors, only_erasures boolean to specify if we should only look for erasures, which speeds up and doubles the total correction power.
+        encoding: if set, decode will return a string instead of an array.  See str.decode() for details.
         '''
         # erase_pos is a list of positions where you know (or greatly suspect at least) there is an erasure (ie, wrong character but you know it's at this position). Just input the list of all positions you know there are errors, and this method will automatically split the erasures positions to attach to the corresponding data chunk.
 
@@ -983,8 +1031,14 @@ class RSCodec(object):
         self.__save_globals()
         self.__set_globals()
 
+        if encoding is not None:
+            if not (self.c_exp==8 or self.c_exp==16):
+                raise ValueError("String encoding is only supported for c_exp=8 and c_exp=16")
+            if self.c_exp==16 and (not self.pack):
+                raise ValueError("String encoding is only supported for c_exp=16 when packing is enabled")
+
         if isinstance(data, str):
-            data = _bytearray(data)
+            raise ValueError("Data must an array of integral type.")
         if isinstance(erase_pos, list):
             erase_pos = _bytearray(erase_pos)
 
@@ -1020,6 +1074,15 @@ class RSCodec(object):
             dec_full[i*nsize:(i+1)*nsize] = rmes
             dec_full[i*nsize + nmes:(i+1)*nsize + nmes] = recc  # append corrected ecc just after corrected message. The two lines are equivalent to rmes + recc but here we don't need to concatenate both arrays first (and create a third one for nothing) before storing in the output array
             errata_pos_all.extend(errata_pos)
+
+        if encoding is not None:
+            if self.c_exp == 8:
+                dec = bytes(dec).decode(encoding=encoding)
+            elif self.c_exp == 16 and self.pack:
+                if dec.itemsize != 2:
+                    # The only way we should encounter this is if the platform doesn't support a two byte uint.
+                    raise NotImplementedError("Unpacking not implemented on this platform")
+                dec = bytes(dec).decode(encoding=encoding)
 
         self.__restore_globals() #just incase someone is using the proceedural API at the same time.
         return dec, dec_full, errata_pos_all

@@ -1019,6 +1019,13 @@ cdef class RSCodec(object):
     g_all = cython.declare(cython.list, visibility='readonly')
     single_gen = cython.declare(cython.bint, visibility='readonly')
 
+    field_charac = cython.declare(cython.int, visibility='readonly')
+    gf_log = cython.declare(uint8_t[::1], visibility='readonly')
+    gf_exp = cython.declare(uint8_t[::1], visibility='readonly')
+    field_charac_temp = cython.declare(cython.int, visibility='readonly')
+    gf_log_temp = cython.declare(uint8_t[::1], visibility='readonly')
+    gf_exp_temp = cython.declare(uint8_t[::1], visibility='readonly')
+
     @cython.cdivision(False)
     def __init__(self, int nsym=10, int nsize=255, int fcr=0, int prim=0x11d, int generator=2, int c_exp=8, bint single_gen=True):  # no `except? 0` here because special methods need to stay uncythonized
         '''Initialize the Reed-Solomon codec. Note that different parameters change the internal values (the ecc symbols, look-up table values, etc) but not the output result (whether your message can be repaired or not, there is no influence of the parameters). Note also there are less checks here to be faster, so if you get weird errors, check aggainst the pure python implementation reedsolo.py to get more verbose errors.
@@ -1049,6 +1056,9 @@ cdef class RSCodec(object):
 
         # Initialize the look-up tables for easy and quick multiplication/division
         init_tables(prim, generator, c_exp)
+        self.field_charac = field_charac
+        self.gf_exp = gf_exp
+        self.gf_log = gf_log
         # Precompute the generator polynomials
         if single_gen:
             self.gen = rs_generator_poly(nsym, fcr=fcr, generator=generator)
@@ -1056,6 +1066,24 @@ cdef class RSCodec(object):
             # Prepare the generator polynomials (because in this cython implementation, the encoding function does not automatically build the generator polynomial if missing)
             self.g_all = rs_generator_poly_all(nsize, fcr=fcr, generator=generator)
 
+    cpdef __save_globals(self):
+        global gf_exp, gf_log, field_charac
+        self.field_charac_temp = field_charac
+        self.gf_exp_temp = gf_exp
+        self.gf_log_temp = gf_log
+    
+    cpdef __restore_globals(self):
+        global gf_exp, gf_log, field_charac
+        field_charac = self.field_charac_temp
+        gf_exp = self.gf_exp_temp
+        gf_log = self.gf_log_temp
+    
+    cpdef __set_globals(self):
+        global field_charac, gf_exp, gf_log
+        field_charac = self.field_charac
+        gf_exp = self.gf_exp
+        gf_log = self.gf_log   
+    
     @cython.cdivision(False)
     cpdef uint8_t[::1] encode(self, uint8_t[::1] data, int nsym=-1):
         '''Encode a message (ie, add the ecc symbols) using Reed-Solomon, whatever the length of the message because we use chunking.
@@ -1070,6 +1098,10 @@ cdef class RSCodec(object):
             data = bytearray(data, "latin-1")
         #if not isinstance(data, bytearray):
             #raise ValueError("encode needs a bytearray as input! Not bytes nor str!")  # DEPRECATED: cannot distinguish bytes from bytearray in Python 3
+        #save and set globals for multip instance use.
+        self.__save_globals()
+        self.__set_globals()
+        
         # Preload locally class variables
         if nsym < 0:
             nsym = self.nsym
@@ -1090,6 +1122,8 @@ cdef class RSCodec(object):
         for i in xrange(0, total_chunks):  # Split the long message in a chunk # TODO: optimize with a prange(nogil=True) once we do not use a Python object anymore (ie, cpython array)
             # Encode this chunk and update the memoryview
             enc[i*nsize:(i+1)*nsize] = rs_encode_msg(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator, gen=gen)
+
+        self.__restore_globals()
         return enc
 
     @cython.cdivision(False)
@@ -1105,6 +1139,10 @@ cdef class RSCodec(object):
         if isinstance(data, str):
             data = bytearray(data, "latin-1")
 
+        #save and set globals for multip instance use.
+        self.__save_globals()
+        self.__set_globals()
+    
         # Precache class attributes into local variables
         if nsym < 0:
             nsym = self.nsym
@@ -1147,6 +1185,7 @@ cdef class RSCodec(object):
             #dec_full.extend(rmes)
             #dec_full.extend(recc)
             errata_pos_all.extend(errata_pos)
+        self.__restore_globals()
         return dec, dec_full, errata_pos_all
 
     @cython.cdivision(False)
@@ -1156,6 +1195,10 @@ cdef class RSCodec(object):
         if isinstance(data, str):
             data = bytearray(data)
 
+        #save and set globals for multip instance use.
+        self.__save_globals()
+        self.__set_globals()
+    
         # Precache class attributes into local variables
         if nsym < 0:
             nsym = self.nsym
@@ -1176,6 +1219,7 @@ cdef class RSCodec(object):
         for i in xrange(0, total_chunks):  # Split the long message in a chunk
             # Check and add the result in the list, we concatenate all results since we are chunking
             check[i] = rs_check(data[i*chunk_size:(i+1)*chunk_size], nsym, fcr=fcr, generator=generator)
+        self.__restore_globals()
         return check #check.base
 
     @cython.cdivision(False)

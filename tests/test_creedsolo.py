@@ -106,6 +106,19 @@ else:
                 self.assertEqual(dec, msg)
                 self.assertEqual(dec_enc, enc)
 
+            def test_simple_multi_instance(self):
+                rs = RSCodec(nsym=10, c_exp=7)
+                rs2 = RSCodec(nsym=10, c_exp=8)
+                msg = bytearray("hello world " * 10, "ascii")
+                enc = rs.encode(msg)
+                enc2 = rs2.encode(msg)
+                dec, dec_enc, errata_pos = rs.decode(enc)
+                dec2, dec_enc2, errata_pos2 = rs2.decode(enc2)
+                self.assertEqual(dec, msg)
+                self.assertEqual(dec_enc, enc)
+                self.assertEqual(dec2, msg)
+                self.assertEqual(dec_enc2, enc2)    
+
             def test_correction(self):
                 rs = RSCodec(10)
                 msg = bytearray("hello world " * 10, "latin1")

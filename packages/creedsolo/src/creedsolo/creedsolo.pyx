@@ -73,7 +73,7 @@ but I'm only testing on 2.5-3.2.
 
     To decode:
     >> mes, ecc, errata_pos = rs_correct_msg(mes + ecc, n-k, erase_pos=erase_pos)
-    
+
     If the decoding fails, it will normally automatically check and raise a ReedSolomonError exception that you can handle.
     However if you want to manually check if the repaired message is correct, you can do so:
     >> rsman.check(rmes + recc, k=k)
@@ -112,7 +112,7 @@ cdef class ReedSolomonError(Exception):
     pass
 
 ctypedef unsigned char uint8_t  # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
-ctypedef const unsigned char cuint8_t  # to support immutable (bytes/strings) inputs, we need to set type as constant. 
+ctypedef const unsigned char cuint8_t  # to support immutable (bytes/strings) inputs, we need to set type as constant.
 ctypedef fused buint8_t:  # to support both immutable (bytes/strings) and mutable (bytearray) inputs, we accept both unsigned and const unsigned char using a fused type (aka multiple dispatch)
     uint8_t
     cuint8_t
@@ -163,7 +163,7 @@ cpdef array.array find_prime_polys(int generator=2, int c_exp=8, bint fast_prime
     # Here is implemented a bruteforce approach to find all these prime polynomials, by generating every possible prime polynomials (ie, every integers between field_charac+1 and field_charac*2), and then we build the whole Galois Field, and we reject the candidate prime polynomial if it duplicates even one value or if it generates a value above field_charac (ie, cause an overflow).
     # Note that this algorithm is slow if the field is too big (above 12), because it's an exhaustive search algorithm. There are probabilistic approaches, and almost surely prime approaches, but there is no determistic polynomial time algorithm to find irreducible monic polynomials. More info can be found at: http://people.mpi-inf.mpg.de/~csaha/lectures/lec9.pdf
     # Another faster algorithm may be found at Adleman, Leonard M., and Hendrik W. Lenstra. "Finding irreducible polynomials over finite fields." Proceedings of the eighteenth annual ACM symposium on Theory of computing. ACM, 1986.
-    
+
     cdef int i, i_prim, prim, x
 
     # Prepare the finite field characteristic (2^p - 1), this also represent the maximum possible value in this field
@@ -205,7 +205,7 @@ cpdef array.array find_prime_polys(int generator=2, int c_exp=8, bint fast_prime
                 seen[x] = 1
 
         # End of the second loop: if there's no conflict (no overflow nor duplicated value), this is a prime polynomial!
-        if not conflict: 
+        if not conflict:
             correct_primes.append(prim)
             if single: return array.array('i', [prim])  # for API consistency, we always return an array, but here with a single value
 
@@ -324,7 +324,7 @@ def gf_mult_noLUT_slow(x, y, prim=0):
         bits = 0
         while n >> bits: bits += 1
         return bits
- 
+
     def cl_div(dividend, divisor=None):
         '''Bitwise carry-less long division on integers and returns the remainder'''
         # Compute the position of the most significant bit for each integers
@@ -340,15 +340,15 @@ def gf_mult_noLUT_slow(x, y, prim=0):
                 # If divisible, then shift the divisor to align the most significant bits and XOR (carry-less substraction)
                 dividend ^= divisor << i
         return dividend
- 
+
     ### Main GF multiplication routine ###
- 
+
     # Multiply the gf numbers
     result = cl_mult(x,y)
     # Then do a modular reduction (ie, remainder from the division) with an irreducible primitive polynomial so that it stays inside GF bounds
     if prim > 0:
         result = cl_div(result, prim)
- 
+
     return result
 
 @cython.boundscheck(False)
@@ -415,7 +415,7 @@ cpdef uint8_t[::1] gf_poly_mul(uint8_t[:] p, uint8_t[:] q):
     return r
 
 @cython.boundscheck(False)
-cpdef uint8_t[::1] gf_poly_neg(uint8_t[::1] poly) nogil:
+cpdef uint8_t[::1] gf_poly_neg(uint8_t[::1] poly) noexcept nogil:
     '''Returns the polynomial with all coefficients negated. In GF(2^p), negation does not change the coefficient, so we return the polynomial as-is.'''
     return poly
 
@@ -705,7 +705,7 @@ cpdef uint8_t[::1] rs_correct_errata(uint8_t[::1] msg_in, uint8_t[::1] synd, uin
         # Thus here this method works with erasures too because firstly we fixed the equation to be like the theoretical one (don't know why it was modified in _old_forney(), if it's an optimization, it doesn't enhance anything), and secondly because we removed the product bound on s, which prevented computing errors and erasures above the s=(n-k)//2 bound.
         y = gf_poly_eval(err_eval[::-1], Xi_inv) # numerator of the Forney algorithm (errata evaluator evaluated)
         y = gf_mul(gf_pow(Xi, 1-fcr), y) # adjust to fcr parameter
-        
+
         # Compute the magnitude
         magnitude = gf_div(y, err_loc_prime) # magnitude value of the error, calculated by the Forney algorithm (an equation in fact): dividing the errata evaluator with the errata locator derivative gives us the errata magnitude (ie, value to repair) the ith symbol
         E[err_pos[i]] = magnitude # store the magnitude for this error into the magnitude polynomial
@@ -866,7 +866,7 @@ cpdef rs_correct_msg(uint8_t[::1] msg_in, int nsym, int fcr=0, int generator=2, 
     # check if there's any error/erasure in the input codeword. If not (all syndromes coefficients are 0), then just return the codeword as-is.
     if max(synd) == 0:
         return msg_out[:-nsym], msg_out[-nsym:], erase_pos  # no errors
-    
+
     # Find errors locations
     cdef uint8_t[::1] err_pos
     if only_erasures:

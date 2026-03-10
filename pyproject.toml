@@ -3,15 +3,13 @@
 # We here use a src-layout distribution style https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
 
 [build-system]
-# never uppercap requirements unless we have evidence it won't work https://iscinumpy.dev/post/bound-version-constraints/ 
-# cython cannot be placed in optional-dependencies, Cython won't be able to do its magic to make it importable in setup.py
-requires = ["setuptools>59", "cython>=3.0.0b2"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.10.4,<0.11.0"]
+build-backend = "uv_build"
 
-[project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
+[project]
 name = "reedsolo"
-version = "2.1.3b1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases
-description = "Pythonic universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot, with a future-proof zero-dependencies pure-python implementation and an optional speed-optimized Cython/C extension."
+version = "2.2.0b1"
+description = "Zero-dependencies, pure-python universal errors-and-erasures Reed-Solomon codec to protect your data from errors and bitrot."
 authors = [
     {name = "Tomer Filiba", email = "tomerfiliba@gmail.com"},
     {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
@@ -19,7 +17,7 @@ authors = [
 maintainers = [
     {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
     ]
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 license = { file = "LICENSE" }
 keywords = ["data", "protection", "correction", "recovery", "restore", "save", "data-recovery", "reed-solomon", "error-correction-code", "qr", "qr-codes", "barcodes"]
 classifiers = [
@@ -36,12 +34,11 @@ classifiers = [
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: Implementation :: MicroPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Cython",
@@ -54,10 +51,13 @@ classifiers = [
     "Topic :: System :: Recovery Tools",
     "Topic :: Utilities",
 ]
-dependencies = [
-    #"typing-extensions; python_version<'3.8'",
-    #"importlib_metadata;python_version<'3.8'",
-]
+
+[project.readme]
+# Do NOT use .. code:: python for interactive code session, otherwise syntax error due to prompt handle >>>, see https://svn.python.org/projects/external/Sphinx-1.2/doc/markup/code.rst and https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#python-docstrings
+# also use rstcheck
+file = "README.rst"
+content-type = "text/x-rst"
+
 
 [project.urls]
 Homepage = "https://github.com/tomerfiliba-org/reedsolomon"
@@ -68,60 +68,47 @@ Download = "https://github.com/tomerfiliba-org/reedsolomon/releases"
 "Conda-Forge" = "https://anaconda.org/conda-forge/reedsolo"
 #Changelog = "https://url/changelog"
 
-[project.optional-dependencies]
-# tests_require was deprecated in setup.py by setuptools, because anyway downstream the user wants to test in their own environment, not an isolated env, so the only practical replacement is to have test requirements defined as an extras/optional-dependency [test] so that they can be installed in the user's environment if they want to: https://discuss.python.org/t/providing-a-way-to-specify-how-to-run-tests-and-docs/15016
+[dependency-groups]
+dev = [
+    "ipython>=8.38.0",
+    "nox>=2026.2.9",
+    "ruff>=0.15.1",
+]
 test = [  # minimum dependencies to run tests
-    "pytest",
-    "pytest-cov",
-    "coveralls",
-    "cython>=3.0.0b2",
+    "pytest>=9.0",
+    "pytest-cov>=7.0",
+    "coveralls>=4.0",
 ]
 testmeta = [  # dependencies to test meta-data. Note that some of these dependencies make cibuildwheel choke on cryptography
-    "build",
-    "twine",
-    "validate-pyproject",
-    "rstcheck",
+    "twine>=6.2",
+    "validate-pyproject>=0.25",
+    "rstcheck>=6.2",
 ]
 testoptional = [  # dependencies for additional optional tests
-    "unireedsolomon"
-]
-#cythonize = [  # cython and other build time dependencies can NOT be defined as optional-dependencies nor extras, they are installed only after build! They need to be defined as build-system requirements. But it's possible to make it installable as an option given a config-setting arg, see: https://discuss.python.org/t/explicit-optional-cythonization-via-config-setting-post-pep517-and-install-option-deprecation/
-#    "cython>=3.0.0b2"
-#]
-
-[project.readme]
-# Do NOT use .. code:: python for interactive code session, otherwise syntax error due to prompt handle >>>, see https://svn.python.org/projects/external/Sphinx-1.2/doc/markup/code.rst and https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html#python-docstrings
-# also use rstcheck
-file = "README.rst"
-content-type = "text/x-rst"
-
-#[tool.setuptools]
-#package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-# IMPORTANT: systematically delete `src/<project.name>.egg-info` folder before rebuilding, otherwise the list of included files will not get updated (it's in `SOURCES.txt` file in this folder)
-where = ["src"]
-#exclude = ["test*"]
-#namespaces = false
-
-[tool.setuptools.package-data]
-# Check the <mypkg>.egg-info/SOURCES.txt file generated after a `build` or `pip install` to check if the following files are correctly included in the sdist.
-# Check also the list of files included by default: https://packaging.python.org/en/latest/guides/using-manifest-in/
-"*" = [
-    "*.rst",
-    "LICENSE*",
-    "README*",
-    "*.pyx",  # include the cython implementation sourcecode in the wheel, so that the user can cythonize later, this is necessary, it's not included by default even with extensions in setup.py
-    "*.c",  # include the cythonized intermediary .c file for source distributions such as Gentoo, so that they do not need to install Cython v3 - no need since we use src-layout, it's automatically included
-    #"tests",  # to help linux distros package builders, they may want to run the unit test to check their package is working OK - no need, tests folder is packaged by default in sdist nowadays
+    "unireedsolomon>=1.0"
 ]
 
-#[tool.setuptools.exclude-package-data]
-#"*" = [
-#    "docs/_build",
-#    "tests/__pycache__",
-#    "tests/.mypy_cache",
-#]
+[project.optional-dependencies]
+creedsolo = [
+    "creedsolo == 2.2.0b1"
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+[tool.uv.sources]
+creedsolo = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+    "packages/creedsolo",
+]
 
 [tool.pytest.ini_options]
 addopts = [
@@ -130,7 +117,7 @@ addopts = [
     "--strict-markers",
 ]
 xfail_strict = true
-testpaths = "tests"  # default path to look for tests if nothing is specified in commandline
+testpaths = ["tests", "packages/creedsolo/tests"]  # default path to look for tests if nothing is specified in commandline
 filterwarnings = [
     "once::Warning",
 ]
@@ -173,45 +160,3 @@ exclude_lines = [
     "^ +\\.\\.\\.$",
     "-> ['\"]?NoReturn['\"]?:",
 ]
-
-[tool.cibuildwheel]
-#build = "*"
-#skip = ""
-#test-skip = ""
-
-archs = ["auto"]
-#build-frontend = "pip"
-#dependency-versions = "pinned"
-#environment = {"REEDSOLO_CYTHONIZE: 1"}
-#environment-pass = []
-build-verbosity = "1"
-
-#before-all = ""
-#before-build = ""
-#repair-wheel-command = ""
-
-test-command = "pytest {package}/tests"
-#before-test = ""
-#test-requires = []
-test-extras = ["test"]  # reuse the [test] extras optional dependencies to install test dependencies, instead of redefining in test-requires
-
-[tool.cibuildwheel.config-settings]
---build-option = "--cythonize"
-
-# NOTE: you have to use single-quoted strings in TOML for regular expressions.
-# It's the equivalent of r-strings in Python.  Multiline strings are treated as
-# verbose regular expressions by Black.  Use [ ] to denote a significant space
-# character.
-
-# While black is awesome, it does not support cython, so we avoid for the moment
-# to keep a similar formatting between the pure python and the cython implementations.
-# see: https://github.com/psf/black/issues/359
-
-#[tool.black]
-#line-length = 88
-#target-version = ['py39', 'py310', 'py311']
-#include = '\.pyi?$'
-# We use preview style for formatting Black itself. If you
-# want stable formatting across releases, you should keep
-# this off.
-#preview = false
